@@ -2,7 +2,12 @@
 
 #include "BaseClass.h"
 
-class LogSystem : public BaseClass
+struct LogCreateInfo
+{
+	std::string fileName = "../log.txt";
+};
+
+class LogSystem : private BaseClass
 {
 	friend class EngineDevice;
 public:
@@ -19,11 +24,6 @@ private:
 	LogSystem(const LogSystem&) = delete;
 	LogSystem& operator=(LogSystem&&) = delete;
 	LogSystem& operator=(const LogSystem&) = delete;
-
-	struct LogCreateInfo
-	{
-		std::string fileName;
-	};
 
 	void create(const LogCreateInfo& createInfo);
 	void destroy();

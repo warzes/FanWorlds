@@ -95,6 +95,7 @@
   <ItemGroup>
     <ClCompile Include="BaseClass.cpp" />
     <ClCompile Include="EngineDevice.cpp" />
+    <ClCompile Include="EngineTimestamp.cpp" />
     <ClCompile Include="LogSystem.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
@@ -106,6 +107,7 @@
     <ClInclude Include="BaseClass.h" />
     <ClInclude Include="EngineConfiguration.h" />
     <ClInclude Include="EngineDevice.h" />
+    <ClInclude Include="EngineTimestamp.h" />
     <ClInclude Include="IApp.h" />
     <ClInclude Include="LogSystem.h" />
     <ClInclude Include="stdafx.h" />

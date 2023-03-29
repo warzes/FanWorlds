@@ -3,11 +3,20 @@
 
 bool GameApp::Create()
 {
-	puts("Create");
+	Print("GameApp Create");
 	return true;
 }
 
 void GameApp::Destroy()
 {
-	puts("Destroy");
+	Print("GameApp Destroy");
+}
+
+void GameApp::Render()
+{
+}
+
+void GameApp::Update(float elapsedTimeSeconds)
+{
+	BaseClass::ExitRequest();
 }

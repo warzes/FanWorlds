@@ -12,7 +12,10 @@
       <Filter>Core\Object</Filter>
     </ClCompile>
     <ClCompile Include="EngineDevice.cpp">
-      <Filter>EngineDevice</Filter>
+      <Filter>EngineApp</Filter>
+    </ClCompile>
+    <ClCompile Include="EngineTimestamp.cpp">
+      <Filter>EngineApp</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -28,10 +31,13 @@
       <Filter>Core\Object</Filter>
     </ClInclude>
     <ClInclude Include="EngineDevice.h">
-      <Filter>EngineDevice</Filter>
+      <Filter>EngineApp</Filter>
     </ClInclude>
     <ClInclude Include="IApp.h">
-      <Filter>EngineDevice</Filter>
+      <Filter>EngineApp</Filter>
+    </ClInclude>
+    <ClInclude Include="EngineTimestamp.h">
+      <Filter>EngineApp</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -43,9 +49,6 @@
     </Filter>
     <Filter Include="Graphics">
       <UniqueIdentifier>{1cb1f8bf-8e20-406d-b837-b752439bf257}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="EngineDevice">
-      <UniqueIdentifier>{b1ba09fd-6b08-4eed-a7b8-9351dc4d300f}</UniqueIdentifier>
     </Filter>
     <Filter Include="Resource">
       <UniqueIdentifier>{2a8c4f6e-d82c-4dd6-bfd2-2449dd48662f}</UniqueIdentifier>
@@ -70,6 +73,9 @@
     </Filter>
     <Filter Include="Core\Platform">
       <UniqueIdentifier>{c8d3700f-6525-41b4-81f3-2062323e5652}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EngineApp">
+      <UniqueIdentifier>{b1ba09fd-6b08-4eed-a7b8-9351dc4d300f}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
