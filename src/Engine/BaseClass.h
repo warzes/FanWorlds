@@ -14,5 +14,5 @@ public:
 	void Fatal(const std::string& msg);
 
 protected:
-	std::shared_ptr<EngineDevice> m_engineDevice = nullptr;
+	EngineDevice* m_engineDevice = nullptr;
 };

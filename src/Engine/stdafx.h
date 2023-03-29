@@ -24,6 +24,10 @@
 
 #include <glfw.h>
 
+#if defined(_WIN32)
+#include <ShellScalingApi.h>
+#endif
+
 #include <stb/stb_image.h>
 
 /*

@@ -2,19 +2,21 @@
 
 #include "LogSystem.h"
 #include "EngineTimestamp.h"
+#include "Window.h"
 #include "IApp.h"
 
 
 struct EngineDeviceCreateInfo
 {
 	LogCreateInfo log;
+	WindowCreateInfo window;
 };
 
-class EngineDevice : public std::enable_shared_from_this<EngineDevice>
+class EngineDevice
 {
 	friend BaseClass;
 public:
-	EngineDevice(const EngineDeviceCreateInfo& createInfo);
+	EngineDevice() = default;
 	~EngineDevice();
 
 	static std::shared_ptr<EngineDevice> Create(const EngineDeviceCreateInfo& createInfo);
@@ -27,13 +29,18 @@ private:
 	EngineDevice& operator=(EngineDevice&&) = delete;
 	EngineDevice& operator=(const EngineDevice&) = delete;
 
+	void init(const EngineDeviceCreateInfo& createInfo);
+	void close();
+
 	void update();
 	void render();
 	void present();
 
 	std::shared_ptr<IApp> m_currentApp = nullptr;
 	LogSystem m_logSystem;
-	bool m_isExitRequested = false;
+	Window m_window;
 
 	EngineTimestamp m_timestamp;
+
+	bool m_isExitRequested = true;
 };

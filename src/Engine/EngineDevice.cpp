@@ -1,22 +1,24 @@
 #include "stdafx.h"
 #include "EngineDevice.h"
-//-----------------------------------------------------------------------------
-EngineDevice::EngineDevice(const EngineDeviceCreateInfo& createInfo)
-{
-	m_logSystem.create(createInfo.log);
-	m_logSystem.LogPrint("EngineDevice Create");
-}
+unrimp
+haru
+https ://open.gl
+https://github.com/OpenGL-Graphics/opengl-utils
+https://github.com/OpenGL-Graphics/first-person-shooter
+PawsForAdventure
+https ://discord.com/channels/794280341149712404/1042555400844750858
+
 //-----------------------------------------------------------------------------
 EngineDevice::~EngineDevice()
 {
-	m_logSystem.destroy();
-
-	m_logSystem.LogPrint("EngineDevice Destroy");
+	close();
 }
 //-----------------------------------------------------------------------------
 std::shared_ptr<EngineDevice> EngineDevice::Create(const EngineDeviceCreateInfo& createInfo)
 {
-	return std::make_shared<EngineDevice>(createInfo);
+	auto ptr = std::make_shared<EngineDevice>();
+	ptr->init(createInfo);
+	return ptr;
 }
 //-----------------------------------------------------------------------------
 void EngineDevice::RunApp(std::shared_ptr<IApp> app)
@@ -29,7 +31,7 @@ void EngineDevice::RunApp(std::shared_ptr<IApp> app)
 
 	// Init
 	m_currentApp = app;
-	m_currentApp->m_engineDevice = shared_from_this();
+	m_currentApp->m_engineDevice = this;
 
 	if( m_currentApp->Create() )
 	{
@@ -47,11 +49,32 @@ void EngineDevice::RunApp(std::shared_ptr<IApp> app)
 	m_currentApp = nullptr;
 }
 //-----------------------------------------------------------------------------
+void EngineDevice::init(const EngineDeviceCreateInfo& createInfo)
+{
+	m_logSystem.create(createInfo.log);
+	m_logSystem.LogPrint("EngineDevice Create");
+
+	m_window.m_engineDevice = this;
+	if( !m_window.Create(createInfo.window) )
+		return;
+
+	m_isExitRequested = false;
+}
+//-----------------------------------------------------------------------------
+void EngineDevice::close()
+{
+	m_window.Destroy();
+	m_window.m_engineDevice = nullptr;
+	m_logSystem.destroy();
+	m_logSystem.LogPrint("EngineDevice Destroy");
+}
+//-----------------------------------------------------------------------------
 void EngineDevice::update()
 {
+	m_window.Update();
 	m_timestamp.Update();
-	m_currentApp->Update(m_timestamp.ElapsedTime);
 
+	m_currentApp->Update(m_timestamp.ElapsedTime);
 
 	m_timestamp.UpdateAverageFrameTime();
 }
@@ -63,5 +86,6 @@ void EngineDevice::render()
 //-----------------------------------------------------------------------------
 void EngineDevice::present()
 {
+	m_window.Present();
 }
 //-----------------------------------------------------------------------------
