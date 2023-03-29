@@ -1,13 +1,5 @@
 #include "stdafx.h"
 #include "EngineDevice.h"
-unrimp
-haru
-https ://open.gl
-https://github.com/OpenGL-Graphics/opengl-utils
-https://github.com/OpenGL-Graphics/first-person-shooter
-PawsForAdventure
-https ://discord.com/channels/794280341149712404/1042555400844750858
-
 //-----------------------------------------------------------------------------
 EngineDevice::~EngineDevice()
 {
@@ -51,12 +43,16 @@ void EngineDevice::RunApp(std::shared_ptr<IApp> app)
 //-----------------------------------------------------------------------------
 void EngineDevice::init(const EngineDeviceCreateInfo& createInfo)
 {
+	m_logSystem.m_engineDevice = this;
 	m_logSystem.create(createInfo.log);
 	m_logSystem.LogPrint("EngineDevice Create");
 
 	m_window.m_engineDevice = this;
 	if( !m_window.Create(createInfo.window) )
 		return;
+
+	m_input.m_engineDevice = this;
+	m_input.Init();
 
 	m_isExitRequested = false;
 }
@@ -73,6 +69,7 @@ void EngineDevice::update()
 {
 	m_window.Update();
 	m_timestamp.Update();
+	m_input.Update();
 
 	m_currentApp->Update(m_timestamp.ElapsedTime);
 
@@ -81,6 +78,10 @@ void EngineDevice::update()
 //-----------------------------------------------------------------------------
 void EngineDevice::render()
 {
+	glViewport(0, 0, 1024, 768);
+	glClearColor(0.2f, 0.4f, 0.9f, 1.0f);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
 	m_currentApp->Render();
 }
 //-----------------------------------------------------------------------------

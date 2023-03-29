@@ -32,3 +32,39 @@ void BaseClass::Fatal(const std::string& msg)
 	m_engineDevice->m_logSystem.LogFatal(msg);
 }
 //-----------------------------------------------------------------------------
+Window& BaseClass::GetWindow()
+{
+	assert(m_engineDevice);
+	return m_engineDevice->m_window;
+}
+//-----------------------------------------------------------------------------
+const Window& BaseClass::GetWindow() const
+{
+	assert(m_engineDevice);
+	return m_engineDevice->m_window;
+}
+//-----------------------------------------------------------------------------
+Input& BaseClass::GetInput()
+{
+	assert(m_engineDevice);
+	return m_engineDevice->m_input;
+}
+//-----------------------------------------------------------------------------
+const Input& BaseClass::GetInput() const
+{
+	assert(m_engineDevice);
+	return m_engineDevice->m_input;
+}
+//-----------------------------------------------------------------------------
+int BaseClass::GetWindowWidth() const
+{
+	assert(m_engineDevice);
+	return m_engineDevice->m_window.GetWidth();
+}
+//-----------------------------------------------------------------------------
+int BaseClass::GetWindowHeight() const
+{
+	assert(m_engineDevice);
+	return m_engineDevice->m_window.GetHeight();
+}
+//-----------------------------------------------------------------------------

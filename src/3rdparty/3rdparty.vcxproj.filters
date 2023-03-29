@@ -7,6 +7,9 @@
     <ClCompile Include="stb.cpp">
       <Filter>stb</Filter>
     </ClCompile>
+    <ClCompile Include="glad\gl.c">
+      <Filter>glad</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="glfw">
@@ -32,6 +35,9 @@
     </Filter>
     <Filter Include="glm\simd">
       <UniqueIdentifier>{991dd315-0a8d-4085-a600-21f78c74985d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="glad">
+      <UniqueIdentifier>{664fbe2a-7619-435b-89ab-1c2ecd69cfe3}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -901,6 +907,12 @@
     </ClInclude>
     <ClInclude Include="glm\simd\vector_relational.h">
       <Filter>glm\simd</Filter>
+    </ClInclude>
+    <ClInclude Include="glad\gl.h">
+      <Filter>glad</Filter>
+    </ClInclude>
+    <ClInclude Include="KHR\khrplatform.h">
+      <Filter>glad</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

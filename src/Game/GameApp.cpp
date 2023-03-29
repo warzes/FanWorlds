@@ -18,5 +18,5 @@ void GameApp::Render()
 
 void GameApp::Update(float elapsedTimeSeconds)
 {
-	BaseClass::ExitRequest();
+	//BaseClass::ExitRequest();
 }

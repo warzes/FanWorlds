@@ -20,6 +20,9 @@
     <ClCompile Include="Window.cpp">
       <Filter>Core\Platform</Filter>
     </ClCompile>
+    <ClCompile Include="Input.cpp">
+      <Filter>Core\Platform</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h" />
@@ -43,6 +46,12 @@
       <Filter>EngineApp</Filter>
     </ClInclude>
     <ClInclude Include="Window.h">
+      <Filter>Core\Platform</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseFunc.h">
+      <Filter>Core\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="Input.h">
       <Filter>Core\Platform</Filter>
     </ClInclude>
   </ItemGroup>

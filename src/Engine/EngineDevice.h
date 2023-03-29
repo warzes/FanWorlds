@@ -3,8 +3,8 @@
 #include "LogSystem.h"
 #include "EngineTimestamp.h"
 #include "Window.h"
+#include "Input.h"
 #include "IApp.h"
-
 
 struct EngineDeviceCreateInfo
 {
@@ -39,6 +39,7 @@ private:
 	std::shared_ptr<IApp> m_currentApp = nullptr;
 	LogSystem m_logSystem;
 	Window m_window;
+	Input m_input;
 
 	EngineTimestamp m_timestamp;
 

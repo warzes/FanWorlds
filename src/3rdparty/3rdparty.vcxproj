@@ -89,10 +89,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="glad\gl.c" />
     <ClCompile Include="glfw.c" />
     <ClCompile Include="stb.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="glad\gl.h" />
     <ClInclude Include="glfw.h" />
     <ClInclude Include="glm\common.hpp" />
     <ClInclude Include="glm\detail\compute_common.hpp" />
@@ -381,6 +383,7 @@
     <ClInclude Include="glm\vec3.hpp" />
     <ClInclude Include="glm\vec4.hpp" />
     <ClInclude Include="glm\vector_relational.hpp" />
+    <ClInclude Include="KHR\khrplatform.h" />
     <ClInclude Include="stb\stb_image.h" />
   </ItemGroup>
   <ItemGroup>

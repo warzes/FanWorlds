@@ -22,6 +22,8 @@
 #include <vector>
 #include <unordered_map>
 
+#include <glad/gl.h>
+
 #include <glfw.h>
 
 #if defined(_WIN32)
