@@ -9,10 +9,5 @@ int main(
 	[[maybe_unused]] int   argc,
 	[[maybe_unused]] char* argv[])
 {
-	extern void fnMy3rdparty(); // 3rdparty.lib
-	extern void fnEngine();     // Engine.lib
-
-	fnMy3rdparty();
-	fnEngine();
 }
 //-----------------------------------------------------------------------------
