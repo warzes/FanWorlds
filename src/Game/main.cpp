@@ -1,4 +1,5 @@
 ﻿#include "stdafx.h"
+#include "GameApp.h"
 //-----------------------------------------------------------------------------
 #if defined(_MSC_VER)
 #	pragma comment( lib, "3rdparty.lib" )
@@ -9,5 +10,7 @@ int main(
 	[[maybe_unused]] int   argc,
 	[[maybe_unused]] char* argv[])
 {
+	auto engineDevice = EngineDevice::Create({});
+	engineDevice->RunApp(std::make_shared<GameApp>());
 }
 //-----------------------------------------------------------------------------

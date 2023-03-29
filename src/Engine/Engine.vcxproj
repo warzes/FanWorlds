@@ -93,14 +93,23 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="source.cpp" />
+    <ClCompile Include="BaseClass.cpp" />
+    <ClCompile Include="EngineDevice.cpp" />
+    <ClCompile Include="LogSystem.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="StringUtils.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BaseClass.h" />
+    <ClInclude Include="EngineConfiguration.h" />
+    <ClInclude Include="EngineDevice.h" />
+    <ClInclude Include="IApp.h" />
+    <ClInclude Include="LogSystem.h" />
     <ClInclude Include="stdafx.h" />
+    <ClInclude Include="StringUtils.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
