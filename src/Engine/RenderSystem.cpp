@@ -1,6 +1,8 @@
 #include "stdafx.h"
 #include "RenderSystem.h"
 
+такой стиль - https://sketchfab.com/3d-models/disciples-2-diorama-9410ae51d5654ece968b9fcd21b4a84b
+
 dwSampleFramework
 unrimp
 haru
