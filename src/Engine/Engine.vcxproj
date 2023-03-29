@@ -98,6 +98,9 @@
     <ClCompile Include="EngineTimestamp.cpp" />
     <ClCompile Include="Input.cpp" />
     <ClCompile Include="LogSystem.cpp" />
+    <ClCompile Include="RenderCore.cpp" />
+    <ClCompile Include="RenderSystem.cpp" />
+    <ClCompile Include="Shader.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
@@ -114,6 +117,9 @@
     <ClInclude Include="IApp.h" />
     <ClInclude Include="Input.h" />
     <ClInclude Include="LogSystem.h" />
+    <ClInclude Include="RenderCore.h" />
+    <ClInclude Include="RenderSystem.h" />
+    <ClInclude Include="Shader.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="StringUtils.h" />
     <ClInclude Include="Window.h" />

@@ -54,13 +54,16 @@ void EngineDevice::init(const EngineDeviceCreateInfo& createInfo)
 	m_input.m_engineDevice = this;
 	m_input.Init();
 
+	m_renderSystem.m_engineDevice = this;
+	m_renderSystem.Init(createInfo.render);
+
 	m_isExitRequested = false;
 }
 //-----------------------------------------------------------------------------
 void EngineDevice::close()
 {
+	m_renderSystem.Close();
 	m_window.Destroy();
-	m_window.m_engineDevice = nullptr;
 	m_logSystem.destroy();
 	m_logSystem.LogPrint("EngineDevice Destroy");
 }
@@ -78,11 +81,9 @@ void EngineDevice::update()
 //-----------------------------------------------------------------------------
 void EngineDevice::render()
 {
-	glViewport(0, 0, 1024, 768);
-	glClearColor(0.2f, 0.4f, 0.9f, 1.0f);
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
+	m_renderSystem.BeginFrame();
 	m_currentApp->Render();
+	m_renderSystem.EndFrame();
 }
 //-----------------------------------------------------------------------------
 void EngineDevice::present()

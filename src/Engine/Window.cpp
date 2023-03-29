@@ -69,7 +69,7 @@ bool Window::Create(const WindowCreateInfo& createInfo)
 
 	glfwMakeContextCurrent(m_window);
 
-	if( !gladLoadGL(glfwGetProcAddress) )
+	if( !gladLoadGL((GLADloadfunc)glfwGetProcAddress) )
 	{
 		Fatal("GLAD: Cannot load OpenGL extensions.");
 		return false;

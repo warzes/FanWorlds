@@ -23,6 +23,15 @@
     <ClCompile Include="Input.cpp">
       <Filter>Core\Platform</Filter>
     </ClCompile>
+    <ClCompile Include="RenderCore.cpp">
+      <Filter>RenderAPI</Filter>
+    </ClCompile>
+    <ClCompile Include="RenderSystem.cpp">
+      <Filter>RenderAPI</Filter>
+    </ClCompile>
+    <ClCompile Include="Shader.cpp">
+      <Filter>RenderAPI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h" />
@@ -53,6 +62,15 @@
     </ClInclude>
     <ClInclude Include="Input.h">
       <Filter>Core\Platform</Filter>
+    </ClInclude>
+    <ClInclude Include="RenderCore.h">
+      <Filter>RenderAPI</Filter>
+    </ClInclude>
+    <ClInclude Include="RenderSystem.h">
+      <Filter>RenderAPI</Filter>
+    </ClInclude>
+    <ClInclude Include="Shader.h">
+      <Filter>RenderAPI</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

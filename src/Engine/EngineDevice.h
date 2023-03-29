@@ -4,12 +4,14 @@
 #include "EngineTimestamp.h"
 #include "Window.h"
 #include "Input.h"
+#include "RenderSystem.h"
 #include "IApp.h"
 
 struct EngineDeviceCreateInfo
 {
 	LogCreateInfo log;
 	WindowCreateInfo window;
+	RenderCreateInfo render;
 };
 
 class EngineDevice
@@ -40,6 +42,7 @@ private:
 	LogSystem m_logSystem;
 	Window m_window;
 	Input m_input;
+	RenderSystem m_renderSystem;
 
 	EngineTimestamp m_timestamp;
 
