@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="GameApp.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="stdafx.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="GameApp.h" />
+    <ClInclude Include="stdafx.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Siege">
+      <UniqueIdentifier>{b19fccb8-d30e-46e0-948f-053bcc46643d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Siege\_DOC">
+      <UniqueIdentifier>{f209f689-cbac-4f86-a88d-05988f3fe7d8}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="IdeaSiege.md">
+      <Filter>Siege\_DOC</Filter>
+    </None>
+  </ItemGroup>
+</Project>

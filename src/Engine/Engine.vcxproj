@@ -60,7 +60,7 @@
       <PrecompiledHeader>Use</PrecompiledHeader>
       <LanguageStandard>stdcpplatest</LanguageStandard>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
-      <AdditionalIncludeDirectories>$(SolutionDir)3rdparty\;$(SolutionDir);$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)3rdparty\;$(SolutionDir);$(ProjectDir);$(SolutionDir)PhysX5Lib\physx5\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
     </ClCompile>
@@ -81,7 +81,7 @@
       <PrecompiledHeader>Use</PrecompiledHeader>
       <LanguageStandard>stdcpplatest</LanguageStandard>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
-      <AdditionalIncludeDirectories>$(SolutionDir)3rdparty\;$(SolutionDir);$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)3rdparty\;$(SolutionDir);$(ProjectDir);$(SolutionDir)PhysX5Lib\physx5\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
@@ -98,6 +98,9 @@
     <ClCompile Include="EngineTimestamp.cpp" />
     <ClCompile Include="Input.cpp" />
     <ClCompile Include="LogSystem.cpp" />
+    <ClCompile Include="PhysicsLayer.cpp" />
+    <ClCompile Include="PhysicsScene.cpp" />
+    <ClCompile Include="PhysicsSystem.cpp" />
     <ClCompile Include="RenderCore.cpp" />
     <ClCompile Include="RenderSystem.cpp" />
     <ClCompile Include="Shader.cpp" />
@@ -111,17 +114,22 @@
   <ItemGroup>
     <ClInclude Include="BaseClass.h" />
     <ClInclude Include="BaseFunc.h" />
+    <ClInclude Include="BaseMacros.h" />
     <ClInclude Include="EngineConfiguration.h" />
     <ClInclude Include="EngineDevice.h" />
     <ClInclude Include="EngineTimestamp.h" />
     <ClInclude Include="IApp.h" />
     <ClInclude Include="Input.h" />
     <ClInclude Include="LogSystem.h" />
+    <ClInclude Include="PhysicsLayer.h" />
+    <ClInclude Include="PhysicsScene.h" />
+    <ClInclude Include="PhysicsSystem.h" />
     <ClInclude Include="RenderCore.h" />
     <ClInclude Include="RenderSystem.h" />
     <ClInclude Include="Shader.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="StringUtils.h" />
+    <ClInclude Include="Transform.h" />
     <ClInclude Include="Window.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

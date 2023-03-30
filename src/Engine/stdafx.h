@@ -1,11 +1,14 @@
 #pragma once
 
+
+#define _SILENCE_CXX20_CISO646_REMOVED_WARNING
+
 #include "EngineConfiguration.h"
 
 #if defined(_MSC_VER)
 #	pragma warning(push, 0)
 //#	pragma warning(disable : 4668)
-//#	pragma warning(disable : 5039)
+#	pragma warning(disable : 5039)
 #endif
 
 #include <cassert>
@@ -25,10 +28,6 @@
 #include <glad/gl.h>
 
 #include <glfw.h>
-
-#if defined(_WIN32)
-#include <ShellScalingApi.h>
-#endif
 
 #include <stb/stb_image.h>
 
@@ -53,6 +52,8 @@ Left handed
 //#include <glm/gtx/matrix_decompose.hpp>
 //#include <glm/gtx/euler_angles.hpp>
 //#include <glm/gtx/normal.hpp>
+
+#include <PxPhysicsAPI.h>
 
 
 #if defined(_MSC_VER)

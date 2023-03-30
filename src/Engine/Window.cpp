@@ -1,10 +1,6 @@
 #include "stdafx.h"
 #include "Window.h"
 //-----------------------------------------------------------------------------
-#if defined(_WIN32)
-#	pragma comment(lib, "shcore.lib")
-#endif
-//-----------------------------------------------------------------------------
 static void GLFWErrorCallback(int error, const char *description) noexcept
 {
 	puts((std::string("GLFW error ") + std::to_string(error) + ": " + description).c_str());
@@ -19,18 +15,6 @@ static void GLFWErrorCallback(int error, const char *description) noexcept
 bool Window::Create(const WindowCreateInfo& createInfo)
 {
 	Print("Window Create");
-
-#if defined(_WIN32)
-	if( createInfo.enablePerMonitorDPI )
-	{
-		// this needs to happen before glfwInit in order to override GLFW behavior
-		SetProcessDpiAwareness(PROCESS_PER_MONITOR_DPI_AWARE);
-	}
-	else
-	{
-		SetProcessDpiAwareness(PROCESS_DPI_UNAWARE);
-	}
-#endif
 
 	m_requestedVSync = createInfo.vsyncEnabled;
 

@@ -1,17 +1,5 @@
 #include "stdafx.h"
 #include "RenderSystem.h"
-
-такой стиль - https://sketchfab.com/3d-models/disciples-2-diorama-9410ae51d5654ece968b9fcd21b4a84b
-
-dwSampleFramework
-unrimp
-haru
-https ://open.gl
-https://github.com/OpenGL-Graphics/opengl-utils
-https://github.com/OpenGL-Graphics/first-person-shooter
-PawsForAdventure
-https ://discord.com/channels/794280341149712404/1042555400844750858
-
 //-----------------------------------------------------------------------------
 #if defined(_DEBUG)
 std::string glDebugInfoText;

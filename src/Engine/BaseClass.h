@@ -3,6 +3,8 @@
 class EngineDevice;
 class Window;
 class Input;
+class RenderSystem;
+class PhysicsSystem;
 
 class BaseClass
 {
@@ -12,9 +14,12 @@ public:
 
 	Window& GetWindow();
 	const Window& GetWindow() const;
-
 	Input& GetInput();
 	const Input& GetInput() const;
+	RenderSystem& GetRenderSystem();
+	const RenderSystem& GetRenderSystem() const;
+	PhysicsSystem& GetPhysicsSystem();
+	const PhysicsSystem& GetPhysicsSystem() const;
 
 	void Print(const std::string& msg);
 	void Warning(const std::string& msg);
@@ -23,7 +28,6 @@ public:
 
 	int GetWindowWidth() const;
 	int GetWindowHeight() const;
-
 
 protected:
 	EngineDevice* m_engineDevice = nullptr;

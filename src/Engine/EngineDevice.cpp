@@ -1,6 +1,11 @@
 #include "stdafx.h"
 #include "EngineDevice.h"
 //-----------------------------------------------------------------------------
+#if defined(_MSC_VER)
+#	pragma comment( lib, "3rdparty.lib" )
+#	pragma comment( lib, "PhysX5Lib.lib" )
+#endif
+//-----------------------------------------------------------------------------
 EngineDevice::~EngineDevice()
 {
 	close();
@@ -57,11 +62,16 @@ void EngineDevice::init(const EngineDeviceCreateInfo& createInfo)
 	m_renderSystem.m_engineDevice = this;
 	m_renderSystem.Init(createInfo.render);
 
+	m_physicsSystem.m_engineDevice = this;
+	if( !m_physicsSystem.Create() )
+		return;
+
 	m_isExitRequested = false;
 }
 //-----------------------------------------------------------------------------
 void EngineDevice::close()
 {
+	m_physicsSystem.Destroy();
 	m_renderSystem.Close();
 	m_window.Destroy();
 	m_logSystem.destroy();

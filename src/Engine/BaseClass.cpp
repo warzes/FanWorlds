@@ -56,6 +56,30 @@ const Input& BaseClass::GetInput() const
 	return m_engineDevice->m_input;
 }
 //-----------------------------------------------------------------------------
+RenderSystem& BaseClass::GetRenderSystem()
+{
+	assert(m_engineDevice);
+	return m_engineDevice->m_renderSystem;
+}
+//-----------------------------------------------------------------------------
+const RenderSystem& BaseClass::GetRenderSystem() const
+{
+	assert(m_engineDevice);
+	return m_engineDevice->m_renderSystem;
+}
+//-----------------------------------------------------------------------------
+PhysicsSystem& BaseClass::GetPhysicsSystem()
+{
+	assert(m_engineDevice);
+	return m_engineDevice->m_physicsSystem;
+}
+//-----------------------------------------------------------------------------
+const PhysicsSystem& BaseClass::GetPhysicsSystem() const
+{
+	assert(m_engineDevice);
+	return m_engineDevice->m_physicsSystem;
+}
+//-----------------------------------------------------------------------------
 int BaseClass::GetWindowWidth() const
 {
 	assert(m_engineDevice);

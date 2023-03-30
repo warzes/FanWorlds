@@ -32,6 +32,15 @@
     <ClCompile Include="Shader.cpp">
       <Filter>RenderAPI</Filter>
     </ClCompile>
+    <ClCompile Include="PhysicsSystem.cpp">
+      <Filter>Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysicsScene.cpp">
+      <Filter>Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysicsLayer.cpp">
+      <Filter>Physics</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h" />
@@ -72,6 +81,21 @@
     <ClInclude Include="Shader.h">
       <Filter>RenderAPI</Filter>
     </ClInclude>
+    <ClInclude Include="BaseMacros.h">
+      <Filter>Core\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="Transform.h">
+      <Filter>Core\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicsSystem.h">
+      <Filter>Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicsScene.h">
+      <Filter>Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicsLayer.h">
+      <Filter>Physics</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Core">
@@ -109,6 +133,12 @@
     </Filter>
     <Filter Include="EngineApp">
       <UniqueIdentifier>{b1ba09fd-6b08-4eed-a7b8-9351dc4d300f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\Math">
+      <UniqueIdentifier>{7e329fc1-960f-4880-8351-6b63a0b6afe2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Physics">
+      <UniqueIdentifier>{8ab8e827-6370-4b02-99d9-d303b9cb565d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
