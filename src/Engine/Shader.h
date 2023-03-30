@@ -1,5 +1,9 @@
 #pragma once
 
+#include "MoveOnly.h"
+
+class RenderSystem;
+
 class Uniform
 {
 	int location = -1;
@@ -9,13 +13,17 @@ class Uniform
 class ShaderProgram
 {
 public:
-	ShaderProgram() = default;
+	MOVE_ONLY(ShaderProgram);
+
+	ShaderProgram() = delete;
 	ShaderProgram(
+		RenderSystem& renderSystem,
 		const std::string &sharedSource,
 		const std::string &vertexSource,
 		const std::string &fragmentSource
 	);
 	ShaderProgram(
+		RenderSystem& renderSystem,
 		const std::string &sharedSource,
 		const std::string &vertexSource,
 		const std::string &geometrySource,
@@ -23,18 +31,20 @@ public:
 	);
 	~ShaderProgram();
 
-	//static ShaderProgram FromFile(
-	//	const std::string &sharedFilename,
-	//	const std::string &vertexFilename,
-	//	const std::string &fragmentFilename
-	//);
+	static ShaderProgram FromFile(
+		RenderSystem& renderSystem,
+		const std::string &sharedFilename,
+		const std::string &vertexFilename,
+		const std::string &fragmentFilename
+	);
 
-	//static ShaderProgram FromFile(
-	//	const std::string &sharedFilename,
-	//	const std::string &vertexFilename,
-	//	const std::string &geometryFilename,
-	//	const std::string &fragmentFilename
-	//);
+	static ShaderProgram FromFile(
+		RenderSystem& renderSystem,
+		const std::string &sharedFilename,
+		const std::string &vertexFilename,
+		const std::string &geometryFilename,
+		const std::string &fragmentFilename
+	);
 
 	void Bind() const;
 
@@ -47,5 +57,6 @@ public:
 	void SetUniform(GLint location, const glm::mat4& value);
 
 private:
-	unsigned m_program = 0;
+	RenderSystem& m_renderSystem;
+	MoveOnly<GLuint> m_program;
 };

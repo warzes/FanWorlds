@@ -58,7 +58,23 @@ Left handed
 //#include <glm/gtx/euler_angles.hpp>
 //#include <glm/gtx/normal.hpp>
 
+
+#define PX_PHYSX_STATIC_LIB
+#define PX_PUBLIC_RELEASE 1
+#define RENDER_SNIPPET
+#if defined(_DEBUG)
+#define PX_DEBUG 1
+#define PX_CHECKED 1
+#define PX_NVTX 0
+#define PX_SUPPORT_PVD 1
+#define PX_SUPPORT_OMNI_PVD 1
+#else
+#define PX_SUPPORT_PVD 0
+#define PX_SUPPORT_OMNI_PVD 0
+#endif
 #include <PxPhysicsAPI.h>
+
+#include <physfs/physfs.h>
 
 
 #if defined(_MSC_VER)

@@ -98,6 +98,7 @@
     <ClCompile Include="EngineTimestamp.cpp" />
     <ClCompile Include="FileSystem.cpp" />
     <ClCompile Include="Framebuffer.cpp" />
+    <ClCompile Include="ImageFile.cpp" />
     <ClCompile Include="Input.cpp" />
     <ClCompile Include="LogSystem.cpp" />
     <ClCompile Include="PhysicsLayer.cpp" />
@@ -123,8 +124,10 @@
     <ClInclude Include="FileSystem.h" />
     <ClInclude Include="Framebuffer.h" />
     <ClInclude Include="IApp.h" />
+    <ClInclude Include="ImageFile.h" />
     <ClInclude Include="Input.h" />
     <ClInclude Include="LogSystem.h" />
+    <ClInclude Include="MoveOnly.h" />
     <ClInclude Include="PhysicsLayer.h" />
     <ClInclude Include="PhysicsScene.h" />
     <ClInclude Include="PhysicsSystem.h" />

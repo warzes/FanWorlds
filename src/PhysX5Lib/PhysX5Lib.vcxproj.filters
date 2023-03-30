@@ -1,0 +1,976 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Code">
+      <UniqueIdentifier>{8c82d17e-1fe1-469c-82f1-8dd9b60ec793}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Code\characterkinematic">
+      <UniqueIdentifier>{9db36b64-192a-4db2-a4d3-882023f818d1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Code\collision">
+      <UniqueIdentifier>{04756e42-928e-4617-8622-f32f837dcbbd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Code\common">
+      <UniqueIdentifier>{0833f2e4-8fe3-42f9-83f2-9c779becd2c8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Code\cooking">
+      <UniqueIdentifier>{c38d778b-46b6-47d5-9220-522f21467ee8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Code\cudamanager">
+      <UniqueIdentifier>{67ed2b85-6044-4334-80a0-d4303c1fef27}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Code\extensions">
+      <UniqueIdentifier>{04be4f38-3e59-4c53-915e-bdc0828d50e8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Code\filebuf">
+      <UniqueIdentifier>{4181f563-81b6-4117-928a-0a3b349e44a8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Code\foundation">
+      <UniqueIdentifier>{15df9f0f-2d4a-425c-8e70-a2b0900a5ca8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Code\geometry">
+      <UniqueIdentifier>{040bd006-8c15-4096-80e6-a101f55c60e8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Code\geomutils">
+      <UniqueIdentifier>{843d52c7-9528-4994-b742-ff64fdd1a2c9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Code\gpu">
+      <UniqueIdentifier>{0b801fb5-665a-4c7f-812c-f9c7d90743a3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Code\omnipvd">
+      <UniqueIdentifier>{8a8fcb72-3661-4f90-80d3-99058bc36b53}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Code\pvd">
+      <UniqueIdentifier>{3e6325de-a0a9-46f3-af14-198a64b80303}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Code\solver">
+      <UniqueIdentifier>{9f2b33f7-7df8-48b2-bdac-2abbb568a3a2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Code\task">
+      <UniqueIdentifier>{98867be0-a194-4298-987d-fe2adf3f893c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Code\common\windows">
+      <UniqueIdentifier>{17d5428e-6c39-4a26-baca-9283befe832f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Code\foundation\windows">
+      <UniqueIdentifier>{119cea96-0cf7-452f-8273-6e1a9d43dffa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Code\foundation\unix">
+      <UniqueIdentifier>{bc032a59-0666-4bcc-9689-ff568eff6ab9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Code\vehicle">
+      <UniqueIdentifier>{7964d4f4-fed9-4b74-8991-1a99381e178d}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="physx5\PxVisualizationParameter.h">
+      <Filter>Code</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\PxActor.h">
+      <Filter>Code</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\PxActorData.h">
+      <Filter>Code</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\PxAggregate.h">
+      <Filter>Code</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\PxArticulationFlag.h">
+      <Filter>Code</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\PxArticulationJointReducedCoordinate.h">
+      <Filter>Code</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\PxArticulationLink.h">
+      <Filter>Code</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\PxArticulationReducedCoordinate.h">
+      <Filter>Code</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\PxArticulationTendon.h">
+      <Filter>Code</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\PxArticulationTendonData.h">
+      <Filter>Code</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\PxAttachment.h">
+      <Filter>Code</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\PxBaseMaterial.h">
+      <Filter>Code</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\PxBroadPhase.h">
+      <Filter>Code</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\PxBuffer.h">
+      <Filter>Code</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\PxClient.h">
+      <Filter>Code</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\PxConeLimitedConstraint.h">
+      <Filter>Code</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\PxConfig.h">
+      <Filter>Code</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\PxConstraint.h">
+      <Filter>Code</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\PxConstraintDesc.h">
+      <Filter>Code</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\PxContact.h">
+      <Filter>Code</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\PxContactModifyCallback.h">
+      <Filter>Code</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\PxCustomParticleSystemSolverCallback.h">
+      <Filter>Code</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\PxDeletionListener.h">
+      <Filter>Code</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\PxFEMClothFlags.h">
+      <Filter>Code</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\PxFEMClothMaterial.h">
+      <Filter>Code</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\PxFEMMaterial.h">
+      <Filter>Code</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\PxFEMParameter.h">
+      <Filter>Code</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\PxFEMSoftBodyMaterial.h">
+      <Filter>Code</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\PxFiltering.h">
+      <Filter>Code</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\PxFLIPMaterial.h">
+      <Filter>Code</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\PxForceMode.h">
+      <Filter>Code</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\PxHairSystemFlag.h">
+      <Filter>Code</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\PxImmediateMode.h">
+      <Filter>Code</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\PxLockedData.h">
+      <Filter>Code</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\PxMaterial.h">
+      <Filter>Code</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\PxMPMMaterial.h">
+      <Filter>Code</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\PxNodeIndex.h">
+      <Filter>Code</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\PxParticleBuffer.h">
+      <Filter>Code</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\PxParticleGpu.h">
+      <Filter>Code</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\PxParticleMaterial.h">
+      <Filter>Code</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\PxParticleSolverType.h">
+      <Filter>Code</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\PxParticleSystem.h">
+      <Filter>Code</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\PxParticleSystemFlag.h">
+      <Filter>Code</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\PxPBDMaterial.h">
+      <Filter>Code</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\PxPBDParticleSystem.h">
+      <Filter>Code</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\PxPhysics.h">
+      <Filter>Code</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\PxPhysicsAPI.h">
+      <Filter>Code</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\PxPhysicsSerialization.h">
+      <Filter>Code</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\PxPhysXConfig.h">
+      <Filter>Code</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\PxPruningStructure.h">
+      <Filter>Code</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\PxQueryFiltering.h">
+      <Filter>Code</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\PxQueryReport.h">
+      <Filter>Code</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\PxRigidActor.h">
+      <Filter>Code</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\PxRigidBody.h">
+      <Filter>Code</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\PxRigidDynamic.h">
+      <Filter>Code</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\PxRigidStatic.h">
+      <Filter>Code</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\PxScene.h">
+      <Filter>Code</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\PxSceneDesc.h">
+      <Filter>Code</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\PxSceneLock.h">
+      <Filter>Code</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\PxSceneQueryDesc.h">
+      <Filter>Code</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\PxSceneQuerySystem.h">
+      <Filter>Code</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\PxShape.h">
+      <Filter>Code</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\PxSimulationEventCallback.h">
+      <Filter>Code</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\PxSimulationStatistics.h">
+      <Filter>Code</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\PxSoftBody.h">
+      <Filter>Code</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\PxSoftBodyFlag.h">
+      <Filter>Code</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\PxSparseGridParams.h">
+      <Filter>Code</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\characterkinematic\PxBoxController.h">
+      <Filter>Code\characterkinematic</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\characterkinematic\PxCapsuleController.h">
+      <Filter>Code\characterkinematic</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\characterkinematic\PxController.h">
+      <Filter>Code\characterkinematic</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\characterkinematic\PxControllerBehavior.h">
+      <Filter>Code\characterkinematic</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\characterkinematic\PxControllerManager.h">
+      <Filter>Code\characterkinematic</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\characterkinematic\PxControllerObstacles.h">
+      <Filter>Code\characterkinematic</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\characterkinematic\PxExtended.h">
+      <Filter>Code\characterkinematic</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\collision\PxCollisionDefs.h">
+      <Filter>Code\collision</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\common\PxBase.h">
+      <Filter>Code\common</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\common\PxCollection.h">
+      <Filter>Code\common</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\common\PxCoreUtilityTypes.h">
+      <Filter>Code\common</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\common\PxInsertionCallback.h">
+      <Filter>Code\common</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\common\PxMetaData.h">
+      <Filter>Code\common</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\common\PxMetaDataFlags.h">
+      <Filter>Code\common</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\common\PxPhysXCommonConfig.h">
+      <Filter>Code\common</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\common\PxProfileZone.h">
+      <Filter>Code\common</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\common\PxRenderBuffer.h">
+      <Filter>Code\common</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\common\PxRenderOutput.h">
+      <Filter>Code\common</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\common\PxSerialFramework.h">
+      <Filter>Code\common</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\common\PxSerializer.h">
+      <Filter>Code\common</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\common\PxStringTable.h">
+      <Filter>Code\common</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\common\PxTolerancesScale.h">
+      <Filter>Code\common</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\common\PxTypeInfo.h">
+      <Filter>Code\common</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\common\windows\PxWindowsDelayLoadHook.h">
+      <Filter>Code\common\windows</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\cooking\PxBVH33MidphaseDesc.h">
+      <Filter>Code\cooking</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\cooking\PxBVH34MidphaseDesc.h">
+      <Filter>Code\cooking</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\cooking\PxBVHDesc.h">
+      <Filter>Code\cooking</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\cooking\Pxc.h">
+      <Filter>Code\cooking</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\cooking\PxConvexMeshDesc.h">
+      <Filter>Code\cooking</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\cooking\PxCooking.h">
+      <Filter>Code\cooking</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\cooking\PxCookingInternal.h">
+      <Filter>Code\cooking</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\cooking\PxMidphaseDesc.h">
+      <Filter>Code\cooking</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\cooking\PxSDFDesc.h">
+      <Filter>Code\cooking</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\cooking\PxTetrahedronMeshDesc.h">
+      <Filter>Code\cooking</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\cooking\PxTriangleMeshDesc.h">
+      <Filter>Code\cooking</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\cudamanager\PxCudaContext.h">
+      <Filter>Code\cudamanager</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\cudamanager\PxCudaContextManager.h">
+      <Filter>Code\cudamanager</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\cudamanager\PxCudaTypes.h">
+      <Filter>Code\cudamanager</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\extensions\PxBinaryConverter.h">
+      <Filter>Code\extensions</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\extensions\PxBroadPhaseExt.h">
+      <Filter>Code\extensions</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\extensions\PxCollectionExt.h">
+      <Filter>Code\extensions</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\extensions\PxConstraintExt.h">
+      <Filter>Code\extensions</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\extensions\PxContactJoint.h">
+      <Filter>Code\extensions</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\extensions\PxConvexMeshExt.h">
+      <Filter>Code\extensions</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\extensions\PxCustomGeometryExt.h">
+      <Filter>Code\extensions</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\extensions\PxCustomSceneQuerySystem.h">
+      <Filter>Code\extensions</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\extensions\PxD6Joint.h">
+      <Filter>Code\extensions</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\extensions\PxD6JointCreate.h">
+      <Filter>Code\extensions</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\extensions\PxDefaultAllocator.h">
+      <Filter>Code\extensions</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\extensions\PxDefaultCpuDispatcher.h">
+      <Filter>Code\extensions</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\extensions\PxDefaultErrorCallback.h">
+      <Filter>Code\extensions</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\extensions\PxDefaultSimulationFilterShader.h">
+      <Filter>Code\extensions</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\extensions\PxDefaultStreams.h">
+      <Filter>Code\extensions</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\extensions\PxDistanceJoint.h">
+      <Filter>Code\extensions</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\extensions\PxExtensionsAPI.h">
+      <Filter>Code\extensions</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\extensions\PxFixedJoint.h">
+      <Filter>Code\extensions</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\extensions\PxGearJoint.h">
+      <Filter>Code\extensions</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\extensions\PxGjkQueryExt.h">
+      <Filter>Code\extensions</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\extensions\PxJoint.h">
+      <Filter>Code\extensions</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\extensions\PxJointLimit.h">
+      <Filter>Code\extensions</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\extensions\PxMassProperties.h">
+      <Filter>Code\extensions</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\extensions\PxParticleClothCooker.h">
+      <Filter>Code\extensions</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\extensions\PxParticleExt.h">
+      <Filter>Code\extensions</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\extensions\PxPrismaticJoint.h">
+      <Filter>Code\extensions</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\extensions\PxRackAndPinionJoint.h">
+      <Filter>Code\extensions</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\extensions\PxRaycastCCD.h">
+      <Filter>Code\extensions</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\extensions\PxRemeshingExt.h">
+      <Filter>Code\extensions</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\extensions\PxRepXSerializer.h">
+      <Filter>Code\extensions</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\extensions\PxRepXSimpleType.h">
+      <Filter>Code\extensions</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\extensions\PxRevoluteJoint.h">
+      <Filter>Code\extensions</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\extensions\PxRigidActorExt.h">
+      <Filter>Code\extensions</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\extensions\PxRigidBodyExt.h">
+      <Filter>Code\extensions</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\extensions\PxSamplingExt.h">
+      <Filter>Code\extensions</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\extensions\PxSceneQueryExt.h">
+      <Filter>Code\extensions</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\extensions\PxSceneQuerySystemExt.h">
+      <Filter>Code\extensions</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\extensions\PxSerialization.h">
+      <Filter>Code\extensions</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\extensions\PxShapeExt.h">
+      <Filter>Code\extensions</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\extensions\PxSimpleFactory.h">
+      <Filter>Code\extensions</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\extensions\PxSmoothNormals.h">
+      <Filter>Code\extensions</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\extensions\PxSoftBodyExt.h">
+      <Filter>Code\extensions</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\extensions\PxSphericalJoint.h">
+      <Filter>Code\extensions</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\extensions\PxStringTableExt.h">
+      <Filter>Code\extensions</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\extensions\PxTetMakerExt.h">
+      <Filter>Code\extensions</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\extensions\PxTetrahedronMeshAnalysisResult.h">
+      <Filter>Code\extensions</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\extensions\PxTetrahedronMeshExt.h">
+      <Filter>Code\extensions</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\extensions\PxTriangleMeshAnalysisResult.h">
+      <Filter>Code\extensions</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\extensions\PxTriangleMeshExt.h">
+      <Filter>Code\extensions</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\filebuf\PxFileBuf.h">
+      <Filter>Code\filebuf</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\foundation\unix\neon\PxUnixNeonAoS.h">
+      <Filter>Code\foundation\unix</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\foundation\unix\neon\PxUnixNeonInlineAoS.h">
+      <Filter>Code\foundation\unix</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\foundation\unix\sse2\PxUnixSse2AoS.h">
+      <Filter>Code\foundation\unix</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\foundation\unix\sse2\PxUnixSse2InlineAoS.h">
+      <Filter>Code\foundation\unix</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\foundation\unix\PxUnixAoS.h">
+      <Filter>Code\foundation\unix</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\foundation\unix\PxUnixFPU.h">
+      <Filter>Code\foundation\unix</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\foundation\unix\PxUnixInlineAoS.h">
+      <Filter>Code\foundation\unix</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\foundation\unix\PxUnixIntrinsics.h">
+      <Filter>Code\foundation\unix</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\foundation\unix\PxUnixMathIntrinsics.h">
+      <Filter>Code\foundation\unix</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\foundation\unix\PxUnixTrigConstants.h">
+      <Filter>Code\foundation\unix</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\foundation\windows\PxWindowsAoS.h">
+      <Filter>Code\foundation\windows</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\foundation\windows\PxWindowsFPU.h">
+      <Filter>Code\foundation\windows</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\foundation\windows\PxWindowsInclude.h">
+      <Filter>Code\foundation\windows</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\foundation\windows\PxWindowsInlineAoS.h">
+      <Filter>Code\foundation\windows</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\foundation\windows\PxWindowsIntrinsics.h">
+      <Filter>Code\foundation\windows</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\foundation\windows\PxWindowsMathIntrinsics.h">
+      <Filter>Code\foundation\windows</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\foundation\windows\PxWindowsTrigConstants.h">
+      <Filter>Code\foundation\windows</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\foundation\Px.h">
+      <Filter>Code\foundation</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\foundation\PxAlignedMalloc.h">
+      <Filter>Code\foundation</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\foundation\PxAlloca.h">
+      <Filter>Code\foundation</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\foundation\PxAllocator.h">
+      <Filter>Code\foundation</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\foundation\PxAllocatorCallback.h">
+      <Filter>Code\foundation</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\foundation\PxAoS.h">
+      <Filter>Code\foundation</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\foundation\PxArray.h">
+      <Filter>Code\foundation</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\foundation\PxAssert.h">
+      <Filter>Code\foundation</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\foundation\PxAtomic.h">
+      <Filter>Code\foundation</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\foundation\PxBasicTemplates.h">
+      <Filter>Code\foundation</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\foundation\PxBitAndData.h">
+      <Filter>Code\foundation</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\foundation\PxBitMap.h">
+      <Filter>Code\foundation</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\foundation\PxBitUtils.h">
+      <Filter>Code\foundation</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\foundation\PxBounds3.h">
+      <Filter>Code\foundation</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\foundation\PxBroadcast.h">
+      <Filter>Code\foundation</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\foundation\PxErrorCallback.h">
+      <Filter>Code\foundation</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\foundation\PxErrors.h">
+      <Filter>Code\foundation</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\foundation\PxFlags.h">
+      <Filter>Code\foundation</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\foundation\PxFoundation.h">
+      <Filter>Code\foundation</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\foundation\PxFoundationConfig.h">
+      <Filter>Code\foundation</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\foundation\PxFPU.h">
+      <Filter>Code\foundation</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\foundation\PxHash.h">
+      <Filter>Code\foundation</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\foundation\PxHashInternals.h">
+      <Filter>Code\foundation</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\foundation\PxHashMap.h">
+      <Filter>Code\foundation</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\foundation\PxHashSet.h">
+      <Filter>Code\foundation</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\foundation\PxInlineAllocator.h">
+      <Filter>Code\foundation</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\foundation\PxInlineAoS.h">
+      <Filter>Code\foundation</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\foundation\PxInlineArray.h">
+      <Filter>Code\foundation</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\foundation\PxIntrinsics.h">
+      <Filter>Code\foundation</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\foundation\PxIO.h">
+      <Filter>Code\foundation</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\foundation\PxMat33.h">
+      <Filter>Code\foundation</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\foundation\PxMat34.h">
+      <Filter>Code\foundation</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\foundation\PxMat44.h">
+      <Filter>Code\foundation</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\foundation\PxMath.h">
+      <Filter>Code\foundation</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\foundation\PxMathIntrinsics.h">
+      <Filter>Code\foundation</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\foundation\PxMathUtils.h">
+      <Filter>Code\foundation</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\foundation\PxMemory.h">
+      <Filter>Code\foundation</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\foundation\PxMutex.h">
+      <Filter>Code\foundation</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\foundation\PxPhysicsVersion.h">
+      <Filter>Code\foundation</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\foundation\PxPinnedArray.h">
+      <Filter>Code\foundation</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\foundation\PxPlane.h">
+      <Filter>Code\foundation</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\foundation\PxPool.h">
+      <Filter>Code\foundation</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\foundation\PxPreprocessor.h">
+      <Filter>Code\foundation</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\foundation\PxProfiler.h">
+      <Filter>Code\foundation</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\foundation\PxQuat.h">
+      <Filter>Code\foundation</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\foundation\PxSIMDHelpers.h">
+      <Filter>Code\foundation</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\foundation\PxSimpleTypes.h">
+      <Filter>Code\foundation</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\foundation\PxSList.h">
+      <Filter>Code\foundation</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\foundation\PxSocket.h">
+      <Filter>Code\foundation</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\foundation\PxSort.h">
+      <Filter>Code\foundation</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\foundation\PxSortInternals.h">
+      <Filter>Code\foundation</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\foundation\PxStrideIterator.h">
+      <Filter>Code\foundation</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\foundation\PxString.h">
+      <Filter>Code\foundation</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\foundation\PxSync.h">
+      <Filter>Code\foundation</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\foundation\PxTempAllocator.h">
+      <Filter>Code\foundation</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\foundation\PxThread.h">
+      <Filter>Code\foundation</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\foundation\PxTime.h">
+      <Filter>Code\foundation</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\foundation\PxTransform.h">
+      <Filter>Code\foundation</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\foundation\PxUnionCast.h">
+      <Filter>Code\foundation</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\foundation\PxUserAllocated.h">
+      <Filter>Code\foundation</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\foundation\PxUtilities.h">
+      <Filter>Code\foundation</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\foundation\PxVec2.h">
+      <Filter>Code\foundation</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\foundation\PxVec3.h">
+      <Filter>Code\foundation</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\foundation\PxVec4.h">
+      <Filter>Code\foundation</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\foundation\PxVecMath.h">
+      <Filter>Code\foundation</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\foundation\PxVecMathAoSScalar.h">
+      <Filter>Code\foundation</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\foundation\PxVecMathAoSScalarInline.h">
+      <Filter>Code\foundation</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\foundation\PxVecMathSSE.h">
+      <Filter>Code\foundation</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\foundation\PxVecQuat.h">
+      <Filter>Code\foundation</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\foundation\PxVecTransform.h">
+      <Filter>Code\foundation</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\geometry\PxBoxGeometry.h">
+      <Filter>Code\geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\geometry\PxBVH.h">
+      <Filter>Code\geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\geometry\PxBVHBuildStrategy.h">
+      <Filter>Code\geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\geometry\PxCapsuleGeometry.h">
+      <Filter>Code\geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\geometry\PxConvexMesh.h">
+      <Filter>Code\geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\geometry\PxConvexMeshGeometry.h">
+      <Filter>Code\geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\geometry\PxCustomGeometry.h">
+      <Filter>Code\geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\geometry\PxGeometry.h">
+      <Filter>Code\geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\geometry\PxGeometryHelpers.h">
+      <Filter>Code\geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\geometry\PxGeometryHit.h">
+      <Filter>Code\geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\geometry\PxGeometryInternal.h">
+      <Filter>Code\geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\geometry\PxGeometryQuery.h">
+      <Filter>Code\geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\geometry\PxGeometryQueryContext.h">
+      <Filter>Code\geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\geometry\PxGeometryQueryFlags.h">
+      <Filter>Code\geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\geometry\PxGjkQuery.h">
+      <Filter>Code\geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\geometry\PxHairSystemDesc.h">
+      <Filter>Code\geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\geometry\PxHairSystemGeometry.h">
+      <Filter>Code\geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\geometry\PxHeightField.h">
+      <Filter>Code\geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\geometry\PxHeightFieldDesc.h">
+      <Filter>Code\geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\geometry\PxHeightFieldFlag.h">
+      <Filter>Code\geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\geometry\PxHeightFieldGeometry.h">
+      <Filter>Code\geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\geometry\PxHeightFieldSample.h">
+      <Filter>Code\geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\geometry\PxMeshQuery.h">
+      <Filter>Code\geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\geometry\PxMeshScale.h">
+      <Filter>Code\geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\geometry\PxParticleSystemGeometry.h">
+      <Filter>Code\geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\geometry\PxPlaneGeometry.h">
+      <Filter>Code\geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\geometry\PxReportCallback.h">
+      <Filter>Code\geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\geometry\PxSimpleTriangleMesh.h">
+      <Filter>Code\geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\geometry\PxSphereGeometry.h">
+      <Filter>Code\geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\geometry\PxTetrahedron.h">
+      <Filter>Code\geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\geometry\PxTetrahedronMesh.h">
+      <Filter>Code\geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\geometry\PxTetrahedronMeshGeometry.h">
+      <Filter>Code\geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\geometry\PxTriangle.h">
+      <Filter>Code\geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\geometry\PxTriangleMesh.h">
+      <Filter>Code\geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\geometry\PxTriangleMeshGeometry.h">
+      <Filter>Code\geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\geomutils\PxContactBuffer.h">
+      <Filter>Code\geomutils</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\geomutils\PxContactPoint.h">
+      <Filter>Code\geomutils</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\gpu\PxGpu.h">
+      <Filter>Code\gpu</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\pvd\PxPvd.h">
+      <Filter>Code\pvd</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\pvd\PxPvdSceneClient.h">
+      <Filter>Code\pvd</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\pvd\PxPvdTransport.h">
+      <Filter>Code\pvd</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\solver\PxSolverDefs.h">
+      <Filter>Code\solver</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\omnipvd\PxOmniPvd.h">
+      <Filter>Code\omnipvd</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\task\PxCpuDispatcher.h">
+      <Filter>Code\task</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\task\PxTask.h">
+      <Filter>Code\task</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\task\PxTaskManager.h">
+      <Filter>Code\task</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\vehicle\PxVehicleComponents.h">
+      <Filter>Code\vehicle</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\vehicle\PxVehicleDrive.h">
+      <Filter>Code\vehicle</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\vehicle\PxVehicleDrive4W.h">
+      <Filter>Code\vehicle</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\vehicle\PxVehicleDriveNW.h">
+      <Filter>Code\vehicle</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\vehicle\PxVehicleDriveTank.h">
+      <Filter>Code\vehicle</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\vehicle\PxVehicleNoDrive.h">
+      <Filter>Code\vehicle</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\vehicle\PxVehicleSDK.h">
+      <Filter>Code\vehicle</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\vehicle\PxVehicleShaders.h">
+      <Filter>Code\vehicle</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\vehicle\PxVehicleTireFriction.h">
+      <Filter>Code\vehicle</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\vehicle\PxVehicleUpdate.h">
+      <Filter>Code\vehicle</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\vehicle\PxVehicleUtil.h">
+      <Filter>Code\vehicle</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\vehicle\PxVehicleUtilControl.h">
+      <Filter>Code\vehicle</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\vehicle\PxVehicleUtilSetup.h">
+      <Filter>Code\vehicle</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\vehicle\PxVehicleUtilTelemetry.h">
+      <Filter>Code\vehicle</Filter>
+    </ClInclude>
+    <ClInclude Include="physx5\vehicle\PxVehicleWheels.h">
+      <Filter>Code\vehicle</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

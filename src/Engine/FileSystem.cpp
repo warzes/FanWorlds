@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "FileSystem.h"
 //-----------------------------------------------------------------------------
-std::optional<std::vector<uint8_t>> FileSystem::FileToMemory(const char* fileName, unsigned int* bytesRead)
+std::optional<std::vector<uint8_t>> FileSystemUtils::FileToMemory(const char* fileName, unsigned int* bytesRead)
 {
 	if (!fileName || !fileName[0])
 	{
@@ -63,7 +63,7 @@ std::optional<std::vector<uint8_t>> FileSystem::FileToMemory(const char* fileNam
 	return contents;
 }
 //-----------------------------------------------------------------------------
-bool FileSystem::FileExists(const char* fileName)
+bool FileSystemUtils::FileExists(const char* fileName)
 {
 	bool result = false;
 
@@ -81,7 +81,7 @@ bool FileSystem::FileExists(const char* fileName)
 	return result;
 }
 //-----------------------------------------------------------------------------
-const char* FileSystem::GetFileExtension(const char* fileName)
+const char* FileSystemUtils::GetFileExtension(const char* fileName)
 {
 	// TODO: бывают случаи когда точка используется в имени файла например file.foo.ext
 	// сейчас это не будет работать
@@ -90,12 +90,75 @@ const char* FileSystem::GetFileExtension(const char* fileName)
 	return dot;
 }
 //-----------------------------------------------------------------------------
-const char* FileSystem::GetFileName(const char* filePath)
+const char* FileSystemUtils::GetFileName(const char* filePath)
 {
 	const char* latestMatch = nullptr;
 	for (; filePath = strpbrk(filePath, "\\/"), filePath != nullptr; latestMatch = filePath++) {}
 	const char* fileName = latestMatch;
 	if (!fileName) return filePath;
 	return fileName + 1;
+}
+//-----------------------------------------------------------------------------
+std::string GetFileSystemLastError()
+{
+	return PHYSFS_getErrorByCode(PHYSFS_getLastErrorCode());
+}
+//-----------------------------------------------------------------------------
+bool FileSystem::Init()
+{
+	if( !PHYSFS_init(__argv[0]))
+	{
+		Error("Failed to init Physfs: " + GetFileSystemLastError());
+		return false;
+	}
+	Print("Physfs " 
+		+ std::to_string(PHYSFS_VER_MAJOR) + "." 
+		+ std::to_string(PHYSFS_VER_MINOR) + "."
+		+ std::to_string(PHYSFS_VER_PATCH));
+
+	return true;
+}
+//-----------------------------------------------------------------------------
+void FileSystem::Close()
+{
+	if( !PHYSFS_deinit() )
+	{
+		Error("Failed to destroy Physfs: " + GetFileSystemLastError());
+	}
+}
+//-----------------------------------------------------------------------------
+FileSystem &FileSystem::Mount(const std::string &newDir, const std::string &mountPoint, bool appendToPath)
+{
+	if( !PHYSFS_mount(newDir.c_str(), mountPoint.c_str(), appendToPath) )
+	{
+		Error("Physfs failed to mount " + newDir + " at " + mountPoint + ": " + GetFileSystemLastError());
+	}
+	else
+	{
+		Print("Physfs mount %s at %s" + newDir +" at " + mountPoint);
+	}
+	return *this;
+}
+//-----------------------------------------------------------------------------
+std::string FileSystem::ReadFile(const std::string &filename)
+{
+	PHYSFS_File *file = PHYSFS_openRead(filename.c_str());
+	if( !file )
+	{
+		Error("Physfs failed to open file " + filename + ": " + GetFileSystemLastError());
+		return {};
+	}
+	PHYSFS_sint64 length = PHYSFS_fileLength(file);
+	if( length == -1 )
+	{
+		Error("Physfs failed to get file size " + filename + ": " + GetFileSystemLastError());
+		return {};
+	}
+	std::string bytes(length, '\0');
+	if( PHYSFS_readBytes(file, bytes.data(), length) == -1 )
+	{
+		Error("Physfs failed to read file " + filename + ": " + GetFileSystemLastError());
+	}
+	return bytes;
 }
 //-----------------------------------------------------------------------------

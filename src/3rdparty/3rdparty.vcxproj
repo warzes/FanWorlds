@@ -91,6 +91,29 @@
   <ItemGroup>
     <ClCompile Include="glad\gl.c" />
     <ClCompile Include="glfw.c" />
+    <ClCompile Include="physfs\physfs.c" />
+    <ClCompile Include="physfs\physfs_archiver_7z.c" />
+    <ClCompile Include="physfs\physfs_archiver_dir.c" />
+    <ClCompile Include="physfs\physfs_archiver_grp.c" />
+    <ClCompile Include="physfs\physfs_archiver_hog.c" />
+    <ClCompile Include="physfs\physfs_archiver_iso9660.c" />
+    <ClCompile Include="physfs\physfs_archiver_mvl.c" />
+    <ClCompile Include="physfs\physfs_archiver_qpak.c" />
+    <ClCompile Include="physfs\physfs_archiver_slb.c" />
+    <ClCompile Include="physfs\physfs_archiver_unpacked.c" />
+    <ClCompile Include="physfs\physfs_archiver_vdf.c" />
+    <ClCompile Include="physfs\physfs_archiver_wad.c" />
+    <ClCompile Include="physfs\physfs_archiver_zip.c" />
+    <ClCompile Include="physfs\physfs_byteorder.c" />
+    <ClCompile Include="physfs\physfs_platform_android.c" />
+    <ClCompile Include="physfs\physfs_platform_haiku.cpp" />
+    <ClCompile Include="physfs\physfs_platform_os2.c" />
+    <ClCompile Include="physfs\physfs_platform_posix.c" />
+    <ClCompile Include="physfs\physfs_platform_qnx.c" />
+    <ClCompile Include="physfs\physfs_platform_unix.c" />
+    <ClCompile Include="physfs\physfs_platform_windows.c" />
+    <ClCompile Include="physfs\physfs_platform_winrt.cpp" />
+    <ClCompile Include="physfs\physfs_unicode.c" />
     <ClCompile Include="stb.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -384,6 +407,12 @@
     <ClInclude Include="glm\vec4.hpp" />
     <ClInclude Include="glm\vector_relational.hpp" />
     <ClInclude Include="KHR\khrplatform.h" />
+    <ClInclude Include="physfs\physfs.h" />
+    <ClInclude Include="physfs\physfs_casefolding.h" />
+    <ClInclude Include="physfs\physfs_internal.h" />
+    <ClInclude Include="physfs\physfs_lzmasdk.h" />
+    <ClInclude Include="physfs\physfs_miniz.h" />
+    <ClInclude Include="physfs\physfs_platforms.h" />
     <ClInclude Include="stb\stb_image.h" />
   </ItemGroup>
   <ItemGroup>
@@ -526,6 +555,7 @@
     <None Include="glm\gtx\vector_angle.inl" />
     <None Include="glm\gtx\vector_query.inl" />
     <None Include="glm\gtx\wrap.inl" />
+    <None Include="physfs\physfs_platform_apple.m" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

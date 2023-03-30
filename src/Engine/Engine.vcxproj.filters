@@ -18,10 +18,10 @@
       <Filter>EngineApp</Filter>
     </ClCompile>
     <ClCompile Include="Window.cpp">
-      <Filter>Core\Platform</Filter>
+      <Filter>Platform</Filter>
     </ClCompile>
     <ClCompile Include="Input.cpp">
-      <Filter>Core\Platform</Filter>
+      <Filter>Platform</Filter>
     </ClCompile>
     <ClCompile Include="RenderCore.cpp">
       <Filter>RenderAPI</Filter>
@@ -47,6 +47,9 @@
     <ClCompile Include="Framebuffer.cpp">
       <Filter>RenderAPI</Filter>
     </ClCompile>
+    <ClCompile Include="ImageFile.cpp">
+      <Filter>Core\IO</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h" />
@@ -70,13 +73,13 @@
       <Filter>EngineApp</Filter>
     </ClInclude>
     <ClInclude Include="Window.h">
-      <Filter>Core\Platform</Filter>
+      <Filter>Platform</Filter>
     </ClInclude>
     <ClInclude Include="BaseFunc.h">
       <Filter>Core\Base</Filter>
     </ClInclude>
     <ClInclude Include="Input.h">
-      <Filter>Core\Platform</Filter>
+      <Filter>Platform</Filter>
     </ClInclude>
     <ClInclude Include="RenderCore.h">
       <Filter>RenderAPI</Filter>
@@ -111,6 +114,12 @@
     <ClInclude Include="Framebuffer.h">
       <Filter>RenderAPI</Filter>
     </ClInclude>
+    <ClInclude Include="MoveOnly.h">
+      <Filter>Core\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="ImageFile.h">
+      <Filter>Core\IO</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Core">
@@ -143,9 +152,6 @@
     <Filter Include="Core\Object">
       <UniqueIdentifier>{c4d88eca-c696-4473-89bb-b83a232babb2}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Core\Platform">
-      <UniqueIdentifier>{c8d3700f-6525-41b4-81f3-2062323e5652}</UniqueIdentifier>
-    </Filter>
     <Filter Include="EngineApp">
       <UniqueIdentifier>{b1ba09fd-6b08-4eed-a7b8-9351dc4d300f}</UniqueIdentifier>
     </Filter>
@@ -154,6 +160,9 @@
     </Filter>
     <Filter Include="Physics">
       <UniqueIdentifier>{8ab8e827-6370-4b02-99d9-d303b9cb565d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Platform">
+      <UniqueIdentifier>{c8d3700f-6525-41b4-81f3-2062323e5652}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

@@ -2,6 +2,7 @@
 
 #include "LogSystem.h"
 #include "EngineTimestamp.h"
+#include "FileSystem.h"
 #include "Window.h"
 #include "Input.h"
 #include "RenderSystem.h"
@@ -41,6 +42,7 @@ private:
 
 	std::shared_ptr<IApp> m_currentApp = nullptr;
 	LogSystem m_logSystem;
+	FileSystem m_fileSystem;
 	Window m_window;
 	Input m_input;
 	RenderSystem m_renderSystem;

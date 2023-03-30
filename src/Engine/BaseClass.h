@@ -1,6 +1,7 @@
 #pragma once
 
 class EngineDevice;
+class FileSystem;
 class Window;
 class Input;
 class RenderSystem;
@@ -11,7 +12,8 @@ class BaseClass
 	friend EngineDevice;
 public:
 	void ExitRequest();
-
+	FileSystem& GetFileSystem();
+	const FileSystem& GetFileSystem() const;
 	Window& GetWindow();
 	const Window& GetWindow() const;
 	Input& GetInput();
@@ -20,6 +22,7 @@ public:
 	const RenderSystem& GetRenderSystem() const;
 	PhysicsSystem& GetPhysicsSystem();
 	const PhysicsSystem& GetPhysicsSystem() const;
+
 
 	void Print(const std::string& msg);
 	void Warning(const std::string& msg);

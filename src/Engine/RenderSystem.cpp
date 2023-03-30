@@ -47,6 +47,12 @@ void RenderSystem::Init(const RenderCreateInfo& createInfo)
 	glDebugMessageCallback(glDebugCallback, nullptr);
 	glEnable(GL_DEBUG_OUTPUT);
 #endif
+
+	Print("OpenGL: OpenGL device information:");
+	Print("    > Vendor:   " + std::string((const char*)glGetString(GL_VENDOR)));
+	Print("    > Renderer: " + std::string((const char*)glGetString(GL_RENDERER)));
+	Print("    > Version:  " + std::string((const char*)glGetString(GL_VERSION)));
+	Print("    > GLSL:     " + std::string((const char*)glGetString(GL_SHADING_LANGUAGE_VERSION)));
 }
 //-----------------------------------------------------------------------------
 void RenderSystem::Close()

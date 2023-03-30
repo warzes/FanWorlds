@@ -6,11 +6,13 @@ static void GLFWErrorCallback(int error, const char *description) noexcept
 	puts((std::string("GLFW error ") + std::to_string(error) + ": " + description).c_str());
 }
 //-----------------------------------------------------------------------------
-//void GLFWWindowSizeCallback(GLFWwindow* /*window*/, int width, int height) noexcept
-//{
-//	//WindowWidth = width;
-//	//WindowHeight = height;
-//}
+void GLFWFramebufferSizeCallback(GLFWwindow* window, int width, int height) noexcept
+{
+	const auto app = static_cast<Window*>(glfwGetWindowUserPointer(window));
+	if( app == nullptr ) return;
+	app->m_windowWidth = width;
+	app->m_windowHeight = width;
+}
 //-----------------------------------------------------------------------------
 bool Window::Create(const WindowCreateInfo& createInfo)
 {
@@ -30,6 +32,7 @@ bool Window::Create(const WindowCreateInfo& createInfo)
 	);
 	glfwSetErrorCallback(GLFWErrorCallback);
 
+	// OpenGL Config
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 6);
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
@@ -39,7 +42,10 @@ bool Window::Create(const WindowCreateInfo& createInfo)
 #else
 	glfwWindowHint(GLFW_CONTEXT_NO_ERROR, GLFW_TRUE);
 #endif
+
+	// Window Config
 	glfwWindowHint(GLFW_RESIZABLE, createInfo.resizable ? GL_TRUE : GL_FALSE);
+	glfwWindowHint(GLFW_MAXIMIZED, createInfo.maximized ? GLFW_TRUE : GLFW_FALSE);
 
 	m_window = glfwCreateWindow(createInfo.width, createInfo.height, createInfo.title.c_str(), nullptr, nullptr);
 	if( !m_window )
@@ -49,7 +55,7 @@ bool Window::Create(const WindowCreateInfo& createInfo)
 	}
 	glfwSetWindowUserPointer(m_window, this);
 
-	//glfwSetWindowSizeCallback(m_window, GLFWWindowSizeCallback);
+	glfwSetFramebufferSizeCallback(m_window, GLFWFramebufferSizeCallback);
 
 	glfwMakeContextCurrent(m_window);
 
@@ -58,11 +64,6 @@ bool Window::Create(const WindowCreateInfo& createInfo)
 		Fatal("GLAD: Cannot load OpenGL extensions.");
 		return false;
 	}
-	Print("OpenGL: OpenGL device information:");
-	Print("    > Vendor:   " + std::string((const char*)glGetString(GL_VENDOR)));
-	Print("    > Renderer: " + std::string((const char*)glGetString(GL_RENDERER)));
-	Print("    > Version:  " + std::string((const char*)glGetString(GL_VERSION)));
-	Print("    > GLSL:     " + std::string((const char*)glGetString(GL_SHADING_LANGUAGE_VERSION)));
 
 	glfwSwapInterval(m_requestedVSync ? 1 : 0);
 

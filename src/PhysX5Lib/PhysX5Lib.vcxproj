@@ -1,0 +1,408 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Lib.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="physx5\characterkinematic\PxBoxController.h" />
+    <ClInclude Include="physx5\characterkinematic\PxCapsuleController.h" />
+    <ClInclude Include="physx5\characterkinematic\PxController.h" />
+    <ClInclude Include="physx5\characterkinematic\PxControllerBehavior.h" />
+    <ClInclude Include="physx5\characterkinematic\PxControllerManager.h" />
+    <ClInclude Include="physx5\characterkinematic\PxControllerObstacles.h" />
+    <ClInclude Include="physx5\characterkinematic\PxExtended.h" />
+    <ClInclude Include="physx5\collision\PxCollisionDefs.h" />
+    <ClInclude Include="physx5\common\PxBase.h" />
+    <ClInclude Include="physx5\common\PxCollection.h" />
+    <ClInclude Include="physx5\common\PxCoreUtilityTypes.h" />
+    <ClInclude Include="physx5\common\PxInsertionCallback.h" />
+    <ClInclude Include="physx5\common\PxMetaData.h" />
+    <ClInclude Include="physx5\common\PxMetaDataFlags.h" />
+    <ClInclude Include="physx5\common\PxPhysXCommonConfig.h" />
+    <ClInclude Include="physx5\common\PxProfileZone.h" />
+    <ClInclude Include="physx5\common\PxRenderBuffer.h" />
+    <ClInclude Include="physx5\common\PxRenderOutput.h" />
+    <ClInclude Include="physx5\common\PxSerialFramework.h" />
+    <ClInclude Include="physx5\common\PxSerializer.h" />
+    <ClInclude Include="physx5\common\PxStringTable.h" />
+    <ClInclude Include="physx5\common\PxTolerancesScale.h" />
+    <ClInclude Include="physx5\common\PxTypeInfo.h" />
+    <ClInclude Include="physx5\common\windows\PxWindowsDelayLoadHook.h" />
+    <ClInclude Include="physx5\cooking\PxBVH33MidphaseDesc.h" />
+    <ClInclude Include="physx5\cooking\PxBVH34MidphaseDesc.h" />
+    <ClInclude Include="physx5\cooking\PxBVHDesc.h" />
+    <ClInclude Include="physx5\cooking\Pxc.h" />
+    <ClInclude Include="physx5\cooking\PxConvexMeshDesc.h" />
+    <ClInclude Include="physx5\cooking\PxCooking.h" />
+    <ClInclude Include="physx5\cooking\PxCookingInternal.h" />
+    <ClInclude Include="physx5\cooking\PxMidphaseDesc.h" />
+    <ClInclude Include="physx5\cooking\PxSDFDesc.h" />
+    <ClInclude Include="physx5\cooking\PxTetrahedronMeshDesc.h" />
+    <ClInclude Include="physx5\cooking\PxTriangleMeshDesc.h" />
+    <ClInclude Include="physx5\cudamanager\PxCudaContext.h" />
+    <ClInclude Include="physx5\cudamanager\PxCudaContextManager.h" />
+    <ClInclude Include="physx5\cudamanager\PxCudaTypes.h" />
+    <ClInclude Include="physx5\extensions\PxBinaryConverter.h" />
+    <ClInclude Include="physx5\extensions\PxBroadPhaseExt.h" />
+    <ClInclude Include="physx5\extensions\PxCollectionExt.h" />
+    <ClInclude Include="physx5\extensions\PxConstraintExt.h" />
+    <ClInclude Include="physx5\extensions\PxContactJoint.h" />
+    <ClInclude Include="physx5\extensions\PxConvexMeshExt.h" />
+    <ClInclude Include="physx5\extensions\PxCustomGeometryExt.h" />
+    <ClInclude Include="physx5\extensions\PxCustomSceneQuerySystem.h" />
+    <ClInclude Include="physx5\extensions\PxD6Joint.h" />
+    <ClInclude Include="physx5\extensions\PxD6JointCreate.h" />
+    <ClInclude Include="physx5\extensions\PxDefaultAllocator.h" />
+    <ClInclude Include="physx5\extensions\PxDefaultCpuDispatcher.h" />
+    <ClInclude Include="physx5\extensions\PxDefaultErrorCallback.h" />
+    <ClInclude Include="physx5\extensions\PxDefaultSimulationFilterShader.h" />
+    <ClInclude Include="physx5\extensions\PxDefaultStreams.h" />
+    <ClInclude Include="physx5\extensions\PxDistanceJoint.h" />
+    <ClInclude Include="physx5\extensions\PxExtensionsAPI.h" />
+    <ClInclude Include="physx5\extensions\PxFixedJoint.h" />
+    <ClInclude Include="physx5\extensions\PxGearJoint.h" />
+    <ClInclude Include="physx5\extensions\PxGjkQueryExt.h" />
+    <ClInclude Include="physx5\extensions\PxJoint.h" />
+    <ClInclude Include="physx5\extensions\PxJointLimit.h" />
+    <ClInclude Include="physx5\extensions\PxMassProperties.h" />
+    <ClInclude Include="physx5\extensions\PxParticleClothCooker.h" />
+    <ClInclude Include="physx5\extensions\PxParticleExt.h" />
+    <ClInclude Include="physx5\extensions\PxPrismaticJoint.h" />
+    <ClInclude Include="physx5\extensions\PxRackAndPinionJoint.h" />
+    <ClInclude Include="physx5\extensions\PxRaycastCCD.h" />
+    <ClInclude Include="physx5\extensions\PxRemeshingExt.h" />
+    <ClInclude Include="physx5\extensions\PxRepXSerializer.h" />
+    <ClInclude Include="physx5\extensions\PxRepXSimpleType.h" />
+    <ClInclude Include="physx5\extensions\PxRevoluteJoint.h" />
+    <ClInclude Include="physx5\extensions\PxRigidActorExt.h" />
+    <ClInclude Include="physx5\extensions\PxRigidBodyExt.h" />
+    <ClInclude Include="physx5\extensions\PxSamplingExt.h" />
+    <ClInclude Include="physx5\extensions\PxSceneQueryExt.h" />
+    <ClInclude Include="physx5\extensions\PxSceneQuerySystemExt.h" />
+    <ClInclude Include="physx5\extensions\PxSerialization.h" />
+    <ClInclude Include="physx5\extensions\PxShapeExt.h" />
+    <ClInclude Include="physx5\extensions\PxSimpleFactory.h" />
+    <ClInclude Include="physx5\extensions\PxSmoothNormals.h" />
+    <ClInclude Include="physx5\extensions\PxSoftBodyExt.h" />
+    <ClInclude Include="physx5\extensions\PxSphericalJoint.h" />
+    <ClInclude Include="physx5\extensions\PxStringTableExt.h" />
+    <ClInclude Include="physx5\extensions\PxTetMakerExt.h" />
+    <ClInclude Include="physx5\extensions\PxTetrahedronMeshAnalysisResult.h" />
+    <ClInclude Include="physx5\extensions\PxTetrahedronMeshExt.h" />
+    <ClInclude Include="physx5\extensions\PxTriangleMeshAnalysisResult.h" />
+    <ClInclude Include="physx5\extensions\PxTriangleMeshExt.h" />
+    <ClInclude Include="physx5\filebuf\PxFileBuf.h" />
+    <ClInclude Include="physx5\foundation\Px.h" />
+    <ClInclude Include="physx5\foundation\PxAlignedMalloc.h" />
+    <ClInclude Include="physx5\foundation\PxAlloca.h" />
+    <ClInclude Include="physx5\foundation\PxAllocator.h" />
+    <ClInclude Include="physx5\foundation\PxAllocatorCallback.h" />
+    <ClInclude Include="physx5\foundation\PxAoS.h" />
+    <ClInclude Include="physx5\foundation\PxArray.h" />
+    <ClInclude Include="physx5\foundation\PxAssert.h" />
+    <ClInclude Include="physx5\foundation\PxAtomic.h" />
+    <ClInclude Include="physx5\foundation\PxBasicTemplates.h" />
+    <ClInclude Include="physx5\foundation\PxBitAndData.h" />
+    <ClInclude Include="physx5\foundation\PxBitMap.h" />
+    <ClInclude Include="physx5\foundation\PxBitUtils.h" />
+    <ClInclude Include="physx5\foundation\PxBounds3.h" />
+    <ClInclude Include="physx5\foundation\PxBroadcast.h" />
+    <ClInclude Include="physx5\foundation\PxErrorCallback.h" />
+    <ClInclude Include="physx5\foundation\PxErrors.h" />
+    <ClInclude Include="physx5\foundation\PxFlags.h" />
+    <ClInclude Include="physx5\foundation\PxFoundation.h" />
+    <ClInclude Include="physx5\foundation\PxFoundationConfig.h" />
+    <ClInclude Include="physx5\foundation\PxFPU.h" />
+    <ClInclude Include="physx5\foundation\PxHash.h" />
+    <ClInclude Include="physx5\foundation\PxHashInternals.h" />
+    <ClInclude Include="physx5\foundation\PxHashMap.h" />
+    <ClInclude Include="physx5\foundation\PxHashSet.h" />
+    <ClInclude Include="physx5\foundation\PxInlineAllocator.h" />
+    <ClInclude Include="physx5\foundation\PxInlineAoS.h" />
+    <ClInclude Include="physx5\foundation\PxInlineArray.h" />
+    <ClInclude Include="physx5\foundation\PxIntrinsics.h" />
+    <ClInclude Include="physx5\foundation\PxIO.h" />
+    <ClInclude Include="physx5\foundation\PxMat33.h" />
+    <ClInclude Include="physx5\foundation\PxMat34.h" />
+    <ClInclude Include="physx5\foundation\PxMat44.h" />
+    <ClInclude Include="physx5\foundation\PxMath.h" />
+    <ClInclude Include="physx5\foundation\PxMathIntrinsics.h" />
+    <ClInclude Include="physx5\foundation\PxMathUtils.h" />
+    <ClInclude Include="physx5\foundation\PxMemory.h" />
+    <ClInclude Include="physx5\foundation\PxMutex.h" />
+    <ClInclude Include="physx5\foundation\PxPhysicsVersion.h" />
+    <ClInclude Include="physx5\foundation\PxPinnedArray.h" />
+    <ClInclude Include="physx5\foundation\PxPlane.h" />
+    <ClInclude Include="physx5\foundation\PxPool.h" />
+    <ClInclude Include="physx5\foundation\PxPreprocessor.h" />
+    <ClInclude Include="physx5\foundation\PxProfiler.h" />
+    <ClInclude Include="physx5\foundation\PxQuat.h" />
+    <ClInclude Include="physx5\foundation\PxSIMDHelpers.h" />
+    <ClInclude Include="physx5\foundation\PxSimpleTypes.h" />
+    <ClInclude Include="physx5\foundation\PxSList.h" />
+    <ClInclude Include="physx5\foundation\PxSocket.h" />
+    <ClInclude Include="physx5\foundation\PxSort.h" />
+    <ClInclude Include="physx5\foundation\PxSortInternals.h" />
+    <ClInclude Include="physx5\foundation\PxStrideIterator.h" />
+    <ClInclude Include="physx5\foundation\PxString.h" />
+    <ClInclude Include="physx5\foundation\PxSync.h" />
+    <ClInclude Include="physx5\foundation\PxTempAllocator.h" />
+    <ClInclude Include="physx5\foundation\PxThread.h" />
+    <ClInclude Include="physx5\foundation\PxTime.h" />
+    <ClInclude Include="physx5\foundation\PxTransform.h" />
+    <ClInclude Include="physx5\foundation\PxUnionCast.h" />
+    <ClInclude Include="physx5\foundation\PxUserAllocated.h" />
+    <ClInclude Include="physx5\foundation\PxUtilities.h" />
+    <ClInclude Include="physx5\foundation\PxVec2.h" />
+    <ClInclude Include="physx5\foundation\PxVec3.h" />
+    <ClInclude Include="physx5\foundation\PxVec4.h" />
+    <ClInclude Include="physx5\foundation\PxVecMath.h" />
+    <ClInclude Include="physx5\foundation\PxVecMathAoSScalar.h" />
+    <ClInclude Include="physx5\foundation\PxVecMathAoSScalarInline.h" />
+    <ClInclude Include="physx5\foundation\PxVecMathSSE.h" />
+    <ClInclude Include="physx5\foundation\PxVecQuat.h" />
+    <ClInclude Include="physx5\foundation\PxVecTransform.h" />
+    <ClInclude Include="physx5\foundation\unix\neon\PxUnixNeonAoS.h" />
+    <ClInclude Include="physx5\foundation\unix\neon\PxUnixNeonInlineAoS.h" />
+    <ClInclude Include="physx5\foundation\unix\PxUnixAoS.h" />
+    <ClInclude Include="physx5\foundation\unix\PxUnixFPU.h" />
+    <ClInclude Include="physx5\foundation\unix\PxUnixInlineAoS.h" />
+    <ClInclude Include="physx5\foundation\unix\PxUnixIntrinsics.h" />
+    <ClInclude Include="physx5\foundation\unix\PxUnixMathIntrinsics.h" />
+    <ClInclude Include="physx5\foundation\unix\PxUnixTrigConstants.h" />
+    <ClInclude Include="physx5\foundation\unix\sse2\PxUnixSse2AoS.h" />
+    <ClInclude Include="physx5\foundation\unix\sse2\PxUnixSse2InlineAoS.h" />
+    <ClInclude Include="physx5\foundation\windows\PxWindowsAoS.h" />
+    <ClInclude Include="physx5\foundation\windows\PxWindowsFPU.h" />
+    <ClInclude Include="physx5\foundation\windows\PxWindowsInclude.h" />
+    <ClInclude Include="physx5\foundation\windows\PxWindowsInlineAoS.h" />
+    <ClInclude Include="physx5\foundation\windows\PxWindowsIntrinsics.h" />
+    <ClInclude Include="physx5\foundation\windows\PxWindowsMathIntrinsics.h" />
+    <ClInclude Include="physx5\foundation\windows\PxWindowsTrigConstants.h" />
+    <ClInclude Include="physx5\geometry\PxBoxGeometry.h" />
+    <ClInclude Include="physx5\geometry\PxBVH.h" />
+    <ClInclude Include="physx5\geometry\PxBVHBuildStrategy.h" />
+    <ClInclude Include="physx5\geometry\PxCapsuleGeometry.h" />
+    <ClInclude Include="physx5\geometry\PxConvexMesh.h" />
+    <ClInclude Include="physx5\geometry\PxConvexMeshGeometry.h" />
+    <ClInclude Include="physx5\geometry\PxCustomGeometry.h" />
+    <ClInclude Include="physx5\geometry\PxGeometry.h" />
+    <ClInclude Include="physx5\geometry\PxGeometryHelpers.h" />
+    <ClInclude Include="physx5\geometry\PxGeometryHit.h" />
+    <ClInclude Include="physx5\geometry\PxGeometryInternal.h" />
+    <ClInclude Include="physx5\geometry\PxGeometryQuery.h" />
+    <ClInclude Include="physx5\geometry\PxGeometryQueryContext.h" />
+    <ClInclude Include="physx5\geometry\PxGeometryQueryFlags.h" />
+    <ClInclude Include="physx5\geometry\PxGjkQuery.h" />
+    <ClInclude Include="physx5\geometry\PxHairSystemDesc.h" />
+    <ClInclude Include="physx5\geometry\PxHairSystemGeometry.h" />
+    <ClInclude Include="physx5\geometry\PxHeightField.h" />
+    <ClInclude Include="physx5\geometry\PxHeightFieldDesc.h" />
+    <ClInclude Include="physx5\geometry\PxHeightFieldFlag.h" />
+    <ClInclude Include="physx5\geometry\PxHeightFieldGeometry.h" />
+    <ClInclude Include="physx5\geometry\PxHeightFieldSample.h" />
+    <ClInclude Include="physx5\geometry\PxMeshQuery.h" />
+    <ClInclude Include="physx5\geometry\PxMeshScale.h" />
+    <ClInclude Include="physx5\geometry\PxParticleSystemGeometry.h" />
+    <ClInclude Include="physx5\geometry\PxPlaneGeometry.h" />
+    <ClInclude Include="physx5\geometry\PxReportCallback.h" />
+    <ClInclude Include="physx5\geometry\PxSimpleTriangleMesh.h" />
+    <ClInclude Include="physx5\geometry\PxSphereGeometry.h" />
+    <ClInclude Include="physx5\geometry\PxTetrahedron.h" />
+    <ClInclude Include="physx5\geometry\PxTetrahedronMesh.h" />
+    <ClInclude Include="physx5\geometry\PxTetrahedronMeshGeometry.h" />
+    <ClInclude Include="physx5\geometry\PxTriangle.h" />
+    <ClInclude Include="physx5\geometry\PxTriangleMesh.h" />
+    <ClInclude Include="physx5\geometry\PxTriangleMeshGeometry.h" />
+    <ClInclude Include="physx5\geomutils\PxContactBuffer.h" />
+    <ClInclude Include="physx5\geomutils\PxContactPoint.h" />
+    <ClInclude Include="physx5\gpu\PxGpu.h" />
+    <ClInclude Include="physx5\omnipvd\PxOmniPvd.h" />
+    <ClInclude Include="physx5\pvd\PxPvd.h" />
+    <ClInclude Include="physx5\pvd\PxPvdSceneClient.h" />
+    <ClInclude Include="physx5\pvd\PxPvdTransport.h" />
+    <ClInclude Include="physx5\PxActor.h" />
+    <ClInclude Include="physx5\PxActorData.h" />
+    <ClInclude Include="physx5\PxAggregate.h" />
+    <ClInclude Include="physx5\PxArticulationFlag.h" />
+    <ClInclude Include="physx5\PxArticulationJointReducedCoordinate.h" />
+    <ClInclude Include="physx5\PxArticulationLink.h" />
+    <ClInclude Include="physx5\PxArticulationReducedCoordinate.h" />
+    <ClInclude Include="physx5\PxArticulationTendon.h" />
+    <ClInclude Include="physx5\PxArticulationTendonData.h" />
+    <ClInclude Include="physx5\PxAttachment.h" />
+    <ClInclude Include="physx5\PxBaseMaterial.h" />
+    <ClInclude Include="physx5\PxBroadPhase.h" />
+    <ClInclude Include="physx5\PxBuffer.h" />
+    <ClInclude Include="physx5\PxClient.h" />
+    <ClInclude Include="physx5\PxConeLimitedConstraint.h" />
+    <ClInclude Include="physx5\PxConfig.h" />
+    <ClInclude Include="physx5\PxConstraint.h" />
+    <ClInclude Include="physx5\PxConstraintDesc.h" />
+    <ClInclude Include="physx5\PxContact.h" />
+    <ClInclude Include="physx5\PxContactModifyCallback.h" />
+    <ClInclude Include="physx5\PxCustomParticleSystemSolverCallback.h" />
+    <ClInclude Include="physx5\PxDeletionListener.h" />
+    <ClInclude Include="physx5\PxFEMClothFlags.h" />
+    <ClInclude Include="physx5\PxFEMClothMaterial.h" />
+    <ClInclude Include="physx5\PxFEMMaterial.h" />
+    <ClInclude Include="physx5\PxFEMParameter.h" />
+    <ClInclude Include="physx5\PxFEMSoftBodyMaterial.h" />
+    <ClInclude Include="physx5\PxFiltering.h" />
+    <ClInclude Include="physx5\PxFLIPMaterial.h" />
+    <ClInclude Include="physx5\PxForceMode.h" />
+    <ClInclude Include="physx5\PxHairSystemFlag.h" />
+    <ClInclude Include="physx5\PxImmediateMode.h" />
+    <ClInclude Include="physx5\PxLockedData.h" />
+    <ClInclude Include="physx5\PxMaterial.h" />
+    <ClInclude Include="physx5\PxMPMMaterial.h" />
+    <ClInclude Include="physx5\PxNodeIndex.h" />
+    <ClInclude Include="physx5\PxParticleBuffer.h" />
+    <ClInclude Include="physx5\PxParticleGpu.h" />
+    <ClInclude Include="physx5\PxParticleMaterial.h" />
+    <ClInclude Include="physx5\PxParticleSolverType.h" />
+    <ClInclude Include="physx5\PxParticleSystem.h" />
+    <ClInclude Include="physx5\PxParticleSystemFlag.h" />
+    <ClInclude Include="physx5\PxPBDMaterial.h" />
+    <ClInclude Include="physx5\PxPBDParticleSystem.h" />
+    <ClInclude Include="physx5\PxPhysics.h" />
+    <ClInclude Include="physx5\PxPhysicsAPI.h" />
+    <ClInclude Include="physx5\PxPhysicsSerialization.h" />
+    <ClInclude Include="physx5\PxPhysXConfig.h" />
+    <ClInclude Include="physx5\PxPruningStructure.h" />
+    <ClInclude Include="physx5\PxQueryFiltering.h" />
+    <ClInclude Include="physx5\PxQueryReport.h" />
+    <ClInclude Include="physx5\PxRigidActor.h" />
+    <ClInclude Include="physx5\PxRigidBody.h" />
+    <ClInclude Include="physx5\PxRigidDynamic.h" />
+    <ClInclude Include="physx5\PxRigidStatic.h" />
+    <ClInclude Include="physx5\PxScene.h" />
+    <ClInclude Include="physx5\PxSceneDesc.h" />
+    <ClInclude Include="physx5\PxSceneLock.h" />
+    <ClInclude Include="physx5\PxSceneQueryDesc.h" />
+    <ClInclude Include="physx5\PxSceneQuerySystem.h" />
+    <ClInclude Include="physx5\PxShape.h" />
+    <ClInclude Include="physx5\PxSimulationEventCallback.h" />
+    <ClInclude Include="physx5\PxSimulationStatistics.h" />
+    <ClInclude Include="physx5\PxSoftBody.h" />
+    <ClInclude Include="physx5\PxSoftBodyFlag.h" />
+    <ClInclude Include="physx5\PxSparseGridParams.h" />
+    <ClInclude Include="physx5\PxVisualizationParameter.h" />
+    <ClInclude Include="physx5\solver\PxSolverDefs.h" />
+    <ClInclude Include="physx5\task\PxCpuDispatcher.h" />
+    <ClInclude Include="physx5\task\PxTask.h" />
+    <ClInclude Include="physx5\task\PxTaskManager.h" />
+    <ClInclude Include="physx5\vehicle\PxVehicleComponents.h" />
+    <ClInclude Include="physx5\vehicle\PxVehicleDrive.h" />
+    <ClInclude Include="physx5\vehicle\PxVehicleDrive4W.h" />
+    <ClInclude Include="physx5\vehicle\PxVehicleDriveNW.h" />
+    <ClInclude Include="physx5\vehicle\PxVehicleDriveTank.h" />
+    <ClInclude Include="physx5\vehicle\PxVehicleNoDrive.h" />
+    <ClInclude Include="physx5\vehicle\PxVehicleSDK.h" />
+    <ClInclude Include="physx5\vehicle\PxVehicleShaders.h" />
+    <ClInclude Include="physx5\vehicle\PxVehicleTireFriction.h" />
+    <ClInclude Include="physx5\vehicle\PxVehicleUpdate.h" />
+    <ClInclude Include="physx5\vehicle\PxVehicleUtil.h" />
+    <ClInclude Include="physx5\vehicle\PxVehicleUtilControl.h" />
+    <ClInclude Include="physx5\vehicle\PxVehicleUtilSetup.h" />
+    <ClInclude Include="physx5\vehicle\PxVehicleUtilTelemetry.h" />
+    <ClInclude Include="physx5\vehicle\PxVehicleWheels.h" />
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>16.0</VCProjectVersion>
+    <Keyword>Win32Proj</Keyword>
+    <ProjectGuid>{A6DE23CF-2B28-4BE3-8E18-A7F17CCCC6F6}</ProjectGuid>
+    <RootNamespace>My3rdparty</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <OutDir>$(SolutionDir)..\_lib\$(Configuration)\$(PlatformTarget)\</OutDir>
+    <IntDir>$(SolutionDir)..\_obj\$(Configuration)\$(PlatformTarget)\$(ProjectName)\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <OutDir>$(SolutionDir)..\_lib\$(Configuration)\$(PlatformTarget)\</OutDir>
+    <IntDir>$(SolutionDir)..\_obj\$(Configuration)\$(PlatformTarget)\$(ProjectName)\</IntDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>TurnOffAllWarnings</WarningLevel>
+      <SDLCheck>false</SDLCheck>
+      <PreprocessorDefinitions>_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(SolutionDir)3rdparty\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+    <Link>
+      <SubSystem>
+      </SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+    <Lib>
+      <AdditionalLibraryDirectories>$(ProjectDir)physx5Lib\$(Configuration)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>TurnOffAllWarnings</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>false</SDLCheck>
+      <PreprocessorDefinitions>NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(SolutionDir)3rdparty\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>
+      </SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+    <Lib>
+      <AdditionalLibraryDirectories>$(ProjectDir)physx5Lib\$(Configuration)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Lib>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

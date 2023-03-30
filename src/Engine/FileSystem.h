@@ -1,6 +1,8 @@
 #pragma once
 
-namespace FileSystem
+#include "BaseClass.h"
+
+namespace FileSystemUtils
 {
 	std::optional<std::vector<uint8_t>> FileToMemory(const char* fileName, unsigned int* bytesRead = nullptr);
 
@@ -11,3 +13,15 @@ namespace FileSystem
 	// Get pointer to filename for a path string
 	const char* GetFileName(const char* filePath);
 }
+
+class FileSystem : public BaseClass
+{
+	friend class EngineDevice;
+public:
+	bool Init();
+	void Close();
+
+	FileSystem &Mount(const std::string &newDir, const std::string &mountPoint, bool appendToPath = true);
+
+	std::string ReadFile(const std::string &filename);
+};

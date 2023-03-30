@@ -10,6 +10,75 @@
     <ClCompile Include="glad\gl.c">
       <Filter>glad</Filter>
     </ClCompile>
+    <ClCompile Include="physfs\physfs.c">
+      <Filter>physfs</Filter>
+    </ClCompile>
+    <ClCompile Include="physfs\physfs_archiver_7z.c">
+      <Filter>physfs</Filter>
+    </ClCompile>
+    <ClCompile Include="physfs\physfs_archiver_dir.c">
+      <Filter>physfs</Filter>
+    </ClCompile>
+    <ClCompile Include="physfs\physfs_archiver_grp.c">
+      <Filter>physfs</Filter>
+    </ClCompile>
+    <ClCompile Include="physfs\physfs_archiver_hog.c">
+      <Filter>physfs</Filter>
+    </ClCompile>
+    <ClCompile Include="physfs\physfs_archiver_iso9660.c">
+      <Filter>physfs</Filter>
+    </ClCompile>
+    <ClCompile Include="physfs\physfs_archiver_mvl.c">
+      <Filter>physfs</Filter>
+    </ClCompile>
+    <ClCompile Include="physfs\physfs_archiver_qpak.c">
+      <Filter>physfs</Filter>
+    </ClCompile>
+    <ClCompile Include="physfs\physfs_archiver_slb.c">
+      <Filter>physfs</Filter>
+    </ClCompile>
+    <ClCompile Include="physfs\physfs_archiver_unpacked.c">
+      <Filter>physfs</Filter>
+    </ClCompile>
+    <ClCompile Include="physfs\physfs_archiver_vdf.c">
+      <Filter>physfs</Filter>
+    </ClCompile>
+    <ClCompile Include="physfs\physfs_archiver_wad.c">
+      <Filter>physfs</Filter>
+    </ClCompile>
+    <ClCompile Include="physfs\physfs_archiver_zip.c">
+      <Filter>physfs</Filter>
+    </ClCompile>
+    <ClCompile Include="physfs\physfs_byteorder.c">
+      <Filter>physfs</Filter>
+    </ClCompile>
+    <ClCompile Include="physfs\physfs_platform_android.c">
+      <Filter>physfs</Filter>
+    </ClCompile>
+    <ClCompile Include="physfs\physfs_platform_haiku.cpp">
+      <Filter>physfs</Filter>
+    </ClCompile>
+    <ClCompile Include="physfs\physfs_platform_os2.c">
+      <Filter>physfs</Filter>
+    </ClCompile>
+    <ClCompile Include="physfs\physfs_platform_posix.c">
+      <Filter>physfs</Filter>
+    </ClCompile>
+    <ClCompile Include="physfs\physfs_platform_qnx.c">
+      <Filter>physfs</Filter>
+    </ClCompile>
+    <ClCompile Include="physfs\physfs_platform_unix.c">
+      <Filter>physfs</Filter>
+    </ClCompile>
+    <ClCompile Include="physfs\physfs_platform_windows.c">
+      <Filter>physfs</Filter>
+    </ClCompile>
+    <ClCompile Include="physfs\physfs_platform_winrt.cpp">
+      <Filter>physfs</Filter>
+    </ClCompile>
+    <ClCompile Include="physfs\physfs_unicode.c">
+      <Filter>physfs</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="glfw">
@@ -38,6 +107,9 @@
     </Filter>
     <Filter Include="glad">
       <UniqueIdentifier>{664fbe2a-7619-435b-89ab-1c2ecd69cfe3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="physfs">
+      <UniqueIdentifier>{ec769492-d51b-41dc-8b10-f1c14c066572}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -914,6 +986,24 @@
     <ClInclude Include="KHR\khrplatform.h">
       <Filter>glad</Filter>
     </ClInclude>
+    <ClInclude Include="physfs\physfs.h">
+      <Filter>physfs</Filter>
+    </ClInclude>
+    <ClInclude Include="physfs\physfs_casefolding.h">
+      <Filter>physfs</Filter>
+    </ClInclude>
+    <ClInclude Include="physfs\physfs_internal.h">
+      <Filter>physfs</Filter>
+    </ClInclude>
+    <ClInclude Include="physfs\physfs_lzmasdk.h">
+      <Filter>physfs</Filter>
+    </ClInclude>
+    <ClInclude Include="physfs\physfs_miniz.h">
+      <Filter>physfs</Filter>
+    </ClInclude>
+    <ClInclude Include="physfs\physfs_platforms.h">
+      <Filter>physfs</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="glm\detail\func_common.inl">
@@ -1332,6 +1422,9 @@
     </None>
     <None Include="glm\gtx\wrap.inl">
       <Filter>glm\gtx</Filter>
+    </None>
+    <None Include="physfs\physfs_platform_apple.m">
+      <Filter>physfs</Filter>
     </None>
   </ItemGroup>
 </Project>

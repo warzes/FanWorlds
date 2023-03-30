@@ -8,6 +8,7 @@ struct WindowCreateInfo
 	int height = 768;
 	std::string title = "Game";
 	bool resizable = true;
+	bool maximized = true;
 
 	// set to true to enable DPI scale factors to be computed per monitor this will keep the on-screen window size in pixels constant
 	// if set to false, the DPI scale factors will be constant but the system may scale the contents of the window based on DPI
@@ -21,6 +22,7 @@ class Window : public BaseClass
 {
 	friend class EngineDevice;
 	friend class Input;
+	friend void GLFWFramebufferSizeCallback(GLFWwindow*, int, int) noexcept;
 public:
 	bool Create(const WindowCreateInfo& createInfo);
 	void Destroy();

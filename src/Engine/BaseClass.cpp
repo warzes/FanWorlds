@@ -32,6 +32,18 @@ void BaseClass::Fatal(const std::string& msg)
 	m_engineDevice->m_logSystem.LogFatal(msg);
 }
 //-----------------------------------------------------------------------------
+FileSystem& BaseClass::GetFileSystem()
+{
+	assert(m_engineDevice);
+	return m_engineDevice->m_fileSystem;
+}
+//-----------------------------------------------------------------------------
+const FileSystem& BaseClass::GetFileSystem() const
+{
+	assert(m_engineDevice);
+	return m_engineDevice->m_fileSystem;
+}
+//-----------------------------------------------------------------------------
 Window& BaseClass::GetWindow()
 {
 	assert(m_engineDevice);
