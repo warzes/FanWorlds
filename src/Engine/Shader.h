@@ -23,21 +23,29 @@ public:
 	);
 	~ShaderProgram();
 
-	static ShaderProgram FromFile(
-		const std::string &sharedFilename,
-		const std::string &vertexFilename,
-		const std::string &fragmentFilename
-	);
+	//static ShaderProgram FromFile(
+	//	const std::string &sharedFilename,
+	//	const std::string &vertexFilename,
+	//	const std::string &fragmentFilename
+	//);
 
-	static ShaderProgram FromFile(
-		const std::string &sharedFilename,
-		const std::string &vertexFilename,
-		const std::string &geometryFilename,
-		const std::string &fragmentFilename
-	);
+	//static ShaderProgram FromFile(
+	//	const std::string &sharedFilename,
+	//	const std::string &vertexFilename,
+	//	const std::string &geometryFilename,
+	//	const std::string &fragmentFilename
+	//);
 
 	void Bind() const;
 
+	[[nodiscard]] GLint GetUniformLocation(const std::string& name) const;
+
+	void SetUniform(GLint location, float value);
+	void SetUniform(GLint location, const glm::vec2& value);
+	void SetUniform(GLint location, const glm::vec3& value);
+	void SetUniform(GLint location, const glm::vec4& value);
+	void SetUniform(GLint location, const glm::mat4& value);
+
 private:
-	unsigned id = 0;
+	unsigned m_program = 0;
 };

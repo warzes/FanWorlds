@@ -96,6 +96,8 @@
     <ClCompile Include="BaseClass.cpp" />
     <ClCompile Include="EngineDevice.cpp" />
     <ClCompile Include="EngineTimestamp.cpp" />
+    <ClCompile Include="FileSystem.cpp" />
+    <ClCompile Include="Framebuffer.cpp" />
     <ClCompile Include="Input.cpp" />
     <ClCompile Include="LogSystem.cpp" />
     <ClCompile Include="PhysicsLayer.cpp" />
@@ -118,6 +120,8 @@
     <ClInclude Include="EngineConfiguration.h" />
     <ClInclude Include="EngineDevice.h" />
     <ClInclude Include="EngineTimestamp.h" />
+    <ClInclude Include="FileSystem.h" />
+    <ClInclude Include="Framebuffer.h" />
     <ClInclude Include="IApp.h" />
     <ClInclude Include="Input.h" />
     <ClInclude Include="LogSystem.h" />
@@ -130,6 +134,7 @@
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="StringUtils.h" />
     <ClInclude Include="Transform.h" />
+    <ClInclude Include="UniformBuffer.h" />
     <ClInclude Include="Window.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

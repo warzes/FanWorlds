@@ -1,76 +1,190 @@
 #include "stdafx.h"
 #include "Shader.h"
+#include "FileSystem.h"
 
-такой стиль - https://sketchfab.com/3d-models/disciples-2-diorama-9410ae51d5654ece968b9fcd21b4a84b
+static constexpr const char* SHADER_COMMON_HEADER = R"GLSL(
+#version 450 core
+)GLSL";
 
-dwSampleFramework
-unrimp
-haru
-https ://open.gl
-https://github.com/OpenGL-Graphics/opengl-utils
-https://github.com/OpenGL-Graphics/first-person-shooter
-PawsForAdventure
-https ://discord.com/channels/794280341149712404/1042555400844750858
-
-https://github.com/KTStephano/StratusGFX
-https://ktstephano.github.io/
-
-
-
-
-fixed grid
-
-мир разделен на клетки
-центры объектов прописываются в ячейки
-проверки идут внутри сетки и по границам.перебор каждой клетки
-при этом можно не проверять ячейки на границах(нулевые)
-
-
-for( int x = 1; x < gridWidth - 1; x++ )
+static GLuint CreateShader(GLenum type, const std::vector<const char*>& source) 
 {
-	for( int y = 1; y < gridHeight - 1; y++ )
+	const GLuint shader = glCreateShader(type);
+
+	glShaderSource(shader, static_cast<GLsizei>(source.size()), source.data(), nullptr);
+	glCompileShader(shader);
+
+	GLint compileStatus = 0;
+	glGetShaderiv(shader, GL_COMPILE_STATUS, &compileStatus);
+	if (compileStatus != GL_TRUE) 
 	{
-		auto& currentCell = grid[x][y];
-		for( int dx = -1; dx <= 1; dx++ )
-		{
-			for( int dy = -1; dy <= 1; dy++ )
-			{
-				auto& otherCell = grid[x + dx][y + dy];
-				CheckCells(currentCell, otherCell);
-			}
-		}
+		GLint infoLogLength = 0;
+		glGetShaderiv(shader, GL_INFO_LOG_LENGTH, &infoLogLength);
+		const auto infoLog = new GLchar[infoLogLength];
+		glGetShaderInfoLog(shader, infoLogLength, &infoLogLength, infoLog);
+		//DebugLog("Failed to load shader: %s", infoLog);
+		delete[] infoLog;
+		glDeleteShader(shader);
+		return 0;
 	}
+
+	return shader;
 }
 
-void CheckCells(Cell & cell1, Cell & cell2)
+static GLuint CreateProgram(const std::initializer_list<GLuint>& shaders) 
 {
-	for( auto& objIdx1 : cell1.objects )
+	const GLuint program = glCreateProgram();
+
+	for (const GLuint shader : shaders)
+		glAttachShader(program, shader);
+	glLinkProgram(program);
+
+	GLint linkStatus = 0;
+	glGetProgramiv(program, GL_LINK_STATUS, &linkStatus);
+	if (linkStatus != GL_TRUE) 
 	{
-		for( auto& objIdx2 : cell2.objects )
-		{
-			if( objIdx1 != objIdx2 )
-			{
-				...
-			}
-		}
+		GLint infoLogLength = 0;
+		glGetProgramiv(program, GL_INFO_LOG_LENGTH, &infoLogLength);
+		const auto infoLog = new GLchar[infoLogLength];
+		glGetProgramInfoLog(program, infoLogLength, &infoLogLength, infoLog);
+		//DebugLog("Failed to link program: %s", infoLog);
+		delete[] infoLog;
+		glDeleteProgram(program);
+		return 0;
 	}
+
+	for (const GLuint shader : shaders)
+		glDetachShader(program, shader);
+	return program;
 }
 
-А еще эту сетку можно разделить на поток.То есть для двух потоков будет две сетки, для четырех - четыре
-Чтобы не было конфликтов потоков, можно счделать так
+ShaderProgram::ShaderProgram(
+	const std::string& sharedSource,
+	const std::string& vertexSource,
+	const std::string& fragmentSource
+) {
+	GLuint vertexShader = CreateShader(
+		GL_VERTEX_SHADER,
+		{
+		SHADER_COMMON_HEADER,
+		sharedSource.c_str(),
+		vertexSource.c_str()
+		}
+	);
+	GLuint fragmentShader = CreateShader(
+		GL_FRAGMENT_SHADER,
+		{
+		SHADER_COMMON_HEADER,
+		sharedSource.c_str(),
+		fragmentSource.c_str()
+		}
+	);
 
-пусть у нас два потока.делим сетку на две сетки
-теперь берем первый поток, и снова делим стеку на две сетки(тоже и для второго)
-теперь в обоих потоках сначала обрабатываем первую часть сетки.а потом вторую.тогда одновременно между двумя потоками не будет общих ячеек(видео 10.50)
+	m_program = CreateProgram({ vertexShader, fragmentShader });
 
+	glDeleteShader(vertexShader);
+	glDeleteShader(fragmentShader);
+}
 
-идеи
-https ://www.youtube.com/watch?v=9IULfQH7E90
+ShaderProgram::ShaderProgram(
+	const std::string& sharedSource,
+	const std::string& vertexSource,
+	const std::string& geometrySource,
+	const std::string& fragmentSource
+) {
+	GLuint vertexShader = CreateShader(
+		GL_VERTEX_SHADER,
+		{
+		SHADER_COMMON_HEADER,
+		sharedSource.c_str(),
+		vertexSource.c_str()
+		}
+	);
+	GLuint geometryShader = CreateShader(
+		GL_GEOMETRY_SHADER,
+		{
+		SHADER_COMMON_HEADER,
+		sharedSource.c_str(),
+		geometrySource.c_str()
+		}
+	);
+	GLuint fragmentShader = CreateShader(
+		GL_FRAGMENT_SHADER,
+		{
+		SHADER_COMMON_HEADER,
+		sharedSource.c_str(),
+		fragmentSource.c_str()
+		}
+	);
 
+	m_program = CreateProgram({ vertexShader, geometryShader, fragmentShader });
 
-как генерить острова
-алгоритм пьяницы(animated drunken umber hulks)
+	glDeleteShader(vertexShader);
+	glDeleteShader(geometryShader);
+	glDeleteShader(fragmentShader);
+}
 
-берется точка, ей дается кол - во шагов.и она начинает ходить в любых направлениях.когда закончит - берется еще одна точка внутри открытой зоны - повторяется.
-в итоге получаются неплохие острова
+//ShaderProgram ShaderProgram::FromFile(
+//	const std::string& sharedFilename,
+//	const std::string& vertexFilename,
+//	const std::string& fragmentFilename) 
+//{
+//	return {
+//	FileSystem::ReadFile(sharedFilename),
+//	FileSystem::ReadFile(vertexFilename),
+//	FileSystem::ReadFile(fragmentFilename)
+//	};
+//}
+//
+//ShaderProgram ShaderProgram::FromFile(
+//	const std::string& sharedFilename,
+//	const std::string& vertexFilename,
+//	const std::string& geometryFilename,
+//	const std::string& fragmentFilename) {
+//	return {
+//	FileSystem::ReadFile(sharedFilename),
+//	FileSystem::ReadFile(vertexFilename),
+//	FileSystem::ReadFile(geometryFilename),
+//	FileSystem::ReadFile(fragmentFilename)
+//	};
+//}
 
+ShaderProgram::~ShaderProgram() 
+{
+	if (m_program)
+		glDeleteProgram(m_program);
+}
+
+void ShaderProgram::Bind() const 
+{
+	glUseProgram(m_program);
+}
+
+GLint ShaderProgram::GetUniformLocation(const std::string& name) const 
+{
+	return glGetUniformLocation(m_program, name.c_str());
+}
+
+void ShaderProgram::SetUniform(const GLint location, const float value) 
+{
+	glProgramUniform1f(m_program, location, value);
+}
+
+void ShaderProgram::SetUniform(const GLint location, const glm::vec2& value)
+{
+	glProgramUniform2fv(m_program, location, 1, glm::value_ptr(value));
+}
+
+void ShaderProgram::SetUniform(const GLint location, const glm::vec3& value)
+{
+	glProgramUniform3fv(m_program, location, 1, glm::value_ptr(value));
+}
+
+void ShaderProgram::SetUniform(const GLint location, const glm::vec4& value) 
+{
+	glProgramUniform4fv(m_program, location, 1, glm::value_ptr(value));
+}
+
+void ShaderProgram::SetUniform(GLint location, const glm::mat4& value) 
+{
+	glProgramUniformMatrix4fv(m_program, location, 1, GL_FALSE, glm::value_ptr(value));
+}

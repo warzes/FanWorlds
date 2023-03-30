@@ -41,6 +41,12 @@
     <ClCompile Include="PhysicsLayer.cpp">
       <Filter>Physics</Filter>
     </ClCompile>
+    <ClCompile Include="FileSystem.cpp">
+      <Filter>Core\IO</Filter>
+    </ClCompile>
+    <ClCompile Include="Framebuffer.cpp">
+      <Filter>RenderAPI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h" />
@@ -95,6 +101,15 @@
     </ClInclude>
     <ClInclude Include="PhysicsLayer.h">
       <Filter>Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="UniformBuffer.h">
+      <Filter>RenderAPI</Filter>
+    </ClInclude>
+    <ClInclude Include="FileSystem.h">
+      <Filter>Core\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="Framebuffer.h">
+      <Filter>RenderAPI</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
