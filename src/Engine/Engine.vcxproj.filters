@@ -62,9 +62,6 @@
     <ClCompile Include="MeshUtilities.cpp">
       <Filter>RenderAPI</Filter>
     </ClCompile>
-    <ClCompile Include="ShadowMatrixCalculator.cpp">
-      <Filter>RenderAPI</Filter>
-    </ClCompile>
     <ClCompile Include="Renderer.cpp">
       <Filter>RenderAPI</Filter>
     </ClCompile>
@@ -121,6 +118,15 @@
     </ClCompile>
     <ClCompile Include="Scene.cpp">
       <Filter>World</Filter>
+    </ClCompile>
+    <ClCompile Include="BinaryParser.cpp">
+      <Filter>Core\IO</Filter>
+    </ClCompile>
+    <ClCompile Include="ShadowMatrixCalculator.cpp">
+      <Filter>Core\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysicsErrorCallback.cpp">
+      <Filter>Physics</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -219,9 +225,6 @@
     <ClInclude Include="MeshUtilities.h">
       <Filter>RenderAPI</Filter>
     </ClInclude>
-    <ClInclude Include="ShadowMatrixCalculator.h">
-      <Filter>RenderAPI</Filter>
-    </ClInclude>
     <ClInclude Include="Renderer.h">
       <Filter>RenderAPI</Filter>
     </ClInclude>
@@ -290,6 +293,18 @@
     </ClInclude>
     <ClInclude Include="Scene.h">
       <Filter>World</Filter>
+    </ClInclude>
+    <ClInclude Include="BinaryParser.h">
+      <Filter>Core\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="ShadowMatrixCalculator.h">
+      <Filter>Core\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicsUtilities.h">
+      <Filter>Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicsErrorCallback.h">
+      <Filter>Physics</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

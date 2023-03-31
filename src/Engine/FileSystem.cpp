@@ -140,7 +140,7 @@ FileSystem &FileSystem::Mount(const std::string &newDir, const std::string &moun
 	return *this;
 }
 //-----------------------------------------------------------------------------
-std::string FileSystem::ReadFile(const std::string &filename)
+std::string FileSystem::Read(const std::string &filename)
 {
 	PHYSFS_File *file = PHYSFS_openRead(filename.c_str());
 	if( !file )

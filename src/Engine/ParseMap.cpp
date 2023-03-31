@@ -92,7 +92,7 @@ static void ParseEntityBrushes(std::stringstream &mapStream, EntityBrushes &brus
 
 void ParseMap(SystemRef& systemRef, const std::string &mapFilename, std::vector<EntityDefinition> &entities)
 {
-	std::stringstream mapStream(systemRef.GetFileSystem().ReadFile(mapFilename));
+	std::stringstream mapStream(systemRef.GetFileSystem().Read(mapFilename));
 
 	int numEntities;
 	mapStream >> numEntities;

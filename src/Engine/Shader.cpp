@@ -144,9 +144,9 @@ ShaderProgram ShaderProgram::FromFile(
 	return 
 	{
 		renderSystem,
-		renderSystem.GetFileSystem().ReadFile(sharedFilename),
-		renderSystem.GetFileSystem().ReadFile(vertexFilename),
-		renderSystem.GetFileSystem().ReadFile(fragmentFilename)
+		renderSystem.GetFileSystem().Read(sharedFilename),
+		renderSystem.GetFileSystem().Read(vertexFilename),
+		renderSystem.GetFileSystem().Read(fragmentFilename)
 	};
 }
 //-----------------------------------------------------------------------------
@@ -160,10 +160,10 @@ ShaderProgram ShaderProgram::FromFile(
 	return 
 	{
 		renderSystem,
-		renderSystem.GetFileSystem().ReadFile(sharedFilename),
-		renderSystem.GetFileSystem().ReadFile(vertexFilename),
-		renderSystem.GetFileSystem().ReadFile(geometryFilename),
-		renderSystem.GetFileSystem().ReadFile(fragmentFilename)
+		renderSystem.GetFileSystem().Read(sharedFilename),
+		renderSystem.GetFileSystem().Read(vertexFilename),
+		renderSystem.GetFileSystem().Read(geometryFilename),
+		renderSystem.GetFileSystem().Read(fragmentFilename)
 	};
 }
 //-----------------------------------------------------------------------------

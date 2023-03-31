@@ -35,14 +35,14 @@
 class Transform
 {
 public:
-	Transform &SetPosition(const glm::vec3 &position)
+	Transform& SetPosition(const glm::vec3& position)
 	{
 		m_translationDirty = true;
 		m_position = position;
 		return *this;
 	}
 
-	Transform &SetEulerAngles(const glm::vec3 &eulerAngles)
+	Transform& SetEulerAngles(const glm::vec3& eulerAngles)
 	{
 		m_rotationDirty = true;
 		m_eulerAngles.x = WrapAngle(eulerAngles.x);
@@ -51,7 +51,14 @@ public:
 		return *this;
 	}
 
-	Transform &SetRotation(const glm::quat &quaternion)
+	Transform& Translate(const glm::vec3& translation)
+	{
+		m_translationDirty = true;
+		m_position += translation;
+		return *this;
+	}
+
+	Transform& SetRotation(const glm::quat& quaternion)
 	{
 		m_rotationDirty = true;
 		m_eulerAngles.x = pitch(quaternion);
@@ -60,52 +67,38 @@ public:
 		return *this;
 	}
 
-	Transform &Translate(const glm::vec3 &translation)
-	{
-		m_translationDirty = true;
-		m_position += translation;
-		return *this;
-	}
-
-	Transform &RotateX(const float radians)
+	Transform& RotateX(const float radians)
 	{
 		m_rotationDirty = true;
 		m_eulerAngles.x = WrapAngle(m_eulerAngles.x + radians);
 		return *this;
 	}
 
-	Transform &RotateY(const float radians)
+	Transform& RotateY(const float radians)
 	{
 		m_rotationDirty = true;
 		m_eulerAngles.y = WrapAngle(m_eulerAngles.y + radians);
 		return *this;
 	}
 
-	Transform &RotateZ(const float radians)
+	Transform& RotateZ(const float radians)
 	{
 		m_rotationDirty = true;
 		m_eulerAngles.z = WrapAngle(m_eulerAngles.z + radians);
 		return *this;
 	}
 
-	Transform &ClampPitch()
+	Transform& ClampPitch()
 	{
 		m_rotationDirty = true;
 		m_eulerAngles.x = ClampPitch(m_eulerAngles.x);
 		return *this;
 	}
 
-	[[nodiscard]] const glm::vec3 &GetPosition() const
-	{
-		return m_position;
-	}
+	[[nodiscard]] const glm::vec3& GetPosition() const { return m_position; }
+	[[nodiscard]] const glm::vec3& GetEulerAngles() const { return m_eulerAngles; }
 
-	[[nodiscard]] const glm::vec3 &GetEulerAngles() const
-	{
-		return m_eulerAngles;
-	}
-
-	[[nodiscard]] const glm::mat4 &GetTranslationMatrix() const
+	[[nodiscard]] const glm::mat4& GetTranslationMatrix() const
 	{
 		if( m_translationDirty )
 		{
@@ -116,7 +109,7 @@ public:
 		return m_translationMatrix;
 	}
 
-	[[nodiscard]] const glm::mat4 &GetRotationMatrix() const
+	[[nodiscard]] const glm::mat4& GetRotationMatrix() const
 	{
 		if( m_rotationDirty )
 		{
@@ -140,7 +133,11 @@ public:
 
 	[[nodiscard]] glm::vec3 GetForwardVector() const
 	{
+#ifndef GLM_FORCE_LEFT_HANDED // TODO: удалить
 		static constexpr glm::vec4 FORWARD{ 0, 0, -1, 0 };
+#else
+		static constexpr glm::vec4 FORWARD{ 0, 0, 1, 0 };
+#endif
 		return GetRotationMatrix() * FORWARD;
 	}
 
@@ -150,10 +147,15 @@ public:
 		return { glm::cos(yaw), 0, -glm::sin(yaw) };
 	}
 
+
 	[[nodiscard]] glm::vec3 GetHorizontalForwardVector() const
 	{
 		const float yaw = m_eulerAngles.y;
+#ifndef GLM_FORCE_LEFT_HANDED // TODO: удалить
 		return { -glm::sin(yaw), 0, -glm::cos(yaw) };
+#else
+		return { glm::sin(yaw), 0, glm::cos(yaw) };
+#endif
 	}
 
 	[[nodiscard]] glm::mat4 GetMatrix() const
@@ -167,10 +169,7 @@ public:
 	}
 
 private:
-	static float ClampPitch(const float radians)
-	{
-		return glm::clamp(radians, -glm::half_pi<float>(), glm::half_pi<float>());
-	}
+	static float ClampPitch(const float radians) { return glm::clamp(radians, -glm::half_pi<float>(), glm::half_pi<float>()); }
 
 	// Wrap to (-PI..PI]
 	static float WrapAngle(const float radians)
@@ -181,9 +180,9 @@ private:
 	glm::vec3 m_position{};
 	glm::vec3 m_eulerAngles{}; // in radians
 
-	mutable bool m_translationDirty = true;
+	mutable bool      m_translationDirty = true;
 	mutable glm::mat4 m_translationMatrix{ 1.0f };
 
-	mutable bool m_rotationDirty = true;
+	mutable bool      m_rotationDirty = true;
 	mutable glm::mat4 m_rotationMatrix{ 1.0f };
 };

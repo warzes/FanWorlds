@@ -3,30 +3,22 @@
 class ShadowMatrixCalculator
 {
 public:
-	void SetCameraInfo(const glm::mat4 &view, float fov, float aspectRatio)
-	{
-		m_view = view;
-		m_fov = fov;
-		m_aspectRatio = aspectRatio;
-	}
+	void SetCameraInfo(const glm::mat4& view, float fov, float aspectRatio);
 
-	void SetLightDirection(const glm::vec3 &lightDir)
-	{
-		m_lightDir = lightDir;
-	}
+	void SetLightDirection(const glm::vec3& lightDir);
 
-	void SetWorldBounds(const glm::vec3 &min, const glm::vec3 &max);
+	void SetWorldBounds(const glm::vec3& min, const glm::vec3& max);
 
 	[[nodiscard]] glm::mat4 CalcShadowMatrix(float near, float far) const;
 
 private:
 	[[nodiscard]] std::array<glm::vec4, 8> GetFrustumCorners(float near, float far) const;
 
-	[[nodiscard]] glm::mat4 GetLightProjection(const std::array<glm::vec4, 8> &frustumCorners, const glm::mat4 &lightView) const;
+	[[nodiscard]] glm::mat4 GetLightProjection(const std::array<glm::vec4, 8>& frustumCorners, const glm::mat4& lightView) const;
 
 	glm::mat4 m_view{ 1.0f };
-	float m_fov = 0.0f;
-	float m_aspectRatio = 1.0f;
+	float     m_fov = 0.0f;
+	float     m_aspectRatio = 1.0f;
 
 	glm::vec3 m_lightDir{};
 

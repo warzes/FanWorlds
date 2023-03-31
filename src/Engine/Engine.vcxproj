@@ -104,6 +104,7 @@
     <ClCompile Include="AWorldLight.cpp" />
     <ClCompile Include="AWorldSpawn.cpp" />
     <ClCompile Include="BaseClass.cpp" />
+    <ClCompile Include="BinaryParser.cpp" />
     <ClCompile Include="DeferredRenderer.cpp" />
     <ClCompile Include="DeferredShaders.cpp" />
     <ClCompile Include="EngineDevice.cpp" />
@@ -120,6 +121,7 @@
     <ClCompile Include="MdlLoader.cpp" />
     <ClCompile Include="MeshUtilities.cpp" />
     <ClCompile Include="ParseMap.cpp" />
+    <ClCompile Include="PhysicsErrorCallback.cpp" />
     <ClCompile Include="PhysicsLayer.cpp" />
     <ClCompile Include="PhysicsScene.cpp" />
     <ClCompile Include="PhysicsSystem.cpp" />
@@ -153,6 +155,7 @@
     <ClInclude Include="BaseClass.h" />
     <ClInclude Include="BaseFunc.h" />
     <ClInclude Include="BaseMacros.h" />
+    <ClInclude Include="BinaryParser.h" />
     <ClInclude Include="DeferredRenderer.h" />
     <ClInclude Include="DeferredShaders.h" />
     <ClInclude Include="EngineConfiguration.h" />
@@ -180,9 +183,11 @@
     <ClInclude Include="MeshUtilities.h" />
     <ClInclude Include="MoveOnly.h" />
     <ClInclude Include="ParseMap.h" />
+    <ClInclude Include="PhysicsErrorCallback.h" />
     <ClInclude Include="PhysicsLayer.h" />
     <ClInclude Include="PhysicsScene.h" />
     <ClInclude Include="PhysicsSystem.h" />
+    <ClInclude Include="PhysicsUtilities.h" />
     <ClInclude Include="RenderCore.h" />
     <ClInclude Include="Renderer.h" />
     <ClInclude Include="RenderSystem.h" />

@@ -7,8 +7,8 @@ namespace physx
 
 enum PhysicsLayer : physx::PxU32
 {
-	PHYSICS_LAYER_0 = (1u << 0),    // world default
-	PHYSICS_LAYER_1 = (1u << 1),    // character controller default
+	PHYSICS_LAYER_0 = (1u << 0), // world default
+	PHYSICS_LAYER_1 = (1u << 1), // character controller default
 	PHYSICS_LAYER_2 = (1u << 2),
 	PHYSICS_LAYER_3 = (1u << 3),
 	PHYSICS_LAYER_4 = (1u << 4),

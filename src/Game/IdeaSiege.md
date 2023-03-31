@@ -1,9 +1,7 @@
 такой стиль - https://sketchfab.com/3d-models/disciples-2-diorama-9410ae51d5654ece968b9fcd21b4a84b
 
 dwSampleFramework
-unrimp
-haru
-https ://open.gl
+https://open.gl
 https://github.com/OpenGL-Graphics/opengl-utils
 https://github.com/OpenGL-Graphics/first-person-shooter
 PawsForAdventure

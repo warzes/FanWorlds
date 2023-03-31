@@ -23,5 +23,5 @@ public:
 
 	FileSystem &Mount(const std::string &newDir, const std::string &mountPoint, bool appendToPath = true);
 
-	std::string ReadFile(const std::string &filename);
+	std::string Read(const std::string &filename);
 };

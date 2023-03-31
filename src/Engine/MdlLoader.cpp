@@ -6,7 +6,7 @@
 //-----------------------------------------------------------------------------
 MdlLoader::MdlLoader(SystemRef& systemRef, const std::string &filename)
 	: m_systemRef(systemRef)
-	, m_bytes(systemRef.GetFileSystem().ReadFile(filename))
+	, m_bytes(systemRef.GetFileSystem().Read(filename))
 	, m_currentPos(m_bytes.data())
 	, m_remainingBytes(m_bytes.size())
 {

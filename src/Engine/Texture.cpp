@@ -50,12 +50,12 @@ Texture::Texture(RenderSystem& renderSystem, const glm::ivec2 &size, const unsig
 Texture Texture::FromFile(RenderSystem& renderSystem, const std::string &filename, Texture::Wrap wrap, bool filter, bool mipmaps)
 {
 	ImageFile image(renderSystem.GetFileSystem(), filename);
-	if( !image.Data() )
+	if( !image.GetData() )
 	{
 		renderSystem.Error("Failed to load texture from file: " + filename);
 		return { renderSystem };
 	}
-	return { renderSystem, image.Size(), image.Data(), wrap, filter, mipmaps };
+	return { renderSystem, {image.GetWidth(), image.GetHeight()}, image.GetData(), wrap, filter, mipmaps};
 }
 //-----------------------------------------------------------------------------
 void Texture::ClearCache()
