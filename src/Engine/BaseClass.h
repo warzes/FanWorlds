@@ -11,6 +11,8 @@ class BaseClass
 {
 	friend EngineDevice;
 public:
+	void InitFromOther(BaseClass* other);
+
 	void ExitRequest();
 	FileSystem& GetFileSystem();
 	const FileSystem& GetFileSystem() const;

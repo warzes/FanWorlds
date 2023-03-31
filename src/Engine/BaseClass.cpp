@@ -2,6 +2,11 @@
 #include "BaseClass.h"
 #include "EngineDevice.h"
 //-----------------------------------------------------------------------------
+void BaseClass::InitFromOther(BaseClass* other)
+{
+	m_engineDevice = other->m_engineDevice;
+}
+//-----------------------------------------------------------------------------
 void BaseClass::ExitRequest()
 {
 	assert(m_engineDevice);

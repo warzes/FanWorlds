@@ -2,49 +2,63 @@
 #include "Input.h"
 #include "Window.h"
 //-----------------------------------------------------------------------------
-void GLFWKeyCallback(GLFWwindow* /*window*/, int key, int /*scancode*/, int action, int /*mods*/) noexcept
+#define GET_INPUT_SYSTEM \
+			const auto app = static_cast<Window*>(glfwGetWindowUserPointer(window)); \
+			if( app == nullptr ) return; \
+			Input& input = app->GetInput();
+//-----------------------------------------------------------------------------
+void GLFWKeyCallback(GLFWwindow* window, int key, int /*scancode*/, int action, int /*mods*/) noexcept
 {
 	if (key < 0) return;
 
-	//if (action == GLFW_RELEASE) Keyboard.currentKeyState[key] = 0;
-	//else Keyboard.currentKeyState[key] = 1;
+	GET_INPUT_SYSTEM;
 
-	//if ((Keyboard.keyPressedQueueCount < MAX_KEY_PRESSED_QUEUE) && (action == GLFW_PRESS))
-	//{
-	//	Keyboard.keyPressedQueue[Keyboard.keyPressedQueueCount] = key;
-	//	Keyboard.keyPressedQueueCount++;
-	//}
+	if (action == GLFW_RELEASE) input.m_keyboard.currentKeyState[key] = 0;
+	else input.m_keyboard.currentKeyState[key] = 1;
+
+	if ((input.m_keyboard.keyPressedQueueCount < MAX_KEY_PRESSED_QUEUE) && (action == GLFW_PRESS))
+	{
+		input.m_keyboard.keyPressedQueue[input.m_keyboard.keyPressedQueueCount] = key;
+		input.m_keyboard.keyPressedQueueCount++;
+	}
 }
 //-----------------------------------------------------------------------------
-void GLFWCharCallback(GLFWwindow* /*window*/, unsigned int key) noexcept
+void GLFWCharCallback(GLFWwindow* window, unsigned int key) noexcept
 {
-	//if (Keyboard.charPressedQueueCount < MAX_KEY_PRESSED_QUEUE)
-	//{
-	//	Keyboard.charPressedQueue[Keyboard.charPressedQueueCount] = (int)key;
-	//	Keyboard.charPressedQueueCount++;
-	//}
+	GET_INPUT_SYSTEM;
+	if ( input.m_keyboard.charPressedQueueCount < MAX_KEY_PRESSED_QUEUE)
+	{
+		input.m_keyboard.charPressedQueue[input.m_keyboard.charPressedQueueCount] = (int)key;
+		input.m_keyboard.charPressedQueueCount++;
+	}
 }
 //-----------------------------------------------------------------------------
-void GLFWMouseButtonCallback(GLFWwindow* /*window*/, int button, int action, int /*mods*/) noexcept
+void GLFWMouseButtonCallback(GLFWwindow* window, int button, int action, int /*mods*/) noexcept
 {
-	//Mouse.currentButtonState[button] = (char)action;
+	GET_INPUT_SYSTEM;
+	input.m_mouse.currentButtonState[button] = (char)action;
 }
 //-----------------------------------------------------------------------------
-void GLFWMouseCursorPosCallback(GLFWwindow* /*window*/, double x, double y) noexcept
+void GLFWMouseCursorPosCallback(GLFWwindow* window, double x, double y) noexcept
 {
-	//Mouse.currentPosition.x = (float)x;
-	//Mouse.currentPosition.y = (float)y;
+	GET_INPUT_SYSTEM;
+	input.m_mouse.currentPosition.x = (float)x;
+	input.m_mouse.currentPosition.y = (float)y;
 }
 //-----------------------------------------------------------------------------
-void GLFWMouseScrollCallback(GLFWwindow* /*window*/, double xoffset, double yoffset) noexcept
+void GLFWMouseScrollCallback(GLFWwindow* window, double xoffset, double yoffset) noexcept
 {
-	//Mouse.currentWheelMove = { (float)xoffset, (float)yoffset };
+	GET_INPUT_SYSTEM;
+	input.m_mouse.currentWheelMove = { (float)xoffset, (float)yoffset };
 }
 //-----------------------------------------------------------------------------
-void GLFWCursorEnterCallback(GLFWwindow* /*window*/, int enter) noexcept
+void GLFWCursorEnterCallback(GLFWwindow* window, int enter) noexcept
 {
-	//Mouse.cursorOnScreen = (enter == GLFW_TRUE);
+	GET_INPUT_SYSTEM;
+	input.m_mouse.cursorOnScreen = (enter == GLFW_TRUE);
 }
+//-----------------------------------------------------------------------------
+#undef GET_INPUT_SYSTEM
 //-----------------------------------------------------------------------------
 void Input::Init()
 {

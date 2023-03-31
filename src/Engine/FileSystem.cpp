@@ -135,7 +135,7 @@ FileSystem &FileSystem::Mount(const std::string &newDir, const std::string &moun
 	}
 	else
 	{
-		Print("Physfs mount %s at %s" + newDir +" at " + mountPoint);
+		Print("Physfs mount " + newDir +" at " + mountPoint);
 	}
 	return *this;
 }

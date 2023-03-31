@@ -10,6 +10,12 @@ constexpr auto MAX_MOUSE_BUTTONS = 8;
 class Input : public BaseClass
 {
 	friend class EngineDevice;
+	friend void GLFWKeyCallback(GLFWwindow*, int, int, int, int) noexcept;
+	friend void GLFWCharCallback(GLFWwindow*, unsigned int) noexcept;
+	friend void GLFWMouseButtonCallback(GLFWwindow*, int, int, int) noexcept;
+	friend void GLFWMouseCursorPosCallback(GLFWwindow*, double, double) noexcept;
+	friend void GLFWMouseScrollCallback(GLFWwindow*, double, double) noexcept;
+	friend void GLFWCursorEnterCallback(GLFWwindow*, int) noexcept;
 public:
 	enum KeyboardKey
 	{

@@ -111,7 +111,8 @@ void LoadEntities(Scene* scene, const std::vector<EntityDefinition> &entities)
 		auto loader = s_EntityLoaders.find(className);
 		if( loader == s_EntityLoaders.end() )
 		{
-			scene->Fatal("Unknown entity type " + className);
+			scene->Error("Unknown entity type " + className);
+			return;
 		}
 		loader->second(scene, entity);
 	}
