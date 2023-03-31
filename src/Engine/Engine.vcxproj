@@ -94,6 +94,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="BaseClass.cpp" />
+    <ClCompile Include="DeferredRenderer.cpp" />
+    <ClCompile Include="DeferredShaders.cpp" />
     <ClCompile Include="EngineDevice.cpp" />
     <ClCompile Include="EngineTimestamp.cpp" />
     <ClCompile Include="FileSystem.cpp" />
@@ -101,23 +103,30 @@
     <ClCompile Include="ImageFile.cpp" />
     <ClCompile Include="Input.cpp" />
     <ClCompile Include="LogSystem.cpp" />
+    <ClCompile Include="MeshUtilities.cpp" />
     <ClCompile Include="PhysicsLayer.cpp" />
     <ClCompile Include="PhysicsScene.cpp" />
     <ClCompile Include="PhysicsSystem.cpp" />
     <ClCompile Include="RenderCore.cpp" />
+    <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="RenderSystem.cpp" />
     <ClCompile Include="Shader.cpp" />
+    <ClCompile Include="ShadowMap.cpp" />
+    <ClCompile Include="ShadowMatrixCalculator.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="StringUtils.cpp" />
+    <ClCompile Include="Texture.cpp" />
     <ClCompile Include="Window.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BaseClass.h" />
     <ClInclude Include="BaseFunc.h" />
     <ClInclude Include="BaseMacros.h" />
+    <ClInclude Include="DeferredRenderer.h" />
+    <ClInclude Include="DeferredShaders.h" />
     <ClInclude Include="EngineConfiguration.h" />
     <ClInclude Include="EngineDevice.h" />
     <ClInclude Include="EngineTimestamp.h" />
@@ -127,15 +136,25 @@
     <ClInclude Include="ImageFile.h" />
     <ClInclude Include="Input.h" />
     <ClInclude Include="LogSystem.h" />
+    <ClInclude Include="Material.h" />
+    <ClInclude Include="Mesh.h" />
+    <ClInclude Include="MeshBase.h" />
+    <ClInclude Include="MeshPositionColor.h" />
+    <ClInclude Include="MeshPositionOnly.h" />
+    <ClInclude Include="MeshUtilities.h" />
     <ClInclude Include="MoveOnly.h" />
     <ClInclude Include="PhysicsLayer.h" />
     <ClInclude Include="PhysicsScene.h" />
     <ClInclude Include="PhysicsSystem.h" />
     <ClInclude Include="RenderCore.h" />
+    <ClInclude Include="Renderer.h" />
     <ClInclude Include="RenderSystem.h" />
     <ClInclude Include="Shader.h" />
+    <ClInclude Include="ShadowMap.h" />
+    <ClInclude Include="ShadowMatrixCalculator.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="StringUtils.h" />
+    <ClInclude Include="Texture.h" />
     <ClInclude Include="Transform.h" />
     <ClInclude Include="UniformBuffer.h" />
     <ClInclude Include="Window.h" />

@@ -50,6 +50,27 @@
     <ClCompile Include="ImageFile.cpp">
       <Filter>Core\IO</Filter>
     </ClCompile>
+    <ClCompile Include="DeferredShaders.cpp">
+      <Filter>RenderAPI</Filter>
+    </ClCompile>
+    <ClCompile Include="Texture.cpp">
+      <Filter>RenderAPI</Filter>
+    </ClCompile>
+    <ClCompile Include="ShadowMap.cpp">
+      <Filter>RenderAPI</Filter>
+    </ClCompile>
+    <ClCompile Include="MeshUtilities.cpp">
+      <Filter>RenderAPI</Filter>
+    </ClCompile>
+    <ClCompile Include="ShadowMatrixCalculator.cpp">
+      <Filter>RenderAPI</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer.cpp">
+      <Filter>RenderAPI</Filter>
+    </ClCompile>
+    <ClCompile Include="DeferredRenderer.cpp">
+      <Filter>RenderAPI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h" />
@@ -119,6 +140,42 @@
     </ClInclude>
     <ClInclude Include="ImageFile.h">
       <Filter>Core\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="DeferredShaders.h">
+      <Filter>RenderAPI</Filter>
+    </ClInclude>
+    <ClInclude Include="Texture.h">
+      <Filter>RenderAPI</Filter>
+    </ClInclude>
+    <ClInclude Include="ShadowMap.h">
+      <Filter>RenderAPI</Filter>
+    </ClInclude>
+    <ClInclude Include="Material.h">
+      <Filter>RenderAPI</Filter>
+    </ClInclude>
+    <ClInclude Include="Mesh.h">
+      <Filter>RenderAPI</Filter>
+    </ClInclude>
+    <ClInclude Include="MeshBase.h">
+      <Filter>RenderAPI</Filter>
+    </ClInclude>
+    <ClInclude Include="MeshPositionColor.h">
+      <Filter>RenderAPI</Filter>
+    </ClInclude>
+    <ClInclude Include="MeshPositionOnly.h">
+      <Filter>RenderAPI</Filter>
+    </ClInclude>
+    <ClInclude Include="MeshUtilities.h">
+      <Filter>RenderAPI</Filter>
+    </ClInclude>
+    <ClInclude Include="ShadowMatrixCalculator.h">
+      <Filter>RenderAPI</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer.h">
+      <Filter>RenderAPI</Filter>
+    </ClInclude>
+    <ClInclude Include="DeferredRenderer.h">
+      <Filter>RenderAPI</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

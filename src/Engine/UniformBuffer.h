@@ -1,10 +1,13 @@
 #pragma once
 
-template<class T>
-class UniformBuffer 
-{
+#include "MoveOnly.h"
 
+template<class T>
+class UniformBuffer
+{
 public:
+	MOVE_ONLY(UniformBuffer);
+
 	UniformBuffer()
 	{
 		glCreateBuffers(1, &m_buffer);
@@ -17,27 +20,27 @@ public:
 		glDeleteBuffers(1, &m_buffer);
 	}
 
-	void Bind(const GLuint index) 
+	void Bind(const GLuint index)
 	{
 		glBindBufferBase(GL_UNIFORM_BUFFER, index, m_buffer);
 	}
 
-	void Map() 
+	void Map()
 	{
-		m_data = static_cast<T*>(glMapNamedBuffer(m_buffer, GL_WRITE_ONLY));
+		m_data = static_cast<T *>(glMapNamedBuffer(m_buffer, GL_WRITE_ONLY));
 	}
 
-	void Unmap() 
+	void Unmap()
 	{
 		glUnmapNamedBuffer(m_buffer);
 	}
 
-	T* operator->() 
+	T *operator->()
 	{
 		return m_data;
 	}
 
 private:
-	GLuint m_buffer;
-	T* m_data;
+	MoveOnly<GLuint> m_buffer;
+	MoveOnly<T *> m_data;
 };
