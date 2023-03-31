@@ -12,22 +12,28 @@ namespace physx
 class APlayer;
 
 #define DEFINE_ACTOR_CLASS(className) \
-NO_MOVE_OR_COPY(className) \
-static inline const std::string &ClassName = #className; \
-const std::string &GetActorClassName() const override { return ClassName; }
+    className(const className &) = delete; \
+    className &operator=(const className &) = delete; \
+    className(className &&) = delete; \
+    className &operator=(className &&) = delete; \
+	static inline const std::string &ClassName = #className; \
+	const std::string &GetActorClassName() const override { return ClassName; }
 
 class Actor
 {
 public:
-	NO_MOVE_OR_COPY(Actor)
-
 	Actor() = default;
+	Actor(Actor&&) = delete;
+	Actor(const Actor&) = delete;
 	virtual ~Actor() = default;
+
+	Actor& operator=(Actor&&) = delete;
+	Actor& operator=(const Actor&) = delete;
 
 	virtual const std::string &GetActorClassName() const = 0;
 
 	template<class T>
-	bool IsClass() const
+	[[nodiscard]] bool IsClass() const
 	{
 		return T::ClassName == GetActorClassName();
 	}
@@ -39,14 +45,13 @@ public:
 	}
 
 	virtual void Update(float deltaTime) {}
-
 	virtual void FixedUpdate(float fixedDeltaTime) {}
 
 	virtual void Draw(Renderer &renderer) {}
 
 	virtual void Use(APlayer *player, const physx::PxRaycastHit &hit) {}
 
-	bool IsPendingDestroy() const { return m_pendingDestroy; }
+	[[nodiscard]] bool IsPendingDestroy() const { return m_pendingDestroy; }
 
 	void Destroy() { m_pendingDestroy = true; }
 
