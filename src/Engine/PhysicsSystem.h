@@ -1,6 +1,7 @@
 #pragma once
 
 #include "BaseClass.h"
+#include "PhysicsSystem.h"
 
 namespace physx
 {
@@ -13,6 +14,8 @@ namespace physx
 	class PxTriangleMesh;
 }
 
+class PhysicsScene;
+
 class PhysicsSystem : public BaseClass
 {
 	friend class EngineDevice;
@@ -20,7 +23,6 @@ class PhysicsSystem : public BaseClass
 public:
 	bool Create();
 	void Destroy();
-
 
 	physx::PxConvexMesh* CreateConvexMesh(
 		physx::PxU32 count, 
@@ -33,11 +35,16 @@ public:
 		physx::PxU32 count,
 		const physx::PxVec3 *vertices
 	);
+
+	void AddScene(PhysicsScene* scene) { m_physicsScene = scene; }
+	PhysicsScene *GetPhysicsScene() { assert(m_physicsScene); return m_physicsScene; }
 private:
 	//PhysicsSystem(PhysicsSystem&&) = delete;
 	//PhysicsSystem(const PhysicsSystem&) = delete;
 	//PhysicsSystem& operator=(PhysicsSystem&&) = delete;
 	//PhysicsSystem& operator=(const PhysicsSystem&) = delete;
+
+	PhysicsScene *m_physicsScene = nullptr;
 
 	physx::PxFoundation *m_foundation = nullptr;
 	physx::PxPvdTransport *m_pvdTransport = nullptr;

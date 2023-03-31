@@ -1,9 +1,10 @@
 #pragma once
 
 #include "MoveOnly.h"
+#include "BaseClass.h"
 
 class RenderSystem;
-class BaseClass;
+
 
 class Texture
 {
@@ -39,7 +40,7 @@ public:
 
 	static void ClearCache();
 
-	static Texture *LoadToCache(BaseClass& baseClass, const std::string &filename);
+	static Texture *LoadToCache(SystemRef& systemRef, const std::string &filename);
 
 	[[nodiscard]] const glm::ivec2 &Size() const { return m_size; }
 

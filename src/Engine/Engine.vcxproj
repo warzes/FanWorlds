@@ -93,23 +93,40 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="ACamera.cpp" />
+    <ClCompile Include="AFuncBrush.cpp" />
+    <ClCompile Include="AFuncMove.cpp" />
+    <ClCompile Include="AFuncPhys.cpp" />
+    <ClCompile Include="ALightPoint.cpp" />
+    <ClCompile Include="APlayer.cpp" />
+    <ClCompile Include="APlayerNoClip.cpp" />
+    <ClCompile Include="APropStatic.cpp" />
+    <ClCompile Include="AWorldLight.cpp" />
+    <ClCompile Include="AWorldSpawn.cpp" />
     <ClCompile Include="BaseClass.cpp" />
     <ClCompile Include="DeferredRenderer.cpp" />
     <ClCompile Include="DeferredShaders.cpp" />
     <ClCompile Include="EngineDevice.cpp" />
     <ClCompile Include="EngineTimestamp.cpp" />
+    <ClCompile Include="FacesAndTexture.cpp" />
+    <ClCompile Include="LoadEntities.cpp" />
+    <ClCompile Include="MapBrushes.cpp" />
+    <ClCompile Include="MapEntity.cpp" />
     <ClCompile Include="FileSystem.cpp" />
     <ClCompile Include="Framebuffer.cpp" />
     <ClCompile Include="ImageFile.cpp" />
     <ClCompile Include="Input.cpp" />
     <ClCompile Include="LogSystem.cpp" />
+    <ClCompile Include="MdlLoader.cpp" />
     <ClCompile Include="MeshUtilities.cpp" />
+    <ClCompile Include="ParseMap.cpp" />
     <ClCompile Include="PhysicsLayer.cpp" />
     <ClCompile Include="PhysicsScene.cpp" />
     <ClCompile Include="PhysicsSystem.cpp" />
     <ClCompile Include="RenderCore.cpp" />
     <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="RenderSystem.cpp" />
+    <ClCompile Include="Scene.cpp" />
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="ShadowMap.cpp" />
     <ClCompile Include="ShadowMatrixCalculator.cpp" />
@@ -122,6 +139,17 @@
     <ClCompile Include="Window.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ACamera.h" />
+    <ClInclude Include="Actor.h" />
+    <ClInclude Include="AFuncBrush.h" />
+    <ClInclude Include="AFuncMove.h" />
+    <ClInclude Include="AFuncPhys.h" />
+    <ClInclude Include="ALightPoint.h" />
+    <ClInclude Include="APlayer.h" />
+    <ClInclude Include="APlayerNoClip.h" />
+    <ClInclude Include="APropStatic.h" />
+    <ClInclude Include="AWorldLight.h" />
+    <ClInclude Include="AWorldSpawn.h" />
     <ClInclude Include="BaseClass.h" />
     <ClInclude Include="BaseFunc.h" />
     <ClInclude Include="BaseMacros.h" />
@@ -130,6 +158,10 @@
     <ClInclude Include="EngineConfiguration.h" />
     <ClInclude Include="EngineDevice.h" />
     <ClInclude Include="EngineTimestamp.h" />
+    <ClInclude Include="FacesAndTexture.h" />
+    <ClInclude Include="LoadEntities.h" />
+    <ClInclude Include="MapBrushes.h" />
+    <ClInclude Include="MapEntity.h" />
     <ClInclude Include="FileSystem.h" />
     <ClInclude Include="Framebuffer.h" />
     <ClInclude Include="IApp.h" />
@@ -137,18 +169,24 @@
     <ClInclude Include="Input.h" />
     <ClInclude Include="LogSystem.h" />
     <ClInclude Include="Material.h" />
+    <ClInclude Include="MdlLoader.h" />
+    <ClInclude Include="MdlNormals.h" />
+    <ClInclude Include="MdlPalette.h" />
+    <ClInclude Include="MdlStructs.h" />
     <ClInclude Include="Mesh.h" />
     <ClInclude Include="MeshBase.h" />
     <ClInclude Include="MeshPositionColor.h" />
     <ClInclude Include="MeshPositionOnly.h" />
     <ClInclude Include="MeshUtilities.h" />
     <ClInclude Include="MoveOnly.h" />
+    <ClInclude Include="ParseMap.h" />
     <ClInclude Include="PhysicsLayer.h" />
     <ClInclude Include="PhysicsScene.h" />
     <ClInclude Include="PhysicsSystem.h" />
     <ClInclude Include="RenderCore.h" />
     <ClInclude Include="Renderer.h" />
     <ClInclude Include="RenderSystem.h" />
+    <ClInclude Include="Scene.h" />
     <ClInclude Include="Shader.h" />
     <ClInclude Include="ShadowMap.h" />
     <ClInclude Include="ShadowMatrixCalculator.h" />

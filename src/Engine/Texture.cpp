@@ -63,13 +63,13 @@ void Texture::ClearCache()
 	s_textureCache.clear();
 }
 //-----------------------------------------------------------------------------
-Texture *Texture::LoadToCache(BaseClass& baseClass, const std::string &filename)
+Texture *Texture::LoadToCache(SystemRef& systemRef, const std::string &filename)
 {
 	auto pair = s_textureCache.find(filename);
 	if( pair == s_textureCache.end() )
 	{
-		baseClass.Print("Caching texture: " + filename);
-		pair = s_textureCache.emplace(filename, FromFile(baseClass.GetRenderSystem(), filename)).first;
+		systemRef.Print("Caching texture: " + filename);
+		pair = s_textureCache.emplace(filename, FromFile(systemRef.GetRenderSystem(), filename)).first;
 	}
 	return &pair->second;
 }

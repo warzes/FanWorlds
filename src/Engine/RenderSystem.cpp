@@ -1,6 +1,16 @@
 #include "stdafx.h"
 #include "RenderSystem.h"
 //-----------------------------------------------------------------------------
+// Use discrete GPU by default.
+extern "C" 
+{
+	// http://developer.download.nvidia.com/devzone/devcenter/gamegraphics/files/OptimusRenderingPolicies.pdf
+	__declspec(dllexport) unsigned long NvOptimusEnablement = 0x00000001;
+
+	// https://gpuopen.com/learn/amdpowerxpressrequesthighperformance/
+	__declspec(dllexport) unsigned long AmdPowerXpressRequestHighPerformance = 0x00000001;
+}
+//-----------------------------------------------------------------------------
 #if defined(_DEBUG)
 std::string glDebugInfoText;
 void APIENTRY glDebugCallback(GLenum source, GLenum type, GLuint id, GLenum severity, GLsizei length, const GLchar* message, const void* user_param) noexcept

@@ -35,3 +35,5 @@ public:
 protected:
 	EngineDevice* m_engineDevice = nullptr;
 };
+
+using SystemRef = BaseClass;

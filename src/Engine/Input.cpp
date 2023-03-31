@@ -168,7 +168,7 @@ glm::vec2 Input::GetMousePosition() const
 	};
 }
 //-----------------------------------------------------------------------------
-glm::vec2 Input::GetMouseDelta() const
+glm::vec2 Input::GetMouseDeltaPosition() const
 {
 	return
 	{

@@ -19,6 +19,7 @@
 #include <algorithm>
 #include <regex>
 #include <charconv>
+#include <sstream>
 #include <string>
 #include <string_view>
 #include <array>
@@ -55,7 +56,7 @@ Left handed
 //#include <glm/gtx/quaternion.hpp>
 //#include <glm/gtx/transform.hpp>
 //#include <glm/gtx/matrix_decompose.hpp>
-//#include <glm/gtx/euler_angles.hpp>
+#include <glm/gtx/euler_angles.hpp>
 //#include <glm/gtx/normal.hpp>
 
 

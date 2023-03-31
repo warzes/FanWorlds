@@ -145,13 +145,21 @@ public:
 	bool IsMouseButtonReleased(int button) const;
 	bool IsMouseButtonUp(int button) const;
 	glm::vec2 GetMousePosition() const;
-	glm::vec2 GetMouseDelta() const;
+	glm::vec2 GetMouseDeltaPosition() const;
 
 	void SetMousePosition(int x, int y);
 	float GetMouseWheelMove() const;
 	glm::vec2 GetMouseWheelMoveV() const;
 	void SetMouseLock(bool lock);
 	bool IsCursorOnScreen() const;
+
+	[[nodiscard]] float GetKeyAxis(int posKey, int negKey) const
+	{
+		float value = 0.0f;
+		if( IsKeyDown(posKey) ) value += 1.0f;
+		if( IsKeyDown(negKey) ) value -= 1.0f;
+		return value;
+	}
 
 private:
 	struct
