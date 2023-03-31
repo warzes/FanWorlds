@@ -10,6 +10,7 @@ namespace physx
 	class PxPvd;
 	class PxPhysics;
 	class PxCooking;
+	class PxMaterial;
 	class PxConvexMesh;
 	class PxTriangleMesh;
 }
@@ -23,6 +24,8 @@ class PhysicsSystem : public BaseClass
 public:
 	bool Create();
 	void Destroy();
+
+	physx::PxMaterial* CreateMaterial(physx::PxReal staticFriction, physx::PxReal dynamicFriction, physx::PxReal restitution);
 
 	physx::PxConvexMesh* CreateConvexMesh(
 		physx::PxU32 count, 
@@ -39,16 +42,12 @@ public:
 	void AddScene(PhysicsScene* scene) { m_physicsScene = scene; }
 	PhysicsScene *GetPhysicsScene() { assert(m_physicsScene); return m_physicsScene; }
 private:
-	//PhysicsSystem(PhysicsSystem&&) = delete;
-	//PhysicsSystem(const PhysicsSystem&) = delete;
-	//PhysicsSystem& operator=(PhysicsSystem&&) = delete;
-	//PhysicsSystem& operator=(const PhysicsSystem&) = delete;
 
-	PhysicsScene *m_physicsScene = nullptr;
+	PhysicsScene* m_physicsScene = nullptr;
 
-	physx::PxFoundation *m_foundation = nullptr;
+	physx::PxFoundation   *m_foundation = nullptr;
 	physx::PxPvdTransport *m_pvdTransport = nullptr;
-	physx::PxPvd *m_pvd = nullptr;
-	physx::PxPhysics *m_physics = nullptr;
-	physx::PxCooking *m_cooking = nullptr;
+	physx::PxPvd          *m_pvd = nullptr;
+	physx::PxPhysics      *m_physics = nullptr;
+	physx::PxCooking      *m_cooking = nullptr;
 };

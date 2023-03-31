@@ -53,7 +53,7 @@ Brushes::Brushes(SystemRef& systemRef, const EntityBrushes &brushes, PhysicsLaye
 		physx::PxConvexMesh *brushCollider = physicsSystem.CreateConvexMesh(localCollider.size(), localCollider.data());
 		m_brushColliders.push_back(brushCollider);
 
-		physx::PxShape *brushShape = physicsScene->CreateShape(physx::PxConvexMeshGeometry(brushCollider), true);
+		physx::PxShape *brushShape = physicsScene->CreateShape(physx::PxConvexMeshGeometry(brushCollider), true, false);
 		brushShape->setQueryFilterData(filterData);
 		m_brushShapes.push_back(brushShape);
 	}
