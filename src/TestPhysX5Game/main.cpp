@@ -1,5 +1,5 @@
 ﻿#include "stdafx.h"
-#include "001_Triangle.h"
+#include "GameApp.h"
 //-----------------------------------------------------------------------------
 #if defined(_MSC_VER)
 #	pragma comment( lib, "Engine.lib" )
@@ -18,26 +18,7 @@ int main(
 	[[maybe_unused]] int   argc,
 	[[maybe_unused]] char* argv[])
 {
-
-	while( 1 )
-	{
-		system("CLS");
-		std::cout << "Select Example (q - exit):";
-		std::cout << "    b1 - Basic Triangle";
-		std::cout << std::endl;
-
-		std::string read;
-		std::cin >> read;
-
-		if( read == "q" )
-			break;
-		
-		if( read == "b1" )
-		{
-			auto engineDevice = EngineDevice::Create({});
-			engineDevice->RunApp(std::make_shared<_001Triangle>());
-		}
-	}
-
+	auto engineDevice = EngineDevice::Create({});
+	engineDevice->RunApp(std::make_shared<GameApp>());
 }
 //-----------------------------------------------------------------------------

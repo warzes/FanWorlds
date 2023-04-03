@@ -1,0 +1,230 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="GameApp.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="stdafx.cpp" />
+    <ClCompile Include="Scene.cpp">
+      <Filter>Framework\World</Filter>
+    </ClCompile>
+    <ClCompile Include="ACamera.cpp">
+      <Filter>Framework\World\Actors</Filter>
+    </ClCompile>
+    <ClCompile Include="AFuncBrush.cpp">
+      <Filter>Framework\World\Actors</Filter>
+    </ClCompile>
+    <ClCompile Include="AFuncMove.cpp">
+      <Filter>Framework\World\Actors</Filter>
+    </ClCompile>
+    <ClCompile Include="AFuncPhys.cpp">
+      <Filter>Framework\World\Actors</Filter>
+    </ClCompile>
+    <ClCompile Include="ALightPoint.cpp">
+      <Filter>Framework\World\Actors</Filter>
+    </ClCompile>
+    <ClCompile Include="APlayer.cpp">
+      <Filter>Framework\World\Actors</Filter>
+    </ClCompile>
+    <ClCompile Include="APlayerNoClip.cpp">
+      <Filter>Framework\World\Actors</Filter>
+    </ClCompile>
+    <ClCompile Include="APropStatic.cpp">
+      <Filter>Framework\World\Actors</Filter>
+    </ClCompile>
+    <ClCompile Include="AWorldLight.cpp">
+      <Filter>Framework\World\Actors</Filter>
+    </ClCompile>
+    <ClCompile Include="AWorldSpawn.cpp">
+      <Filter>Framework\World\Actors</Filter>
+    </ClCompile>
+    <ClCompile Include="FacesAndTexture.cpp">
+      <Filter>Framework\World\Map</Filter>
+    </ClCompile>
+    <ClCompile Include="LoadEntities.cpp">
+      <Filter>Framework\World\Map</Filter>
+    </ClCompile>
+    <ClCompile Include="MapBrushes.cpp">
+      <Filter>Framework\World\Map</Filter>
+    </ClCompile>
+    <ClCompile Include="MapEntity.cpp">
+      <Filter>Framework\World\Map</Filter>
+    </ClCompile>
+    <ClCompile Include="ParseMap.cpp">
+      <Filter>Framework\World\Map</Filter>
+    </ClCompile>
+    <ClCompile Include="MdlLoader.cpp">
+      <Filter>Framework\MDL</Filter>
+    </ClCompile>
+    <ClCompile Include="DeferredRenderer.cpp">
+      <Filter>Framework\Render</Filter>
+    </ClCompile>
+    <ClCompile Include="DeferredShaders.cpp">
+      <Filter>Framework\Render</Filter>
+    </ClCompile>
+    <ClCompile Include="Framebuffer.cpp">
+      <Filter>Framework\Render</Filter>
+    </ClCompile>
+    <ClCompile Include="MeshUtilities.cpp">
+      <Filter>Framework\Render</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer.cpp">
+      <Filter>Framework\Render</Filter>
+    </ClCompile>
+    <ClCompile Include="Shader.cpp">
+      <Filter>Framework\Render</Filter>
+    </ClCompile>
+    <ClCompile Include="ShadowMap.cpp">
+      <Filter>Framework\Render</Filter>
+    </ClCompile>
+    <ClCompile Include="Texture.cpp">
+      <Filter>Framework\Render</Filter>
+    </ClCompile>
+    <ClCompile Include="ShadowMatrixCalculator.cpp">
+      <Filter>Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="ImageFile.cpp">
+      <Filter>Framework\IO</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="GameApp.h" />
+    <ClInclude Include="stdafx.h" />
+    <ClInclude Include="Scene.h">
+      <Filter>Framework\World</Filter>
+    </ClInclude>
+    <ClInclude Include="AWorldSpawn.h">
+      <Filter>Framework\World\Actors</Filter>
+    </ClInclude>
+    <ClInclude Include="ACamera.h">
+      <Filter>Framework\World\Actors</Filter>
+    </ClInclude>
+    <ClInclude Include="Actor.h">
+      <Filter>Framework\World\Actors</Filter>
+    </ClInclude>
+    <ClInclude Include="AFuncBrush.h">
+      <Filter>Framework\World\Actors</Filter>
+    </ClInclude>
+    <ClInclude Include="AFuncMove.h">
+      <Filter>Framework\World\Actors</Filter>
+    </ClInclude>
+    <ClInclude Include="AFuncPhys.h">
+      <Filter>Framework\World\Actors</Filter>
+    </ClInclude>
+    <ClInclude Include="ALightPoint.h">
+      <Filter>Framework\World\Actors</Filter>
+    </ClInclude>
+    <ClInclude Include="APlayer.h">
+      <Filter>Framework\World\Actors</Filter>
+    </ClInclude>
+    <ClInclude Include="APlayerNoClip.h">
+      <Filter>Framework\World\Actors</Filter>
+    </ClInclude>
+    <ClInclude Include="APropStatic.h">
+      <Filter>Framework\World\Actors</Filter>
+    </ClInclude>
+    <ClInclude Include="AWorldLight.h">
+      <Filter>Framework\World\Actors</Filter>
+    </ClInclude>
+    <ClInclude Include="ParseMap.h">
+      <Filter>Framework\World\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="FacesAndTexture.h">
+      <Filter>Framework\World\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="LoadEntities.h">
+      <Filter>Framework\World\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="MapBrushes.h">
+      <Filter>Framework\World\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="MapEntity.h">
+      <Filter>Framework\World\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="MdlStructs.h">
+      <Filter>Framework\MDL</Filter>
+    </ClInclude>
+    <ClInclude Include="MdlLoader.h">
+      <Filter>Framework\MDL</Filter>
+    </ClInclude>
+    <ClInclude Include="MdlNormals.h">
+      <Filter>Framework\MDL</Filter>
+    </ClInclude>
+    <ClInclude Include="MdlPalette.h">
+      <Filter>Framework\MDL</Filter>
+    </ClInclude>
+    <ClInclude Include="DeferredRenderer.h">
+      <Filter>Framework\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="DeferredShaders.h">
+      <Filter>Framework\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="Framebuffer.h">
+      <Filter>Framework\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="Material.h">
+      <Filter>Framework\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="Mesh.h">
+      <Filter>Framework\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="MeshBase.h">
+      <Filter>Framework\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="MeshPositionColor.h">
+      <Filter>Framework\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="MeshPositionOnly.h">
+      <Filter>Framework\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="MeshUtilities.h">
+      <Filter>Framework\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="UniformBuffer.h">
+      <Filter>Framework\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer.h">
+      <Filter>Framework\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="Shader.h">
+      <Filter>Framework\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="ShadowMap.h">
+      <Filter>Framework\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="Texture.h">
+      <Filter>Framework\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="ShadowMatrixCalculator.h">
+      <Filter>Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="MoveOnly.h">
+      <Filter>Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="ImageFile.h">
+      <Filter>Framework\IO</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Framework">
+      <UniqueIdentifier>{dc0a6ca4-305a-4a4f-ad6a-123ff977b00f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\World">
+      <UniqueIdentifier>{14aa95e9-57eb-4cc4-bc8e-c46f64596ee2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\World\Actors">
+      <UniqueIdentifier>{b95aaa79-31ac-497b-947a-d6fe3a506219}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\World\Map">
+      <UniqueIdentifier>{32505e31-9386-489f-acd4-d6a91964592d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\MDL">
+      <UniqueIdentifier>{1e3376c7-8555-4606-8629-c3567a60dca8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\Render">
+      <UniqueIdentifier>{4b970ada-50be-4445-af28-f1dfba9e3a8d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\IO">
+      <UniqueIdentifier>{f2446d53-f30f-4038-a5fd-5f41dc0436de}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

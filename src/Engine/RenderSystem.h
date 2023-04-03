@@ -21,8 +21,8 @@ public:
 	std::shared_ptr<ShaderProgram> CreateShaderProgram(const std::string& vertexShaderMemory, const std::string& fragmentShaderMemory);
 	std::shared_ptr<VertexBuffer> CreateVertexBuffer(ResourceUsage usage, unsigned vertexCount, unsigned vertexSize, const void* data);
 	std::shared_ptr<IndexBuffer> CreateIndexBuffer(ResourceUsage usage, unsigned indexCount, unsigned indexSize, const void* data);
-	std::shared_ptr<VertexArray> CreateVertexArray(VertexBuffer* vbo, IndexBuffer* ibo, const std::vector<VertexAttribute>& attribs);
-	std::shared_ptr<VertexArray> CreateVertexArray(VertexBuffer* vbo, IndexBuffer* ibo, const ShaderProgram& shaders);
+	std::shared_ptr<VertexArray> CreateVertexArray(std::shared_ptr<VertexBuffer> vbo, std::shared_ptr<IndexBuffer> ibo, const std::vector<VertexAttribute>& attribs);
+	std::shared_ptr<VertexArray> CreateVertexArray(std::shared_ptr<VertexBuffer> vbo, IndexBuffer* ibo, const ShaderProgram& shaders);
 	std::shared_ptr<Texture2D> CreateTexture2D(const char* fileName, bool useCache = true, const Texture2DInfo& textureInfo = {});
 	std::shared_ptr<Texture2D> CreateTexture2D(const Texture2DCreateInfo& createInfo, const Texture2DInfo& textureInfo = {});
 
@@ -60,4 +60,10 @@ private:
 	unsigned createShader(GLenum openGLshaderType, const std::string& source);
 	int m_mainFramebufferWidth = 0;
 	int m_mainFramebufferHeight = 0;
+
+	struct
+	{
+		unsigned CurrentVBO = 0;
+		unsigned CurrentIBO = 0;
+	} m_cache;
 };

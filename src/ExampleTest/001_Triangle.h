@@ -1,6 +1,6 @@
 #pragma once
 
-class GameApp final : public IApp
+class _001Triangle final : public IApp
 {
 	bool Create() final;
 	void Destroy() final;

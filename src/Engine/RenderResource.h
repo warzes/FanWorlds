@@ -148,8 +148,10 @@ struct Texture2DCreateInfo
 	unsigned mipMapCount = 1; // TODO: only compressed
 };
 
+struct Uniform { int location = -1; unsigned programId = 0; };
+
 class ShaderProgram
-{ 
+{
 public:
 	ShaderProgram() { id = glCreateProgram(); }
 	ShaderProgram(ShaderProgram&&) = default;
@@ -161,9 +163,24 @@ public:
 	unsigned id = 0; 
 };
 
-struct Uniform { int location = -1; unsigned programId = 0; };
-struct VertexBuffer { unsigned id = 0; ResourceUsage usage = ResourceUsage::Static; unsigned count = 0; unsigned size = 0; };
-struct IndexBuffer { unsigned id = 0; ResourceUsage usage = ResourceUsage::Static; unsigned count = 0; unsigned size = 0; };
+class VertexBuffer 
+{
+public:
+	VertexBuffer() = delete;
+	VertexBuffer(ResourceUsage _usage, unsigned _count, unsigned _size) : usage(_usage), count(_count), size(_size) { glGenBuffers(1, &id); }
+	VertexBuffer(VertexBuffer&&) = default;
+	VertexBuffer(const VertexBuffer&) = delete;
+	~VertexBuffer() { glDeleteBuffers(1, &id); id = 0; }
+	VertexBuffer& operator=(VertexBuffer&&) = default;
+	VertexBuffer& operator=(const VertexBuffer&) = delete;
+
+	unsigned id = 0;
+	ResourceUsage usage = ResourceUsage::Static;
+	unsigned count = 0;
+	unsigned size = 0; 
+};
+using IndexBuffer = VertexBuffer;
+
 struct VertexArray { unsigned id = 0; VertexBuffer *vbo = nullptr; IndexBuffer *ibo = nullptr; unsigned attribsCount = 0; };
 struct Texture2D { unsigned id = 0; unsigned width = 0; unsigned height = 0; TexelsFormat format = TexelsFormat::RGBA_U8; };
 

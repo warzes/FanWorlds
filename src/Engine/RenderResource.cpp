@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "RenderResource.h"
 #include "RenderSystem.h"
+#include "TranslateToGL.h"
 //-----------------------------------------------------------------------------
 // если какая-то структура была изменена, надо не забыть внести изменения в operator==
 static_assert(sizeof(ShaderProgram) == 4, "ShaderProgram changed!!!");
@@ -43,10 +44,10 @@ bool operator==(const Texture2D& Left, const Texture2D& Right) noexcept
 //-----------------------------------------------------------------------------
 std::shared_ptr<ShaderProgram> RenderSystem::CreateShaderProgram(const std::string& vertexShaderMemory, const std::string& fragmentShaderMemory)
 {
-	std::shared_ptr<ShaderProgram> resource;
 	const GLuint glShaderVertex = createShader(GL_VERTEX_SHADER, vertexShaderMemory);
 	const GLuint glShaderFragment = createShader(GL_FRAGMENT_SHADER, fragmentShaderMemory);
 
+	std::shared_ptr<ShaderProgram> resource;
 	if( glShaderVertex > 0 && glShaderFragment > 0 )
 	{
 		resource.reset(new ShaderProgram());
@@ -73,6 +74,28 @@ std::shared_ptr<ShaderProgram> RenderSystem::CreateShaderProgram(const std::stri
 	glDeleteShader(glShaderFragment);
 
 	return resource;
+}
+//-----------------------------------------------------------------------------
+std::shared_ptr<VertexBuffer> RenderSystem::CreateVertexBuffer(ResourceUsage usage, unsigned vertexCount, unsigned vertexSize, const void* data)
+{
+	std::shared_ptr<VertexBuffer> resource(new VertexBuffer(usage, vertexCount, vertexSize));
+	glBindBuffer(GL_ARRAY_BUFFER, resource->id);
+	glBufferData(GL_ARRAY_BUFFER, vertexCount * vertexSize, data, TranslateToGL(usage));
+	glBindBuffer(GL_ARRAY_BUFFER, m_cache.CurrentVBO); // restore current vb
+	return resource;
+}
+//-----------------------------------------------------------------------------
+std::shared_ptr<IndexBuffer> RenderSystem::CreateIndexBuffer(ResourceUsage usage, unsigned indexCount, unsigned indexSize, const void * data)
+{
+	std::shared_ptr<IndexBuffer> resource(new IndexBuffer(usage, indexCount, indexSize));
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, resource->id);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, indexCount * indexSize, data, TranslateToGL(usage));
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_cache.CurrentIBO); // restore current ib
+	return resource;
+}
+//-----------------------------------------------------------------------------
+void RenderSystem::DestroyResource(ShaderProgram& resource)
+{
 }
 //-----------------------------------------------------------------------------
 unsigned RenderSystem::createShader(GLenum openGLshaderType, const std::string& source)

@@ -38,95 +38,8 @@
     <ClCompile Include="FileSystem.cpp">
       <Filter>Core\IO</Filter>
     </ClCompile>
-    <ClCompile Include="ImageFile.cpp">
-      <Filter>Core\IO</Filter>
-    </ClCompile>
-    <ClCompile Include="MdlLoader.cpp">
-      <Filter>Graphics\MDL</Filter>
-    </ClCompile>
-    <ClCompile Include="MapEntity.cpp">
-      <Filter>World\Map</Filter>
-    </ClCompile>
-    <ClCompile Include="ParseMap.cpp">
-      <Filter>World\Map</Filter>
-    </ClCompile>
-    <ClCompile Include="LoadEntities.cpp">
-      <Filter>World\Map</Filter>
-    </ClCompile>
-    <ClCompile Include="FacesAndTexture.cpp">
-      <Filter>World\Map</Filter>
-    </ClCompile>
-    <ClCompile Include="MapBrushes.cpp">
-      <Filter>World\Map</Filter>
-    </ClCompile>
-    <ClCompile Include="AWorldSpawn.cpp">
-      <Filter>World\Actors</Filter>
-    </ClCompile>
-    <ClCompile Include="AWorldLight.cpp">
-      <Filter>World\Actors</Filter>
-    </ClCompile>
-    <ClCompile Include="APropStatic.cpp">
-      <Filter>World\Actors</Filter>
-    </ClCompile>
-    <ClCompile Include="APlayerNoClip.cpp">
-      <Filter>World\Actors</Filter>
-    </ClCompile>
-    <ClCompile Include="APlayer.cpp">
-      <Filter>World\Actors</Filter>
-    </ClCompile>
-    <ClCompile Include="ALightPoint.cpp">
-      <Filter>World\Actors</Filter>
-    </ClCompile>
-    <ClCompile Include="AFuncPhys.cpp">
-      <Filter>World\Actors</Filter>
-    </ClCompile>
-    <ClCompile Include="AFuncMove.cpp">
-      <Filter>World\Actors</Filter>
-    </ClCompile>
-    <ClCompile Include="AFuncBrush.cpp">
-      <Filter>World\Actors</Filter>
-    </ClCompile>
-    <ClCompile Include="ACamera.cpp">
-      <Filter>World\Actors</Filter>
-    </ClCompile>
-    <ClCompile Include="Scene.cpp">
-      <Filter>World</Filter>
-    </ClCompile>
-    <ClCompile Include="BinaryParser.cpp">
-      <Filter>Core\IO</Filter>
-    </ClCompile>
-    <ClCompile Include="ShadowMatrixCalculator.cpp">
-      <Filter>Core\Math</Filter>
-    </ClCompile>
     <ClCompile Include="PhysicsErrorCallback.cpp">
       <Filter>Physics</Filter>
-    </ClCompile>
-    <ClCompile Include="DeferredRenderer.cpp">
-      <Filter>Graphics\old</Filter>
-    </ClCompile>
-    <ClCompile Include="DeferredShaders.cpp">
-      <Filter>Graphics\old</Filter>
-    </ClCompile>
-    <ClCompile Include="Framebuffer.cpp">
-      <Filter>Graphics\old</Filter>
-    </ClCompile>
-    <ClCompile Include="MeshUtilities.cpp">
-      <Filter>Graphics\old</Filter>
-    </ClCompile>
-    <ClCompile Include="RenderCore.cpp">
-      <Filter>Graphics\old</Filter>
-    </ClCompile>
-    <ClCompile Include="Renderer.cpp">
-      <Filter>Graphics\old</Filter>
-    </ClCompile>
-    <ClCompile Include="Shader.cpp">
-      <Filter>Graphics\old</Filter>
-    </ClCompile>
-    <ClCompile Include="ShadowMap.cpp">
-      <Filter>Graphics\old</Filter>
-    </ClCompile>
-    <ClCompile Include="Texture.cpp">
-      <Filter>Graphics\old</Filter>
     </ClCompile>
     <ClCompile Include="RenderResource.cpp">
       <Filter>RenderAPI</Filter>
@@ -183,133 +96,16 @@
     <ClInclude Include="FileSystem.h">
       <Filter>Core\IO</Filter>
     </ClInclude>
-    <ClInclude Include="MoveOnly.h">
-      <Filter>Core\Object</Filter>
-    </ClInclude>
-    <ClInclude Include="ImageFile.h">
-      <Filter>Core\IO</Filter>
-    </ClInclude>
-    <ClInclude Include="MdlStructs.h">
-      <Filter>Graphics\MDL</Filter>
-    </ClInclude>
-    <ClInclude Include="MdlPalette.h">
-      <Filter>Graphics\MDL</Filter>
-    </ClInclude>
-    <ClInclude Include="MdlNormals.h">
-      <Filter>Graphics\MDL</Filter>
-    </ClInclude>
-    <ClInclude Include="MdlLoader.h">
-      <Filter>Graphics\MDL</Filter>
-    </ClInclude>
-    <ClInclude Include="MapEntity.h">
-      <Filter>World\Map</Filter>
-    </ClInclude>
-    <ClInclude Include="ParseMap.h">
-      <Filter>World\Map</Filter>
-    </ClInclude>
-    <ClInclude Include="LoadEntities.h">
-      <Filter>World\Map</Filter>
-    </ClInclude>
-    <ClInclude Include="FacesAndTexture.h">
-      <Filter>World\Map</Filter>
-    </ClInclude>
-    <ClInclude Include="MapBrushes.h">
-      <Filter>World\Map</Filter>
-    </ClInclude>
-    <ClInclude Include="AWorldSpawn.h">
-      <Filter>World\Actors</Filter>
-    </ClInclude>
-    <ClInclude Include="Actor.h">
-      <Filter>World\Actors</Filter>
-    </ClInclude>
-    <ClInclude Include="AWorldLight.h">
-      <Filter>World\Actors</Filter>
-    </ClInclude>
-    <ClInclude Include="APropStatic.h">
-      <Filter>World\Actors</Filter>
-    </ClInclude>
-    <ClInclude Include="APlayerNoClip.h">
-      <Filter>World\Actors</Filter>
-    </ClInclude>
-    <ClInclude Include="APlayer.h">
-      <Filter>World\Actors</Filter>
-    </ClInclude>
-    <ClInclude Include="ALightPoint.h">
-      <Filter>World\Actors</Filter>
-    </ClInclude>
-    <ClInclude Include="AFuncPhys.h">
-      <Filter>World\Actors</Filter>
-    </ClInclude>
-    <ClInclude Include="AFuncMove.h">
-      <Filter>World\Actors</Filter>
-    </ClInclude>
-    <ClInclude Include="AFuncBrush.h">
-      <Filter>World\Actors</Filter>
-    </ClInclude>
-    <ClInclude Include="ACamera.h">
-      <Filter>World\Actors</Filter>
-    </ClInclude>
-    <ClInclude Include="Scene.h">
-      <Filter>World</Filter>
-    </ClInclude>
-    <ClInclude Include="BinaryParser.h">
-      <Filter>Core\IO</Filter>
-    </ClInclude>
-    <ClInclude Include="ShadowMatrixCalculator.h">
-      <Filter>Core\Math</Filter>
-    </ClInclude>
     <ClInclude Include="PhysicsUtilities.h">
       <Filter>Physics</Filter>
     </ClInclude>
     <ClInclude Include="PhysicsErrorCallback.h">
       <Filter>Physics</Filter>
     </ClInclude>
-    <ClInclude Include="DeferredRenderer.h">
-      <Filter>Graphics\old</Filter>
-    </ClInclude>
-    <ClInclude Include="DeferredShaders.h">
-      <Filter>Graphics\old</Filter>
-    </ClInclude>
-    <ClInclude Include="Framebuffer.h">
-      <Filter>Graphics\old</Filter>
-    </ClInclude>
-    <ClInclude Include="Material.h">
-      <Filter>Graphics\old</Filter>
-    </ClInclude>
-    <ClInclude Include="Mesh.h">
-      <Filter>Graphics\old</Filter>
-    </ClInclude>
-    <ClInclude Include="MeshBase.h">
-      <Filter>Graphics\old</Filter>
-    </ClInclude>
-    <ClInclude Include="MeshPositionColor.h">
-      <Filter>Graphics\old</Filter>
-    </ClInclude>
-    <ClInclude Include="MeshPositionOnly.h">
-      <Filter>Graphics\old</Filter>
-    </ClInclude>
-    <ClInclude Include="MeshUtilities.h">
-      <Filter>Graphics\old</Filter>
-    </ClInclude>
-    <ClInclude Include="RenderCore.h">
-      <Filter>Graphics\old</Filter>
-    </ClInclude>
-    <ClInclude Include="Renderer.h">
-      <Filter>Graphics\old</Filter>
-    </ClInclude>
-    <ClInclude Include="Shader.h">
-      <Filter>Graphics\old</Filter>
-    </ClInclude>
-    <ClInclude Include="ShadowMap.h">
-      <Filter>Graphics\old</Filter>
-    </ClInclude>
-    <ClInclude Include="Texture.h">
-      <Filter>Graphics\old</Filter>
-    </ClInclude>
-    <ClInclude Include="UniformBuffer.h">
-      <Filter>Graphics\old</Filter>
-    </ClInclude>
     <ClInclude Include="RenderResource.h">
+      <Filter>RenderAPI</Filter>
+    </ClInclude>
+    <ClInclude Include="TranslateToGL.h">
       <Filter>RenderAPI</Filter>
     </ClInclude>
   </ItemGroup>
@@ -325,9 +121,6 @@
     </Filter>
     <Filter Include="Resource">
       <UniqueIdentifier>{2a8c4f6e-d82c-4dd6-bfd2-2449dd48662f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="World">
-      <UniqueIdentifier>{a7e880cc-0d44-4aba-8f2a-1f2849924314}</UniqueIdentifier>
     </Filter>
     <Filter Include="Core\Base">
       <UniqueIdentifier>{790d1004-3233-4c0f-90c0-0d920a5553c4}</UniqueIdentifier>
@@ -355,21 +148,6 @@
     </Filter>
     <Filter Include="Platform">
       <UniqueIdentifier>{c8d3700f-6525-41b4-81f3-2062323e5652}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Graphics\MDL">
-      <UniqueIdentifier>{2a1939bc-902c-408f-9c0e-c10f4db5864d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="World\Actors">
-      <UniqueIdentifier>{fd6f0bba-6dec-4405-a7b6-21be7ef64744}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="World\Map">
-      <UniqueIdentifier>{ec35bed2-92ed-4c2e-8e21-a81e2e4b171e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="World\PlayerUtils">
-      <UniqueIdentifier>{684719a2-a4c9-404b-ab57-835dc1b6b19f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Graphics\old">
-      <UniqueIdentifier>{7da84546-5b84-4f1a-8da1-22ff482ae2db}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

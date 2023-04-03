@@ -1,19 +1,19 @@
 #include "stdafx.h"
-#include "GameApp.h"
+#include "001_Triangle.h"
 
-bool GameApp::Create()
+bool _001Triangle::Create()
 {
-	Print("GameApp Create");
-	
+	Print("001Triangle Create");
+
 	return true;
 }
 
-void GameApp::Destroy()
+void _001Triangle::Destroy()
 {
-	Print("GameApp Destroy");
+	Print("001Triangle Destroy");
 }
 
-void GameApp::Render()
+void _001Triangle::Render()
 {
 	if( m_windowWidth != GetWindowWidth() || m_windowHeight != GetWindowHeight() )
 	{
@@ -22,11 +22,11 @@ void GameApp::Render()
 	}
 }
 
-void GameApp::Update(float elapsedTimeSeconds)
+void _001Triangle::Update(float elapsedTimeSeconds)
 {
 	if( GetInput().IsKeyDown(Input::KEY_ESCAPE) )
 	{
 		BaseClass::ExitRequest();
 		return;
-	}	
+	}
 }
