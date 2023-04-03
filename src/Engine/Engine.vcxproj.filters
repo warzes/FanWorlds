@@ -23,13 +23,7 @@
     <ClCompile Include="Input.cpp">
       <Filter>Platform</Filter>
     </ClCompile>
-    <ClCompile Include="RenderCore.cpp">
-      <Filter>RenderAPI</Filter>
-    </ClCompile>
     <ClCompile Include="RenderSystem.cpp">
-      <Filter>RenderAPI</Filter>
-    </ClCompile>
-    <ClCompile Include="Shader.cpp">
       <Filter>RenderAPI</Filter>
     </ClCompile>
     <ClCompile Include="PhysicsSystem.cpp">
@@ -44,47 +38,26 @@
     <ClCompile Include="FileSystem.cpp">
       <Filter>Core\IO</Filter>
     </ClCompile>
-    <ClCompile Include="Framebuffer.cpp">
-      <Filter>RenderAPI</Filter>
-    </ClCompile>
     <ClCompile Include="ImageFile.cpp">
       <Filter>Core\IO</Filter>
-    </ClCompile>
-    <ClCompile Include="DeferredShaders.cpp">
-      <Filter>RenderAPI</Filter>
-    </ClCompile>
-    <ClCompile Include="Texture.cpp">
-      <Filter>RenderAPI</Filter>
-    </ClCompile>
-    <ClCompile Include="ShadowMap.cpp">
-      <Filter>RenderAPI</Filter>
-    </ClCompile>
-    <ClCompile Include="MeshUtilities.cpp">
-      <Filter>RenderAPI</Filter>
-    </ClCompile>
-    <ClCompile Include="Renderer.cpp">
-      <Filter>RenderAPI</Filter>
-    </ClCompile>
-    <ClCompile Include="DeferredRenderer.cpp">
-      <Filter>RenderAPI</Filter>
     </ClCompile>
     <ClCompile Include="MdlLoader.cpp">
       <Filter>Graphics\MDL</Filter>
     </ClCompile>
     <ClCompile Include="MapEntity.cpp">
-      <Filter>Graphics\Map</Filter>
+      <Filter>World\Map</Filter>
     </ClCompile>
     <ClCompile Include="ParseMap.cpp">
-      <Filter>Graphics\Map</Filter>
+      <Filter>World\Map</Filter>
     </ClCompile>
     <ClCompile Include="LoadEntities.cpp">
-      <Filter>Graphics\Map</Filter>
+      <Filter>World\Map</Filter>
     </ClCompile>
     <ClCompile Include="FacesAndTexture.cpp">
-      <Filter>Graphics\Map</Filter>
+      <Filter>World\Map</Filter>
     </ClCompile>
     <ClCompile Include="MapBrushes.cpp">
-      <Filter>Graphics\Map</Filter>
+      <Filter>World\Map</Filter>
     </ClCompile>
     <ClCompile Include="AWorldSpawn.cpp">
       <Filter>World\Actors</Filter>
@@ -128,6 +101,36 @@
     <ClCompile Include="PhysicsErrorCallback.cpp">
       <Filter>Physics</Filter>
     </ClCompile>
+    <ClCompile Include="DeferredRenderer.cpp">
+      <Filter>Graphics\old</Filter>
+    </ClCompile>
+    <ClCompile Include="DeferredShaders.cpp">
+      <Filter>Graphics\old</Filter>
+    </ClCompile>
+    <ClCompile Include="Framebuffer.cpp">
+      <Filter>Graphics\old</Filter>
+    </ClCompile>
+    <ClCompile Include="MeshUtilities.cpp">
+      <Filter>Graphics\old</Filter>
+    </ClCompile>
+    <ClCompile Include="RenderCore.cpp">
+      <Filter>Graphics\old</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer.cpp">
+      <Filter>Graphics\old</Filter>
+    </ClCompile>
+    <ClCompile Include="Shader.cpp">
+      <Filter>Graphics\old</Filter>
+    </ClCompile>
+    <ClCompile Include="ShadowMap.cpp">
+      <Filter>Graphics\old</Filter>
+    </ClCompile>
+    <ClCompile Include="Texture.cpp">
+      <Filter>Graphics\old</Filter>
+    </ClCompile>
+    <ClCompile Include="RenderResource.cpp">
+      <Filter>RenderAPI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h" />
@@ -159,13 +162,7 @@
     <ClInclude Include="Input.h">
       <Filter>Platform</Filter>
     </ClInclude>
-    <ClInclude Include="RenderCore.h">
-      <Filter>RenderAPI</Filter>
-    </ClInclude>
     <ClInclude Include="RenderSystem.h">
-      <Filter>RenderAPI</Filter>
-    </ClInclude>
-    <ClInclude Include="Shader.h">
       <Filter>RenderAPI</Filter>
     </ClInclude>
     <ClInclude Include="BaseMacros.h">
@@ -183,53 +180,14 @@
     <ClInclude Include="PhysicsLayer.h">
       <Filter>Physics</Filter>
     </ClInclude>
-    <ClInclude Include="UniformBuffer.h">
-      <Filter>RenderAPI</Filter>
-    </ClInclude>
     <ClInclude Include="FileSystem.h">
       <Filter>Core\IO</Filter>
-    </ClInclude>
-    <ClInclude Include="Framebuffer.h">
-      <Filter>RenderAPI</Filter>
     </ClInclude>
     <ClInclude Include="MoveOnly.h">
       <Filter>Core\Object</Filter>
     </ClInclude>
     <ClInclude Include="ImageFile.h">
       <Filter>Core\IO</Filter>
-    </ClInclude>
-    <ClInclude Include="DeferredShaders.h">
-      <Filter>RenderAPI</Filter>
-    </ClInclude>
-    <ClInclude Include="Texture.h">
-      <Filter>RenderAPI</Filter>
-    </ClInclude>
-    <ClInclude Include="ShadowMap.h">
-      <Filter>RenderAPI</Filter>
-    </ClInclude>
-    <ClInclude Include="Material.h">
-      <Filter>RenderAPI</Filter>
-    </ClInclude>
-    <ClInclude Include="Mesh.h">
-      <Filter>RenderAPI</Filter>
-    </ClInclude>
-    <ClInclude Include="MeshBase.h">
-      <Filter>RenderAPI</Filter>
-    </ClInclude>
-    <ClInclude Include="MeshPositionColor.h">
-      <Filter>RenderAPI</Filter>
-    </ClInclude>
-    <ClInclude Include="MeshPositionOnly.h">
-      <Filter>RenderAPI</Filter>
-    </ClInclude>
-    <ClInclude Include="MeshUtilities.h">
-      <Filter>RenderAPI</Filter>
-    </ClInclude>
-    <ClInclude Include="Renderer.h">
-      <Filter>RenderAPI</Filter>
-    </ClInclude>
-    <ClInclude Include="DeferredRenderer.h">
-      <Filter>RenderAPI</Filter>
     </ClInclude>
     <ClInclude Include="MdlStructs.h">
       <Filter>Graphics\MDL</Filter>
@@ -244,19 +202,19 @@
       <Filter>Graphics\MDL</Filter>
     </ClInclude>
     <ClInclude Include="MapEntity.h">
-      <Filter>Graphics\Map</Filter>
+      <Filter>World\Map</Filter>
     </ClInclude>
     <ClInclude Include="ParseMap.h">
-      <Filter>Graphics\Map</Filter>
+      <Filter>World\Map</Filter>
     </ClInclude>
     <ClInclude Include="LoadEntities.h">
-      <Filter>Graphics\Map</Filter>
+      <Filter>World\Map</Filter>
     </ClInclude>
     <ClInclude Include="FacesAndTexture.h">
-      <Filter>Graphics\Map</Filter>
+      <Filter>World\Map</Filter>
     </ClInclude>
     <ClInclude Include="MapBrushes.h">
-      <Filter>Graphics\Map</Filter>
+      <Filter>World\Map</Filter>
     </ClInclude>
     <ClInclude Include="AWorldSpawn.h">
       <Filter>World\Actors</Filter>
@@ -306,6 +264,54 @@
     <ClInclude Include="PhysicsErrorCallback.h">
       <Filter>Physics</Filter>
     </ClInclude>
+    <ClInclude Include="DeferredRenderer.h">
+      <Filter>Graphics\old</Filter>
+    </ClInclude>
+    <ClInclude Include="DeferredShaders.h">
+      <Filter>Graphics\old</Filter>
+    </ClInclude>
+    <ClInclude Include="Framebuffer.h">
+      <Filter>Graphics\old</Filter>
+    </ClInclude>
+    <ClInclude Include="Material.h">
+      <Filter>Graphics\old</Filter>
+    </ClInclude>
+    <ClInclude Include="Mesh.h">
+      <Filter>Graphics\old</Filter>
+    </ClInclude>
+    <ClInclude Include="MeshBase.h">
+      <Filter>Graphics\old</Filter>
+    </ClInclude>
+    <ClInclude Include="MeshPositionColor.h">
+      <Filter>Graphics\old</Filter>
+    </ClInclude>
+    <ClInclude Include="MeshPositionOnly.h">
+      <Filter>Graphics\old</Filter>
+    </ClInclude>
+    <ClInclude Include="MeshUtilities.h">
+      <Filter>Graphics\old</Filter>
+    </ClInclude>
+    <ClInclude Include="RenderCore.h">
+      <Filter>Graphics\old</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer.h">
+      <Filter>Graphics\old</Filter>
+    </ClInclude>
+    <ClInclude Include="Shader.h">
+      <Filter>Graphics\old</Filter>
+    </ClInclude>
+    <ClInclude Include="ShadowMap.h">
+      <Filter>Graphics\old</Filter>
+    </ClInclude>
+    <ClInclude Include="Texture.h">
+      <Filter>Graphics\old</Filter>
+    </ClInclude>
+    <ClInclude Include="UniformBuffer.h">
+      <Filter>Graphics\old</Filter>
+    </ClInclude>
+    <ClInclude Include="RenderResource.h">
+      <Filter>RenderAPI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Core">
@@ -353,11 +359,17 @@
     <Filter Include="Graphics\MDL">
       <UniqueIdentifier>{2a1939bc-902c-408f-9c0e-c10f4db5864d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Graphics\Map">
-      <UniqueIdentifier>{ec35bed2-92ed-4c2e-8e21-a81e2e4b171e}</UniqueIdentifier>
-    </Filter>
     <Filter Include="World\Actors">
       <UniqueIdentifier>{fd6f0bba-6dec-4405-a7b6-21be7ef64744}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="World\Map">
+      <UniqueIdentifier>{ec35bed2-92ed-4c2e-8e21-a81e2e4b171e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="World\PlayerUtils">
+      <UniqueIdentifier>{684719a2-a4c9-404b-ab57-835dc1b6b19f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Graphics\old">
+      <UniqueIdentifier>{7da84546-5b84-4f1a-8da1-22ff482ae2db}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

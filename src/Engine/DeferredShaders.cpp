@@ -2,7 +2,7 @@
 #include "DeferredShaders.h"
 //-----------------------------------------------------------------------------
 DeferredShaderShadowPass::DeferredShaderShadowPass(RenderSystem& renderSystem) 
-	: ShaderProgram(ShaderProgram::FromFile(
+	: OldShaderProgram(OldShaderProgram::FromFile(
 		renderSystem,
 		"shaders/shared.glsl",
 		"shaders/shadow_pass.vert",
@@ -19,7 +19,7 @@ void DeferredShaderShadowPass::SetModel(const glm::mat4 &model)
 }
 //-----------------------------------------------------------------------------
 DeferredShaderBase::DeferredShaderBase(RenderSystem& renderSystem) 
-	: ShaderProgram(ShaderProgram::FromFile(
+	: OldShaderProgram(OldShaderProgram::FromFile(
 		renderSystem,
 		"shaders/shared.glsl",
 		"shaders/base.vert",
@@ -35,7 +35,7 @@ void DeferredShaderBase::SetModel(const glm::mat4 &model)
 }
 //-----------------------------------------------------------------------------
 DeferredShaderGPass::DeferredShaderGPass(RenderSystem& renderSystem) 
-	: ShaderProgram(ShaderProgram::FromFile(
+	: OldShaderProgram(OldShaderProgram::FromFile(
 		renderSystem,
 		"shaders/shared.glsl",
 		"shaders/g_pass.vert",
@@ -45,7 +45,7 @@ DeferredShaderGPass::DeferredShaderGPass(RenderSystem& renderSystem)
 }
 //-----------------------------------------------------------------------------
 DeferredShaderLines::DeferredShaderLines(RenderSystem& renderSystem) 
-	: ShaderProgram(ShaderProgram::FromFile(
+	: OldShaderProgram(OldShaderProgram::FromFile(
 		renderSystem,
 		"shaders/shared.glsl",
 		"shaders/lines.vert",
@@ -55,7 +55,7 @@ DeferredShaderLines::DeferredShaderLines(RenderSystem& renderSystem)
 }
 //-----------------------------------------------------------------------------
 DeferredShaderSkybox::DeferredShaderSkybox(RenderSystem& renderSystem)
-	: ShaderProgram(ShaderProgram::FromFile(
+	: OldShaderProgram(OldShaderProgram::FromFile(
 		renderSystem,
 		"shaders/shared.glsl",
 		"shaders/skybox.vert",

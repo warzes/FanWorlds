@@ -2,7 +2,7 @@
 
 #include "Shader.h"
 
-class DeferredShaderShadowPass : public ShaderProgram
+class DeferredShaderShadowPass : public OldShaderProgram
 {
 public:
 	MOVE_ONLY(DeferredShaderShadowPass);
@@ -15,7 +15,7 @@ private:
 	GLint m_modelLocation = -1;
 };
 
-class DeferredShaderBase : public ShaderProgram
+class DeferredShaderBase : public OldShaderProgram
 {
 public:
 	MOVE_ONLY(DeferredShaderBase);
@@ -28,7 +28,7 @@ private:
 	GLint m_modelLocation = -1;
 };
 
-class DeferredShaderGPass : public ShaderProgram
+class DeferredShaderGPass : public OldShaderProgram
 {
 public:
 	MOVE_ONLY(DeferredShaderGPass);
@@ -36,7 +36,7 @@ public:
 	DeferredShaderGPass(RenderSystem& renderSystem);
 };
 
-class DeferredShaderLines : public ShaderProgram
+class DeferredShaderLines : public OldShaderProgram
 {
 public:
 	MOVE_ONLY(DeferredShaderLines);
@@ -44,7 +44,7 @@ public:
 	DeferredShaderLines(RenderSystem& renderSystem);
 };
 
-class DeferredShaderSkybox : public ShaderProgram
+class DeferredShaderSkybox : public OldShaderProgram
 {
 public:
 	MOVE_ONLY(DeferredShaderSkybox);

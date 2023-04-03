@@ -58,7 +58,7 @@ static GLuint CreateProgram(RenderSystem& renderSystem, const std::initializer_l
 	return program;
 }
 //-----------------------------------------------------------------------------
-ShaderProgram::ShaderProgram(
+OldShaderProgram::OldShaderProgram(
 	RenderSystem& renderSystem,
 	const std::string& sharedSource,
 	const std::string& vertexSource,
@@ -91,7 +91,7 @@ ShaderProgram::ShaderProgram(
 	glDeleteShader(fragmentShader);
 }
 //-----------------------------------------------------------------------------
-ShaderProgram::ShaderProgram(
+OldShaderProgram::OldShaderProgram(
 	RenderSystem& renderSystem,
 	const std::string& sharedSource,
 	const std::string& vertexSource,
@@ -135,7 +135,7 @@ ShaderProgram::ShaderProgram(
 	glDeleteShader(fragmentShader);
 }
 //-----------------------------------------------------------------------------
-ShaderProgram ShaderProgram::FromFile(
+OldShaderProgram OldShaderProgram::FromFile(
 	RenderSystem& renderSystem,
 	const std::string& sharedFilename,
 	const std::string& vertexFilename,
@@ -150,7 +150,7 @@ ShaderProgram ShaderProgram::FromFile(
 	};
 }
 //-----------------------------------------------------------------------------
-ShaderProgram ShaderProgram::FromFile(
+OldShaderProgram OldShaderProgram::FromFile(
 	RenderSystem& renderSystem,
 	const std::string& sharedFilename,
 	const std::string& vertexFilename,
@@ -167,43 +167,43 @@ ShaderProgram ShaderProgram::FromFile(
 	};
 }
 //-----------------------------------------------------------------------------
-ShaderProgram::~ShaderProgram() 
+OldShaderProgram::~OldShaderProgram() 
 {
 	if (m_program)
 		glDeleteProgram(m_program);
 }
 //-----------------------------------------------------------------------------
-void ShaderProgram::Bind() const 
+void OldShaderProgram::Bind() const 
 {
 	glUseProgram(m_program);
 }
 //-----------------------------------------------------------------------------
-GLint ShaderProgram::GetUniformLocation(const std::string& name) const 
+GLint OldShaderProgram::GetUniformLocation(const std::string& name) const 
 {
 	return glGetUniformLocation(m_program, name.c_str());
 }
 //-----------------------------------------------------------------------------
-void ShaderProgram::SetUniform(const GLint location, const float value) 
+void OldShaderProgram::SetUniform(const GLint location, const float value) 
 {
 	glProgramUniform1f(m_program, location, value);
 }
 //-----------------------------------------------------------------------------
-void ShaderProgram::SetUniform(const GLint location, const glm::vec2& value)
+void OldShaderProgram::SetUniform(const GLint location, const glm::vec2& value)
 {
 	glProgramUniform2fv(m_program, location, 1, glm::value_ptr(value));
 }
 //-----------------------------------------------------------------------------
-void ShaderProgram::SetUniform(const GLint location, const glm::vec3& value)
+void OldShaderProgram::SetUniform(const GLint location, const glm::vec3& value)
 {
 	glProgramUniform3fv(m_program, location, 1, glm::value_ptr(value));
 }
 //-----------------------------------------------------------------------------
-void ShaderProgram::SetUniform(const GLint location, const glm::vec4& value) 
+void OldShaderProgram::SetUniform(const GLint location, const glm::vec4& value) 
 {
 	glProgramUniform4fv(m_program, location, 1, glm::value_ptr(value));
 }
 //-----------------------------------------------------------------------------
-void ShaderProgram::SetUniform(GLint location, const glm::mat4& value) 
+void OldShaderProgram::SetUniform(GLint location, const glm::mat4& value) 
 {
 	glProgramUniformMatrix4fv(m_program, location, 1, GL_FALSE, glm::value_ptr(value));
 }

@@ -4,19 +4,17 @@
 #include "PhysicsScene.h"
 #include "Input.h"
 
-APlayer::APlayer(
-	SystemRef& systemRef,
-	const glm::vec3 &position, float yaw,
-	float mouseSpeed) 
+APlayer::APlayer(SystemRef& systemRef, const glm::vec3 &position, float yaw, float mouseSpeed) 
 	: m_systemRef(systemRef)
-	, m_controller(systemRef.GetPhysicsSystem().GetPhysicsScene()->CreateController(
-		{ position.x, position.y, position.z },
-		CAPSULE_RADIUS,
-		CAPSULE_HEIGHT))
 	, m_mouseSpeed(mouseSpeed)
 {
-	m_respawnPoint = position;
+	m_controller = systemRef.GetPhysicsSystem().GetPhysicsScene()->CreateController(
+		{ position.x, position.y, position.z },
+		CAPSULE_RADIUS,
+		CAPSULE_HEIGHT);
 	m_controller->getActor()->userData = this;
+
+	m_respawnPoint = position;
 	GetTransform().RotateY(yaw);
 	m_previousPosition = position;
 }
@@ -28,7 +26,44 @@ APlayer::~APlayer()
 
 void APlayer::Update(const float deltaTime)
 {
-	PhysicsScene *physicsScene = m_systemRef.GetPhysicsSystem().GetPhysicsScene();
+	PhysicsScene* physicsScene = m_systemRef.GetPhysicsSystem().GetPhysicsScene();
+	Transform& transform = GetTransform();
+
+	// turn
+	{
+		const glm::vec2 deltaMousePos = m_systemRef.GetInput().GetMouseDeltaPosition();
+#ifdef GLM_FORCE_LEFT_HANDED
+		transform
+			.RotateX(m_mouseSpeed * deltaMousePos.y)
+			.RotateY(m_mouseSpeed * deltaMousePos.x)
+			.ClampPitch();
+#else
+		transform
+			.RotateX(m_mouseSpeed * -deltaMousePos.y)
+			.RotateY(m_mouseSpeed * -deltaMousePos.x)
+			.ClampPitch();
+#endif
+	}
+
+	// move
+	{
+		m_movementInput =
+			transform.GetHorizontalRightVector() * m_systemRef.GetInput().GetKeyAxis(GLFW_KEY_D, GLFW_KEY_A) +
+			transform.GetHorizontalForwardVector() * m_systemRef.GetInput().GetKeyAxis(GLFW_KEY_W, GLFW_KEY_S);
+		if( m_movementInput.x != 0 || m_movementInput.y != 0 || m_movementInput.z != 0 )
+			m_movementInput = glm::normalize(m_movementInput);
+	}
+
+	// jump
+	{
+		bool currSpace = m_systemRef.GetInput().IsKeyDown(GLFW_KEY_SPACE);
+		if( !m_prevSpace && currSpace && m_isOnGround )
+		{
+			m_velocity.y = JUMP_VELOCITY;
+		}
+
+		m_prevSpace = currSpace;
+	}
 
 	// sync position
 	{
@@ -40,35 +75,6 @@ void APlayer::Update(const float deltaTime)
 		position.z + m_velocity.z * timeError
 		};
 		GetTransform().SetPosition(predictedPosition + glm::vec3{ 0.0f, CAPSULE_HALF_HEIGHT, 0.0f });
-	}
-
-	// turn
-	{
-		const glm::vec2 deltaMousePos = m_systemRef.GetInput().GetMouseDeltaPosition();
-		GetTransform()
-			.RotateX(m_mouseSpeed * -deltaMousePos.y)
-			.RotateY(m_mouseSpeed * -deltaMousePos.x)
-			.ClampPitch();
-	}
-
-	// move
-	{
-		Transform &transform = GetTransform();
-		m_movementInput =
-			transform.GetHorizontalRightVector() * m_systemRef.GetInput().GetKeyAxis(GLFW_KEY_D, GLFW_KEY_A) +
-			transform.GetHorizontalForwardVector() * m_systemRef.GetInput().GetKeyAxis(GLFW_KEY_W, GLFW_KEY_S);
-	}
-
-	// jump
-	{
-		bool currSpace = m_systemRef.GetInput().IsKeyDown(GLFW_KEY_SPACE);
-
-		if( !m_prevSpace && currSpace && m_isOnGround )
-		{
-			m_velocity.y = JUMP_VELOCITY;
-		}
-
-		m_prevSpace = currSpace;
 	}
 
 	// raycast for current target
@@ -146,6 +152,25 @@ void APlayer::UpdateAcceleration()
 	m_acceleration.y = -GRAVITY;
 }
 
+// based on Kalman filter from: https://github.com/Garima13a/Kalman-Filters/blob/master/2.%201D%20Kalman%20Filter%2C%20solution.ipynb
+static void KalmanUpdate(glm::vec3 &posPredicted, glm::vec3 &varPredicted, const glm::vec3 &posObserved, const glm::vec3 &varObserved)
+{
+	const glm::vec3 pos = (varObserved * posPredicted + varPredicted * posObserved) / (varPredicted + varObserved);
+	const glm::vec3 var = varPredicted * varObserved / (varPredicted + varObserved);
+
+	posPredicted = pos;
+	varPredicted = var;
+}
+
+static void KalmanPredict(glm::vec3 &posPredicted, glm::vec3 &varPredicted, const glm::vec3 &deltaObserved, const glm::vec3 &varObserved)
+{
+	const glm::vec3 mean = posPredicted + deltaObserved;
+	const glm::vec3 var = varPredicted + varObserved;
+
+	posPredicted = mean;
+	varPredicted = var;
+}
+
 void APlayer::FixedUpdate(float fixedDeltaTime)
 {
 	UpdateGround();
@@ -154,18 +179,17 @@ void APlayer::FixedUpdate(float fixedDeltaTime)
 
 	// move character controller
 	m_velocity += m_acceleration * fixedDeltaTime;
-	const glm::vec3 displacement = m_velocity * fixedDeltaTime;
-	m_controller->move(
-		{ displacement.x, displacement.y, displacement.z },
-		0.0001f,
-		fixedDeltaTime,
-		physx::PxControllerFilters()
-	);
+
+	const glm::vec3     displacement = m_velocity * fixedDeltaTime;
+	const physx::PxVec3 disp{ displacement.x, displacement.y, displacement.z };
+	m_controller->move(disp, 0.0001f, fixedDeltaTime, physx::PxControllerFilters());
 
 	// calc projected velocity
 	const physx::PxVec3 pos = toVec3(m_controller->getPosition());
-	const glm::vec3 currentPosition{ pos.x, pos.y, pos.z };
-	m_velocity = (currentPosition - m_previousPosition) / fixedDeltaTime;
+	const glm::vec3     currentPosition{ pos.x, pos.y, pos.z };
+	const glm::vec3     deltaPosition = currentPosition - m_previousPosition;
+	
+	m_velocity = deltaPosition / fixedDeltaTime;
 	m_previousPosition = currentPosition;
 
 	// clamp vertical speed (this is a hack)

@@ -21,5 +21,6 @@
     <None Include="IdeaSiege.md">
       <Filter>Siege\_DOC</Filter>
     </None>
+    <None Include="Ref.md" />
   </ItemGroup>
 </Project>

@@ -4,41 +4,35 @@
 
 class RenderSystem;
 
-class Uniform
-{
-	int location = -1;
-	unsigned programId = 0;
-};
-
-class ShaderProgram
+class OldShaderProgram
 {
 public:
-	MOVE_ONLY(ShaderProgram);
+	MOVE_ONLY(OldShaderProgram);
 
-	ShaderProgram() = delete;
-	ShaderProgram(
+	OldShaderProgram() = delete;
+	OldShaderProgram(
 		RenderSystem& renderSystem,
 		const std::string &sharedSource,
 		const std::string &vertexSource,
 		const std::string &fragmentSource
 	);
-	ShaderProgram(
+	OldShaderProgram(
 		RenderSystem& renderSystem,
 		const std::string &sharedSource,
 		const std::string &vertexSource,
 		const std::string &geometrySource,
 		const std::string &fragmentSource
 	);
-	~ShaderProgram();
+	~OldShaderProgram();
 
-	static ShaderProgram FromFile(
+	static OldShaderProgram FromFile(
 		RenderSystem& renderSystem,
 		const std::string &sharedFilename,
 		const std::string &vertexFilename,
 		const std::string &fragmentFilename
 	);
 
-	static ShaderProgram FromFile(
+	static OldShaderProgram FromFile(
 		RenderSystem& renderSystem,
 		const std::string &sharedFilename,
 		const std::string &vertexFilename,

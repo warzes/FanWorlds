@@ -127,6 +127,7 @@
     <ClCompile Include="PhysicsSystem.cpp" />
     <ClCompile Include="RenderCore.cpp" />
     <ClCompile Include="Renderer.cpp" />
+    <ClCompile Include="RenderResource.cpp" />
     <ClCompile Include="RenderSystem.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="Shader.cpp" />
@@ -190,6 +191,7 @@
     <ClInclude Include="PhysicsUtilities.h" />
     <ClInclude Include="RenderCore.h" />
     <ClInclude Include="Renderer.h" />
+    <ClInclude Include="RenderResource.h" />
     <ClInclude Include="RenderSystem.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="Shader.h" />

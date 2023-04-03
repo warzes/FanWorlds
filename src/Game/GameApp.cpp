@@ -1,27 +1,6 @@
 #include "stdafx.h"
 #include "GameApp.h"
 
-поискать "информационные системы"
-
-
-змейка в 3д
-вот в таком стиле сбор монет - https://www.youtube.com/watch?v=1mmHx6caqQE&list=PL0FMz3Ykx65REpkuyBz-STnLHru8tWpzA
-терейны и демки с растертека
-
-
-https ://www.youtube.com/watch?v=vwOzi1PgdFo
-https://www.youtube.com/watch?v=8lfsst1Rs-4
-https://www.youtube.com/watch?v=bsntCRBoj3A
-https://www.youtube.com/watch?v=30N6K9IOPMk
-https://www.youtube.com/watch?v=HrW7bwGBfD8
-https://www.youtube.com/watch?v=sbCW0Cs7aI8&t=866s
-
-https://www.youtube.com/watch?v=JV1bro7eK04&list=PLusrwvSv5LhFTbiIrrwV-YAnUCdrIZCDv
-
-https://github.com/KTStephano/StratusGFX
-https://ktstephano.github.io/rendering/stratusgfx/frame_analysis
-https://ktstephano.github.io/rendering/stratusgfx/feature_reel
-
 bool GameApp::Create()
 {
 	Print("GameApp Create");
