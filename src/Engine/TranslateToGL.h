@@ -13,26 +13,26 @@ inline GLenum TranslateToGL(ResourceUsage usage)
 	return 0;
 }
 //-----------------------------------------------------------------------------
-inline GLenum TranslateToGL(PrimitiveDraw p)
+inline GLenum TranslateToGL(PrimitiveTopology p)
 {
 	switch( p )
 	{
-	case PrimitiveDraw::Lines:     return GL_LINES;
-	case PrimitiveDraw::Triangles: return GL_TRIANGLES;
-	case PrimitiveDraw::Points:    return GL_POINTS;
+	case PrimitiveTopology::Lines:     return GL_LINES;
+	case PrimitiveTopology::Triangles: return GL_TRIANGLES;
+	case PrimitiveTopology::Points:    return GL_POINTS;
 	}
 	return 0;
 }
 //-----------------------------------------------------------------------------
-inline GLint TranslateToGL(TextureWrapping wrap)
+inline GLint TranslateToGL(TextureAddressMode wrap)
 {
 	switch( wrap )
 	{
-	case TextureWrapping::Repeat:         return GL_REPEAT;
-	case TextureWrapping::MirroredRepeat: return GL_MIRRORED_REPEAT;
-	case TextureWrapping::ClampToEdge:    return GL_CLAMP_TO_EDGE;
+	case TextureAddressMode::Repeat:         return GL_REPEAT;
+	case TextureAddressMode::MirroredRepeat: return GL_MIRRORED_REPEAT;
+	case TextureAddressMode::ClampToEdge:    return GL_CLAMP_TO_EDGE;
 #if !defined(__EMSCRIPTEN__)
-	case TextureWrapping::ClampToBorder:  return GL_CLAMP_TO_BORDER;
+	case TextureAddressMode::ClampToBorder:  return GL_CLAMP_TO_BORDER;
 #endif
 	}
 	return 0;
@@ -60,6 +60,14 @@ inline constexpr GLint TranslateToGL(TextureMagFilter filter)
 	case TextureMagFilter::Linear:  return GL_LINEAR;
 	}
 	return 0;
+}
+inline constexpr unsigned SizeIndexBuffer(IndexBufferFormat format)
+{
+	switch (format)
+	{
+	case IndexBufferFormat::Uint16: return sizeof(uint16_t);
+	case IndexBufferFormat::Uint32: return sizeof(uint32_t);
+	}
 }
 //-----------------------------------------------------------------------------
 inline bool GetTextureFormatType(TexelsFormat inFormat, GLenum textureType, GLenum& format, GLint& internalFormat, GLenum& oglType)

@@ -4,7 +4,7 @@ enum class ResourceType : uint8_t
 {
 	Unknown,
 	ShaderProgram,
-	VertexBuffer,
+	GPUBuffer,
 	IndexBuffer,
 	VertexArray,
 	Texture2D
@@ -17,7 +17,7 @@ enum class ResourceUsage : uint8_t
 	Stream,
 };
 
-enum class PrimitiveDraw : uint8_t
+enum class PrimitiveTopology : uint8_t
 {
 	Lines,
 	Triangles,
@@ -40,7 +40,7 @@ enum class TextureMagFilter : uint8_t
 	Linear,
 };
 
-enum class TextureWrapping : uint8_t
+enum class TextureAddressMode : uint8_t
 {
 	Repeat,
 	MirroredRepeat,
@@ -95,7 +95,11 @@ enum class StencilOp : uint8_t
 	Keep,
 	Zero,
 	Replace,
-	//...
+	IncrSat,
+	DecrSat,
+	Invert,
+	Incr,
+	Decr
 };
 
 enum class ComparisonFunc : uint8_t
@@ -108,6 +112,12 @@ enum class ComparisonFunc : uint8_t
 	NotEqual = 6,
 	GreaterOrEqual = 7,
 	Always = 8
+};
+
+enum class IndexBufferFormat : uint8_t
+{
+	Uint16,
+	Uint32
 };
 
 struct VertexAttribute
@@ -133,8 +143,8 @@ struct Texture2DInfo
 
 	TextureMinFilter minFilter = TextureMinFilter::NearestMipmapNearest;
 	TextureMagFilter magFilter = TextureMagFilter::Nearest;
-	TextureWrapping wrapS = TextureWrapping::Repeat;
-	TextureWrapping wrapT = TextureWrapping::Repeat;
+	TextureAddressMode wrapS = TextureAddressMode::Repeat;
+	TextureAddressMode wrapT = TextureAddressMode::Repeat;
 
 	bool mipmap = true;
 };
@@ -163,33 +173,53 @@ public:
 	unsigned id = 0; 
 };
 
-class VertexBuffer 
+class GPUBuffer 
 {
 public:
-	VertexBuffer() = delete;
-	VertexBuffer(ResourceUsage _usage, unsigned _count, unsigned _size) : usage(_usage), count(_count), size(_size) { glGenBuffers(1, &id); }
-	VertexBuffer(VertexBuffer&&) = default;
-	VertexBuffer(const VertexBuffer&) = delete;
-	~VertexBuffer() { glDeleteBuffers(1, &id); id = 0; }
-	VertexBuffer& operator=(VertexBuffer&&) = default;
-	VertexBuffer& operator=(const VertexBuffer&) = delete;
+	GPUBuffer() = delete;
+	GPUBuffer(ResourceUsage _usage, unsigned _count, unsigned _size) : usage(_usage), count(_count), size(_size) { glGenBuffers(1, &id); }
+	GPUBuffer(GPUBuffer&&) = default;
+	GPUBuffer(const GPUBuffer&) = delete;
+	~GPUBuffer() { glDeleteBuffers(1, &id); id = 0; }
+	GPUBuffer& operator=(GPUBuffer&&) = default;
+	GPUBuffer& operator=(const GPUBuffer&) = delete;
 
 	unsigned id = 0;
 	ResourceUsage usage = ResourceUsage::Static;
 	unsigned count = 0;
 	unsigned size = 0; 
 };
-using IndexBuffer = VertexBuffer;
+using VertexBuffer = GPUBuffer;
+using IndexBuffer = GPUBuffer;
 
-struct VertexArray { unsigned id = 0; VertexBuffer *vbo = nullptr; IndexBuffer *ibo = nullptr; unsigned attribsCount = 0; };
+class VertexArray 
+{
+public:
+	VertexArray() = delete;
+	VertexArray(std::shared_ptr<VertexBuffer> _vbo, std::shared_ptr<IndexBuffer> _ibo, unsigned _attribsCount) : vbo(_vbo), ibo(_ibo), attribsCount(_attribsCount) { glGenVertexArrays(1, &id); }
+	VertexArray(VertexArray&&) = default;
+	VertexArray(const VertexArray&) = delete;
+	~VertexArray() { glDeleteVertexArrays(1, &id); id = 0; }
+	VertexArray& operator=(VertexArray&&) = default;
+	VertexArray& operator=(const VertexArray&) = delete;
+
+	unsigned id = 0;
+	std::shared_ptr<VertexBuffer> vbo = nullptr;
+	std::shared_ptr<IndexBuffer> ibo = nullptr;
+	unsigned attribsCount = 0;
+};
+
+
+
 struct Texture2D { unsigned id = 0; unsigned width = 0; unsigned height = 0; TexelsFormat format = TexelsFormat::RGBA_U8; };
 
 struct BlendState { /*...*/ };
-struct RasterState { /*...*/ };
+struct DepthStencilState { /*...*/ };
+struct RasterizerState { /*...*/ };
 
 bool operator==(const ShaderProgram& Left, const ShaderProgram& Right) noexcept;
 bool operator==(const Uniform& Left, const Uniform& Right) noexcept;
-bool operator==(const VertexBuffer& Left, const VertexBuffer& Right) noexcept;
+bool operator==(const GPUBuffer& Left, const GPUBuffer& Right) noexcept;
 bool operator==(const IndexBuffer& Left, const IndexBuffer& Right) noexcept;
 bool operator==(const VertexArray& Left, const VertexArray& Right) noexcept;
 bool operator==(const Texture2D& Left, const Texture2D& Right) noexcept;
