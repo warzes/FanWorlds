@@ -16,4 +16,4 @@ struct VertexBase
 	}
 };
 
-using MeshBase = Mesh<VertexBase>;
+using MeshBase = Mesh2<VertexBase>;
