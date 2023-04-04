@@ -94,6 +94,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="BaseClass.cpp" />
+    <ClCompile Include="Camera.cpp" />
     <ClCompile Include="EngineDevice.cpp" />
     <ClCompile Include="EngineTimestamp.cpp" />
     <ClCompile Include="FileSystem.cpp" />
@@ -111,11 +112,13 @@
     </ClCompile>
     <ClCompile Include="StringUtils.cpp" />
     <ClCompile Include="Window.cpp" />
+    <ClCompile Include="WorldManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BaseClass.h" />
     <ClInclude Include="BaseFunc.h" />
     <ClInclude Include="BaseMacros.h" />
+    <ClInclude Include="Camera.h" />
     <ClInclude Include="EngineConfiguration.h" />
     <ClInclude Include="EngineDevice.h" />
     <ClInclude Include="EngineTimestamp.h" />
@@ -135,6 +138,7 @@
     <ClInclude Include="Transform.h" />
     <ClInclude Include="TranslateToGL.h" />
     <ClInclude Include="Window.h" />
+    <ClInclude Include="WorldManager.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

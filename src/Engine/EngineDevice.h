@@ -6,6 +6,7 @@
 #include "Window.h"
 #include "Input.h"
 #include "RenderSystem.h"
+#include "WorldManager.h"
 #include "PhysicsSystem.h"
 #include "IApp.h"
 
@@ -46,6 +47,7 @@ private:
 	Window m_window;
 	Input m_input;
 	RenderSystem m_renderSystem;
+	WorldManager m_worldManager;
 	PhysicsSystem m_physicsSystem;
 
 	EngineTimestamp m_timestamp;

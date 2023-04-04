@@ -5,6 +5,7 @@ class FileSystem;
 class Window;
 class Input;
 class RenderSystem;
+class WorldManager;
 class PhysicsSystem;
 
 class BaseClass
@@ -22,6 +23,8 @@ public:
 	const Input& GetInput() const;
 	RenderSystem& GetRenderSystem();
 	const RenderSystem& GetRenderSystem() const;
+	WorldManager& GetWorldManager();
+	const WorldManager& GetWorldManager() const;
 	PhysicsSystem& GetPhysicsSystem();
 	const PhysicsSystem& GetPhysicsSystem() const;
 

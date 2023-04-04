@@ -130,7 +130,7 @@ inline bool GetTextureFormatType(TexelsFormat inFormat, GLenum textureType, GLen
 	}
 	else
 	{
-		LogError("unknown texture format");
+		//Error("unknown texture format");
 		return false;
 	}
 	return true;

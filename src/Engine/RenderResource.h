@@ -4,7 +4,7 @@ enum class ResourceType : uint8_t
 {
 	Unknown,
 	ShaderProgram,
-	GPUBuffer,
+	VertexBuffer,
 	IndexBuffer,
 	VertexArray,
 	Texture2D
@@ -166,31 +166,48 @@ public:
 	ShaderProgram() { id = glCreateProgram(); }
 	ShaderProgram(ShaderProgram&&) = default;
 	ShaderProgram(const ShaderProgram&) = delete;
-	~ShaderProgram() { glDeleteProgram(id); id = 0; }
+	~ShaderProgram() { glDeleteProgram(id); }
 	ShaderProgram& operator=(ShaderProgram&&) = default;
 	ShaderProgram& operator=(const ShaderProgram&) = delete;
 
 	unsigned id = 0; 
 };
 
-class GPUBuffer 
+// GPUBuffer
+
+class VertexBuffer
 {
 public:
-	GPUBuffer() = delete;
-	GPUBuffer(ResourceUsage _usage, unsigned _count, unsigned _size) : usage(_usage), count(_count), size(_size) { glGenBuffers(1, &id); }
-	GPUBuffer(GPUBuffer&&) = default;
-	GPUBuffer(const GPUBuffer&) = delete;
-	~GPUBuffer() { glDeleteBuffers(1, &id); id = 0; }
-	GPUBuffer& operator=(GPUBuffer&&) = default;
-	GPUBuffer& operator=(const GPUBuffer&) = delete;
+	VertexBuffer() = delete;
+	VertexBuffer(ResourceUsage _usage, unsigned _count, unsigned _size) : usage(_usage), count(_count), size(_size) { glGenBuffers(1, &id); }
+	VertexBuffer(VertexBuffer&&) = default;
+	VertexBuffer(const VertexBuffer&) = delete;
+	~VertexBuffer() { glDeleteBuffers(1, &id); }
+	VertexBuffer& operator=(VertexBuffer&&) = default;
+	VertexBuffer& operator=(const VertexBuffer&) = delete;
 
 	unsigned id = 0;
 	ResourceUsage usage = ResourceUsage::Static;
 	unsigned count = 0;
 	unsigned size = 0; 
 };
-using VertexBuffer = GPUBuffer;
-using IndexBuffer = GPUBuffer;
+
+class IndexBuffer
+{
+public:
+	IndexBuffer() = delete;
+	IndexBuffer(ResourceUsage _usage, unsigned _count, unsigned _size) : usage(_usage), count(_count), size(_size) { glGenBuffers(1, &id); }
+	IndexBuffer(IndexBuffer&&) = default;
+	IndexBuffer(const IndexBuffer&) = delete;
+	~IndexBuffer() { glDeleteBuffers(1, &id); }
+	IndexBuffer& operator=(IndexBuffer&&) = default;
+	IndexBuffer& operator=(const IndexBuffer&) = delete;
+
+	unsigned id = 0;
+	ResourceUsage usage = ResourceUsage::Static;
+	unsigned count = 0;
+	unsigned size = 0;
+};
 
 class VertexArray 
 {
@@ -199,7 +216,7 @@ public:
 	VertexArray(std::shared_ptr<VertexBuffer> _vbo, std::shared_ptr<IndexBuffer> _ibo, unsigned _attribsCount) : vbo(_vbo), ibo(_ibo), attribsCount(_attribsCount) { glGenVertexArrays(1, &id); }
 	VertexArray(VertexArray&&) = default;
 	VertexArray(const VertexArray&) = delete;
-	~VertexArray() { glDeleteVertexArrays(1, &id); id = 0; }
+	~VertexArray() { glDeleteVertexArrays(1, &id); }
 	VertexArray& operator=(VertexArray&&) = default;
 	VertexArray& operator=(const VertexArray&) = delete;
 
@@ -209,9 +226,22 @@ public:
 	unsigned attribsCount = 0;
 };
 
+class Texture2D 
+{
+public:
+	Texture2D() = delete;
+	Texture2D(unsigned _width, unsigned _height, TexelsFormat _format) : width(_width), height(_height), format(_format) { glGenTextures(1, &id); }
+	Texture2D(Texture2D&&) = default;
+	Texture2D(const Texture2D&) = delete;
+	~Texture2D() { glDeleteTextures(1, &id); }
+	Texture2D& operator=(Texture2D&&) = default;
+	Texture2D& operator=(const Texture2D&) = delete;
 
-
-struct Texture2D { unsigned id = 0; unsigned width = 0; unsigned height = 0; TexelsFormat format = TexelsFormat::RGBA_U8; };
+	unsigned id = 0;
+	unsigned width = 0;
+	unsigned height = 0;
+	TexelsFormat format = TexelsFormat::RGBA_U8; 
+};
 
 struct BlendState { /*...*/ };
 struct DepthStencilState { /*...*/ };
@@ -219,7 +249,7 @@ struct RasterizerState { /*...*/ };
 
 bool operator==(const ShaderProgram& Left, const ShaderProgram& Right) noexcept;
 bool operator==(const Uniform& Left, const Uniform& Right) noexcept;
-bool operator==(const GPUBuffer& Left, const GPUBuffer& Right) noexcept;
+bool operator==(const VertexBuffer& Left, const VertexBuffer& Right) noexcept;
 bool operator==(const IndexBuffer& Left, const IndexBuffer& Right) noexcept;
 bool operator==(const VertexArray& Left, const VertexArray& Right) noexcept;
 bool operator==(const Texture2D& Left, const Texture2D& Right) noexcept;

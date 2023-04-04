@@ -44,6 +44,12 @@
     <ClCompile Include="RenderResource.cpp">
       <Filter>RenderAPI</Filter>
     </ClCompile>
+    <ClCompile Include="Camera.cpp">
+      <Filter>World</Filter>
+    </ClCompile>
+    <ClCompile Include="WorldManager.cpp">
+      <Filter>World</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h" />
@@ -108,6 +114,12 @@
     <ClInclude Include="TranslateToGL.h">
       <Filter>RenderAPI</Filter>
     </ClInclude>
+    <ClInclude Include="Camera.h">
+      <Filter>World</Filter>
+    </ClInclude>
+    <ClInclude Include="WorldManager.h">
+      <Filter>World</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Core">
@@ -148,6 +160,9 @@
     </Filter>
     <Filter Include="Platform">
       <UniqueIdentifier>{c8d3700f-6525-41b4-81f3-2062323e5652}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="World">
+      <UniqueIdentifier>{3a6f6144-7aa6-4144-9d81-6c05e5dca237}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
