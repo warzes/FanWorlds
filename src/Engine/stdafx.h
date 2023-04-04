@@ -37,6 +37,8 @@
 
 #include <stb/stb_image.h>
 
+#include <tiny_obj_loader.h>
+
 /*
 Left handed
 	Y   Z
@@ -44,7 +46,7 @@ Left handed
 	| /
 	|/___X
 */
-//#define GLM_FORCE_LEFT_HANDED
+#define GLM_FORCE_LEFT_HANDED
 #define GLM_FORCE_INLINE
 #define GLM_ENABLE_EXPERIMENTAL
 #define GLM_FORCE_XYZW_ONLY
@@ -52,7 +54,7 @@ Left handed
 #include <glm/glm.hpp>
 //#include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
-//#include <glm/gtx/hash.hpp>
+#include <glm/gtx/hash.hpp>
 //#include <glm/gtx/quaternion.hpp>
 //#include <glm/gtx/transform.hpp>
 //#include <glm/gtx/matrix_decompose.hpp>

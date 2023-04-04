@@ -98,6 +98,8 @@
     <ClCompile Include="EngineDevice.cpp" />
     <ClCompile Include="EngineTimestamp.cpp" />
     <ClCompile Include="FileSystem.cpp" />
+    <ClCompile Include="GraphicsResource.cpp" />
+    <ClCompile Include="GraphicsSystem.cpp" />
     <ClCompile Include="Input.cpp" />
     <ClCompile Include="LogSystem.cpp" />
     <ClCompile Include="PhysicsErrorCallback.cpp" />
@@ -123,6 +125,8 @@
     <ClInclude Include="EngineDevice.h" />
     <ClInclude Include="EngineTimestamp.h" />
     <ClInclude Include="FileSystem.h" />
+    <ClInclude Include="GraphicsResource.h" />
+    <ClInclude Include="GraphicsSystem.h" />
     <ClInclude Include="IApp.h" />
     <ClInclude Include="Input.h" />
     <ClInclude Include="LogSystem.h" />

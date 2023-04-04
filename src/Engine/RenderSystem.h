@@ -27,15 +27,29 @@ public:
 	std::shared_ptr<IndexBuffer> CreateIndexBuffer(ResourceUsage usage, unsigned indexCount, IndexBufferFormat indexFormat, const void* data);
 	std::shared_ptr<VertexArray> CreateVertexArray(std::shared_ptr<VertexBuffer> vbo, std::shared_ptr<IndexBuffer> ibo, const std::vector<VertexAttribute>& attribs);
 	std::shared_ptr<VertexArray> CreateVertexArray(std::shared_ptr<VertexBuffer> vbo, std::shared_ptr<IndexBuffer> ibo, std::shared_ptr<ShaderProgram> shaders);
+
+	std::shared_ptr<GeometryBuffer> CreateGeometryBuffer(ResourceUsage usage,
+		/*vertex*/unsigned vertexCount, unsigned vertexSize, const void* vertexData,
+		/*index*/unsigned indexCount, IndexBufferFormat indexFormat, const void* indexData,
+		std::shared_ptr<ShaderProgram> shaders);
+	std::shared_ptr<GeometryBuffer> CreateGeometryBuffer(ResourceUsage usage,
+		/*vertex*/unsigned vertexCount, unsigned vertexSize, const void* vertexData,
+		/*index*/unsigned indexCount, IndexBufferFormat indexFormat, const void* indexData,
+		const std::vector<VertexAttribute>& attribs);
+	std::shared_ptr<GeometryBuffer> CreateGeometryBuffer(ResourceUsage usage, unsigned vertexCount, unsigned vertexSize, const void* vertexData, std::shared_ptr<ShaderProgram> shaders);
+	std::shared_ptr<GeometryBuffer> CreateGeometryBuffer(ResourceUsage usage, unsigned vertexCount, unsigned vertexSize, const void* vertexData, const std::vector<VertexAttribute>& attribs);
+
 	std::shared_ptr<Texture2D> CreateTexture2D(const char* fileName, bool useCache = true, const Texture2DInfo& textureInfo = {});
 	std::shared_ptr<Texture2D> CreateTexture2D(const Texture2DCreateInfo& createInfo, const Texture2DInfo& textureInfo = {});
 
-	inline bool IsValid(std::shared_ptr<ShaderProgram> resource) const { return resource->id > 0; }
+	inline bool IsValid(std::shared_ptr<ShaderProgram> resource) const { return resource && resource->id > 0; }
 	inline bool IsValid(const Uniform& uniform) const { return uniform.location >= 0; }
-	inline bool IsValid(std::shared_ptr<VertexBuffer> resource) const { return resource->id > 0; }
-	inline bool IsValid(std::shared_ptr<IndexBuffer> resource) const { return resource->id > 0; }
-	inline bool IsValid(std::shared_ptr<VertexArray> resource) const { return resource->id > 0; }
-	inline bool IsValid(std::shared_ptr<Texture2D> resource) const { return resource->id > 0; }
+	inline bool IsValid(std::shared_ptr<VertexBuffer> resource) const { return resource && resource->id > 0; }
+	inline bool IsValid(std::shared_ptr<IndexBuffer> resource) const { return resource && resource->id > 0; }
+	inline bool IsValid(std::shared_ptr<VertexArray> resource) const { return resource && resource->id > 0; }
+	inline bool IsValid(std::shared_ptr<Texture2D> resource) const { return resource && resource->id > 0; }
+	inline bool IsValid(std::shared_ptr<GeometryBuffer> resource) const { return IsValid(resource->vao); }
+
 	bool IsReadyUniform(const Uniform& uniform);
 
 	std::vector<ShaderAttribInfo> GetAttribInfo(std::shared_ptr<ShaderProgram> resource);

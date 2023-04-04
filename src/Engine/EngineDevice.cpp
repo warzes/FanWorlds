@@ -66,9 +66,15 @@ void EngineDevice::init(const EngineDeviceCreateInfo& createInfo)
 	m_renderSystem.m_engineDevice = this;
 	m_renderSystem.Init(createInfo.render);
 
+	m_graphicsSystem.m_engineDevice = this;
+	m_graphicsSystem.Init();
+
 	m_physicsSystem.m_engineDevice = this;
 	if( !m_physicsSystem.Create() )
 		return;
+
+	m_worldManager.m_engineDevice = this;
+	m_worldManager.Init();
 
 	m_isExitRequested = false;
 }
@@ -77,7 +83,9 @@ void EngineDevice::close()
 {
 	m_logSystem.LogPrint("EngineDevice Destroy");
 	
+	m_worldManager.Close();
 	m_physicsSystem.Destroy();
+	m_graphicsSystem.Close();
 	m_renderSystem.Close();
 	m_window.Destroy();
 	m_fileSystem.Close();

@@ -85,6 +85,18 @@ const RenderSystem& BaseClass::GetRenderSystem() const
 	return m_engineDevice->m_renderSystem;
 }
 //-----------------------------------------------------------------------------
+GraphicsSystem& BaseClass::GetGraphicsSystem()
+{
+	assert(m_engineDevice);
+	return m_engineDevice->m_graphicsSystem;
+}
+//-----------------------------------------------------------------------------
+const GraphicsSystem& BaseClass::GetGraphicsSystem() const
+{
+	assert(m_engineDevice);
+	return m_engineDevice->m_graphicsSystem;
+}
+//-----------------------------------------------------------------------------
 WorldManager& BaseClass::GetWorldManager()
 {
 	assert(m_engineDevice);

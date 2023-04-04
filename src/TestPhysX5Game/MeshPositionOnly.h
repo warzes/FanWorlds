@@ -12,4 +12,4 @@ struct VertexPositionOnly
 	}
 };
 
-using MeshPositionOnly = Mesh<VertexPositionOnly>;
+using MeshPositionOnly = Mesh2<VertexPositionOnly>;

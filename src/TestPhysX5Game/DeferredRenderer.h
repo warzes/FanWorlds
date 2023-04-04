@@ -68,7 +68,7 @@ public:
 
 	void DebugDrawLine(const glm::vec3 &p0, const glm::vec3 &p1, const glm::vec3 &color) override;
 
-	void DrawMesh(const MeshBase &mesh, const glm::mat4 &model, const Material *material) override;
+	void DrawMesh(const MeshBase &mesh, const glm::mat4 &model, const Material2 *material) override;
 
 private:
 	void UpdateUniformBuffers();
@@ -99,7 +99,7 @@ private:
 
 	Texture* m_defaultDiffuseTexture = nullptr;
 	Texture* m_defaultEmissiveTexture = nullptr;
-	Material m_defaultMaterial{
+	Material2 m_defaultMaterial{
 		m_defaultDiffuseTexture,
 		m_defaultEmissiveTexture
 	};
@@ -113,7 +113,7 @@ private:
 	{
 		const MeshBase &Mesh;
 		glm::mat4 Model{ 1.0f };
-		Material material;
+		Material2 material;
 	};
 
 	std::vector<DrawCallBase> m_pendingBaseDrawCalls;

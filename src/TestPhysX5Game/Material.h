@@ -2,7 +2,7 @@
 
 #include "Texture.h"
 
-struct Material
+struct Material2
 {
 	Texture *Diffuse = nullptr;
 	Texture *Emissive = nullptr;

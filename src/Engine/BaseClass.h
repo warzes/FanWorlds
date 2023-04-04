@@ -5,6 +5,7 @@ class FileSystem;
 class Window;
 class Input;
 class RenderSystem;
+class GraphicsSystem;
 class WorldManager;
 class PhysicsSystem;
 
@@ -23,11 +24,12 @@ public:
 	const Input& GetInput() const;
 	RenderSystem& GetRenderSystem();
 	const RenderSystem& GetRenderSystem() const;
+	GraphicsSystem& GetGraphicsSystem();
+	const GraphicsSystem& GetGraphicsSystem() const;
 	WorldManager& GetWorldManager();
 	const WorldManager& GetWorldManager() const;
 	PhysicsSystem& GetPhysicsSystem();
 	const PhysicsSystem& GetPhysicsSystem() const;
-
 
 	void Print(const std::string& msg);
 	void Warning(const std::string& msg);

@@ -5,7 +5,7 @@
 #include "MeshPositionOnly.h"
 #include "MeshBase.h"
 
-struct Material;
+struct Material2;
 class RenderSystem;
 
 // point light attenuation from https://wiki.ogre3d.org/-Point+Light+Attenuation
@@ -70,7 +70,7 @@ public:
 
 	void DebugDrawMarker(const glm::vec3 &position, float size);
 
-	virtual void DrawMesh(const MeshBase &mesh, const glm::mat4 &model, const Material *material) = 0;
+	virtual void DrawMesh(const MeshBase &mesh, const glm::mat4 &model, const Material2 *material) = 0;
 
 protected:
 	RenderSystem& m_renderSystem;

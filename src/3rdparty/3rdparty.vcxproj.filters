@@ -79,6 +79,9 @@
     <ClCompile Include="physfs\physfs_unicode.c">
       <Filter>physfs</Filter>
     </ClCompile>
+    <ClCompile Include="tiny_obj_loader.cpp">
+      <Filter>tiny_obj_loader</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="glfw">
@@ -110,6 +113,9 @@
     </Filter>
     <Filter Include="physfs">
       <UniqueIdentifier>{ec769492-d51b-41dc-8b10-f1c14c066572}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="tiny_obj_loader">
+      <UniqueIdentifier>{12db1d1d-7c89-4f98-a41b-c60500c956d0}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -1003,6 +1009,9 @@
     </ClInclude>
     <ClInclude Include="physfs\physfs_platforms.h">
       <Filter>physfs</Filter>
+    </ClInclude>
+    <ClInclude Include="tiny_obj_loader.h">
+      <Filter>tiny_obj_loader</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

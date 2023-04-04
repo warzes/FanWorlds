@@ -11,6 +11,6 @@ FacesAndTexture::FacesAndTexture(SystemRef& systemRef, const std::vector<VertexB
 
 void FacesAndTexture::Draw(Renderer &renderer, const glm::mat4 &modelMatrix)
 {
-	Material material{ m_texture };
+	Material2 material{ m_texture };
 	renderer.DrawMesh(m_mesh, modelMatrix, &material);
 }

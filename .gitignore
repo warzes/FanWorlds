@@ -14,3 +14,7 @@ Thumbs.db
 /bin/Release/ExampleTest.*
 /bin/Debug/Game.*
 /bin/Release/Game.*
+/bin/Debug/SectorMapEditor.*
+/bin/Release/SectorMapEditor.*
+/bin/Debug/TestPhysX5Game.*
+/bin/Release/TestPhysX5Game.*

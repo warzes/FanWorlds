@@ -158,7 +158,7 @@ void DeferredRenderer::DebugDrawLine(const glm::vec3 &p0, const glm::vec3 &p1, c
 	m_pendingDebugLines.push_back({ p1, color });
 }
 //-----------------------------------------------------------------------------
-void DeferredRenderer::DrawMesh(const MeshBase &mesh, const glm::mat4 &model, const Material *material)
+void DeferredRenderer::DrawMesh(const MeshBase &mesh, const glm::mat4 &model, const Material2 *material)
 {
 	m_pendingBaseDrawCalls.push_back({ mesh, model, material ? *material : m_defaultMaterial });
 }

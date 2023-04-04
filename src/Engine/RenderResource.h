@@ -173,6 +173,8 @@ public:
 	unsigned id = 0; 
 };
 
+using ShaderProgramRef = std::shared_ptr<ShaderProgram>;
+
 // GPUBuffer
 
 class VertexBuffer
@@ -192,6 +194,8 @@ public:
 	unsigned size = 0; 
 };
 
+using VertexBufferRef = std::shared_ptr<VertexBuffer>;
+
 class IndexBuffer
 {
 public:
@@ -208,6 +212,8 @@ public:
 	unsigned count = 0;
 	unsigned size = 0;
 };
+
+using IndexBufferRef = std::shared_ptr<IndexBuffer>;
 
 class VertexArray 
 {
@@ -226,6 +232,24 @@ public:
 	unsigned attribsCount = 0;
 };
 
+using VertexArrayRef = std::shared_ptr<VertexArray>;
+
+class GeometryBuffer
+{
+public:
+	GeometryBuffer() = default;
+	GeometryBuffer(GeometryBuffer&&) = default;
+	GeometryBuffer(const GeometryBuffer&) = delete;
+	GeometryBuffer& operator=(GeometryBuffer&&) = default;
+	GeometryBuffer& operator=(const GeometryBuffer&) = delete;
+
+	std::shared_ptr<VertexBuffer> vb = nullptr;
+	std::shared_ptr<IndexBuffer> ib = nullptr;
+	std::shared_ptr<VertexArray> vao = nullptr;
+};
+
+using GeometryBufferRef = std::shared_ptr<GeometryBuffer>;
+
 class Texture2D 
 {
 public:
@@ -243,13 +267,15 @@ public:
 	TexelsFormat format = TexelsFormat::RGBA_U8; 
 };
 
+using Texture2DRef = std::shared_ptr<Texture2D>;
+
 struct BlendState { /*...*/ };
 struct DepthStencilState { /*...*/ };
 struct RasterizerState { /*...*/ };
 
-bool operator==(const ShaderProgram& Left, const ShaderProgram& Right) noexcept;
+bool operator==(ShaderProgramRef Left, ShaderProgramRef Right) noexcept;
 bool operator==(const Uniform& Left, const Uniform& Right) noexcept;
-bool operator==(const VertexBuffer& Left, const VertexBuffer& Right) noexcept;
-bool operator==(const IndexBuffer& Left, const IndexBuffer& Right) noexcept;
-bool operator==(const VertexArray& Left, const VertexArray& Right) noexcept;
-bool operator==(const Texture2D& Left, const Texture2D& Right) noexcept;
+bool operator==(VertexBufferRef Left, VertexBufferRef Right) noexcept;
+bool operator==(IndexBufferRef Left, IndexBufferRef Right) noexcept;
+bool operator==(VertexArrayRef Left, VertexArrayRef Right) noexcept;
+bool operator==(Texture2DRef Left, Texture2DRef Right) noexcept;

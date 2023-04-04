@@ -115,6 +115,7 @@
     <ClCompile Include="physfs\physfs_platform_winrt.cpp" />
     <ClCompile Include="physfs\physfs_unicode.c" />
     <ClCompile Include="stb.cpp" />
+    <ClCompile Include="tiny_obj_loader.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="glad\gl.h" />
@@ -414,6 +415,7 @@
     <ClInclude Include="physfs\physfs_miniz.h" />
     <ClInclude Include="physfs\physfs_platforms.h" />
     <ClInclude Include="stb\stb_image.h" />
+    <ClInclude Include="tiny_obj_loader.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="glm\detail\func_common.inl" />

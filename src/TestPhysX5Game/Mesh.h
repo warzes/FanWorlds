@@ -3,15 +3,15 @@
 #include "MoveOnly.h"
 
 template<typename V>
-class Mesh
+class Mesh2
 {
 public:
-	MOVE_ONLY(Mesh)
+	MOVE_ONLY(Mesh2)
 
-	Mesh() = default;
+		Mesh2() = default;
 
 	// static
-	Mesh(const size_t count, const V *data, const GLenum mode)
+	Mesh2(const size_t count, const V *data, const GLenum mode)
 	{
 		m_count = static_cast<GLsizei>(count);
 		m_mode = mode;
@@ -26,7 +26,7 @@ public:
 	}
 
 	// dynamic recreate
-	explicit Mesh(const GLenum mode)
+	explicit Mesh2(const GLenum mode)
 	{
 		m_mode = mode;
 
@@ -39,17 +39,17 @@ public:
 	}
 
 	template<size_t Size>
-	Mesh(const V(&data)[Size], const GLenum mode)
-		: Mesh(Size, data, mode)
+	Mesh2(const V(&data)[Size], const GLenum mode)
+		: Mesh2(Size, data, mode)
 	{
 	}
 
-	Mesh(const std::vector<V> &vertices, const GLenum mode)
-		: Mesh(vertices.size(), vertices.data(), mode)
+	Mesh2(const std::vector<V> &vertices, const GLenum mode)
+		: Mesh2(vertices.size(), vertices.data(), mode)
 	{
 	}
 
-	~Mesh()
+	~Mesh2()
 	{
 		if( m_vbo )
 			glDeleteBuffers(1, &m_vbo);

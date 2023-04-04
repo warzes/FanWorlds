@@ -14,4 +14,4 @@ struct VertexPositionColor
 	}
 };
 
-using MeshPositionColor = Mesh<VertexPositionColor>;
+using MeshPositionColor = Mesh2<VertexPositionColor>;

@@ -12,9 +12,9 @@ static_assert(sizeof(IndexBuffer) == 16, "IndexBuffer changed!!!");
 static_assert(sizeof(VertexArray) == 48, "VertexArray changed!!!");
 static_assert(sizeof(Texture2D) == 16, "Texture2D changed!!!");
 //-----------------------------------------------------------------------------
-bool operator==(const ShaderProgram& Left, const ShaderProgram& Right) noexcept
+bool operator==(ShaderProgramRef Left, ShaderProgramRef Right) noexcept
 {
-	return Left.id == Right.id;
+	return Left->id == Right->id;
 }
 //-----------------------------------------------------------------------------
 bool operator==(const Uniform& Left, const Uniform& Right) noexcept
@@ -22,24 +22,24 @@ bool operator==(const Uniform& Left, const Uniform& Right) noexcept
 	return Left.location == Right.location && Left.programId == Right.programId;
 }
 //-----------------------------------------------------------------------------
-bool operator==(const VertexBuffer& Left, const VertexBuffer& Right) noexcept
+bool operator==(VertexBufferRef Left, VertexBufferRef Right) noexcept
 {
-	return Left.count == Right.count && Left.id == Right.id && Left.size == Right.size && Left.usage == Right.usage;
+	return Left->count == Right->count && Left->id == Right->id && Left->size == Right->size && Left->usage == Right->usage;
 }
 //-----------------------------------------------------------------------------
-bool operator==(const IndexBuffer& Left, const IndexBuffer& Right) noexcept
+bool operator==(IndexBufferRef Left, IndexBufferRef Right) noexcept
 {
-	return Left.count == Right.count && Left.id == Right.id && Left.size == Right.size && Left.usage == Right.usage;
+	return Left->count == Right->count && Left->id == Right->id && Left->size == Right->size && Left->usage == Right->usage;
 }
 //-----------------------------------------------------------------------------
-bool operator==(const VertexArray& Left, const VertexArray& Right) noexcept
+bool operator==(VertexArrayRef Left, VertexArrayRef Right) noexcept
 {
-	return Left.attribsCount == Right.attribsCount && Left.ibo == Right.ibo && Left.id == Right.id && Left.vbo == Right.vbo;
+	return Left->attribsCount == Right->attribsCount && Left->ibo == Right->ibo && Left->id == Right->id && Left->vbo == Right->vbo;
 }
 //-----------------------------------------------------------------------------
-bool operator==(const Texture2D& Left, const Texture2D& Right) noexcept
+bool operator==(Texture2DRef Left, Texture2DRef Right) noexcept
 {
-	return Left.format == Right.format && Left.height == Right.height && Left.id == Right.id && Left.width == Right.width;
+	return Left->format == Right->format && Left->height == Right->height && Left->id == Right->id && Left->width == Right->width;
 }
 //-----------------------------------------------------------------------------
 std::shared_ptr<ShaderProgram> RenderSystem::CreateShaderProgram(const std::string& vertexShaderMemory, const std::string& fragmentShaderMemory)
@@ -121,14 +121,12 @@ std::shared_ptr<VertexArray> RenderSystem::CreateVertexArray(std::shared_ptr<Ver
 	}
 
 	glBindVertexArray(resource->id);
-
 	Bind(resource->vbo);
 	for (size_t i = 0; i < attribs.size(); i++)
 	{
 		Bind(attribs[i]);
 	}
-
-	if (resource->ibo) Bind(resource->ibo);
+	Bind(resource->ibo);
 
 	glBindVertexArray(m_cache.CurrentVAO); // restore VAO
 	glBindVertexArray(m_cache.CurrentVBO); // restore VBO
@@ -189,6 +187,80 @@ std::shared_ptr<VertexArray> RenderSystem::CreateVertexArray(std::shared_ptr<Ver
 	}
 
 	return CreateVertexArray(vbo, ibo, attribs);
+}
+//-----------------------------------------------------------------------------
+std::shared_ptr<GeometryBuffer> RenderSystem::CreateGeometryBuffer(ResourceUsage usage, unsigned vertexCount, unsigned vertexSize, const void* vertexData, unsigned indexCount, IndexBufferFormat indexFormat, const void* indexData, std::shared_ptr<ShaderProgram> shaders)
+{
+	assert(IsValid(shaders));
+
+	std::shared_ptr<GeometryBuffer> geom(new GeometryBuffer());
+
+	geom->vb = CreateVertexBuffer(usage, vertexCount, vertexSize, vertexData);
+	if (!IsValid(geom->vb))
+	{
+		Error("GeometryBuffer::VertexBuffer create failed!!");
+		return {};
+	}
+
+	const bool isIndexBuffer = indexCount > 0;
+	if (isIndexBuffer)
+	{
+		geom->ib = CreateIndexBuffer(usage, indexCount, indexFormat, indexData);
+		if (!IsValid(geom->ib))
+		{
+			Error("GeometryBuffer::IndexBuffer create failed!!");
+			return {};
+		}
+	}
+
+	geom->vao = CreateVertexArray(geom->vb, geom->ib, shaders);
+	if (!IsValid(geom->vao))
+	{
+		Error("GeometryBuffer::VertexArray create failed!!");
+		return {};
+	}
+	return geom;
+}
+//-----------------------------------------------------------------------------
+std::shared_ptr<GeometryBuffer> RenderSystem::CreateGeometryBuffer(ResourceUsage usage, unsigned vertexCount, unsigned vertexSize, const void* vertexData, unsigned indexCount, IndexBufferFormat indexFormat, const void* indexData, const std::vector<VertexAttribute>& attribs)
+{
+	std::shared_ptr<GeometryBuffer> geom(new GeometryBuffer());
+
+	geom->vb = CreateVertexBuffer(usage, vertexCount, vertexSize, vertexData);
+	if (!IsValid(geom->vb))
+	{
+		Error("GeometryBuffer::VertexBuffer create failed!!");
+		return {};
+	}
+
+	const bool isIndexBuffer = indexCount > 0;
+	if (isIndexBuffer)
+	{
+		geom->ib = CreateIndexBuffer(usage, indexCount, indexFormat, indexData);
+		if (!IsValid(geom->ib))
+		{
+			Error("GeometryBuffer::IndexBuffer create failed!!");
+			return {};
+		}
+	}
+
+	geom->vao = CreateVertexArray(geom->vb, geom->ib, attribs);
+	if (!IsValid(geom->vao))
+	{
+		Error("GeometryBuffer::VertexArray create failed!!");
+		return {};
+	}
+	return geom;
+}
+//-----------------------------------------------------------------------------
+std::shared_ptr<GeometryBuffer> RenderSystem::CreateGeometryBuffer(ResourceUsage usage, unsigned vertexCount, unsigned vertexSize, const void* vertexData, std::shared_ptr<ShaderProgram> shaders)
+{
+	return CreateGeometryBuffer(usage, vertexCount, vertexSize, vertexData, 0, {}, nullptr, shaders);
+}
+//-----------------------------------------------------------------------------
+std::shared_ptr<GeometryBuffer> RenderSystem::CreateGeometryBuffer(ResourceUsage usage, unsigned vertexCount, unsigned vertexSize, const void* vertexData, const std::vector<VertexAttribute>& attribs)
+{
+	return CreateGeometryBuffer(usage, vertexCount, vertexSize, vertexData, 0, {}, nullptr, attribs);
 }
 //-----------------------------------------------------------------------------
 std::shared_ptr<Texture2D> RenderSystem::CreateTexture2D(const char* fileName, bool useCache, const Texture2DInfo& textureInfo)
@@ -482,6 +554,7 @@ void RenderSystem::Bind(const VertexAttribute& attribute)
 //-----------------------------------------------------------------------------
 void RenderSystem::Bind(std::shared_ptr<Texture2D> resource, unsigned slot)
 {
+	if (!resource) return;
 	assert(IsValid(resource));
 	if( m_cache.CurrentTexture2D[slot] == resource->id ) return;
 	m_cache.CurrentTexture2D[slot] = resource->id;
@@ -495,6 +568,8 @@ void RenderSystem::Draw(std::shared_ptr<VertexArray> vao, PrimitiveTopology prim
 	if( m_cache.CurrentVAO != vao->id )
 	{
 		m_cache.CurrentVAO = vao->id;
+		m_cache.CurrentVBO = 0;
+		m_cache.CurrentIBO = 0;
 		glBindVertexArray(vao->id);
 		Bind(vao->vbo);
 		Bind(vao->ibo);
