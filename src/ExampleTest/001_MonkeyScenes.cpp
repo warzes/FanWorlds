@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "001_MonkeyScenes.h"
-//#define __VSM__
+#define __VSM__
+const GLuint SHADOWMAP_SIZE = 1024;
 //-----------------------------------------------------------------------------
 bool _001MonkeyScenes::Create()
 {
@@ -164,7 +165,7 @@ uniform sampler2D shadowMap;
 
 uniform vec3 viewPosition;
 
-/*
+
 float chebyshevUpperBound(vec4 fragPosLightSpace)
 {
     float p = 0.0;
@@ -189,7 +190,7 @@ float chebyshevUpperBound(vec4 fragPosLightSpace)
 
     return max(p, pMax);
 }
-*/
+
 void main()
 {          
     vec3 color = vec3(texture(diffuseTexture, fragmentInput.uv));
@@ -209,8 +210,8 @@ void main()
     float spec = pow(max(dot(viewDir, reflectDir), 0.0), 16.0);
     vec3 specular = light.specular * spec * vec3(1.0);
 
-    //float visibility = chebyshevUpperBound(fragmentInput.positionLightSpace);
-    float visibility = 1.0;
+    float visibility = chebyshevUpperBound(fragmentInput.positionLightSpace);
+    //float visibility = 1.0;
     vec3 lighting = (ambient + visibility * (diffuse + specular)) * color;    
     
     outputColor = vec4(pow(lighting, vec3(1.0 / 2.2)), 1.0);
@@ -260,11 +261,14 @@ void main()
     }
 
 #ifdef __VSM__
-    shadowMapTexture = std::make_unique<Texture>(GL_RG32F, SHADOWMAP_SIZE, SHADOWMAP_SIZE, GL_RG, GL_FLOAT);
-    shadowMapFbo = std::make_unique<Framebuffer>(GL_COLOR_ATTACHMENT0, shadowMapTexture->getId());
+    Texture2DCreateInfo texInfo;
+    texInfo.format = TexelsFormat::RG_F32;
+    texInfo.width = texInfo.height = SHADOWMAP_SIZE;
+    shadowMapTexture = renderSystem.CreateTexture2D(texInfo);
+    shadowMapFbo = renderSystem.CreateFramebuffer(GL_COLOR_ATTACHMENT0, shadowMapTexture);
 
-    blurTexture = std::make_unique<Texture>(GL_RG32F, SHADOWMAP_SIZE, SHADOWMAP_SIZE, GL_RG, GL_FLOAT);
-    blurFbo = std::make_unique<Framebuffer>(GL_COLOR_ATTACHMENT0, blurTexture->getId());
+    blurTexture = renderSystem.CreateTexture2D(texInfo);
+    blurFbo = renderSystem.CreateFramebuffer(GL_COLOR_ATTACHMENT0, blurTexture);
 #endif
 
     {
@@ -419,7 +423,7 @@ void _001MonkeyScenes::Render()
     glm::mat4 proj = glm::perspective(glm::radians(45.0f), aspectRatio, 0.01f, 1000.f);
     glm::mat4 view = camera.GetViewMatrix();
 
-    renderSystem.Bind(m_tempShader);
+ /*   renderSystem.Bind(m_tempShader);
     renderSystem.SetUniform(m_tempuniformProj, proj);
     renderSystem.SetUniform(m_tempuniformView, view);
 
@@ -430,7 +434,104 @@ void _001MonkeyScenes::Render()
     renderSystem.SetUniform(uniformModelViewMatrix, view);
     renderSystem.SetUniform(uniformModelProjectionMatrix, proj);
     renderSystem.SetUniform(uniformModelWorldMatrix, glm::mat4(1.0f));
-    graphicsSystem.Draw(m_model);
+    graphicsSystem.Draw(m_model);*/
+
+    glViewport(0, 0, m_windowWidth, m_windowHeight);
+    glClearColor(0, 0, 0, 1.0f);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+    glm::vec3 lightPosition(glm::vec3(-3.0f, 6.0f, -3.0f));
+    // Light calculations.
+    glm::mat4 lightProjection, lightView;
+    glm::mat4 lightSpaceMatrix;
+    GLfloat near_plane = 1.0f, far_plane = 30.0f;
+    lightProjection = glm::ortho(-10.0f, 10.0f, -10.0f, 10.0f, near_plane, far_plane);
+    lightView = glm::lookAt(lightPosition, glm::vec3(0.0f), glm::vec3(1.0));
+    lightSpaceMatrix = lightProjection * lightView;
+
+#ifdef __VSM__
+
+    // Render scene from light's point of view.
+    renderSystem.Bind(shadowMapFbo);
+    glViewport(0, 0, SHADOWMAP_SIZE, SHADOWMAP_SIZE);
+    glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+    renderSystem.Bind(simpleDepthShader);
+    renderSystem.SetUniform("lightSpaceMatrix", lightSpaceMatrix);
+
+    glCullFace(GL_FRONT);
+    renderScene(simpleDepthShader);
+    glCullFace(GL_BACK);
+
+    renderSystem.ResetState(ResourceType::Framebuffer);
+    glBindFramebuffer(GL_FRAMEBUFFER, 0);
+    renderSystem.ResetState(ResourceType::Texture2D);
+    glBindTexture(GL_TEXTURE_2D, 0);
+
+    renderSystem.Bind(blurShader);
+    glViewport(0, 0, SHADOWMAP_SIZE, SHADOWMAP_SIZE);
+
+    // Blur shadowMapTexture.
+    glDisable(GL_DEPTH_TEST);
+
+    for( int i = 0; i < 1; i++ )
+    {
+        renderSystem.Bind(blurFbo);
+        // Blur shadowMapTexture (horizontally) to blurTexture.
+        renderSystem.Bind(shadowMapTexture, 0);
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+        renderSystem.SetUniform("horizontal", true);
+        renderQuad();
+
+        // Blur blurTexture vertically and write to shadowMapTexture.
+        renderSystem.Bind(shadowMapFbo);
+        renderSystem.Bind(blurTexture, 0);
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+        renderSystem.SetUniform("horizontal", false);
+        renderQuad();
+    }
+
+    renderSystem.ResetState(ResourceType::Framebuffer);
+    glBindFramebuffer(GL_FRAMEBUFFER, 0);
+    glEnable(GL_DEPTH_TEST);
+
+#endif
+
+    glViewport(0, 0, m_windowWidth, m_windowHeight);
+    glClearColor(0.412f, 0.733f, 0.929f, 1.0f);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+    renderSystem.Bind(shader);
+    renderSystem.SetUniform("projection", proj);
+    renderSystem.SetUniform("view", view);
+    renderSystem.SetUniform("viewPosition", camera.position);
+    renderSystem.SetUniform("lightSpaceMatrix", lightSpaceMatrix);
+
+    renderSystem.SetUniform("light.direction", lightPosition);
+    renderSystem.SetUniform("light.ambient", glm::vec3(0.2f, 0.23f, 0.25f));
+    renderSystem.SetUniform("light.diffuse", glm::vec3(0.6f, 0.63f, 0.65f));
+    renderSystem.SetUniform("light.specular", glm::vec3(0.0f));
+    // TODO: switch to g->useTexture(...)
+    renderSystem.SetUniform("diffuseTexture", 0);
+#ifdef __VSM__
+    renderSystem.SetUniform("shadowMap", 1);
+#endif
+
+    renderSystem.Bind(t1, 0);
+#ifdef __VSM__
+    renderSystem.Bind(shadowMapTexture, 1);
+#endif
+    renderScene(shader);
+
+    /*
+    debugQuadShader->use();
+    glUniform1f(glGetUniformLocation(debugQuadShader->getId(), "near_plane"), near_plane);
+    glUniform1f(glGetUniformLocation(debugQuadShader->getId(), "far_plane"), far_plane);
+    glActiveTexture(GL_TEXTURE0);
+    glBindTexture(GL_TEXTURE_2D, shadowMapTexture->getId());
+    renderQuad();
+    */
 }
 //-----------------------------------------------------------------------------
 void _001MonkeyScenes::Update(float deltaTime)
@@ -453,5 +554,72 @@ void _001MonkeyScenes::Update(float deltaTime)
     glm::vec2 delta = GetInput().GetMouseDeltaPosition();
     if( delta.x != 0.0f )  camera.RotateLeftRight(delta.x * mouseSensitivity);
     if( delta.y != 0.0f )  camera.RotateUpDown(-delta.y * mouseSensitivity);
+}
+//-----------------------------------------------------------------------------
+inline glm::mat4 getModelMatrix(glm::vec3 translate, glm::vec3 rotate, glm::vec3 scale)
+{
+    glm::mat4 unit(1);
+    return unit
+        * glm::translate(unit, translate)
+        * glm::rotate(unit, rotate.x, glm::vec3(1.0f, 0.0f, 0.0f)) // x
+        * glm::rotate(unit, rotate.y, glm::vec3(0.0f, 1.0f, 0.0f)) // y
+        * glm::rotate(unit, rotate.z, glm::vec3(0.0f, 0.0f, 1.0f)) // z
+        * glm::scale(unit, scale);
+}
+//-----------------------------------------------------------------------------
+void _001MonkeyScenes::renderScene(ShaderProgramRef shader)
+{
+    auto& renderSystem = GetRenderSystem();
+    auto& graphicsSystem = GetGraphicsSystem();
+
+    renderSystem.Bind(shader);
+    renderSystem.SetUniform("model", getModelMatrix(glm::vec3(-5.0f, 0.0f, -5.0f), glm::vec3(0.0f), glm::vec3(3.0f)));
+
+    graphicsSystem.Draw(plane);
+
+    /*
+    for (int32 i = 0; i < positions.size(); i++)
+    {
+        s->setUniform(
+            "model",
+            g->getModelMatrix(positions[i], glm::vec3(0.0f, glm::radians(250.0f), 0.0f), glm::vec3(1.0f)));
+
+        m->draw();
+    }
+    */
+
+    renderSystem.SetUniform("model", getModelMatrix(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 180.0f, 0.0f), glm::vec3(1.0f)));
+    graphicsSystem.Draw(m);
+}
+//-----------------------------------------------------------------------------
+GLuint quadVAO = 0, quadVBO = 0;
+void _001MonkeyScenes::renderQuad()
+{
+    GetRenderSystem().ResetState(ResourceType::VertexArray);
+
+    if( quadVAO == 0 )
+    {
+        GLfloat quadVertices[] = {
+            // positions        // texture coordinates
+            -1.0f,  1.0f, 0.0f, 0.0f, 1.0f,
+            -1.0f, -1.0f, 0.0f, 0.0f, 0.0f,
+             1.0f,  1.0f, 0.0f, 1.0f, 1.0f,
+             1.0f, -1.0f, 0.0f, 1.0f, 0.0f,
+        };
+
+        // Setup plane VAO.
+        glGenVertexArrays(1, &quadVAO);
+        glGenBuffers(1, &quadVBO);
+        glBindVertexArray(quadVAO);
+        glBindBuffer(GL_ARRAY_BUFFER, quadVBO);
+        glBufferData(GL_ARRAY_BUFFER, sizeof(quadVertices), &quadVertices, GL_STATIC_DRAW);
+        glEnableVertexAttribArray(0);
+        glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(GLfloat), (GLvoid*)0);
+        glEnableVertexAttribArray(1);
+        glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(GLfloat), (GLvoid*)(3 * sizeof(GLfloat)));
+    }
+    glBindVertexArray(quadVAO);
+    glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+    glBindVertexArray(0);
 }
 //-----------------------------------------------------------------------------

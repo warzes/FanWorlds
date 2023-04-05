@@ -104,6 +104,12 @@ inline bool GetTextureFormatType(TexelsFormat inFormat, GLenum textureType, GLen
 		internalFormat = GL_RGBA8;
 		oglType = GL_UNSIGNED_BYTE;
 	}
+	else if( inFormat == TexelsFormat::RG_F32 )
+	{
+		format = GL_RG;
+		internalFormat = GL_RG32F;
+		oglType = GL_FLOAT;
+	}
 	else if( inFormat == TexelsFormat::Depth_U16 )
 	{
 		format = GL_DEPTH_COMPONENT;

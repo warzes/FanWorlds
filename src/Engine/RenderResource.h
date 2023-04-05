@@ -58,6 +58,9 @@ enum class TexelsFormat : uint8_t
 	RG_U8,
 	RGB_U8,
 	RGBA_U8,
+
+	RG_F32,
+
 	Depth_U16,
 	DepthStencil_U16,
 	Depth_U24,

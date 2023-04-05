@@ -9,6 +9,9 @@ class _001MonkeyScenes final : public IApp
 	void Update(float deltaTime) final;
 
 private:
+	void renderScene(ShaderProgramRef shader);
+	void renderQuad();
+
 	int m_windowWidth = 0;
 	int m_windowHeight = 0;
 
