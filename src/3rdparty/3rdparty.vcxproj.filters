@@ -117,6 +117,9 @@
     <Filter Include="tiny_obj_loader">
       <UniqueIdentifier>{12db1d1d-7c89-4f98-a41b-c60500c956d0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="other">
+      <UniqueIdentifier>{0f2c76b0-a8ee-4c46-b2f3-39c498dbd73e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="glfw.h">
@@ -1012,6 +1015,9 @@
     </ClInclude>
     <ClInclude Include="tiny_obj_loader.h">
       <Filter>tiny_obj_loader</Filter>
+    </ClInclude>
+    <ClInclude Include="mdspan.hpp">
+      <Filter>other</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

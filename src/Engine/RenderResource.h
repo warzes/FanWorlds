@@ -269,6 +269,21 @@ public:
 
 using Texture2DRef = std::shared_ptr<Texture2D>;
 
+class Framebuffer
+{
+public:
+	Framebuffer() { glGenFramebuffers(1, &id); }
+	Framebuffer(Framebuffer&&) = default;
+	Framebuffer(const Framebuffer&) = delete;
+	~Framebuffer() { glDeleteFramebuffers(1, &id); }
+	Framebuffer& operator=(Framebuffer&&) = default;
+	Framebuffer& operator=(const Framebuffer&) = delete;
+
+	unsigned id = 0;
+};
+
+using FramebufferRef = std::shared_ptr<Framebuffer>;
+
 struct BlendState { /*...*/ };
 struct DepthStencilState { /*...*/ };
 struct RasterizerState { /*...*/ };

@@ -13,7 +13,7 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{43c9efa0-7f72-49cb-8c2a-9b6c37f46a0f}</ProjectGuid>
+    <ProjectGuid>{E7456A1C-80D5-4AEE-A0EC-F889CA1CE036}</ProjectGuid>
     <RootNamespace>Engine</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
@@ -93,58 +93,16 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="BaseClass.cpp" />
-    <ClCompile Include="Camera.cpp" />
-    <ClCompile Include="EngineDevice.cpp" />
-    <ClCompile Include="EngineTimestamp.cpp" />
-    <ClCompile Include="FileSystem.cpp" />
-    <ClCompile Include="GraphicsResource.cpp" />
-    <ClCompile Include="GraphicsSystem.cpp" />
-    <ClCompile Include="Input.cpp" />
-    <ClCompile Include="LogSystem.cpp" />
-    <ClCompile Include="PhysicsErrorCallback.cpp" />
-    <ClCompile Include="PhysicsLayer.cpp" />
-    <ClCompile Include="PhysicsScene.cpp" />
-    <ClCompile Include="PhysicsSystem.cpp" />
-    <ClCompile Include="RenderResource.cpp" />
-    <ClCompile Include="RenderSystem.cpp" />
-    <ClCompile Include="STBImageLoader.cpp" />
+    <ClCompile Include="source.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="StringUtils.cpp" />
-    <ClCompile Include="Window.cpp" />
-    <ClCompile Include="WorldManager.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="BaseClass.h" />
-    <ClInclude Include="BaseFunc.h" />
-    <ClInclude Include="BaseMacros.h" />
-    <ClInclude Include="Camera.h" />
-    <ClInclude Include="EngineConfiguration.h" />
-    <ClInclude Include="EngineDevice.h" />
-    <ClInclude Include="EngineTimestamp.h" />
-    <ClInclude Include="FileSystem.h" />
-    <ClInclude Include="GraphicsResource.h" />
-    <ClInclude Include="GraphicsSystem.h" />
-    <ClInclude Include="IApp.h" />
-    <ClInclude Include="Input.h" />
-    <ClInclude Include="LogSystem.h" />
-    <ClInclude Include="PhysicsErrorCallback.h" />
-    <ClInclude Include="PhysicsLayer.h" />
-    <ClInclude Include="PhysicsScene.h" />
-    <ClInclude Include="PhysicsSystem.h" />
-    <ClInclude Include="PhysicsUtilities.h" />
-    <ClInclude Include="RenderResource.h" />
-    <ClInclude Include="RenderSystem.h" />
-    <ClInclude Include="STBImageLoader.h" />
+    <ClInclude Include="MultiArray.h" />
+    <ClInclude Include="MultiVector.h" />
     <ClInclude Include="stdafx.h" />
-    <ClInclude Include="StringUtils.h" />
-    <ClInclude Include="Transform.h" />
-    <ClInclude Include="TranslateToGL.h" />
-    <ClInclude Include="Window.h" />
-    <ClInclude Include="WorldManager.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

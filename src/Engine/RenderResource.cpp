@@ -2,7 +2,7 @@
 #include "RenderResource.h"
 #include "RenderSystem.h"
 #include "TranslateToGL.h"
-
+#include "STBImageLoader.h"
 //-----------------------------------------------------------------------------
 // если какая-то структура была изменена, надо не забыть внести изменения в operator==
 static_assert(sizeof(ShaderProgram) == 4, "ShaderProgram changed!!!");
@@ -42,12 +42,24 @@ bool operator==(Texture2DRef Left, Texture2DRef Right) noexcept
 	return Left->format == Right->format && Left->height == Right->height && Left->id == Right->id && Left->width == Right->width;
 }
 //-----------------------------------------------------------------------------
-std::shared_ptr<ShaderProgram> RenderSystem::CreateShaderProgram(const std::string& vertexShaderMemory, const std::string& fragmentShaderMemory)
+ShaderProgramRef RenderSystem::CreateShaderProgram(const std::string& vertexShaderMemory, const std::string& fragmentShaderMemory)
 {
-	const GLuint glShaderVertex = createShader(GL_VERTEX_SHADER, vertexShaderMemory);
-	const GLuint glShaderFragment = createShader(GL_FRAGMENT_SHADER, fragmentShaderMemory);
+	if( vertexShaderMemory.length() == 0 )
+	{
+		Error("You must provide vertex shader (source is blank).");
+		return {};
+	}
 
-	std::shared_ptr<ShaderProgram> resource;
+	if( fragmentShaderMemory.length() == 0 )
+	{
+		Error("You must provide fragment shader (source is blank).");
+		return {};
+	}
+
+	const GLuint glShaderVertex = compileShader(GL_VERTEX_SHADER, vertexShaderMemory);
+	const GLuint glShaderFragment = compileShader(GL_FRAGMENT_SHADER, fragmentShaderMemory);
+
+	ShaderProgramRef resource;
 	if( glShaderVertex > 0 && glShaderFragment > 0 )
 	{
 		resource.reset(new ShaderProgram());
@@ -76,9 +88,9 @@ std::shared_ptr<ShaderProgram> RenderSystem::CreateShaderProgram(const std::stri
 	return resource;
 }
 //-----------------------------------------------------------------------------
-std::shared_ptr<VertexBuffer> RenderSystem::CreateVertexBuffer(ResourceUsage usage, unsigned vertexCount, unsigned vertexSize, const void* data)
+VertexBufferRef RenderSystem::CreateVertexBuffer(ResourceUsage usage, unsigned vertexCount, unsigned vertexSize, const void* data)
 {
-	std::shared_ptr<VertexBuffer> resource(new VertexBuffer(usage, vertexCount, vertexSize));
+	VertexBufferRef resource(new VertexBuffer(usage, vertexCount, vertexSize));
 	if (!IsValid(resource))
 	{
 		Error("VertexBuffer create failed!");
@@ -90,10 +102,10 @@ std::shared_ptr<VertexBuffer> RenderSystem::CreateVertexBuffer(ResourceUsage usa
 	return resource;
 }
 //-----------------------------------------------------------------------------
-std::shared_ptr<IndexBuffer> RenderSystem::CreateIndexBuffer(ResourceUsage usage, unsigned indexCount, IndexBufferFormat indexFormat, const void * data)
+IndexBufferRef RenderSystem::CreateIndexBuffer(ResourceUsage usage, unsigned indexCount, IndexBufferFormat indexFormat, const void * data)
 {
 	const unsigned indexSize = SizeIndexBuffer(indexFormat);
-	std::shared_ptr<IndexBuffer> resource(new IndexBuffer(usage, indexCount, indexSize));
+	IndexBufferRef resource(new IndexBuffer(usage, indexCount, indexSize));
 	if (!IsValid(resource))
 	{
 		Error("IndexBuffer create failed!");
@@ -105,7 +117,7 @@ std::shared_ptr<IndexBuffer> RenderSystem::CreateIndexBuffer(ResourceUsage usage
 	return resource;
 }
 //-----------------------------------------------------------------------------
-std::shared_ptr<VertexArray> RenderSystem::CreateVertexArray(std::shared_ptr<VertexBuffer> vbo, std::shared_ptr<IndexBuffer> ibo, const std::vector<VertexAttribute>& attribs)
+VertexArrayRef RenderSystem::CreateVertexArray(VertexBufferRef vbo, IndexBufferRef ibo, const std::vector<VertexAttribute>& attribs)
 {
 	if (vbo == nullptr || attribs.size() == 0)
 	{
@@ -113,7 +125,7 @@ std::shared_ptr<VertexArray> RenderSystem::CreateVertexArray(std::shared_ptr<Ver
 		return {};
 	}
 
-	std::shared_ptr<VertexArray> resource(new VertexArray(vbo, ibo, static_cast<unsigned>(attribs.size())));
+	VertexArrayRef resource(new VertexArray(vbo, ibo, static_cast<unsigned>(attribs.size())));
 	if (!IsValid(resource))
 	{
 		Error("VertexArray create failed!");
@@ -135,7 +147,7 @@ std::shared_ptr<VertexArray> RenderSystem::CreateVertexArray(std::shared_ptr<Ver
 	return resource;
 }
 //-----------------------------------------------------------------------------
-std::shared_ptr<VertexArray> RenderSystem::CreateVertexArray(std::shared_ptr<VertexBuffer> vbo, std::shared_ptr<IndexBuffer> ibo, std::shared_ptr<ShaderProgram> shaders)
+VertexArrayRef RenderSystem::CreateVertexArray(VertexBufferRef vbo, IndexBufferRef ibo, ShaderProgramRef shaders)
 {
 	assert(IsValid(shaders));
 	if (!IsValid(shaders)) return {};
@@ -189,11 +201,11 @@ std::shared_ptr<VertexArray> RenderSystem::CreateVertexArray(std::shared_ptr<Ver
 	return CreateVertexArray(vbo, ibo, attribs);
 }
 //-----------------------------------------------------------------------------
-std::shared_ptr<GeometryBuffer> RenderSystem::CreateGeometryBuffer(ResourceUsage usage, unsigned vertexCount, unsigned vertexSize, const void* vertexData, unsigned indexCount, IndexBufferFormat indexFormat, const void* indexData, std::shared_ptr<ShaderProgram> shaders)
+GeometryBufferRef RenderSystem::CreateGeometryBuffer(ResourceUsage usage, unsigned vertexCount, unsigned vertexSize, const void* vertexData, unsigned indexCount, IndexBufferFormat indexFormat, const void* indexData, ShaderProgramRef shaders)
 {
 	assert(IsValid(shaders));
 
-	std::shared_ptr<GeometryBuffer> geom(new GeometryBuffer());
+	GeometryBufferRef geom(new GeometryBuffer());
 
 	geom->vb = CreateVertexBuffer(usage, vertexCount, vertexSize, vertexData);
 	if (!IsValid(geom->vb))
@@ -222,9 +234,9 @@ std::shared_ptr<GeometryBuffer> RenderSystem::CreateGeometryBuffer(ResourceUsage
 	return geom;
 }
 //-----------------------------------------------------------------------------
-std::shared_ptr<GeometryBuffer> RenderSystem::CreateGeometryBuffer(ResourceUsage usage, unsigned vertexCount, unsigned vertexSize, const void* vertexData, unsigned indexCount, IndexBufferFormat indexFormat, const void* indexData, const std::vector<VertexAttribute>& attribs)
+GeometryBufferRef RenderSystem::CreateGeometryBuffer(ResourceUsage usage, unsigned vertexCount, unsigned vertexSize, const void* vertexData, unsigned indexCount, IndexBufferFormat indexFormat, const void* indexData, const std::vector<VertexAttribute>& attribs)
 {
-	std::shared_ptr<GeometryBuffer> geom(new GeometryBuffer());
+	GeometryBufferRef geom(new GeometryBuffer());
 
 	geom->vb = CreateVertexBuffer(usage, vertexCount, vertexSize, vertexData);
 	if (!IsValid(geom->vb))
@@ -253,17 +265,17 @@ std::shared_ptr<GeometryBuffer> RenderSystem::CreateGeometryBuffer(ResourceUsage
 	return geom;
 }
 //-----------------------------------------------------------------------------
-std::shared_ptr<GeometryBuffer> RenderSystem::CreateGeometryBuffer(ResourceUsage usage, unsigned vertexCount, unsigned vertexSize, const void* vertexData, std::shared_ptr<ShaderProgram> shaders)
+GeometryBufferRef RenderSystem::CreateGeometryBuffer(ResourceUsage usage, unsigned vertexCount, unsigned vertexSize, const void* vertexData, ShaderProgramRef shaders)
 {
 	return CreateGeometryBuffer(usage, vertexCount, vertexSize, vertexData, 0, {}, nullptr, shaders);
 }
 //-----------------------------------------------------------------------------
-std::shared_ptr<GeometryBuffer> RenderSystem::CreateGeometryBuffer(ResourceUsage usage, unsigned vertexCount, unsigned vertexSize, const void* vertexData, const std::vector<VertexAttribute>& attribs)
+GeometryBufferRef RenderSystem::CreateGeometryBuffer(ResourceUsage usage, unsigned vertexCount, unsigned vertexSize, const void* vertexData, const std::vector<VertexAttribute>& attribs)
 {
 	return CreateGeometryBuffer(usage, vertexCount, vertexSize, vertexData, 0, {}, nullptr, attribs);
 }
 //-----------------------------------------------------------------------------
-std::shared_ptr<Texture2D> RenderSystem::CreateTexture2D(const char* fileName, bool useCache, const Texture2DInfo& textureInfo)
+Texture2DRef RenderSystem::CreateTexture2D(const char* fileName, bool useCache, const Texture2DInfo& textureInfo)
 {
 	if( useCache )
 	{
@@ -274,39 +286,26 @@ std::shared_ptr<Texture2D> RenderSystem::CreateTexture2D(const char* fileName, b
 
 	Print("Load texture: " + std::string(fileName));
 
-	//stbi_set_flip_vertically_on_load(verticallyFlip ? 1 : 0);
-	const int desiredСhannels = STBI_default;
-	int width = 0;
-	int height = 0;
-	int nrChannels = 0;
-	stbi_uc* pixelData = stbi_load(fileName, &width, &height, &nrChannels, desiredСhannels);
-	if( !pixelData || nrChannels < STBI_grey || nrChannels > STBI_rgb_alpha || width == 0 || height == 0 )
+	STBImageLoader imageLoad(fileName);
+	if( imageLoad.isValid == false )
 	{
 		Error("Image loading failed! Filename='" + std::string(fileName) + "'");
-		stbi_image_free((void*)pixelData);
 		return {};
 	}
-	Texture2DCreateInfo createInfo;
-	{
-		if( nrChannels == STBI_grey ) createInfo.format = TexelsFormat::R_U8;
-		else if( nrChannels == STBI_grey_alpha ) createInfo.format = TexelsFormat::RG_U8;
-		else if( nrChannels == STBI_rgb ) createInfo.format = TexelsFormat::RGB_U8;
-		else if( nrChannels == STBI_rgb_alpha ) createInfo.format = TexelsFormat::RGBA_U8;
+	const Texture2DCreateInfo createInfo = {
+		.format = imageLoad.imageFormat,
+		.width = static_cast<uint16_t>(imageLoad.width),
+		.height = static_cast<uint16_t>(imageLoad.height),
+		.pixelData = imageLoad.pixelData,
+	};
 
-		createInfo.width = static_cast<uint16_t>(width);
-		createInfo.height = static_cast<uint16_t>(height);
-		createInfo.pixelData = pixelData;
-	}
-	auto texture = CreateTexture2D(createInfo, textureInfo);
-
-	stbi_image_free((void*)pixelData);
-	m_cacheFileTextures2D[fileName] = texture;
-	return texture;
+	m_cacheFileTextures2D[fileName] = CreateTexture2D(createInfo, textureInfo);
+	return m_cacheFileTextures2D[fileName];
 }
 //-----------------------------------------------------------------------------
-std::shared_ptr<Texture2D> RenderSystem::CreateTexture2D(const Texture2DCreateInfo& createInfo, const Texture2DInfo& textureInfo)
+Texture2DRef RenderSystem::CreateTexture2D(const Texture2DCreateInfo& createInfo, const Texture2DInfo& textureInfo)
 {
-	std::shared_ptr<Texture2D> resource(new Texture2D(createInfo.width, createInfo.height, createInfo.format));
+	Texture2DRef resource(new Texture2D(createInfo.width, createInfo.height, createInfo.format));
 	// gen texture res
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, resource->id);
@@ -352,7 +351,7 @@ bool RenderSystem::IsReadyUniform(const Uniform& uniform)
 	return IsValid(uniform) && uniform.programId == m_cache.CurrentShaderProgram;
 }
 //-----------------------------------------------------------------------------
-std::vector<ShaderAttribInfo> RenderSystem::GetAttribInfo(std::shared_ptr<ShaderProgram> resource)
+std::vector<ShaderAttribInfo> RenderSystem::GetAttribInfo(ShaderProgramRef resource)
 {
 	if( !IsValid(resource) ) return {};
 
@@ -383,7 +382,7 @@ std::vector<ShaderAttribInfo> RenderSystem::GetAttribInfo(std::shared_ptr<Shader
 	return attribs;
 }
 //-----------------------------------------------------------------------------
-Uniform RenderSystem::GetUniform(std::shared_ptr<ShaderProgram> program, const char* uniformName)
+Uniform RenderSystem::GetUniform(ShaderProgramRef program, const char* uniformName)
 {
 	if( !IsValid(program) || uniformName == nullptr ) return {};
 
@@ -437,7 +436,7 @@ void RenderSystem::SetUniform(const Uniform& uniform, const glm::mat4& value)
 	glUniformMatrix4fv(uniform.location, 1, GL_FALSE, glm::value_ptr(value));
 }
 //-----------------------------------------------------------------------------
-void RenderSystem::UpdateVertexBuffer(std::shared_ptr<VertexBuffer> vbo, unsigned offset, unsigned vertexCount, unsigned vertexSize, const void* data)
+void RenderSystem::UpdateVertexBuffer(VertexBufferRef vbo, unsigned offset, unsigned vertexCount, unsigned vertexSize, const void* data)
 {
 	assert(IsValid(vbo));
 
@@ -458,7 +457,7 @@ void RenderSystem::UpdateVertexBuffer(std::shared_ptr<VertexBuffer> vbo, unsigne
 	glBindBuffer(GL_ARRAY_BUFFER, m_cache.CurrentVBO); // restore current vb
 }
 //-----------------------------------------------------------------------------
-void RenderSystem::UpdateIndexBuffer(std::shared_ptr<IndexBuffer> ibo, unsigned offset, unsigned indexCount, unsigned indexSize, const void* data)
+void RenderSystem::UpdateIndexBuffer(IndexBufferRef ibo, unsigned offset, unsigned indexCount, unsigned indexSize, const void* data)
 {
 	assert(IsValid(ibo));
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibo->id);
@@ -513,7 +512,7 @@ void RenderSystem::ResetState(ResourceType type)
 	}
 }
 //-----------------------------------------------------------------------------
-void RenderSystem::Bind(std::shared_ptr<ShaderProgram> resource)
+void RenderSystem::Bind(ShaderProgramRef resource)
 {
 	assert(IsValid(resource));
 	if( m_cache.CurrentShaderProgram == resource->id ) return;
@@ -521,7 +520,7 @@ void RenderSystem::Bind(std::shared_ptr<ShaderProgram> resource)
 	glUseProgram(resource->id);
 }
 //-----------------------------------------------------------------------------
-void RenderSystem::Bind(std::shared_ptr<VertexBuffer> resource)
+void RenderSystem::Bind(VertexBufferRef resource)
 {
 	if( !resource ) return;
 	assert(IsValid(resource));
@@ -530,7 +529,7 @@ void RenderSystem::Bind(std::shared_ptr<VertexBuffer> resource)
 	glBindBuffer(GL_ARRAY_BUFFER, resource->id);
 }
 //-----------------------------------------------------------------------------
-void RenderSystem::Bind(std::shared_ptr<IndexBuffer> resource)
+void RenderSystem::Bind(IndexBufferRef resource)
 {
 	if( !resource ) return;
 	assert(IsValid(resource));
@@ -552,7 +551,7 @@ void RenderSystem::Bind(const VertexAttribute& attribute)
 		attribute.offset);
 }
 //-----------------------------------------------------------------------------
-void RenderSystem::Bind(std::shared_ptr<Texture2D> resource, unsigned slot)
+void RenderSystem::Bind(Texture2DRef resource, unsigned slot)
 {
 	if (!resource) return;
 	assert(IsValid(resource));
@@ -562,7 +561,7 @@ void RenderSystem::Bind(std::shared_ptr<Texture2D> resource, unsigned slot)
 	glBindTexture(GL_TEXTURE_2D, resource->id);
 }
 //-----------------------------------------------------------------------------
-void RenderSystem::Draw(std::shared_ptr<VertexArray> vao, PrimitiveTopology primitive)
+void RenderSystem::Draw(VertexArrayRef vao, PrimitiveTopology primitive)
 {
 	assert(IsValid(vao));
 	if( m_cache.CurrentVAO != vao->id )
@@ -586,7 +585,7 @@ void RenderSystem::Draw(std::shared_ptr<VertexArray> vao, PrimitiveTopology prim
 	}
 }
 //-----------------------------------------------------------------------------
-unsigned RenderSystem::createShader(GLenum openGLshaderType, const std::string& source)
+unsigned RenderSystem::compileShader(GLenum openGLshaderType, const std::string& source)
 {
 	const char* shaderText = source.data();
 	const GLint lenShaderText = static_cast<GLint>(source.size());

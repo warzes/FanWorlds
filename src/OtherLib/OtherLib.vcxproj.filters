@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="stdafx.cpp" />
+    <ClCompile Include="source.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="stdafx.h" />
+    <ClInclude Include="MultiArray.h">
+      <Filter>Core\Container</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiVector.h">
+      <Filter>Core\Container</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Core">
+      <UniqueIdentifier>{c66059f3-a059-4d04-b69a-7a876a8b6e43}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\Container">
+      <UniqueIdentifier>{c44f3dfb-51a6-4a1b-a907-4a3e2ef78cd6}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

@@ -84,7 +84,7 @@ DeferredRenderer::~DeferredRenderer()
 void DeferredRenderer::OnResize(const glm::ivec2 &size)
 {
 	delete m_gBuffers;
-	m_gBuffers = new Framebuffer(
+	m_gBuffers = new Framebuffer2(
 		m_renderSystem,
 		size,
 		{
@@ -253,7 +253,7 @@ void DeferredRenderer::DrawToGBuffers()
 //-----------------------------------------------------------------------------
 void DeferredRenderer::DrawForwardPass()
 {
-	Framebuffer::BindDefault();
+	Framebuffer2::BindDefault();
 	glViewport(0, 0, GetSize().x, GetSize().y);
 
 	constexpr GLfloat clearColor[4]{ 0.0f, 0.0f, 0.0f, 1.0f };

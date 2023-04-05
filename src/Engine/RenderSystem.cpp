@@ -63,10 +63,17 @@ void RenderSystem::Init(const RenderCreateInfo& createInfo)
 	Print("    > Renderer: " + std::string((const char*)glGetString(GL_RENDERER)));
 	Print("    > Version:  " + std::string((const char*)glGetString(GL_VERSION)));
 	Print("    > GLSL:     " + std::string((const char*)glGetString(GL_SHADING_LANGUAGE_VERSION)));
+
+	glEnable(GL_DEPTH_TEST);
+	//glEnable(GL_CULL_FACE);
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	glClearColor(createInfo.clearColor.x, createInfo.clearColor.y, createInfo.clearColor.z, 1.0f);
 }
 //-----------------------------------------------------------------------------
 void RenderSystem::Close()
 {
+	m_cacheFileTextures2D.clear();
 }
 //-----------------------------------------------------------------------------
 void RenderSystem::BeginFrame()
@@ -86,11 +93,16 @@ void RenderSystem::BeginFrame()
 		glViewport(0, 0, m_mainFramebufferWidth, m_mainFramebufferHeight);
 	}
 
-	glClearColor(0.2f, 0.4f, 0.9f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 }
 //-----------------------------------------------------------------------------
 void RenderSystem::EndFrame()
 {
+}
+//-----------------------------------------------------------------------------
+void RenderSystem::SetClearColor(const glm::vec3& color)
+{
+	// TODO: менять цвет только для основного кадра
+	glClearColor(color.x, color.y, color.z, 1.0f);
 }
 //-----------------------------------------------------------------------------

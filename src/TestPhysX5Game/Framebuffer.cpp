@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "Framebuffer.h"
 //-----------------------------------------------------------------------------
-Framebuffer::Framebuffer(
+Framebuffer2::Framebuffer2(
 	RenderSystem& renderSystem,
 	const glm::ivec2& size,
 	const std::initializer_list<GLenum>& formats,
@@ -21,7 +21,7 @@ Framebuffer::Framebuffer(
 	}
 }
 //-----------------------------------------------------------------------------
-void Framebuffer::createColorAttachment(const GLenum format) 
+void Framebuffer2::createColorAttachment(const GLenum format) 
 {
 	if (m_numColorAttachments >= MAX_NUM_COLOR_ATTACHMENTS) 
 	{
@@ -40,7 +40,7 @@ void Framebuffer::createColorAttachment(const GLenum format)
 	glTextureParameteri(texture, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
 }
 //-----------------------------------------------------------------------------
-void Framebuffer::createColorAttachments(const std::initializer_list<GLenum>& formats) 
+void Framebuffer2::createColorAttachments(const std::initializer_list<GLenum>& formats) 
 {
 	for( const GLenum format : formats )
 	{
@@ -56,7 +56,7 @@ void Framebuffer::createColorAttachments(const std::initializer_list<GLenum>& fo
 	glNamedFramebufferDrawBuffers(m_fbo, m_numColorAttachments, attachments.data());
 }
 //-----------------------------------------------------------------------------
-void Framebuffer::createDepthStencilAttachment() 
+void Framebuffer2::createDepthStencilAttachment() 
 {
 	switch( m_depthOption )
 	{
@@ -79,7 +79,7 @@ void Framebuffer::createDepthStencilAttachment()
 	}
 }
 //-----------------------------------------------------------------------------
-Framebuffer::~Framebuffer() 
+Framebuffer2::~Framebuffer2() 
 {
 	if( m_fbo )
 	{
@@ -105,17 +105,17 @@ Framebuffer::~Framebuffer()
 	}
 }
 //-----------------------------------------------------------------------------
-void Framebuffer::Bind() 
+void Framebuffer2::Bind() 
 {
 	glBindFramebuffer(GL_FRAMEBUFFER, m_fbo);
 }
 //-----------------------------------------------------------------------------
-void Framebuffer::BindDefault() 
+void Framebuffer2::BindDefault() 
 {
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 }
 //-----------------------------------------------------------------------------
-void Framebuffer::Clear() 
+void Framebuffer2::Clear() 
 {
 	static constexpr GLfloat CLEAR_COLOR[4]{ 0.0f, 0.0f, 0.0f, 0.0f };
 	for (int i = 0; i < m_numColorAttachments; i++) 
@@ -125,18 +125,18 @@ void Framebuffer::Clear()
 	glClearNamedFramebufferfi(m_fbo, GL_DEPTH_STENCIL, 0, 1.0f, 0);
 }
 //-----------------------------------------------------------------------------
-void Framebuffer::BindColorTexture(const GLuint unit, const GLuint attachment)
+void Framebuffer2::BindColorTexture(const GLuint unit, const GLuint attachment)
 {
 	glBindTextureUnit(unit, m_colorAttachments[attachment]);
 }
 //-----------------------------------------------------------------------------
-void Framebuffer::BindDepthStencilTexture(const GLuint unit)
+void Framebuffer2::BindDepthStencilTexture(const GLuint unit)
 {
 	if (m_depthOption != FramebufferDepthOption::DepthIsTexture) return;
 	glBindTextureUnit(unit, m_depthStencilAttachment);
 }
 //-----------------------------------------------------------------------------
-void Framebuffer::BindAllTextures()
+void Framebuffer2::BindAllTextures()
 {
 	for (int i = 0; i < m_numColorAttachments; i++)
 	{
@@ -145,7 +145,7 @@ void Framebuffer::BindAllTextures()
 	BindDepthStencilTexture(m_numColorAttachments);
 }
 //-----------------------------------------------------------------------------
-void Framebuffer::UnbindAllTextures() 
+void Framebuffer2::UnbindAllTextures() 
 {
 	for (int i = 0; i < m_numColorAttachments; i++) 
 	{
@@ -155,7 +155,7 @@ void Framebuffer::UnbindAllTextures()
 	glBindTextureUnit(m_numColorAttachments, 0);
 }
 //-----------------------------------------------------------------------------
-void Framebuffer::BlitDepthStencilToScreen(const glm::ivec2& screenSize) 
+void Framebuffer2::BlitDepthStencilToScreen(const glm::ivec2& screenSize) 
 {
 	glBlitNamedFramebuffer(
 		m_fbo,

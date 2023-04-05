@@ -11,16 +11,16 @@ enum class FramebufferDepthOption
 	DepthIsTexture
 };
 
-class Framebuffer
+class Framebuffer2
 {
 public:
-	MOVE_ONLY(Framebuffer);
+	MOVE_ONLY(Framebuffer2);
 
-	Framebuffer() = delete;
-	Framebuffer(RenderSystem& renderSystem, const glm::ivec2& size, const std::initializer_list<GLenum>& formats, FramebufferDepthOption depthOption);
-	Framebuffer(RenderSystem& renderSystem, const glm::ivec2& size, GLenum format, FramebufferDepthOption depthOption)
-		: Framebuffer(renderSystem, size, { format }, depthOption) {}
-	~Framebuffer();
+	Framebuffer2() = delete;
+	Framebuffer2(RenderSystem& renderSystem, const glm::ivec2& size, const std::initializer_list<GLenum>& formats, FramebufferDepthOption depthOption);
+	Framebuffer2(RenderSystem& renderSystem, const glm::ivec2& size, GLenum format, FramebufferDepthOption depthOption)
+		: Framebuffer2(renderSystem, size, { format }, depthOption) {}
+	~Framebuffer2();
 
 	[[nodiscard]] const glm::ivec2& Size() const { return m_size; }
 
