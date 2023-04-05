@@ -22,7 +22,7 @@ void GameApp::Render()
 	}
 }
 
-void GameApp::Update(float elapsedTimeSeconds)
+void GameApp::Update(float deltaTime)
 {
 	if( GetInput().IsKeyDown(Input::KEY_ESCAPE) )
 	{

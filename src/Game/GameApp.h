@@ -6,7 +6,7 @@ class GameApp final : public IApp
 	void Destroy() final;
 
 	void Render() final;
-	void Update(float elapsedTimeSeconds) final;
+	void Update(float deltaTime) final;
 
 private:
 	int m_windowWidth = 0;

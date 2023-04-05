@@ -168,6 +168,12 @@ public:
 	}
 
 private:
+	Input() = default;
+	Input(Input&&) = delete;
+	Input(const Input&) = delete;
+	Input& operator=(Input&&) = delete;
+	Input& operator=(const Input&) = delete;
+
 	struct
 	{
 		char currentKeyState[MAX_KEYBOARD_KEYS] = { 0 };

@@ -68,6 +68,15 @@ public:
 	void SetUniform(const Uniform& uniform, const glm::mat3& value);
 	void SetUniform(const Uniform& uniform, const glm::mat4& value);
 
+	// не рекомендуется - только для быстрого теста
+	void SetUniform(const std::string& uniformName, int value);
+	void SetUniform(const std::string& uniformName, float value);
+	void SetUniform(const std::string& uniformName, const glm::vec2& value);
+	void SetUniform(const std::string& uniformName, const glm::vec3& value);
+	void SetUniform(const std::string& uniformName, const glm::vec4& value);
+	void SetUniform(const std::string& uniformName, const glm::mat3& value);
+	void SetUniform(const std::string& uniformName, const glm::mat4& value);
+
 	void UpdateVertexBuffer(VertexBufferRef vbo, unsigned offset, unsigned vertexCount, unsigned vertexSize, const void* data);
 	void UpdateIndexBuffer(IndexBufferRef ibo, unsigned offset, unsigned indexCount, unsigned indexSize, const void* data);
 
@@ -82,6 +91,12 @@ public:
 	void Draw(VertexArrayRef vao, PrimitiveTopology primitive = PrimitiveTopology::Triangles);
 
 private:
+	RenderSystem() = default;
+	RenderSystem(RenderSystem&&) = delete;
+	RenderSystem(const RenderSystem&) = delete;
+	RenderSystem& operator=(RenderSystem&&) = delete;
+	RenderSystem& operator=(const RenderSystem&) = delete;
+
 	unsigned compileShader(GLenum openGLshaderType, const std::string& source);
 	int m_mainFramebufferWidth = 0;
 	int m_mainFramebufferHeight = 0;

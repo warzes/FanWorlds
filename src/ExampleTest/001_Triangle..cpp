@@ -47,7 +47,7 @@ void main()
 		{{ 1.0f, -1.0f, 4.0f}, {0.0f, 0.0f, 1.0f}}
 	};
 
-	auto renderSystem = GetRenderSystem();
+	auto& renderSystem = GetRenderSystem();
 
 	m_shader = renderSystem.CreateShaderProgram(vertexShaderText, fragmentShaderText);
 	m_uniformProjectionMatrix = renderSystem.GetUniform(m_shader, "projectionMatrix");
@@ -74,7 +74,7 @@ void _001Triangle::Render()
 		m_windowHeight = GetWindowHeight();
 	}
 
-	auto renderSystem = GetRenderSystem();
+	auto& renderSystem = GetRenderSystem();
 
 	renderSystem.Bind(m_shader);
 	glm::mat4 mat = glm::perspective(glm::radians(45.0f), (float)GetWindowWidth() / (float)GetWindowHeight(), 0.01f, 1000.f);
@@ -82,7 +82,7 @@ void _001Triangle::Render()
 	renderSystem.Draw(m_vao);
 }
 //-----------------------------------------------------------------------------
-void _001Triangle::Update(float elapsedTimeSeconds)
+void _001Triangle::Update(float deltaTime)
 {
 	if( GetInput().IsKeyDown(Input::KEY_ESCAPE) )
 	{

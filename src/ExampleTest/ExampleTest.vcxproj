@@ -93,6 +93,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="001_MonkeyScenes.cpp" />
     <ClCompile Include="001_Triangle..cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="stdafx.cpp">
@@ -101,6 +102,7 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="001_MonkeyScenes.h" />
     <ClInclude Include="001_Triangle.h" />
     <ClInclude Include="stdafx.h" />
   </ItemGroup>

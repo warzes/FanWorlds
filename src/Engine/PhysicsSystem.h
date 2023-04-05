@@ -42,6 +42,11 @@ public:
 	void AddScene(PhysicsScene* scene) { m_physicsScene = scene; }
 	PhysicsScene *GetPhysicsScene() { assert(m_physicsScene); return m_physicsScene; }
 private:
+	PhysicsSystem() = default;
+	PhysicsSystem(PhysicsSystem&&) = delete;
+	PhysicsSystem(const PhysicsSystem&) = delete;
+	PhysicsSystem& operator=(PhysicsSystem&&) = delete;
+	PhysicsSystem& operator=(const PhysicsSystem&) = delete;
 
 	PhysicsScene* m_physicsScene = nullptr;
 

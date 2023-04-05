@@ -8,4 +8,11 @@ class WorldManager : public BaseClass
 public:
 	void Init();
 	void Close();
+
+private:
+	WorldManager() = default;
+	WorldManager(WorldManager&&) = delete;
+	WorldManager(const WorldManager&) = delete;
+	WorldManager& operator=(WorldManager&&) = delete;
+	WorldManager& operator=(const WorldManager&) = delete;
 };

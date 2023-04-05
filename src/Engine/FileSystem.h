@@ -24,4 +24,11 @@ public:
 	FileSystem &Mount(const std::string &newDir, const std::string &mountPoint, bool appendToPath = true);
 
 	std::string Read(const std::string &filename);
+
+private:
+	FileSystem() = default;
+	FileSystem(FileSystem&&) = delete;
+	FileSystem(const FileSystem&) = delete;
+	FileSystem& operator=(FileSystem&&) = delete;
+	FileSystem& operator=(const FileSystem&) = delete;
 };

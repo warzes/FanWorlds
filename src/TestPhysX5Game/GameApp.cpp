@@ -51,7 +51,7 @@ void GameApp::Render()
 	m_renderer->EndDraw();
 }
 
-void GameApp::Update(float elapsedTimeSeconds)
+void GameApp::Update(float deltaTime)
 {
 	if( GetInput().IsKeyDown(Input::KEY_ESCAPE) )
 	{
@@ -59,7 +59,7 @@ void GameApp::Update(float elapsedTimeSeconds)
 		return;
 	}
 
-	if( m_physicsScene->Update(elapsedTimeSeconds, m_timeScale) )
+	if( m_physicsScene->Update(deltaTime, m_timeScale) )
 	{
 		m_scene->FixedUpdate(m_physicsScene->GetFixedTimestep() * m_timeScale);
 	}
@@ -73,8 +73,8 @@ void GameApp::Update(float elapsedTimeSeconds)
 		m_timeScale = 1.0f;
 	}
 
-	m_renderer->Update(elapsedTimeSeconds * m_timeScale);
-	m_scene->Update(elapsedTimeSeconds * m_timeScale);
+	m_renderer->Update(deltaTime * m_timeScale);
+	m_scene->Update(deltaTime * m_timeScale);
 }
 
 void GameApp::createEssentials()

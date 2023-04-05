@@ -11,7 +11,7 @@ public:
 	virtual void Destroy() = 0;
 
 	virtual void Render() = 0;
-	virtual void Update(float elapsedTimeSeconds) = 0;
+	virtual void Update(float deltaTime) = 0;
 
 	// return value is true if the event was consumed by this render pass, false if it should be passed on
 	virtual bool KeyboardUpdate(int key, int scancode, int action, int mods) { return false; }

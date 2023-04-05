@@ -5,6 +5,12 @@
 class Material
 {
 public:
+	Material() = default;
+	Material(Material&&) = default;
+	Material(const Material&) = delete;
+	~Material() = default;
+	Material& operator=(Material&&) = default;
+	Material& operator=(const Material&) = delete;
 
 	Texture2DRef diffuseTexture = nullptr;
 
@@ -28,6 +34,13 @@ public:
 class Mesh
 {
 public:
+	Mesh() = default;
+	Mesh(Mesh&&) = default;
+	Mesh(const Mesh&) = delete;
+	~Mesh() = default;
+	Mesh& operator=(Mesh&&) = default;
+	Mesh& operator=(const Mesh&) = delete;
+
 	std::vector<VertexMesh> vertices;
 	std::vector<uint32_t> indices;
 	Material material;
@@ -42,6 +55,13 @@ public:
 class Model
 {
 public:
+	Model() = default;
+	Model(Model&&) = default;
+	Model(const Model&) = delete;
+	~Model() = default;
+	Model& operator=(Model&&) = default;
+	Model& operator=(const Model&) = delete;
+
 	std::vector<Mesh> subMeshes;
 	// bouncing box
 	glm::vec3 min;

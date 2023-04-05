@@ -1,5 +1,8 @@
 ﻿#include "stdafx.h"
+// Basic Example
 #include "001_Triangle.h"
+// Other
+#include "001_MonkeyScenes.h"
 //-----------------------------------------------------------------------------
 #if defined(_MSC_VER)
 #	pragma comment( lib, "Engine.lib" )
@@ -18,12 +21,12 @@ int main(
 	[[maybe_unused]] int   argc,
 	[[maybe_unused]] char* argv[])
 {
-
 	while( 1 )
 	{
-		system("CLS");
-		std::cout << "Select Example (q - exit):";
-		std::cout << "    b1 - Basic Triangle";
+		std::cout << "Select Example (q - exit):" << std::endl;
+		std::cout << "    b1 - Basic Triangle" << std::endl;
+
+		std::cout << "    o1 - Monkey Scenes" << std::endl;
 		std::cout << std::endl;
 
 		std::string read;
@@ -31,13 +34,16 @@ int main(
 
 		if( read == "q" )
 			break;
-		
-		if( read == "b1" )
-		{
-			auto engineDevice = EngineDevice::Create({});
-			engineDevice->RunApp(std::make_shared<_001Triangle>());
-		}
-	}
 
-}
+#define START_SCENE(arg, x) \
+		if( read == arg ) \
+		{ \
+			auto engineDevice = EngineDevice::Create({}); \
+			engineDevice->RunApp(std::make_shared<x>()); \
+		}
+		START_SCENE("b1", _001Triangle);
+		START_SCENE("o1", _001MonkeyScenes);
+
+#undef START_SCENE
+	}}
 //-----------------------------------------------------------------------------

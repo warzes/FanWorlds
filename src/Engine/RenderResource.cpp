@@ -461,6 +461,48 @@ void RenderSystem::SetUniform(const Uniform& uniform, const glm::mat4& value)
 	glUniformMatrix4fv(uniform.location, 1, GL_FALSE, glm::value_ptr(value));
 }
 //-----------------------------------------------------------------------------
+void RenderSystem::SetUniform(const std::string& uniformName, int value)
+{
+	assert(m_cache.CurrentShaderProgram > 0);
+	glUniform1i(glGetUniformLocation(m_cache.CurrentShaderProgram, uniformName.c_str()), value);
+}
+//-----------------------------------------------------------------------------
+void RenderSystem::SetUniform(const std::string& uniformName, float value)
+{
+	assert(m_cache.CurrentShaderProgram > 0);
+	glUniform1f(glGetUniformLocation(m_cache.CurrentShaderProgram, uniformName.c_str()), value);
+}
+//-----------------------------------------------------------------------------
+void RenderSystem::SetUniform(const std::string& uniformName, const glm::vec2& value)
+{
+	assert(m_cache.CurrentShaderProgram > 0);
+	glUniform2fv(glGetUniformLocation(m_cache.CurrentShaderProgram, uniformName.c_str()), 1, glm::value_ptr(value));
+}
+//-----------------------------------------------------------------------------
+void RenderSystem::SetUniform(const std::string& uniformName, const glm::vec3& value)
+{
+	assert(m_cache.CurrentShaderProgram > 0);
+	glUniform3fv(glGetUniformLocation(m_cache.CurrentShaderProgram, uniformName.c_str()), 1, glm::value_ptr(value));
+}
+//-----------------------------------------------------------------------------
+void RenderSystem::SetUniform(const std::string& uniformName, const glm::vec4& value)
+{
+	assert(m_cache.CurrentShaderProgram > 0);
+	glUniform4fv(glGetUniformLocation(m_cache.CurrentShaderProgram, uniformName.c_str()), 1, glm::value_ptr(value));
+}
+//-----------------------------------------------------------------------------
+void RenderSystem::SetUniform(const std::string& uniformName, const glm::mat3& value)
+{
+	assert(m_cache.CurrentShaderProgram > 0);
+	glUniformMatrix3fv(glGetUniformLocation(m_cache.CurrentShaderProgram, uniformName.c_str()), 1, GL_FALSE, glm::value_ptr(value));
+}
+//-----------------------------------------------------------------------------
+void RenderSystem::SetUniform(const std::string& uniformName, const glm::mat4& value)
+{
+	assert(m_cache.CurrentShaderProgram > 0);
+	glUniformMatrix4fv(glGetUniformLocation(m_cache.CurrentShaderProgram, uniformName.c_str()), 1, GL_FALSE, glm::value_ptr(value));
+}
+//-----------------------------------------------------------------------------
 void RenderSystem::UpdateVertexBuffer(VertexBufferRef vbo, unsigned offset, unsigned vertexCount, unsigned vertexSize, const void* data)
 {
 	assert(IsValid(vbo));
@@ -603,6 +645,7 @@ void RenderSystem::Bind(FramebufferRef resource)
 void RenderSystem::Draw(VertexArrayRef vao, PrimitiveTopology primitive)
 {
 	assert(IsValid(vao));
+
 	if( m_cache.CurrentVAO != vao->id )
 	{
 		m_cache.CurrentVAO = vao->id;

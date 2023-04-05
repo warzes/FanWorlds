@@ -34,6 +34,12 @@ public:
 	int GetHeight() const;
 
 private:
+	Window() = default;
+	Window(Window&&) = delete;
+	Window(const Window&) = delete;
+	Window& operator=(Window&&) = delete;
+	Window& operator=(const Window&) = delete;
+
 	GLFWwindow* m_window = nullptr;
 	bool m_requestedVSync = false;
 	int m_windowWidth = 0;

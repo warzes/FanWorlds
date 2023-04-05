@@ -18,6 +18,12 @@ public:
 	std::vector<glm::vec3> GetVertexInModel(ModelRef model) const;
 
 private:
+	GraphicsSystem() = default;
+	GraphicsSystem(GraphicsSystem&&) = delete;
+	GraphicsSystem(const GraphicsSystem&) = delete;
+	GraphicsSystem& operator=(GraphicsSystem&&) = delete;
+	GraphicsSystem& operator=(const GraphicsSystem&) = delete;
+
 	ModelRef createMeshBuffer(std::vector<Mesh>&& meshes);
 	ModelRef loadObjFile(const char* fileName, const char* pathMaterialFiles = "./");
 };
