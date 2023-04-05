@@ -23,6 +23,8 @@ public:
 	void EndFrame();
 
 	void SetClearColor(const glm::vec3& color);
+	void Clear();
+	void SetViewport(int width, int height);
 
 	ShaderProgramRef CreateShaderProgram(const std::string& vertexShaderMemory, const std::string& fragmentShaderMemory);
 	VertexBufferRef CreateVertexBuffer(ResourceUsage usage, unsigned vertexCount, unsigned vertexSize, const void* data);
@@ -77,8 +79,8 @@ public:
 	void SetUniform(const std::string& uniformName, const glm::mat3& value);
 	void SetUniform(const std::string& uniformName, const glm::mat4& value);
 
-	void UpdateVertexBuffer(VertexBufferRef vbo, unsigned offset, unsigned vertexCount, unsigned vertexSize, const void* data);
-	void UpdateIndexBuffer(IndexBufferRef ibo, unsigned offset, unsigned indexCount, unsigned indexSize, const void* data);
+	void UpdateBuffer(VertexBufferRef vbo, unsigned offset, unsigned vertexCount, unsigned vertexSize, const void* data);
+	void UpdateBuffer(IndexBufferRef ibo, unsigned offset, unsigned indexCount, unsigned indexSize, const void* data);
 
 	void ResetState(ResourceType type);
 	void Bind(ShaderProgramRef resource);
@@ -98,6 +100,7 @@ private:
 	RenderSystem& operator=(const RenderSystem&) = delete;
 
 	unsigned compileShader(GLenum openGLshaderType, const std::string& source);
+
 	int m_mainFramebufferWidth = 0;
 	int m_mainFramebufferHeight = 0;
 

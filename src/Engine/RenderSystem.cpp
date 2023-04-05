@@ -102,7 +102,16 @@ void RenderSystem::EndFrame()
 //-----------------------------------------------------------------------------
 void RenderSystem::SetClearColor(const glm::vec3& color)
 {
-	// TODO: менять цвет только для основного кадра
 	glClearColor(color.x, color.y, color.z, 1.0f);
+}
+//-----------------------------------------------------------------------------
+void RenderSystem::Clear()
+{
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+}
+//-----------------------------------------------------------------------------
+void RenderSystem::SetViewport(int width, int height)
+{
+	glViewport(0, 0, width, height);
 }
 //-----------------------------------------------------------------------------

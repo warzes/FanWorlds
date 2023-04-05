@@ -503,7 +503,7 @@ void RenderSystem::SetUniform(const std::string& uniformName, const glm::mat4& v
 	glUniformMatrix4fv(glGetUniformLocation(m_cache.CurrentShaderProgram, uniformName.c_str()), 1, GL_FALSE, glm::value_ptr(value));
 }
 //-----------------------------------------------------------------------------
-void RenderSystem::UpdateVertexBuffer(VertexBufferRef vbo, unsigned offset, unsigned vertexCount, unsigned vertexSize, const void* data)
+void RenderSystem::UpdateBuffer(VertexBufferRef vbo, unsigned offset, unsigned vertexCount, unsigned vertexSize, const void* data)
 {
 	assert(IsValid(vbo));
 
@@ -524,7 +524,7 @@ void RenderSystem::UpdateVertexBuffer(VertexBufferRef vbo, unsigned offset, unsi
 	glBindBuffer(GL_ARRAY_BUFFER, m_cache.CurrentVBO); // restore current vb
 }
 //-----------------------------------------------------------------------------
-void RenderSystem::UpdateIndexBuffer(IndexBufferRef ibo, unsigned offset, unsigned indexCount, unsigned indexSize, const void* data)
+void RenderSystem::UpdateBuffer(IndexBufferRef ibo, unsigned offset, unsigned indexCount, unsigned indexSize, const void* data)
 {
 	assert(IsValid(ibo));
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibo->id);

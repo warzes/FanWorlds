@@ -2,6 +2,47 @@
 #include "001_MonkeyScenes.h"
 #define __VSM__
 const GLuint SHADOWMAP_SIZE = 1024;
+
+https://github.com/OpenGL-Graphics/first-person-shooter
+RuinIsland_GLSL_Demo
+
+
+в тредбуме сделать шаблонную карту котоую потом юзать как основу
+то есть она будет указывать все границы.при этом сетка с нее будет игнорироваться движком(удалять не надо)
+
+
+
+
+
+примеры тайлового редактора
+https ://github.com/TheTophatDemon/Total-Editor-3
+https://steamcommunity.com/sharedfiles/filedetails/?l=norwegian&id=2075248129
+https://github.com/jdah/microcraft - визуал (то есть такое же в 3д
+
+
+роцесс такой - первоначально мир пуст.игрок встает на точку и создает первую зону.от нее и строит остальное
+
+мир разделен на клетки.клетка равна 1 метру.
+система координат по x и z начинается от 0 и до бесконечности.по y может быть отрицательно, а ноль - это уровень моря(отрицательно - это подземелье, положительно - небо)
+
+клетки объединены в зоны.например по 100 на 100 клеток.
+
+редактор работает в режимах
+- режим зоны - позволяет добавлять зону(это нужно чтобы делать летающие острова или данжи - то есть несвязанное в пустоте)
+- режим клетки - можно добавлять / удалять клетки в текущей зоне(если добавить клетку на границе - создаст новую зону)
+выглядит так - клетка, на которую смотрит камера - подсвечивается.если там нет реальной клетки то рисуется полупрозрачная и вот ее можно ставить
+- также в режиме клеток можно менять высоту вверха и низа клетки
+- режим вершин - позволяет выбирать одну из 8 вершин клетки и модифицировать ее высоту
+
+
+Чтобы экономить память
+- регионы сейчас могут быть равны 100 х 100 х 100. и всего десяток регионов.
+но внутри себя регионы не содержат трехмерный массив.а хранят массив клеток у которых своя позиция.
+Тогда будет не 100х100х100 клеток.а много меньше.
+Когда добавляется новая клетка - то нужно обходить каждую из имеющихся.
+также будут оптимизиации - например клетка окруженная другими будет удаляться
+
+
 //-----------------------------------------------------------------------------
 bool _001MonkeyScenes::Create()
 {
@@ -166,7 +207,7 @@ uniform sampler2D shadowMap;
 uniform vec3 viewPosition;
 
 
-float chebyshevUpperBound(vec4 fragPosLightSpace)
+/*float chebyshevUpperBound(vec4 fragPosLightSpace)
 {
     float p = 0.0;
 
@@ -189,7 +230,7 @@ float chebyshevUpperBound(vec4 fragPosLightSpace)
     float pMax = variance / (variance + d * d);
 
     return max(p, pMax);
-}
+}*/
 
 void main()
 {          
@@ -210,8 +251,8 @@ void main()
     float spec = pow(max(dot(viewDir, reflectDir), 0.0), 16.0);
     vec3 specular = light.specular * spec * vec3(1.0);
 
-    float visibility = chebyshevUpperBound(fragmentInput.positionLightSpace);
-    //float visibility = 1.0;
+    //float visibility = chebyshevUpperBound(fragmentInput.positionLightSpace);
+    float visibility = 1.0;
     vec3 lighting = (ambient + visibility * (diffuse + specular)) * color;    
     
     outputColor = vec4(pow(lighting, vec3(1.0 / 2.2)), 1.0);
@@ -436,10 +477,6 @@ void _001MonkeyScenes::Render()
     renderSystem.SetUniform(uniformModelWorldMatrix, glm::mat4(1.0f));
     graphicsSystem.Draw(m_model);*/
 
-    glViewport(0, 0, m_windowWidth, m_windowHeight);
-    glClearColor(0, 0, 0, 1.0f);
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
     glm::vec3 lightPosition(glm::vec3(-3.0f, 6.0f, -3.0f));
     // Light calculations.
     glm::mat4 lightProjection, lightView;
@@ -453,9 +490,9 @@ void _001MonkeyScenes::Render()
 
     // Render scene from light's point of view.
     renderSystem.Bind(shadowMapFbo);
-    glViewport(0, 0, SHADOWMAP_SIZE, SHADOWMAP_SIZE);
-    glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    renderSystem.SetClearColor({ 1.0f, 1.0f, 1.0f });
+    renderSystem.SetViewport(SHADOWMAP_SIZE, SHADOWMAP_SIZE);
+    renderSystem.Clear();
 
     renderSystem.Bind(simpleDepthShader);
     renderSystem.SetUniform("lightSpaceMatrix", lightSpaceMatrix);
@@ -465,42 +502,41 @@ void _001MonkeyScenes::Render()
     glCullFace(GL_BACK);
 
     renderSystem.ResetState(ResourceType::Framebuffer);
-    glBindFramebuffer(GL_FRAMEBUFFER, 0);
     renderSystem.ResetState(ResourceType::Texture2D);
-    glBindTexture(GL_TEXTURE_2D, 0);
 
     renderSystem.Bind(blurShader);
-    glViewport(0, 0, SHADOWMAP_SIZE, SHADOWMAP_SIZE);
-
+    
     // Blur shadowMapTexture.
     glDisable(GL_DEPTH_TEST);
 
     for( int i = 0; i < 1; i++ )
     {
         renderSystem.Bind(blurFbo);
+        renderSystem.SetViewport(SHADOWMAP_SIZE, SHADOWMAP_SIZE);
+        renderSystem.Clear();
+
         // Blur shadowMapTexture (horizontally) to blurTexture.
         renderSystem.Bind(shadowMapTexture, 0);
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         renderSystem.SetUniform("horizontal", true);
         renderQuad();
 
         // Blur blurTexture vertically and write to shadowMapTexture.
         renderSystem.Bind(shadowMapFbo);
+        renderSystem.SetViewport(SHADOWMAP_SIZE, SHADOWMAP_SIZE);
+        renderSystem.Clear();
+
         renderSystem.Bind(blurTexture, 0);
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         renderSystem.SetUniform("horizontal", false);
         renderQuad();
     }
 
     renderSystem.ResetState(ResourceType::Framebuffer);
-    glBindFramebuffer(GL_FRAMEBUFFER, 0);
     glEnable(GL_DEPTH_TEST);
 
 #endif
-
-    glViewport(0, 0, m_windowWidth, m_windowHeight);
-    glClearColor(0.412f, 0.733f, 0.929f, 1.0f);
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    renderSystem.SetViewport(m_windowWidth, m_windowHeight);
+    renderSystem.SetClearColor({ 0.412f, 0.733f, 0.929f });
+    renderSystem.Clear();
 
     renderSystem.Bind(shader);
     renderSystem.SetUniform("projection", proj);
