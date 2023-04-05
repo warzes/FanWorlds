@@ -1,5 +1,35 @@
 #pragma once
 
+новый заголовок для OpenGL
+где
+OPENGL_VERSION = 
+OPENGL33
+OPENGL40
+OPENGL41
+OPENGL42
+OPENGL43
+OPENGL44
+OPENGL45
+OPENGL46
+
+https://docs.gl/gl3/glActiveTexture
+Выбрать список - пройти по каждому
+
+
+
+http://www.hyzgame.org.cn/OpenGL/man3/bottom.php
+
+https://registry.khronos.org/OpenGL/specs/gl/glspec33.core.pdf
+
+
+https://github.com/mini3d/mini3d_physics
+и
+https://github.com/mini3d/mini3d
+
+
+
+
+
 enum class ResourceType : uint8_t
 {
 	Unknown,
