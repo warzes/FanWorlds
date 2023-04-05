@@ -44,6 +44,8 @@ public:
 	Texture2DRef CreateTexture2D(const char* fileName, bool useCache = true, const Texture2DInfo& textureInfo = {});
 	Texture2DRef CreateTexture2D(const Texture2DCreateInfo& createInfo, const Texture2DInfo& textureInfo = {});
 
+	FramebufferRef CreateFramebuffer(unsigned attachment, Texture2DRef texture);
+
 	inline bool IsValid(ShaderProgramRef resource) const { return resource && resource->id > 0; }
 	inline bool IsValid(const Uniform& uniform) const { return uniform.location >= 0; }
 	inline bool IsValid(VertexBufferRef resource) const { return resource && resource->id > 0; }
@@ -51,6 +53,7 @@ public:
 	inline bool IsValid(VertexArrayRef resource) const { return resource && resource->id > 0; }
 	inline bool IsValid(Texture2DRef resource) const { return resource && resource->id > 0; }
 	inline bool IsValid(GeometryBufferRef resource) const { return IsValid(resource->vao); }
+	inline bool IsValid(FramebufferRef resource) const { return resource && resource->id > 0; }
 
 	bool IsReadyUniform(const Uniform& uniform);
 
@@ -74,6 +77,7 @@ public:
 	void Bind(IndexBufferRef resource);
 	void Bind(const VertexAttribute& Attribute);
 	void Bind(Texture2DRef resource, unsigned slot = 0);
+	void Bind(FramebufferRef resource);
 
 	void Draw(VertexArrayRef vao, PrimitiveTopology primitive = PrimitiveTopology::Triangles);
 
@@ -89,6 +93,7 @@ private:
 		unsigned CurrentIBO = 0;
 		unsigned CurrentVAO = 0;
 		unsigned CurrentTexture2D[MaxBindingTextures] = { 0 };
+		unsigned CurrentFramebuffer = 0;
 	} m_cache;
 	std::unordered_map<std::string, Texture2DRef> m_cacheFileTextures2D;
 };

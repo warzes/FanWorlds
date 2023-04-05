@@ -11,6 +11,7 @@ static_assert(sizeof(VertexBuffer) == 16, "VertexBuffer changed!!!");
 static_assert(sizeof(IndexBuffer) == 16, "IndexBuffer changed!!!");
 static_assert(sizeof(VertexArray) == 48, "VertexArray changed!!!");
 static_assert(sizeof(Texture2D) == 16, "Texture2D changed!!!");
+static_assert(sizeof(Framebuffer) == 24, "Framebuffer changed!!!");
 //-----------------------------------------------------------------------------
 bool operator==(ShaderProgramRef Left, ShaderProgramRef Right) noexcept
 {
@@ -40,6 +41,11 @@ bool operator==(VertexArrayRef Left, VertexArrayRef Right) noexcept
 bool operator==(Texture2DRef Left, Texture2DRef Right) noexcept
 {
 	return Left->format == Right->format && Left->height == Right->height && Left->id == Right->id && Left->width == Right->width;
+}
+//-----------------------------------------------------------------------------
+bool operator==(FramebufferRef Left, FramebufferRef Right) noexcept
+{
+	return Left->id == Right->id && Left->texture == Right->texture;
 }
 //-----------------------------------------------------------------------------
 ShaderProgramRef RenderSystem::CreateShaderProgram(const std::string& vertexShaderMemory, const std::string& fragmentShaderMemory)
@@ -346,6 +352,25 @@ Texture2DRef RenderSystem::CreateTexture2D(const Texture2DCreateInfo& createInfo
 	return resource;
 }
 //-----------------------------------------------------------------------------
+FramebufferRef RenderSystem::CreateFramebuffer(unsigned attachment, Texture2DRef texture)
+{
+	assert(IsValid(texture));
+
+	FramebufferRef resource(new Framebuffer());
+	resource->texture = texture;
+	glBindFramebuffer(GL_FRAMEBUFFER, resource->id);
+	glFramebufferTexture2D(GL_FRAMEBUFFER, attachment, GL_TEXTURE_2D, resource->texture->id, 0);
+	GLenum result = glCheckFramebufferStatus(GL_FRAMEBUFFER);
+	if( GL_FRAMEBUFFER_COMPLETE != result )
+	{
+		Error("Framebuffer is not complete.");
+		return {};
+	}
+	// restore prev state
+	glBindFramebuffer(GL_FRAMEBUFFER, m_cache.CurrentFramebuffer);
+	return resource;
+}
+//-----------------------------------------------------------------------------
 bool RenderSystem::IsReadyUniform(const Uniform& uniform)
 {
 	return IsValid(uniform) && uniform.programId == m_cache.CurrentShaderProgram;
@@ -510,6 +535,11 @@ void RenderSystem::ResetState(ResourceType type)
 		}
 		glActiveTexture(GL_TEXTURE0);
 	}
+	else if( type == ResourceType::Framebuffer )
+	{
+		m_cache.CurrentFramebuffer = 0;
+		glBindFramebuffer(GL_FRAMEBUFFER, 0);
+	}
 }
 //-----------------------------------------------------------------------------
 void RenderSystem::Bind(ShaderProgramRef resource)
@@ -559,6 +589,15 @@ void RenderSystem::Bind(Texture2DRef resource, unsigned slot)
 	m_cache.CurrentTexture2D[slot] = resource->id;
 	glActiveTexture(GL_TEXTURE0 + slot);
 	glBindTexture(GL_TEXTURE_2D, resource->id);
+}
+//-----------------------------------------------------------------------------
+void RenderSystem::Bind(FramebufferRef resource)
+{
+	if( !resource ) return;
+	assert(IsValid(resource));
+	if( m_cache.CurrentFramebuffer == resource->id ) return;
+	m_cache.CurrentFramebuffer = resource->id;
+	glBindFramebuffer(GL_FRAMEBUFFER, resource->id);
 }
 //-----------------------------------------------------------------------------
 void RenderSystem::Draw(VertexArrayRef vao, PrimitiveTopology primitive)

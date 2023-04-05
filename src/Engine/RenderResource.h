@@ -7,7 +7,8 @@ enum class ResourceType : uint8_t
 	VertexBuffer,
 	IndexBuffer,
 	VertexArray,
-	Texture2D
+	Texture2D,
+	Framebuffer
 };
 
 enum class ResourceUsage : uint8_t
@@ -280,6 +281,7 @@ public:
 	Framebuffer& operator=(const Framebuffer&) = delete;
 
 	unsigned id = 0;
+	Texture2DRef texture;
 };
 
 using FramebufferRef = std::shared_ptr<Framebuffer>;
@@ -294,3 +296,4 @@ bool operator==(VertexBufferRef Left, VertexBufferRef Right) noexcept;
 bool operator==(IndexBufferRef Left, IndexBufferRef Right) noexcept;
 bool operator==(VertexArrayRef Left, VertexArrayRef Right) noexcept;
 bool operator==(Texture2DRef Left, Texture2DRef Right) noexcept;
+bool operator==(FramebufferRef Left, FramebufferRef Right) noexcept;
