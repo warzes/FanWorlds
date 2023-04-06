@@ -1,6 +1,6 @@
 #pragma once
 
-class _001Triangle final : public IApp
+class _002Quad final : public IApp
 {
 	bool Create() final;
 	void Destroy() final;
@@ -15,6 +15,5 @@ private:
 	ShaderProgramRef m_shader;
 	Uniform m_uniformProjectionMatrix;
 	glm::mat4 m_perspective;
-	VertexBufferRef m_vb;
-	VertexArrayRef m_vao;
+	GeometryBufferRef m_geom;
 };

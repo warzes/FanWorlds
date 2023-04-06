@@ -38,20 +38,20 @@ void main()
 	{
 		glm::vec3 pos;
 		glm::vec3 color;
-	};
-
-	testVertex vert[] =
+	} 
+	vert[] =
 	{
 		{{-1.0f, -1.0f, 4.0f}, {1.0f, 0.0f, 0.0f}},
-		{{ 0.0f,  1.0f, 4.0f}, {0.0f, 1.0f, 0.0f}},
-		{{ 1.0f, -1.0f, 4.0f}, {0.0f, 0.0f, 1.0f}}
+		{{ 1.0f, -1.0f, 4.0f}, {0.0f, 1.0f, 0.0f}},
+		{{ 0.0f,  1.0f, 4.0f}, {0.0f, 0.0f, 1.0f}}
 	};
+	glEnable(GL_CULL_FACE); // для теста - треугольник выше против часой стрелки
 
 	auto& renderSystem = GetRenderSystem();
 
 	m_shader = renderSystem.CreateShaderProgram(vertexShaderText, fragmentShaderText);
 	m_uniformProjectionMatrix = renderSystem.GetUniform(m_shader, "projectionMatrix");
-	m_vb = renderSystem.CreateVertexBuffer(ResourceUsage::Static, 3, sizeof(testVertex), vert);
+	m_vb = renderSystem.CreateVertexBuffer(ResourceUsage::Static, Countof(vert), sizeof(testVertex), vert);
 	m_vao = renderSystem.CreateVertexArray(m_vb, nullptr, m_shader);
 
 	return true;
@@ -68,17 +68,19 @@ void _001Triangle::Destroy()
 //-----------------------------------------------------------------------------
 void _001Triangle::Render()
 {
+	auto& renderSystem = GetRenderSystem();
+
 	if( m_windowWidth != GetWindowWidth() || m_windowHeight != GetWindowHeight() )
 	{
 		m_windowWidth = GetWindowWidth();
 		m_windowHeight = GetWindowHeight();
+		m_perspective = glm::perspective(glm::radians(45.0f), GetWindowSizeAspect(), 0.01f, 1000.f);
+		renderSystem.SetViewport(m_windowWidth, m_windowHeight);
 	}
 
-	auto& renderSystem = GetRenderSystem();
-
+	renderSystem.Clear();
 	renderSystem.Bind(m_shader);
-	glm::mat4 mat = glm::perspective(glm::radians(45.0f), (float)GetWindowWidth() / (float)GetWindowHeight(), 0.01f, 1000.f);
-	renderSystem.SetUniform(m_uniformProjectionMatrix, mat);
+	renderSystem.SetUniform(m_uniformProjectionMatrix, m_perspective);
 	renderSystem.Draw(m_vao);
 }
 //-----------------------------------------------------------------------------

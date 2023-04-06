@@ -1,6 +1,7 @@
 ﻿#include "stdafx.h"
 // Basic Example
 #include "001_Triangle.h"
+#include "002_Quad.h"
 // Other
 #include "001_MonkeyScenes.h"
 //-----------------------------------------------------------------------------
@@ -24,7 +25,8 @@ int main(
 	while( 1 )
 	{
 		std::cout << "Select Example (q - exit):" << std::endl;
-		std::cout << "    b1 - Basic Triangle" << std::endl;
+		std::cout << "    b1 - Basic Triangle Draw" << std::endl;
+		std::cout << "    b2 - Basic Quad Draw" << std::endl;
 
 		std::cout << "    o1 - Monkey Scenes" << std::endl;
 		std::cout << std::endl;
@@ -42,6 +44,7 @@ int main(
 			engineDevice->RunApp(std::make_shared<x>()); \
 		}
 		START_SCENE("b1", _001Triangle);
+		START_SCENE("b2", _002Quad);
 		START_SCENE("o1", _001MonkeyScenes);
 
 #undef START_SCENE

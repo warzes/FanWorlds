@@ -1,7 +1,9 @@
 #pragma once
 
 #include "BaseClass.h"
+#include "OpenGLUtil.h"
 #include "RenderResource.h"
+#include "Capabilities.h"
 
 constexpr int MaxBindingTextures = 16;
 
@@ -19,9 +21,12 @@ public:
 	void Init(const RenderCreateInfo& createInfo);
 	void Close();
 
+	const Capabilities& GetCapabilities() const { return m_capabilities; }
+
 	void BeginFrame();
 	void EndFrame();
 
+	// current frame buffer
 	void SetClearColor(const glm::vec3& color);
 	void Clear();
 	void SetViewport(int width, int height);
@@ -57,10 +62,10 @@ public:
 	inline bool IsValid(GeometryBufferRef resource) const { return IsValid(resource->vao); }
 	inline bool IsValid(FramebufferRef resource) const { return resource && resource->id > 0; }
 
-	bool IsReadyUniform(const Uniform& uniform);
+	bool IsReadyUniform(const Uniform& uniform) const;
 
-	std::vector<ShaderAttribInfo> GetAttribInfo(ShaderProgramRef resource);
-	Uniform GetUniform(ShaderProgramRef program, const char* uniformName);
+	std::vector<ShaderAttributeInfo> GetAttributesInfo(ShaderProgramRef resource) const;
+	Uniform GetUniform(ShaderProgramRef program, const char* uniformName) const;
 
 	void SetUniform(const Uniform& uniform, int value);
 	void SetUniform(const Uniform& uniform, float value);
@@ -99,10 +104,14 @@ private:
 	RenderSystem& operator=(RenderSystem&&) = delete;
 	RenderSystem& operator=(const RenderSystem&) = delete;
 
+	void initializeCapabilities(bool print);
+
 	unsigned compileShader(GLenum openGLshaderType, const std::string& source);
 
 	int m_mainFramebufferWidth = 0;
 	int m_mainFramebufferHeight = 0;
+
+	Capabilities m_capabilities;
 
 	struct
 	{

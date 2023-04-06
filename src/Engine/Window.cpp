@@ -11,7 +11,7 @@ void GLFWFramebufferSizeCallback(GLFWwindow* window, int width, int height) noex
 	const auto app = static_cast<Window*>(glfwGetWindowUserPointer(window));
 	if( app == nullptr ) return;
 	app->m_windowWidth = width;
-	app->m_windowHeight = width;
+	app->m_windowHeight = height;
 }
 //-----------------------------------------------------------------------------
 bool Window::Create(const WindowCreateInfo& createInfo)

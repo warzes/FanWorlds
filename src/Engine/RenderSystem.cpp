@@ -64,6 +64,8 @@ void RenderSystem::Init(const RenderCreateInfo& createInfo)
 	Print("    > Version:  " + std::string((const char*)glGetString(GL_VERSION)));
 	Print("    > GLSL:     " + std::string((const char*)glGetString(GL_SHADING_LANGUAGE_VERSION)));
 
+	initializeCapabilities(true);
+
 	glEnable(GL_DEPTH_TEST);
 	//glEnable(GL_CULL_FACE);
 	glEnable(GL_BLEND);
@@ -90,10 +92,10 @@ void RenderSystem::BeginFrame()
 	{
 		m_mainFramebufferWidth = GetWindowWidth();
 		m_mainFramebufferHeight = GetWindowHeight();
-		glViewport(0, 0, m_mainFramebufferWidth, m_mainFramebufferHeight);
+		//glViewport(0, 0, m_mainFramebufferWidth, m_mainFramebufferHeight);
 	}
 
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	//glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 }
 //-----------------------------------------------------------------------------
 void RenderSystem::EndFrame()
@@ -113,5 +115,24 @@ void RenderSystem::Clear()
 void RenderSystem::SetViewport(int width, int height)
 {
 	glViewport(0, 0, width, height);
+}
+//-----------------------------------------------------------------------------
+void RenderSystem::initializeCapabilities(bool print)
+{
+	if( print ) Print("OpenGL: Capabilities information:");
+
+	GLint openGLValue = 0;
+	
+	glGetIntegerv(GL_MAX_TEXTURE_SIZE, &openGLValue);
+	m_capabilities.maximumTextureDimension = static_cast<uint32_t>(openGLValue);
+	if( print ) Print("    > Maximum Texture Dimension = " + std::to_string(m_capabilities.maximumTextureDimension));
+
+	glGetIntegerv(GL_MAX_TEXTURE_IMAGE_UNITS, &openGLValue);
+	m_capabilities.maximumTextureUnitCount = static_cast<uint32_t>(openGLValue);
+	if( print ) Print("    > Maximum Texture Unit Count = " + std::to_string(m_capabilities.maximumTextureUnitCount));
+
+	glGetIntegerv(GL_MAX_UNIFORM_BLOCK_SIZE, &openGLValue);
+	m_capabilities.maximumUniformBufferSize = static_cast<uint32_t>(openGLValue);
+	if( print ) Print("    > Maximum Uniform Buffer Size = " + std::to_string(m_capabilities.maximumUniformBufferSize));
 }
 //-----------------------------------------------------------------------------

@@ -9,6 +9,9 @@
     <ClCompile Include="001_MonkeyScenes.cpp">
       <Filter>Other</Filter>
     </ClCompile>
+    <ClCompile Include="002_Quad.cpp">
+      <Filter>BasicExample</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h" />
@@ -17,6 +20,9 @@
     </ClInclude>
     <ClInclude Include="001_MonkeyScenes.h">
       <Filter>Other</Filter>
+    </ClInclude>
+    <ClInclude Include="002_Quad.h">
+      <Filter>BasicExample</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

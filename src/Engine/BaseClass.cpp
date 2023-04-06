@@ -133,3 +133,12 @@ int BaseClass::GetWindowHeight() const
 	return m_engineDevice->m_window.GetHeight();
 }
 //-----------------------------------------------------------------------------
+float BaseClass::GetWindowSizeAspect() const
+{
+	assert(m_engineDevice);
+	const float width = static_cast<float>(GetWindowWidth());
+	const float height = static_cast<float>(GetWindowHeight());
+
+	return width / (height > 0.0f ? height : 1.0f);
+}
+//-----------------------------------------------------------------------------

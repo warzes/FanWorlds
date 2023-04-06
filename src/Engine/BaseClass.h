@@ -38,6 +38,7 @@ public:
 
 	int GetWindowWidth() const;
 	int GetWindowHeight() const;
+	float GetWindowSizeAspect() const;
 
 protected:
 	EngineDevice* m_engineDevice = nullptr;

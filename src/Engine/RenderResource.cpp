@@ -158,7 +158,7 @@ VertexArrayRef RenderSystem::CreateVertexArray(VertexBufferRef vbo, IndexBufferR
 	assert(IsValid(shaders));
 	if (!IsValid(shaders)) return {};
 
-	auto attribInfo = GetAttribInfo(shaders);
+	auto attribInfo = GetAttributesInfo(shaders);
 	if (attribInfo.empty()) return {};
 
 	size_t offset = 0;
@@ -371,43 +371,45 @@ FramebufferRef RenderSystem::CreateFramebuffer(unsigned attachment, Texture2DRef
 	return resource;
 }
 //-----------------------------------------------------------------------------
-bool RenderSystem::IsReadyUniform(const Uniform& uniform)
+bool RenderSystem::IsReadyUniform(const Uniform& uniform) const
 {
 	return IsValid(uniform) && uniform.programId == m_cache.CurrentShaderProgram;
 }
 //-----------------------------------------------------------------------------
-std::vector<ShaderAttribInfo> RenderSystem::GetAttribInfo(ShaderProgramRef resource)
+std::vector<ShaderAttributeInfo> RenderSystem::GetAttributesInfo(ShaderProgramRef resource) const
 {
 	if( !IsValid(resource) ) return {};
 
-	int activeAttribs = 0;
-	glGetProgramiv(resource->id, GL_ACTIVE_ATTRIBUTES, &activeAttribs);
-	int maxLength = 0;
-	glGetProgramiv(resource->id, GL_ACTIVE_ATTRIBUTE_MAX_LENGTH, &maxLength);
+	int activeAttribsCount = 0;
+	glGetProgramiv(resource->id, GL_ACTIVE_ATTRIBUTES, &activeAttribsCount);
+	int maxNameLength = 0;
+	glGetProgramiv(resource->id, GL_ACTIVE_ATTRIBUTE_MAX_LENGTH, &maxNameLength);
 
 	std::string name;
-	name.resize(static_cast<size_t>(maxLength));
+	name.resize(static_cast<size_t>(maxNameLength));
 
-	std::vector<ShaderAttribInfo> attribs(static_cast<size_t>(activeAttribs));
-	for( int i = 0; i < activeAttribs; i++ )
+	std::vector<ShaderAttributeInfo> attribs(static_cast<size_t>(activeAttribsCount));
+	for( int i = 0; i < activeAttribsCount; i++ )
 	{
 		GLint size;
 		GLenum type = 0;
-		glGetActiveAttrib(resource->id, (GLuint)i, maxLength, nullptr, &size, &type, name.data());
+		glGetActiveAttrib(resource->id, (GLuint)i, maxNameLength, nullptr, &size, &type, name.data());
 
 		attribs[i] = {
 			.typeId = type,
+			.type = GetAttributeType(type),
+			.numType = GetAttributeSize(type),
 			.name = name,
 			.location = glGetAttribLocation(resource->id, name.c_str())
 		};
 	}
 
-	std::sort(attribs.begin(), attribs.end(), [](const ShaderAttribInfo& a, const ShaderAttribInfo& b) {return a.location < b.location; });
+	std::sort(attribs.begin(), attribs.end(), [](const ShaderAttributeInfo& a, const ShaderAttributeInfo& b) {return a.location < b.location; });
 
 	return attribs;
 }
 //-----------------------------------------------------------------------------
-Uniform RenderSystem::GetUniform(ShaderProgramRef program, const char* uniformName)
+Uniform RenderSystem::GetUniform(ShaderProgramRef program, const char* uniformName) const
 {
 	if( !IsValid(program) || uniformName == nullptr ) return {};
 
