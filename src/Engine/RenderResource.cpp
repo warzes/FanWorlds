@@ -18,22 +18,42 @@ bool operator==(const Uniform& Left, const Uniform& Right) noexcept
 	return Left.location == Right.location && Left.programId == Right.programId;
 }
 //-----------------------------------------------------------------------------
-ShaderProgramRef RenderSystem::CreateShaderProgram(const std::string& vertexShaderMemory, const std::string& fragmentShaderMemory)
+bool ShaderSource::LoadFromFile(const std::string& file)
 {
-	if( vertexShaderMemory.length() == 0 )
+	// TODO: возможно заменить fstream на file?
+	m_filename = file;
+	//m_path = ; не забыть
+	std::ifstream shaderFile(file);
+	if( !shaderFile.is_open() )
+	{
+		//Error("Shader file '" + file + "' not found.");
+		return false;
+	}
+	std::stringstream shader_string;
+	shader_string << shaderFile.rdbuf();
+	m_src = shader_string.str();
+	// Remove the EOF from the end of the string.
+	if( m_src[m_src.length() - 1] == EOF )
+		m_src.pop_back();
+	return true;
+}
+//-----------------------------------------------------------------------------
+ShaderProgramRef RenderSystem::CreateShaderProgram(const ShaderSource& vertexShaderSource, const ShaderSource& fragmentShaderSource)
+{
+	if( !vertexShaderSource.IsValid() )
 	{
 		Error("You must provide vertex shader (source is blank).");
 		return {};
 	}
 
-	if( fragmentShaderMemory.length() == 0 )
+	if( !fragmentShaderSource.IsValid() )
 	{
 		Error("You must provide fragment shader (source is blank).");
 		return {};
 	}
 
-	ShaderRef glShaderVertex   = compileShader(ShaderType::Vertex, vertexShaderMemory);
-	ShaderRef glShaderFragment = compileShader(ShaderType::Fragment, fragmentShaderMemory);
+	ShaderRef glShaderVertex   = compileShader(ShaderType::Vertex, vertexShaderSource.GetSource());
+	ShaderRef glShaderFragment = compileShader(ShaderType::Fragment, fragmentShaderSource.GetSource());
 
 	ShaderProgramRef resource;
 	if( IsValid(glShaderVertex) && IsValid(glShaderFragment) )
@@ -47,12 +67,11 @@ ShaderProgramRef RenderSystem::CreateShaderProgram(const std::string& vertexShad
 		glGetProgramiv(*resource, GL_LINK_STATUS, &linkStatus);
 		if( linkStatus == GL_FALSE )
 		{
-			GLint errorMsgLen;
-			glGetProgramiv(*resource, GL_INFO_LOG_LENGTH, &errorMsgLen);
-
-			std::vector<GLchar> errorInfo(static_cast<size_t>(errorMsgLen));
-			glGetProgramInfoLog(*resource, errorMsgLen, nullptr, &errorInfo[0]);
-			Error("OPENGL: Shader program linking failed: " + std::string(&errorInfo[0]));
+			GLint infoLogLength;
+			glGetProgramiv(*resource, GL_INFO_LOG_LENGTH, &infoLogLength);
+			std::unique_ptr<GLchar> errorInfoText{ new GLchar[infoLogLength + 1] };
+			glGetProgramInfoLog(*resource, infoLogLength, nullptr, errorInfoText.get());
+			Error("OPENGL: Shader program linking failed: " + std::string(errorInfoText.get()));
 			resource.reset();
 		}
 		glDetachShader(*resource, *glShaderVertex);
@@ -339,303 +358,6 @@ FramebufferRef RenderSystem::CreateFramebuffer(FramebufferAttachment attachment,
 	return resource;
 }
 //-----------------------------------------------------------------------------
-bool RenderSystem::IsReadyUniform(const Uniform& uniform) const
-{
-	return IsValid(uniform) && uniform.programId == m_cache.CurrentShaderProgram;
-}
-//-----------------------------------------------------------------------------
-std::vector<ShaderAttributeInfo> RenderSystem::GetAttributesInfo(ShaderProgramRef resource) const
-{
-	if( !IsValid(resource) ) return {};
-
-	int activeAttribsCount = 0;
-	glGetProgramiv(*resource, GL_ACTIVE_ATTRIBUTES, &activeAttribsCount);
-	int maxNameLength = 0;
-	glGetProgramiv(*resource, GL_ACTIVE_ATTRIBUTE_MAX_LENGTH, &maxNameLength);
-
-	std::string name;
-	name.resize(static_cast<size_t>(maxNameLength));
-
-	std::vector<ShaderAttributeInfo> attribs(static_cast<size_t>(activeAttribsCount));
-	for( int i = 0; i < activeAttribsCount; i++ )
-	{
-		GLint size;
-		GLenum type = 0;
-		glGetActiveAttrib(*resource, (GLuint)i, maxNameLength, nullptr, &size, &type, name.data());
-
-		attribs[i] = {
-			.typeId = type,
-			.type = GetAttributeType(type),
-			.numType = GetAttributeSize(type),
-			.name = name,
-			.location = glGetAttribLocation(*resource, name.c_str())
-		};
-	}
-
-	std::sort(attribs.begin(), attribs.end(), [](const ShaderAttributeInfo& a, const ShaderAttributeInfo& b) {return a.location < b.location; });
-
-	return attribs;
-}
-//-----------------------------------------------------------------------------
-Uniform RenderSystem::GetUniform(ShaderProgramRef program, const char* uniformName) const
-{
-	if( !IsValid(program) || uniformName == nullptr ) return {};
-
-	if( m_cache.CurrentShaderProgram != *program ) glUseProgram(*program);
-	Uniform uniform;
-	uniform.location = glGetUniformLocation(*program, uniformName);
-	uniform.programId = *program;
-	glUseProgram(m_cache.CurrentShaderProgram); // restore prev shader program
-	return uniform;
-}
-//-----------------------------------------------------------------------------
-void RenderSystem::SetUniform(const Uniform& uniform, int value)
-{
-	assert(IsReadyUniform(uniform));
-	glUniform1i(uniform.location, value);
-}
-//-----------------------------------------------------------------------------
-void RenderSystem::SetUniform(const Uniform& uniform, float value)
-{
-	assert(IsReadyUniform(uniform));
-	glUniform1f(uniform.location, value);
-}
-//-----------------------------------------------------------------------------
-void RenderSystem::SetUniform(const Uniform& uniform, const glm::vec2& value)
-{
-	assert(IsReadyUniform(uniform));
-	glUniform2fv(uniform.location, 1, glm::value_ptr(value));
-}
-//-----------------------------------------------------------------------------
-void RenderSystem::SetUniform(const Uniform& uniform, const glm::vec3& value)
-{
-	assert(IsReadyUniform(uniform));
-	glUniform3fv(uniform.location, 1, glm::value_ptr(value));
-}
-//-----------------------------------------------------------------------------
-void RenderSystem::SetUniform(const Uniform& uniform, const glm::vec4& value)
-{
-	assert(IsReadyUniform(uniform));
-	glUniform4fv(uniform.location, 1, glm::value_ptr(value));
-}
-//-----------------------------------------------------------------------------
-void RenderSystem::SetUniform(const Uniform& uniform, const glm::mat3& value)
-{
-	assert(IsReadyUniform(uniform));
-	glUniformMatrix3fv(uniform.location, 1, GL_FALSE, glm::value_ptr(value));
-}
-//-----------------------------------------------------------------------------
-void RenderSystem::SetUniform(const Uniform& uniform, const glm::mat4& value)
-{
-	assert(IsReadyUniform(uniform));
-	glUniformMatrix4fv(uniform.location, 1, GL_FALSE, glm::value_ptr(value));
-}
-//-----------------------------------------------------------------------------
-void RenderSystem::SetUniform(const std::string& uniformName, int value)
-{
-	assert(m_cache.CurrentShaderProgram > 0);
-	glUniform1i(glGetUniformLocation(m_cache.CurrentShaderProgram, uniformName.c_str()), value);
-}
-//-----------------------------------------------------------------------------
-void RenderSystem::SetUniform(const std::string& uniformName, float value)
-{
-	assert(m_cache.CurrentShaderProgram > 0);
-	glUniform1f(glGetUniformLocation(m_cache.CurrentShaderProgram, uniformName.c_str()), value);
-}
-//-----------------------------------------------------------------------------
-void RenderSystem::SetUniform(const std::string& uniformName, const glm::vec2& value)
-{
-	assert(m_cache.CurrentShaderProgram > 0);
-	glUniform2fv(glGetUniformLocation(m_cache.CurrentShaderProgram, uniformName.c_str()), 1, glm::value_ptr(value));
-}
-//-----------------------------------------------------------------------------
-void RenderSystem::SetUniform(const std::string& uniformName, const glm::vec3& value)
-{
-	assert(m_cache.CurrentShaderProgram > 0);
-	glUniform3fv(glGetUniformLocation(m_cache.CurrentShaderProgram, uniformName.c_str()), 1, glm::value_ptr(value));
-}
-//-----------------------------------------------------------------------------
-void RenderSystem::SetUniform(const std::string& uniformName, const glm::vec4& value)
-{
-	assert(m_cache.CurrentShaderProgram > 0);
-	glUniform4fv(glGetUniformLocation(m_cache.CurrentShaderProgram, uniformName.c_str()), 1, glm::value_ptr(value));
-}
-//-----------------------------------------------------------------------------
-void RenderSystem::SetUniform(const std::string& uniformName, const glm::mat3& value)
-{
-	assert(m_cache.CurrentShaderProgram > 0);
-	glUniformMatrix3fv(glGetUniformLocation(m_cache.CurrentShaderProgram, uniformName.c_str()), 1, GL_FALSE, glm::value_ptr(value));
-}
-//-----------------------------------------------------------------------------
-void RenderSystem::SetUniform(const std::string& uniformName, const glm::mat4& value)
-{
-	assert(m_cache.CurrentShaderProgram > 0);
-	glUniformMatrix4fv(glGetUniformLocation(m_cache.CurrentShaderProgram, uniformName.c_str()), 1, GL_FALSE, glm::value_ptr(value));
-}
-//-----------------------------------------------------------------------------
-void RenderSystem::UpdateBuffer(VertexBufferRef vbo, unsigned offset, unsigned vertexCount, unsigned vertexSize, const void* data)
-{
-	assert(IsValid(vbo));
-
-	glBindBuffer(GL_ARRAY_BUFFER, *vbo);
-
-	if( vbo->count != vertexCount || vbo->size != vertexSize || vbo->usage != ResourceUsage::Dynamic )
-	{
-		glBufferData(GL_ARRAY_BUFFER, vertexCount * vertexSize, data, TranslateToGL(ResourceUsage::Dynamic));
-		vbo->usage = ResourceUsage::Dynamic;
-	}
-	else
-	{
-		glBufferSubData(GL_ARRAY_BUFFER, offset, vertexCount * vertexSize, data);
-	}
-	vbo->count = vertexCount;
-	vbo->size = vertexSize;
-
-	glBindBuffer(GL_ARRAY_BUFFER, m_cache.CurrentVBO); // restore current vb
-}
-//-----------------------------------------------------------------------------
-void RenderSystem::UpdateBuffer(IndexBufferRef ibo, unsigned offset, unsigned indexCount, unsigned indexSize, const void* data)
-{
-	assert(IsValid(ibo));
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, *ibo);
-	if( ibo->count != indexCount || ibo->size != indexSize || ibo->usage != ResourceUsage::Dynamic )
-	{
-		glBufferData(GL_ELEMENT_ARRAY_BUFFER, indexCount * indexSize, data, TranslateToGL(ResourceUsage::Dynamic));
-		ibo->usage = ResourceUsage::Dynamic;
-	}
-	else
-	{
-		glBufferSubData(GL_ELEMENT_ARRAY_BUFFER, offset, indexCount * indexSize, data);
-	}
-	ibo->count = indexCount;
-	ibo->size = indexSize;
-
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_cache.CurrentIBO); // restore current ib
-}
-//-----------------------------------------------------------------------------
-void RenderSystem::ResetState(ResourceType type)
-{
-	if( type == ResourceType::ShaderProgram )
-	{
-		m_cache.CurrentShaderProgram = 0;
-		glUseProgram(0);
-	}
-	else if( type == ResourceType::VertexBuffer )
-	{
-		m_cache.CurrentVBO = 0;
-		glBindBuffer(GL_ARRAY_BUFFER, 0);
-	}
-	else if( type == ResourceType::IndexBuffer )
-	{
-		m_cache.CurrentIBO = 0;
-		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
-	}
-	else if( type == ResourceType::VertexArray )
-	{
-		ResetState(ResourceType::VertexBuffer);
-		ResetState(ResourceType::IndexBuffer);
-		m_cache.CurrentVAO = 0;
-		glBindVertexArray(0);
-	}
-	else if( type == ResourceType::Texture2D )
-	{
-		for( unsigned i = 0; i < MaxBindingTextures; i++ )
-		{
-			glActiveTexture(GL_TEXTURE0 + i);
-			glBindTexture(GL_TEXTURE_2D, 0);
-			m_cache.CurrentTexture2D[i] = 0;
-		}
-		glActiveTexture(GL_TEXTURE0);
-	}
-	else if( type == ResourceType::Framebuffer )
-	{
-		m_cache.CurrentFramebuffer = 0;
-		glBindFramebuffer(GL_FRAMEBUFFER, 0);
-	}
-}
-//-----------------------------------------------------------------------------
-void RenderSystem::Bind(ShaderProgramRef resource)
-{
-	assert(IsValid(resource));
-	if( m_cache.CurrentShaderProgram == *resource ) return;
-	m_cache.CurrentShaderProgram = *resource;
-	glUseProgram(*resource);
-}
-//-----------------------------------------------------------------------------
-void RenderSystem::Bind(VertexBufferRef resource)
-{
-	if( !resource ) return;
-	assert(IsValid(resource));
-	if( m_cache.CurrentVBO == *resource ) return;
-	m_cache.CurrentVBO = *resource;
-	glBindBuffer(GL_ARRAY_BUFFER, *resource);
-}
-//-----------------------------------------------------------------------------
-void RenderSystem::Bind(IndexBufferRef resource)
-{
-	if( !resource ) return;
-	assert(IsValid(resource));
-	if( m_cache.CurrentIBO == *resource ) return;
-	m_cache.CurrentIBO = *resource;
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, *resource);
-}
-//-----------------------------------------------------------------------------
-void RenderSystem::Bind(const VertexAttribute& attribute)
-{
-	const GLuint oglLocation = static_cast<GLuint>(attribute.location);
-	glEnableVertexAttribArray(oglLocation);
-	glVertexAttribPointer(
-		oglLocation,
-		attribute.size,
-		GL_FLOAT,
-		(GLboolean)(attribute.normalized ? GL_TRUE : GL_FALSE),
-		attribute.stride,
-		attribute.offset);
-}
-//-----------------------------------------------------------------------------
-void RenderSystem::Bind(Texture2DRef resource, unsigned slot)
-{
-	if (!resource) return;
-	assert(IsValid(resource));
-	if( m_cache.CurrentTexture2D[slot] == *resource ) return;
-	m_cache.CurrentTexture2D[slot] = *resource;
-	glActiveTexture(GL_TEXTURE0 + slot);
-	glBindTexture(GL_TEXTURE_2D, *resource);
-}
-//-----------------------------------------------------------------------------
-void RenderSystem::Bind(FramebufferRef resource)
-{
-	if( !resource ) return;
-	assert(IsValid(resource));
-	if( m_cache.CurrentFramebuffer == *resource ) return;
-	m_cache.CurrentFramebuffer = *resource;
-	glBindFramebuffer(GL_FRAMEBUFFER, *resource);
-}
-//-----------------------------------------------------------------------------
-void RenderSystem::Draw(VertexArrayRef vao, PrimitiveTopology primitive)
-{
-	assert(IsValid(vao));
-
-	if( m_cache.CurrentVAO != *vao )
-	{
-		m_cache.CurrentVAO = *vao;
-		m_cache.CurrentVBO = 0;
-		m_cache.CurrentIBO = 0;
-		glBindVertexArray(*vao);
-		Bind(vao->vbo);
-		Bind(vao->ibo);
-	}
-
-	if( vao->ibo )
-	{
-		glDrawElements(TranslateToGL(primitive), (GLsizei)vao->ibo->count, SizeIndexType(vao->ibo->size), nullptr);
-	}
-	else
-	{
-		glDrawArrays(TranslateToGL(primitive), 0, (GLsizei)vao->vbo->count);
-	}
-}
-//-----------------------------------------------------------------------------
 ShaderRef RenderSystem::compileShader(ShaderType type, const std::string& source)
 {
 	const char* shaderText = source.data();
@@ -649,13 +371,13 @@ ShaderRef RenderSystem::compileShader(ShaderType type, const std::string& source
 	glGetShaderiv(*shader, GL_COMPILE_STATUS, &compileStatus);
 	if( compileStatus == GL_FALSE )
 	{
-		GLint infoLogSize;
-		glGetShaderiv(*shader, GL_INFO_LOG_LENGTH, &infoLogSize);
-		std::vector<GLchar> errorInfo(static_cast<size_t>(infoLogSize));
-		glGetShaderInfoLog(*shader, (GLsizei)errorInfo.size(), nullptr, &errorInfo[0]);
+		GLint infoLogLength;
+		glGetShaderiv(*shader, GL_INFO_LOG_LENGTH, &infoLogLength);
+		std::unique_ptr<GLchar> errorInfoText{ new GLchar[infoLogLength + 1] };
+		glGetShaderInfoLog(*shader, infoLogLength, nullptr, errorInfoText.get());
 
 		const std::string shaderName = ConvertToStr(type);
-		Error(shaderName + " Shader compilation failed : " + std::string(&errorInfo[0]) + ", Source: " + source);
+		Error(shaderName + " Shader compilation failed : " + std::string(errorInfoText.get()) + ", Source: " + source);
 		return {};
 	}
 

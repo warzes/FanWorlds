@@ -31,7 +31,7 @@ public:
 	void Clear();
 	void SetViewport(int width, int height);
 
-	ShaderProgramRef CreateShaderProgram(const std::string& vertexShaderMemory, const std::string& fragmentShaderMemory);
+	ShaderProgramRef CreateShaderProgram(const ShaderSource& vertexShaderSource, const ShaderSource& fragmentShaderSource);
 	VertexBufferRef CreateVertexBuffer(ResourceUsage usage, unsigned vertexCount, unsigned vertexSize, const void* data);
 	IndexBufferRef CreateIndexBuffer(ResourceUsage usage, unsigned indexCount, IndexType indexFormat, const void* data);
 	VertexArrayRef CreateVertexArray(VertexBufferRef vbo, IndexBufferRef ibo, const std::vector<VertexAttribute>& attribs);

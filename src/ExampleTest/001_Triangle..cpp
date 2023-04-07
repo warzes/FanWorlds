@@ -49,7 +49,7 @@ void main()
 
 	auto& renderSystem = GetRenderSystem();
 
-	m_shader = renderSystem.CreateShaderProgram(vertexShaderText, fragmentShaderText);
+	m_shader = renderSystem.CreateShaderProgram({ vertexShaderText }, { fragmentShaderText });
 	m_uniformProjectionMatrix = renderSystem.GetUniform(m_shader, "projectionMatrix");
 	m_vb = renderSystem.CreateVertexBuffer(ResourceUsage::Static, Countof(vert), sizeof(testVertex), vert);
 	m_vao = renderSystem.CreateVertexArray(m_vb, nullptr, m_shader);

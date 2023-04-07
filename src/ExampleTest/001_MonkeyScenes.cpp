@@ -50,7 +50,7 @@ void main()
     color = vec4(moment1, moment2, 0.0, 1.0);
 }  
 )";
-		simpleDepthShader = renderSystem.CreateShaderProgram(vertexShaderText, fragmentShaderText);
+        simpleDepthShader = renderSystem.CreateShaderProgram({ vertexShaderText }, { fragmentShaderText });
 	}
 
 	{
@@ -103,7 +103,7 @@ void main()
     color = vec4(result, 1.0);
 }
 )";
-		blurShader = renderSystem.CreateShaderProgram(vertexShaderText, fragmentShaderText);
+        blurShader = renderSystem.CreateShaderProgram({ vertexShaderText }, { fragmentShaderText });
 	}
 
 	{
@@ -217,7 +217,7 @@ void main()
     outputColor = vec4(pow(lighting, vec3(1.0 / 2.2)), 1.0);
 }
 )";
-		shader = renderSystem.CreateShaderProgram(vertexShaderText, fragmentShaderText);
+        shader = renderSystem.CreateShaderProgram({ vertexShaderText }, { fragmentShaderText });
 	}
 
     {
@@ -248,7 +248,7 @@ void main()
     //color = vec4(1, 0, 1, 1);
 }  
 )";
-        debugQuadShader = renderSystem.CreateShaderProgram(vertexShaderText, fragmentShaderText);
+        debugQuadShader = renderSystem.CreateShaderProgram({ vertexShaderText }, { fragmentShaderText });
     }
 
 
@@ -329,7 +329,7 @@ void main()
 }
 )";
 
-        m_tempShader = renderSystem.CreateShaderProgram(vertexShaderText, fragmentShaderText);
+        m_tempShader = renderSystem.CreateShaderProgram({ vertexShaderText }, { fragmentShaderText });
         m_tempuniformProj = renderSystem.GetUniform(m_tempShader, "projectionMatrix");
         m_tempuniformView = renderSystem.GetUniform(m_tempShader, "viewMatrix");
 
@@ -371,7 +371,7 @@ void main()
 }
 )";
 
-        shaderModel = renderSystem.CreateShaderProgram(vertexShaderModelText, fragmentShaderModelText);
+        shaderModel = renderSystem.CreateShaderProgram({ vertexShaderModelText }, { fragmentShaderModelText });
         uniformModelWorldMatrix = renderSystem.GetUniform(shaderModel, "uWorld");
         uniformModelViewMatrix = renderSystem.GetUniform(shaderModel, "uView");
         uniformModelProjectionMatrix = renderSystem.GetUniform(shaderModel, "uProjection");

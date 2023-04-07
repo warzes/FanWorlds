@@ -349,6 +349,58 @@ enum class FramebufferBinding : uint8_t
 	FramebufferBinding
 };
 
+//=============================================================================
+// Shader Core
+//=============================================================================
+
+// A class that can load shader sources in from files, and do some preprocessing on them.
+class ShaderSource
+{
+public:
+	ShaderSource() = default;
+	// Loads in the shader from a memory data.
+	ShaderSource(const std::string& src) : m_src(src) {};
+	ShaderSource(ShaderSource&&) = default;
+	ShaderSource(const ShaderSource&) = default;
+
+	ShaderSource& operator=(ShaderSource&&) = default;
+	ShaderSource& operator=(const ShaderSource&) = default;
+	ShaderSource& operator=(const std::string& src) { m_src = src; return *this; }
+
+	bool LoadFromFile(const std::string& file);
+
+	std::string& GetSource() { return m_src; }
+	const std::string& GetSource() const { return m_src; }
+	const std::string& GetPath() const { return m_path; }
+	const std::string& GetFilename() const { return m_filename; }
+
+	bool IsValid() const { return m_src.length() > 0; }
+
+	template<typename T>
+	void InsertMacroValue(const std::string& macroName, const T& value)
+	{
+		size_t macroPos = m_src.find("#define " + macroName);
+#if defined(_DEBUG)
+		if( macroPos == std::string::npos )
+		{
+			//Fatal("ShaderSource::insert_macro_value is called for '" + filename_ + "', but the shader doesn't have any macro named " + macroName);
+			return;
+		}
+#endif
+		size_t macroEnd = m_src.find('\n', macroPos);
+
+		std::stringstream sstream;
+		sstream << m_src.substr(0, macroPos + strlen("#define ") + macroName.length());
+		sstream << ' ' << value << m_src.substr(macroEnd);
+		m_src = sstream.str();
+	}
+
+private:
+	std::string m_filename = "Unnamed shader";
+	std::string m_path;
+	std::string m_src;
+};
+
 struct VertexAttribute
 {
 	unsigned location/* = -1*/;  // если -1, то берется индекс массива атрибутов
@@ -367,6 +419,14 @@ struct ShaderAttributeInfo
 	std::string name;
 	int location;
 };
+
+struct Uniform { int location = -1; unsigned programId = 0; };
+bool operator==(const Uniform& Left, const Uniform& Right) noexcept;
+
+//=============================================================================
+// Texture Core
+//=============================================================================
+
 
 struct Texture2DInfo
 {
@@ -389,10 +449,11 @@ struct Texture2DCreateInfo
 	unsigned mipMapCount = 1; // TODO: only compressed
 };
 
-struct Uniform { int location = -1; unsigned programId = 0; };
-bool operator==(const Uniform& Left, const Uniform& Right) noexcept;
-
+//=============================================================================
+// Render Resource OpenGL Object
+//=============================================================================
 // TODO: в будущем, если решу делать классы ресурсов, то вот эти ресурсы включать в них, как OpenGL обертки
+
 class glObject
 {
 public:
