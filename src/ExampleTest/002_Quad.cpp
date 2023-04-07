@@ -59,7 +59,7 @@ void main()
 	m_shader = renderSystem.CreateShaderProgram(vertexShaderText, fragmentShaderText);
 	m_uniformProjectionMatrix = renderSystem.GetUniform(m_shader, "projectionMatrix");
 
-	m_geom = renderSystem.CreateGeometryBuffer(ResourceUsage::Static, Countof(vert), sizeof(testVertex), vert, Countof(indices), IndexBufferFormat::Uint32, indices, m_shader);
+	m_geom = renderSystem.CreateGeometryBuffer(ResourceUsage::Static, Countof(vert), sizeof(testVertex), vert, Countof(indices), IndexType::Uint32, indices, m_shader);
 
 	return true;
 }

@@ -33,17 +33,17 @@ public:
 
 	ShaderProgramRef CreateShaderProgram(const std::string& vertexShaderMemory, const std::string& fragmentShaderMemory);
 	VertexBufferRef CreateVertexBuffer(ResourceUsage usage, unsigned vertexCount, unsigned vertexSize, const void* data);
-	IndexBufferRef CreateIndexBuffer(ResourceUsage usage, unsigned indexCount, IndexBufferFormat indexFormat, const void* data);
+	IndexBufferRef CreateIndexBuffer(ResourceUsage usage, unsigned indexCount, IndexType indexFormat, const void* data);
 	VertexArrayRef CreateVertexArray(VertexBufferRef vbo, IndexBufferRef ibo, const std::vector<VertexAttribute>& attribs);
 	VertexArrayRef CreateVertexArray(VertexBufferRef vbo, IndexBufferRef ibo, ShaderProgramRef shaders);
 
 	GeometryBufferRef CreateGeometryBuffer(ResourceUsage usage,
 		/*vertex*/unsigned vertexCount, unsigned vertexSize, const void* vertexData,
-		/*index*/unsigned indexCount, IndexBufferFormat indexFormat, const void* indexData,
+		/*index*/unsigned indexCount, IndexType indexFormat, const void* indexData,
 		ShaderProgramRef shaders);
 	GeometryBufferRef CreateGeometryBuffer(ResourceUsage usage,
 		/*vertex*/unsigned vertexCount, unsigned vertexSize, const void* vertexData,
-		/*index*/unsigned indexCount, IndexBufferFormat indexFormat, const void* indexData,
+		/*index*/unsigned indexCount, IndexType indexFormat, const void* indexData,
 		const std::vector<VertexAttribute>& attribs);
 	GeometryBufferRef CreateGeometryBuffer(ResourceUsage usage, unsigned vertexCount, unsigned vertexSize, const void* vertexData, ShaderProgramRef shaders);
 	GeometryBufferRef CreateGeometryBuffer(ResourceUsage usage, unsigned vertexCount, unsigned vertexSize, const void* vertexData, const std::vector<VertexAttribute>& attribs);
@@ -51,7 +51,7 @@ public:
 	Texture2DRef CreateTexture2D(const char* fileName, bool useCache = true, const Texture2DInfo& textureInfo = {});
 	Texture2DRef CreateTexture2D(const Texture2DCreateInfo& createInfo, const Texture2DInfo& textureInfo = {});
 
-	FramebufferRef CreateFramebuffer(unsigned attachment, Texture2DRef texture);
+	FramebufferRef CreateFramebuffer(FramebufferAttachment attachment, Texture2DRef texture);
 
 	inline bool IsValid(ShaderRef resource) const { return resource && resource->IsValid(); }
 	inline bool IsValid(ShaderProgramRef resource) const { return resource && resource->IsValid(); }

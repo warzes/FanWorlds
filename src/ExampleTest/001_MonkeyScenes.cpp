@@ -265,10 +265,10 @@ void main()
     texInfo.format = TexelsFormat::RG_F32;
     texInfo.width = texInfo.height = SHADOWMAP_SIZE;
     shadowMapTexture = renderSystem.CreateTexture2D(texInfo);
-    shadowMapFbo = renderSystem.CreateFramebuffer(GL_COLOR_ATTACHMENT0, shadowMapTexture);
+    shadowMapFbo = renderSystem.CreateFramebuffer(FramebufferAttachment::ColorAttachment0, shadowMapTexture);
 
     blurTexture = renderSystem.CreateTexture2D(texInfo);
-    blurFbo = renderSystem.CreateFramebuffer(GL_COLOR_ATTACHMENT0, blurTexture);
+    blurFbo = renderSystem.CreateFramebuffer(FramebufferAttachment::ColorAttachment0, blurTexture);
 #endif
 
     {
@@ -379,7 +379,7 @@ void main()
 
         m_geom = renderSystem.CreateGeometryBuffer(ResourceUsage::Static,
             Countof(vert), sizeof(testVertex), vert,
-            Countof(indexs), IndexBufferFormat::Uint32, indexs, 
+            Countof(indexs), IndexType::Uint32, indexs, 
             m_tempShader);
 
         Texture2DInfo texInfo;

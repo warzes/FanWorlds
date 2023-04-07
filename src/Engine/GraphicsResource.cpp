@@ -81,7 +81,7 @@ ModelRef GraphicsSystem::createMeshBuffer(std::vector<Mesh>&& meshes)
 		model->subMeshes[i].geometry = GetRenderSystem().CreateGeometryBuffer(
 			ResourceUsage::Static,
 			model->subMeshes[i].vertices.size(), sizeof(model->subMeshes[i].vertices[0]), model->subMeshes[i].vertices.data(),
-			model->subMeshes[i].indices.size(), IndexBufferFormat::Uint32, model->subMeshes[i].indices.data(), 
+			model->subMeshes[i].indices.size(), IndexType::Uint32, model->subMeshes[i].indices.data(), 
 			formatVertex);
 
 		// compute AABB

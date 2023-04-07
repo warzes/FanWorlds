@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #include "OpenGLUtil.h"
 
@@ -18,11 +18,99 @@ enum class ResourceType : uint8_t
 	Framebuffer
 };
 
+// TODO: возможно удалить заменив на BufferUsage (или наоборот)
 enum class ResourceUsage : uint8_t
 {
 	Static,
 	Dynamic,
 	Stream,
+};
+
+//=============================================================================
+// Blend enum
+//=============================================================================
+
+enum class BlendOp : uint8_t
+{
+	Add,
+	Subrtact,
+	ReverseSubtract,
+	Min,
+	Max
+};
+
+enum class BlendFactor : uint8_t
+{
+	Zero,
+	One,
+	SrcColor,
+	OneMinusSrcColor,
+	DstColor,
+	OneMinusDstColor,
+	SrcAlpha,
+	OneMinusSrcAlpha,
+	DstAlpha,
+	OneMinusDstAlpha,
+	ConstantColor,
+	OneMinusConstantColor,
+	ConstantAlpha,
+	OneMinusConstantAlpha,
+	SrcAlphaSaturate,
+	Src1Color,
+	OneMinusSrc1Color,
+	Src1Alpha,
+	OneMinusSrc1Alpha
+};
+
+//=============================================================================
+// Raster enum
+//=============================================================================
+
+enum class RasterCullMode : uint8_t
+{
+	Back,
+	Front,
+	FrontAndBack
+};
+
+enum class FaceOrientation : uint8_t
+{
+	Cw,
+	Ccw,
+};
+
+enum class RasterFillMode : uint8_t // TODO: нет функции TranslateToGL
+{
+	Solid,
+	Wireframe,
+};
+
+//=============================================================================
+// DepthStencil enum
+//=============================================================================
+
+enum class StencilOp : uint8_t
+{
+	Keep,
+	Zero,
+	Replace,
+	IncrSat,
+	DecrSat,
+	Invert,
+	IncrWrap,
+	DecrWrap
+};
+
+enum class ComparisonFunc : uint8_t
+{
+	Lequal,
+	Gequal,
+	Less,
+	Greater,
+	Equal,
+	Notequal,
+	Always,
+	Never
 };
 
 //=============================================================================
@@ -39,14 +127,120 @@ enum class ShaderType : uint8_t
 	Evaluation
 };
 
+//=============================================================================
+// GPUBuffer enum
+//=============================================================================
 
+// TODO: использовать
+enum class BufferType : uint8_t
+{
+	ArrayBuffer, // aka VertexBuffer
+	AtomicCounterBuffer,
+	CopyReadBuffer,
+	CopyWriteBuffer,
+	DispatchIndirectBuffer,
+	DrawIndirectBuffer,
+	ElementArrayBuffer, // aka Index Buffer
+	PixelPackBuffer,
+	PixelUnpackBuffer,
+	ShaderStorageBuffer,
+	TextureBuffer,
+	TransformFeedbackBuffer,
+	UniformBuffer
+};
 
+enum class BufferUsage : uint8_t // TODO: а возможно разбить по контектсу - у буферов свои, у текстур свои.
+{
+	StreamDraw,
+	StreamRead,
+	StreamCopy,
+	StaticDraw,
+	StaticRead,
+	StaticCopy,
+	DynamicDraw,
+	DynamicRead,
+	DynamicCopy
+};
 
+enum class BufferMapAccess : uint8_t
+{
+	Read,
+	Write,
+	ReadWrite
+};
+
+enum class BufferBinding : uint8_t
+{
+	ArrayBufferBinding,
+	AtomicCounterBufferBinding,
+	CopyReadBuffer,
+	CopyWriteBuffer,
+	DispatchIndirectBufferBinding,
+	DrawIndirectBufferBinding,
+	ElementArrayBufferBinding,
+	PixelPackBufferBinding,
+	PixelUnpackBufferBinding,
+	ShaderStorageBufferBinding,
+	TextureBindingBuffer,
+	TransformFeedbackBufferBinding,
+	UniformBufferBinding
+};
+
+enum class BufferMapAccessFlags : uint8_t
+{
+	MapReadBit,
+	MapWriteBit,
+	MapInvalidateRangeBit,
+	MapInvalidateBufferBit,
+	MapFlushExplicitBit,
+	MapUnsynchronizedBit,
+	MapPersistentBit,
+	MapCoherentBit
+};
+
+//=============================================================================
+// IndexBuffer enum
+//=============================================================================
+
+enum class IndexType : uint8_t
+{
+	Uint8,
+	Uint16,
+	Uint32
+};
+
+//=============================================================================
+// VertexArray enum
+//=============================================================================
 enum class PrimitiveTopology : uint8_t
 {
-	Lines,
-	Triangles,
 	Points,
+	Lines,
+	LineStrip,
+	LineLoop,
+	Triangles,
+	TriangleStrip,
+	TriangleFan,
+	LinesAdjacency,
+	LineStripAdjacency,
+	TrianglesAdjacency,
+	TriangleStripAdjacency,
+	Patches
+};
+
+//=============================================================================
+// Texture enum
+//=============================================================================
+
+enum class TextureType : uint8_t // TODO: использовать
+{
+	Texture1D,
+	Texture2D,
+	Texture3D,
+	TextureRectangle,
+	Texture1DArray,
+	Texture2DArray,
+	TextureCubeMap,
 };
 
 enum class TextureMinFilter : uint8_t
@@ -91,66 +285,73 @@ enum class TexelsFormat : uint8_t
 	DepthStencil_U24,
 };
 
-enum class BlendFactor : uint8_t
+enum class TextureCubeTarget : uint8_t
 {
-	Zero,
-	One
-	//...
+	TextureCubeMapPositiveX,
+	TextureCubeMapNegativeX,
+	TextureCubeMapPositiveY,
+	TextureCubeMapNegativeY,
+	TextureCubeMapPositiveZ,
+	TextureCubeMapNegativeZ
 };
 
-enum class BlendOp : uint8_t
+//=============================================================================
+// Framebuffer enum
+//=============================================================================
+
+enum class FramebufferAttachment : uint8_t
 {
-	Add = 1,
-	Subrtact = 2,
-	//...
+	ColorAttachment0,
+	ColorAttachment1,
+	ColorAttachment2,
+	ColorAttachment3,
+	ColorAttachment4,
+	ColorAttachment5,
+	ColorAttachment6,
+	ColorAttachment7,
+	ColorAttachment8,
+	ColorAttachment9,
+	ColorAttachment10,
+	ColorAttachment11,
+	ColorAttachment12,
+	ColorAttachment13,
+	ColorAttachment14,
+	ColorAttachment15,
+	DepthAttachment,
+	StencilAttachment,
+	DepthStencilAttachment
 };
 
-enum class RasterFillMode : uint8_t
+enum class FramebufferType : uint8_t
 {
-	Solid,
-	Wireframe,
+	ReadFramebuffer,
+	DrawFramebuffer,
+	Framebuffer
 };
 
-enum class RasterCullMode : uint8_t
+enum class FramebufferStatus : uint8_t
 {
-	Back,
-	Front,
-	Full
+	FramebufferComplete,
+	FramebufferUndefined,
+	FramebufferIncompleteAttachment,
+	FramebufferIncompleteMissingAttachment,
+	FramebufferIncompleteDrawBuffer,
+	FramebufferIncompleteReadBuffer,
+	FramebufferUnsupported,
+	FramebufferIncompleteMultisample,
+	FramebufferIncompleteLayerTargets
 };
 
-enum class StencilOp : uint8_t
+enum class FramebufferBinding : uint8_t
 {
-	Keep,
-	Zero,
-	Replace,
-	IncrSat,
-	DecrSat,
-	Invert,
-	Incr,
-	Decr
-};
-
-enum class ComparisonFunc : uint8_t
-{
-	Never,
-	Less = 2,
-	Equal = 3,
-	LessOrEqual = 4,
-	Greater = 5,
-	NotEqual = 6,
-	GreaterOrEqual = 7,
-	Always = 8
-};
-
-enum class IndexBufferFormat : uint8_t
-{
-	Uint16,
-	Uint32
+	ReadFramebufferBinding,
+	DrawFramebufferBinding,
+	FramebufferBinding
 };
 
 struct VertexAttribute
 {
-	unsigned location/* = -1*/;  // ���� -1, �� ������� ������ ������� ���������
+	unsigned location/* = -1*/;  // если -1, то берется индекс массива атрибутов
 	int size;
 	//unsigned type;
 	bool normalized;
@@ -191,6 +392,7 @@ struct Texture2DCreateInfo
 struct Uniform { int location = -1; unsigned programId = 0; };
 bool operator==(const Uniform& Left, const Uniform& Right) noexcept;
 
+// TODO: в будущем, если решу делать классы ресурсов, то вот эти ресурсы включать в них, как OpenGL обертки
 class glObject
 {
 public:

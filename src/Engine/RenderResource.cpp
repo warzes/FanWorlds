@@ -76,9 +76,9 @@ VertexBufferRef RenderSystem::CreateVertexBuffer(ResourceUsage usage, unsigned v
 	return resource;
 }
 //-----------------------------------------------------------------------------
-IndexBufferRef RenderSystem::CreateIndexBuffer(ResourceUsage usage, unsigned indexCount, IndexBufferFormat indexFormat, const void * data)
+IndexBufferRef RenderSystem::CreateIndexBuffer(ResourceUsage usage, unsigned indexCount, IndexType indexFormat, const void * data)
 {
-	const unsigned indexSize = SizeIndexBuffer(indexFormat);
+	const unsigned indexSize = SizeIndexType(indexFormat);
 	IndexBufferRef resource(new IndexBuffer(usage, indexCount, indexSize));
 	if (!IsValid(resource))
 	{
@@ -175,7 +175,7 @@ VertexArrayRef RenderSystem::CreateVertexArray(VertexBufferRef vbo, IndexBufferR
 	return CreateVertexArray(vbo, ibo, attribs);
 }
 //-----------------------------------------------------------------------------
-GeometryBufferRef RenderSystem::CreateGeometryBuffer(ResourceUsage usage, unsigned vertexCount, unsigned vertexSize, const void* vertexData, unsigned indexCount, IndexBufferFormat indexFormat, const void* indexData, ShaderProgramRef shaders)
+GeometryBufferRef RenderSystem::CreateGeometryBuffer(ResourceUsage usage, unsigned vertexCount, unsigned vertexSize, const void* vertexData, unsigned indexCount, IndexType indexFormat, const void* indexData, ShaderProgramRef shaders)
 {
 	assert(IsValid(shaders));
 
@@ -208,7 +208,7 @@ GeometryBufferRef RenderSystem::CreateGeometryBuffer(ResourceUsage usage, unsign
 	return geom;
 }
 //-----------------------------------------------------------------------------
-GeometryBufferRef RenderSystem::CreateGeometryBuffer(ResourceUsage usage, unsigned vertexCount, unsigned vertexSize, const void* vertexData, unsigned indexCount, IndexBufferFormat indexFormat, const void* indexData, const std::vector<VertexAttribute>& attribs)
+GeometryBufferRef RenderSystem::CreateGeometryBuffer(ResourceUsage usage, unsigned vertexCount, unsigned vertexSize, const void* vertexData, unsigned indexCount, IndexType indexFormat, const void* indexData, const std::vector<VertexAttribute>& attribs)
 {
 	GeometryBufferRef geom(new GeometryBuffer());
 
@@ -320,14 +320,14 @@ Texture2DRef RenderSystem::CreateTexture2D(const Texture2DCreateInfo& createInfo
 	return resource;
 }
 //-----------------------------------------------------------------------------
-FramebufferRef RenderSystem::CreateFramebuffer(unsigned attachment, Texture2DRef texture)
+FramebufferRef RenderSystem::CreateFramebuffer(FramebufferAttachment attachment, Texture2DRef texture)
 {
 	assert(IsValid(texture));
 
 	FramebufferRef resource(new Framebuffer());
 	resource->texture = texture;
 	glBindFramebuffer(GL_FRAMEBUFFER, *resource);
-	glFramebufferTexture2D(GL_FRAMEBUFFER, attachment, GL_TEXTURE_2D, *resource->texture, 0);
+	glFramebufferTexture2D(GL_FRAMEBUFFER, TranslateToGL(attachment), GL_TEXTURE_2D, *resource->texture, 0);
 	GLenum result = glCheckFramebufferStatus(GL_FRAMEBUFFER);
 	if( GL_FRAMEBUFFER_COMPLETE != result )
 	{
@@ -628,8 +628,7 @@ void RenderSystem::Draw(VertexArrayRef vao, PrimitiveTopology primitive)
 
 	if( vao->ibo )
 	{
-		const GLenum indexSizeType = (GLenum)(vao->ibo->size == sizeof(uint32_t) ? GL_UNSIGNED_INT : GL_UNSIGNED_SHORT);
-		glDrawElements(TranslateToGL(primitive), (GLsizei)vao->ibo->count, indexSizeType, nullptr);
+		glDrawElements(TranslateToGL(primitive), (GLsizei)vao->ibo->count, SizeIndexType(vao->ibo->size), nullptr);
 	}
 	else
 	{
