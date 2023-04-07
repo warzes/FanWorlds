@@ -45,7 +45,7 @@ DeferredRenderer::DeferredRenderer(RenderSystem& renderSystem)
 	0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF,
 	0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF,
 	};
-	m_defaultDiffuseTexture = new Texture(m_renderSystem, { DEFAULT_DIFFUSE_TEXTURE_SIZE, DEFAULT_DIFFUSE_TEXTURE_SIZE }, DEFAULT_DIFFUSE_TEXTURE_DATA);
+	m_defaultDiffuseTexture = new Texture2(m_renderSystem, { DEFAULT_DIFFUSE_TEXTURE_SIZE, DEFAULT_DIFFUSE_TEXTURE_SIZE }, DEFAULT_DIFFUSE_TEXTURE_DATA);
 
 	static constexpr int DEFAULT_EMISSIVE_TEXTURE_SIZE = 4;
 	static constexpr unsigned char DEFAULT_EMISSIVE_TEXTURE_DATA[DEFAULT_EMISSIVE_TEXTURE_SIZE * DEFAULT_EMISSIVE_TEXTURE_SIZE * 4] = {
@@ -54,7 +54,7 @@ DeferredRenderer::DeferredRenderer(RenderSystem& renderSystem)
 	0x00, 0x00, 0x00, 0xFF, 0x00, 0x00, 0x00, 0xFF, 0x00, 0x00, 0x00, 0xFF, 0x00, 0x00, 0x00, 0xFF,
 	0x00, 0x00, 0x00, 0xFF, 0x00, 0x00, 0x00, 0xFF, 0x00, 0x00, 0x00, 0xFF, 0x00, 0x00, 0x00, 0xFF,
 	};
-	m_defaultEmissiveTexture = new Texture(m_renderSystem, { DEFAULT_EMISSIVE_TEXTURE_SIZE, DEFAULT_EMISSIVE_TEXTURE_SIZE }, DEFAULT_EMISSIVE_TEXTURE_DATA);
+	m_defaultEmissiveTexture = new Texture2(m_renderSystem, { DEFAULT_EMISSIVE_TEXTURE_SIZE, DEFAULT_EMISSIVE_TEXTURE_SIZE }, DEFAULT_EMISSIVE_TEXTURE_DATA);
 
 	m_defaultMaterial = { m_defaultDiffuseTexture, m_defaultEmissiveTexture };
 

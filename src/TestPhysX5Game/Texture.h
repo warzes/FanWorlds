@@ -5,10 +5,10 @@
 class RenderSystem;
 
 
-class Texture
+class Texture2
 {
 public:
-	MOVE_ONLY(Texture);
+	MOVE_ONLY(Texture2);
 
 	enum class Wrap
 	{
@@ -17,9 +17,9 @@ public:
 		MirrorRepeat
 	};
 
-	Texture() = delete;
-	Texture(RenderSystem& renderSystem) : m_renderSystem(renderSystem) {}
-	Texture(
+	Texture2() = delete;
+	Texture2(RenderSystem& renderSystem) : m_renderSystem(renderSystem) {}
+	Texture2(
 		RenderSystem& renderSystem,
 		const glm::ivec2 &size,
 		const unsigned char *data,
@@ -27,9 +27,9 @@ public:
 		bool filter = false,
 		bool mipmaps = false
 	);
-	~Texture();
+	~Texture2();
 
-	static Texture FromFile(
+	static Texture2 FromFile(
 		RenderSystem& renderSystem,
 		const std::string &filename,
 		Wrap wrap = Wrap::Repeat,
@@ -39,7 +39,7 @@ public:
 
 	static void ClearCache();
 
-	static Texture *LoadToCache(SystemRef& systemRef, const std::string &filename);
+	static Texture2 *LoadToCache(SystemRef& systemRef, const std::string &filename);
 
 	[[nodiscard]] const glm::ivec2 &Size() const { return m_size; }
 

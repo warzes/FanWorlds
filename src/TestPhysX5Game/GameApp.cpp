@@ -34,7 +34,7 @@ void GameApp::Destroy()
 
 	GetInput().SetMouseLock(false);
 	destroyEssentials();
-	Texture::ClearCache();
+	Texture2::ClearCache();
 }
 
 void GameApp::Render()

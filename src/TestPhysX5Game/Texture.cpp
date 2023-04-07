@@ -2,9 +2,9 @@
 #include "Texture.h"
 #include "ImageFile.h"
 //-----------------------------------------------------------------------------
-static std::unordered_map<std::string, Texture> s_textureCache;
+static std::unordered_map<std::string, Texture2> s_textureCache;
 //-----------------------------------------------------------------------------
-Texture::Texture(RenderSystem& renderSystem, const glm::ivec2 &size, const unsigned char *data, Wrap wrap, bool filter, bool mipmaps)
+Texture2::Texture2(RenderSystem& renderSystem, const glm::ivec2 &size, const unsigned char *data, Wrap wrap, bool filter, bool mipmaps)
 	: m_renderSystem(renderSystem)
 {
 	m_size = size;
@@ -46,7 +46,7 @@ Texture::Texture(RenderSystem& renderSystem, const glm::ivec2 &size, const unsig
 	}
 }
 //-----------------------------------------------------------------------------
-Texture Texture::FromFile(RenderSystem& renderSystem, const std::string &filename, Texture::Wrap wrap, bool filter, bool mipmaps)
+Texture2 Texture2::FromFile(RenderSystem& renderSystem, const std::string &filename, Texture2::Wrap wrap, bool filter, bool mipmaps)
 {
 	ImageFile image(renderSystem.GetFileSystem(), filename);
 	if( !image.GetData() )
@@ -57,12 +57,12 @@ Texture Texture::FromFile(RenderSystem& renderSystem, const std::string &filenam
 	return { renderSystem, {image.GetWidth(), image.GetHeight()}, image.GetData(), wrap, filter, mipmaps};
 }
 //-----------------------------------------------------------------------------
-void Texture::ClearCache()
+void Texture2::ClearCache()
 {
 	s_textureCache.clear();
 }
 //-----------------------------------------------------------------------------
-Texture *Texture::LoadToCache(SystemRef& systemRef, const std::string &filename)
+Texture2 *Texture2::LoadToCache(SystemRef& systemRef, const std::string &filename)
 {
 	auto pair = s_textureCache.find(filename);
 	if( pair == s_textureCache.end() )
@@ -73,12 +73,12 @@ Texture *Texture::LoadToCache(SystemRef& systemRef, const std::string &filename)
 	return &pair->second;
 }
 //-----------------------------------------------------------------------------
-Texture::~Texture()
+Texture2::~Texture2()
 {
 	if( m_texture ) glDeleteTextures(1, &m_texture);
 }
 //-----------------------------------------------------------------------------
-void Texture::Bind(GLuint unit) const
+void Texture2::Bind(GLuint unit) const
 {
 	glBindTextureUnit(unit, m_texture);
 }

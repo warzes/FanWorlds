@@ -1,7 +1,7 @@
 #pragma once
 
 #include "RenderResource.h"
-
+//-----------------------------------------------------------------------------
 inline GLenum TranslateToGL(ResourceUsage usage)
 {
 	switch( usage )
@@ -9,8 +9,42 @@ inline GLenum TranslateToGL(ResourceUsage usage)
 	case ResourceUsage::Static:  return GL_STATIC_DRAW;
 	case ResourceUsage::Dynamic: return GL_DYNAMIC_DRAW;
 	case ResourceUsage::Stream:  return GL_STREAM_DRAW;
+	default: break;
 	}
+	assert(false && "Unknown ResourceUsage");
 	return 0;
+}
+//-----------------------------------------------------------------------------
+inline GLenum TranslateToGL(ShaderType usage)
+{
+	switch( usage )
+	{
+	case ShaderType::Vertex:      return GL_VERTEX_SHADER;
+	case ShaderType::Fragment:    return GL_FRAGMENT_SHADER;
+	case ShaderType::Geometry:    return GL_GEOMETRY_SHADER;
+	case ShaderType::Compute:     return GL_COMPUTE_SHADER;
+	case ShaderType::TessControl: return GL_TESS_CONTROL_SHADER;
+	case ShaderType::Evaluation:  return GL_TESS_EVALUATION_SHADER;
+	default: break;
+	}
+	assert(false && "Unknown ShaderType");
+	return 0;
+}
+//-----------------------------------------------------------------------------
+inline std::string ConvertToStr(ShaderType usage)
+{
+	switch( usage )
+	{
+	case ShaderType::Vertex:      return "Vertex";
+	case ShaderType::Fragment:    return "Fragment";
+	case ShaderType::Geometry:    return "Geometry";
+	case ShaderType::Compute:     return "Compute";
+	case ShaderType::TessControl: return "TessControl";
+	case ShaderType::Evaluation:  return "Evaluation";
+	default: break;
+	}
+	assert(false && "Unknown ShaderType");
+	return "";
 }
 //-----------------------------------------------------------------------------
 inline GLenum TranslateToGL(PrimitiveTopology p)

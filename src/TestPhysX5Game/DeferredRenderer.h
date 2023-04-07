@@ -97,8 +97,8 @@ private:
 	MeshPositionOnly m_fullscreenQuad;
 	MeshPositionOnly m_skyboxCube;
 
-	Texture* m_defaultDiffuseTexture = nullptr;
-	Texture* m_defaultEmissiveTexture = nullptr;
+	Texture2* m_defaultDiffuseTexture = nullptr;
+	Texture2* m_defaultEmissiveTexture = nullptr;
 	Material2 m_defaultMaterial{
 		m_defaultDiffuseTexture,
 		m_defaultEmissiveTexture

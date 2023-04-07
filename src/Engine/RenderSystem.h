@@ -53,14 +53,15 @@ public:
 
 	FramebufferRef CreateFramebuffer(unsigned attachment, Texture2DRef texture);
 
-	inline bool IsValid(ShaderProgramRef resource) const { return resource && resource->id > 0; }
+	inline bool IsValid(ShaderRef resource) const { return resource && resource->IsValid(); }
+	inline bool IsValid(ShaderProgramRef resource) const { return resource && resource->IsValid(); }
 	inline bool IsValid(const Uniform& uniform) const { return uniform.location >= 0; }
-	inline bool IsValid(VertexBufferRef resource) const { return resource && resource->id > 0; }
-	inline bool IsValid(IndexBufferRef resource) const { return resource && resource->id > 0; }
-	inline bool IsValid(VertexArrayRef resource) const { return resource && resource->id > 0; }
-	inline bool IsValid(Texture2DRef resource) const { return resource && resource->id > 0; }
+	inline bool IsValid(VertexBufferRef resource) const { return resource && resource->IsValid(); }
+	inline bool IsValid(IndexBufferRef resource) const { return resource && resource->IsValid(); }
+	inline bool IsValid(VertexArrayRef resource) const { return resource && resource->IsValid(); }
+	inline bool IsValid(Texture2DRef resource) const { return resource && resource->IsValid(); }
 	inline bool IsValid(GeometryBufferRef resource) const { return IsValid(resource->vao); }
-	inline bool IsValid(FramebufferRef resource) const { return resource && resource->id > 0; }
+	inline bool IsValid(FramebufferRef resource) const { return resource && resource->IsValid(); }
 
 	bool IsReadyUniform(const Uniform& uniform) const;
 
@@ -106,7 +107,7 @@ private:
 
 	void initializeCapabilities(bool print);
 
-	unsigned compileShader(GLenum openGLshaderType, const std::string& source);
+	ShaderRef compileShader(ShaderType type, const std::string& source);
 
 	int m_mainFramebufferWidth = 0;
 	int m_mainFramebufferHeight = 0;

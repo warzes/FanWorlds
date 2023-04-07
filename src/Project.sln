@@ -5,6 +5,7 @@ VisualStudioVersion = 17.5.33502.453
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DOC", "DOC", "{DBE8E3A4-9179-4FB8-AF80-43F9DA7D2AB5}"
 	ProjectSection(SolutionItems) = preProject
+		Idea.md = Idea.md
 		..\README.md = ..\README.md
 	EndProjectSection
 EndProject

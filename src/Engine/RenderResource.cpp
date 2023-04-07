@@ -4,48 +4,18 @@
 #include "TranslateToGL.h"
 #include "STBImageLoader.h"
 //-----------------------------------------------------------------------------
-// если какая-то структура была изменена, надо не забыть внести изменения в operator==
-static_assert(sizeof(ShaderProgram) == 4, "ShaderProgram changed!!!");
-static_assert(sizeof(Uniform) == 8, "Uniform changed!!!");
-static_assert(sizeof(VertexBuffer) == 16, "VertexBuffer changed!!!");
-static_assert(sizeof(IndexBuffer) == 16, "IndexBuffer changed!!!");
-static_assert(sizeof(VertexArray) == 48, "VertexArray changed!!!");
-static_assert(sizeof(Texture2D) == 16, "Texture2D changed!!!");
-static_assert(sizeof(Framebuffer) == 24, "Framebuffer changed!!!");
-//-----------------------------------------------------------------------------
-bool operator==(ShaderProgramRef Left, ShaderProgramRef Right) noexcept
+Shader::Shader(ShaderType type)
 {
-	return Left->id == Right->id;
+	m_handle = glCreateShader(TranslateToGL(type));
+	m_ownership = true;
 }
+//-----------------------------------------------------------------------------
+// если какая-то структура была изменена, надо не забыть внести изменения в operator==
+static_assert(sizeof(Uniform) == 8, "Uniform changed!!!");
 //-----------------------------------------------------------------------------
 bool operator==(const Uniform& Left, const Uniform& Right) noexcept
 {
 	return Left.location == Right.location && Left.programId == Right.programId;
-}
-//-----------------------------------------------------------------------------
-bool operator==(VertexBufferRef Left, VertexBufferRef Right) noexcept
-{
-	return Left->count == Right->count && Left->id == Right->id && Left->size == Right->size && Left->usage == Right->usage;
-}
-//-----------------------------------------------------------------------------
-bool operator==(IndexBufferRef Left, IndexBufferRef Right) noexcept
-{
-	return Left->count == Right->count && Left->id == Right->id && Left->size == Right->size && Left->usage == Right->usage;
-}
-//-----------------------------------------------------------------------------
-bool operator==(VertexArrayRef Left, VertexArrayRef Right) noexcept
-{
-	return Left->attribsCount == Right->attribsCount && Left->ibo == Right->ibo && Left->id == Right->id && Left->vbo == Right->vbo;
-}
-//-----------------------------------------------------------------------------
-bool operator==(Texture2DRef Left, Texture2DRef Right) noexcept
-{
-	return Left->format == Right->format && Left->height == Right->height && Left->id == Right->id && Left->width == Right->width;
-}
-//-----------------------------------------------------------------------------
-bool operator==(FramebufferRef Left, FramebufferRef Right) noexcept
-{
-	return Left->id == Right->id && Left->texture == Right->texture;
 }
 //-----------------------------------------------------------------------------
 ShaderProgramRef RenderSystem::CreateShaderProgram(const std::string& vertexShaderMemory, const std::string& fragmentShaderMemory)
@@ -62,34 +32,32 @@ ShaderProgramRef RenderSystem::CreateShaderProgram(const std::string& vertexShad
 		return {};
 	}
 
-	const GLuint glShaderVertex = compileShader(GL_VERTEX_SHADER, vertexShaderMemory);
-	const GLuint glShaderFragment = compileShader(GL_FRAGMENT_SHADER, fragmentShaderMemory);
+	ShaderRef glShaderVertex   = compileShader(ShaderType::Vertex, vertexShaderMemory);
+	ShaderRef glShaderFragment = compileShader(ShaderType::Fragment, fragmentShaderMemory);
 
 	ShaderProgramRef resource;
-	if( glShaderVertex > 0 && glShaderFragment > 0 )
+	if( IsValid(glShaderVertex) && IsValid(glShaderFragment) )
 	{
 		resource.reset(new ShaderProgram());
-		glAttachShader(resource->id, glShaderVertex);
-		glAttachShader(resource->id, glShaderFragment);
-		glLinkProgram(resource->id);
+		glAttachShader(*resource, *glShaderVertex);
+		glAttachShader(*resource, *glShaderFragment);
+		glLinkProgram(*resource);
 
 		GLint linkStatus = 0;
-		glGetProgramiv(resource->id, GL_LINK_STATUS, &linkStatus);
+		glGetProgramiv(*resource, GL_LINK_STATUS, &linkStatus);
 		if( linkStatus == GL_FALSE )
 		{
 			GLint errorMsgLen;
-			glGetProgramiv(resource->id, GL_INFO_LOG_LENGTH, &errorMsgLen);
+			glGetProgramiv(*resource, GL_INFO_LOG_LENGTH, &errorMsgLen);
 
 			std::vector<GLchar> errorInfo(static_cast<size_t>(errorMsgLen));
-			glGetProgramInfoLog(resource->id, errorMsgLen, nullptr, &errorInfo[0]);
+			glGetProgramInfoLog(*resource, errorMsgLen, nullptr, &errorInfo[0]);
 			Error("OPENGL: Shader program linking failed: " + std::string(&errorInfo[0]));
 			resource.reset();
 		}
-		glDetachShader(resource->id, glShaderVertex);
-		glDetachShader(resource->id, glShaderFragment);
+		glDetachShader(*resource, *glShaderVertex);
+		glDetachShader(*resource, *glShaderFragment);
 	}
-	glDeleteShader(glShaderVertex);
-	glDeleteShader(glShaderFragment);
 
 	return resource;
 }
@@ -102,7 +70,7 @@ VertexBufferRef RenderSystem::CreateVertexBuffer(ResourceUsage usage, unsigned v
 		Error("VertexBuffer create failed!");
 		return {};
 	}
-	glBindBuffer(GL_ARRAY_BUFFER, resource->id);
+	glBindBuffer(GL_ARRAY_BUFFER, *resource);
 	glBufferData(GL_ARRAY_BUFFER, vertexCount * vertexSize, data, TranslateToGL(usage));
 	glBindBuffer(GL_ARRAY_BUFFER, m_cache.CurrentVBO); // restore current vb
 	return resource;
@@ -117,7 +85,7 @@ IndexBufferRef RenderSystem::CreateIndexBuffer(ResourceUsage usage, unsigned ind
 		Error("IndexBuffer create failed!");
 		return {};
 	}
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, resource->id);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, *resource);
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, indexCount * indexSize, data, TranslateToGL(usage));
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_cache.CurrentIBO); // restore current ib
 	return resource;
@@ -138,7 +106,7 @@ VertexArrayRef RenderSystem::CreateVertexArray(VertexBufferRef vbo, IndexBufferR
 		return {};
 	}
 
-	glBindVertexArray(resource->id);
+	glBindVertexArray(*resource);
 	Bind(resource->vbo);
 	for (size_t i = 0; i < attribs.size(); i++)
 	{
@@ -314,7 +282,7 @@ Texture2DRef RenderSystem::CreateTexture2D(const Texture2DCreateInfo& createInfo
 	Texture2DRef resource(new Texture2D(createInfo.width, createInfo.height, createInfo.format));
 	// gen texture res
 	glActiveTexture(GL_TEXTURE0);
-	glBindTexture(GL_TEXTURE_2D, resource->id);
+	glBindTexture(GL_TEXTURE_2D, *resource);
 
 	// set the texture wrapping parameters
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, TranslateToGL(textureInfo.wrapS));
@@ -358,8 +326,8 @@ FramebufferRef RenderSystem::CreateFramebuffer(unsigned attachment, Texture2DRef
 
 	FramebufferRef resource(new Framebuffer());
 	resource->texture = texture;
-	glBindFramebuffer(GL_FRAMEBUFFER, resource->id);
-	glFramebufferTexture2D(GL_FRAMEBUFFER, attachment, GL_TEXTURE_2D, resource->texture->id, 0);
+	glBindFramebuffer(GL_FRAMEBUFFER, *resource);
+	glFramebufferTexture2D(GL_FRAMEBUFFER, attachment, GL_TEXTURE_2D, *resource->texture, 0);
 	GLenum result = glCheckFramebufferStatus(GL_FRAMEBUFFER);
 	if( GL_FRAMEBUFFER_COMPLETE != result )
 	{
@@ -381,9 +349,9 @@ std::vector<ShaderAttributeInfo> RenderSystem::GetAttributesInfo(ShaderProgramRe
 	if( !IsValid(resource) ) return {};
 
 	int activeAttribsCount = 0;
-	glGetProgramiv(resource->id, GL_ACTIVE_ATTRIBUTES, &activeAttribsCount);
+	glGetProgramiv(*resource, GL_ACTIVE_ATTRIBUTES, &activeAttribsCount);
 	int maxNameLength = 0;
-	glGetProgramiv(resource->id, GL_ACTIVE_ATTRIBUTE_MAX_LENGTH, &maxNameLength);
+	glGetProgramiv(*resource, GL_ACTIVE_ATTRIBUTE_MAX_LENGTH, &maxNameLength);
 
 	std::string name;
 	name.resize(static_cast<size_t>(maxNameLength));
@@ -393,14 +361,14 @@ std::vector<ShaderAttributeInfo> RenderSystem::GetAttributesInfo(ShaderProgramRe
 	{
 		GLint size;
 		GLenum type = 0;
-		glGetActiveAttrib(resource->id, (GLuint)i, maxNameLength, nullptr, &size, &type, name.data());
+		glGetActiveAttrib(*resource, (GLuint)i, maxNameLength, nullptr, &size, &type, name.data());
 
 		attribs[i] = {
 			.typeId = type,
 			.type = GetAttributeType(type),
 			.numType = GetAttributeSize(type),
 			.name = name,
-			.location = glGetAttribLocation(resource->id, name.c_str())
+			.location = glGetAttribLocation(*resource, name.c_str())
 		};
 	}
 
@@ -413,10 +381,10 @@ Uniform RenderSystem::GetUniform(ShaderProgramRef program, const char* uniformNa
 {
 	if( !IsValid(program) || uniformName == nullptr ) return {};
 
-	if( m_cache.CurrentShaderProgram != program->id ) glUseProgram(program->id);
+	if( m_cache.CurrentShaderProgram != *program ) glUseProgram(*program);
 	Uniform uniform;
-	uniform.location = glGetUniformLocation(program->id, uniformName);
-	uniform.programId = program->id;
+	uniform.location = glGetUniformLocation(*program, uniformName);
+	uniform.programId = *program;
 	glUseProgram(m_cache.CurrentShaderProgram); // restore prev shader program
 	return uniform;
 }
@@ -509,7 +477,7 @@ void RenderSystem::UpdateBuffer(VertexBufferRef vbo, unsigned offset, unsigned v
 {
 	assert(IsValid(vbo));
 
-	glBindBuffer(GL_ARRAY_BUFFER, vbo->id);
+	glBindBuffer(GL_ARRAY_BUFFER, *vbo);
 
 	if( vbo->count != vertexCount || vbo->size != vertexSize || vbo->usage != ResourceUsage::Dynamic )
 	{
@@ -529,7 +497,7 @@ void RenderSystem::UpdateBuffer(VertexBufferRef vbo, unsigned offset, unsigned v
 void RenderSystem::UpdateBuffer(IndexBufferRef ibo, unsigned offset, unsigned indexCount, unsigned indexSize, const void* data)
 {
 	assert(IsValid(ibo));
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibo->id);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, *ibo);
 	if( ibo->count != indexCount || ibo->size != indexSize || ibo->usage != ResourceUsage::Dynamic )
 	{
 		glBufferData(GL_ELEMENT_ARRAY_BUFFER, indexCount * indexSize, data, TranslateToGL(ResourceUsage::Dynamic));
@@ -589,27 +557,27 @@ void RenderSystem::ResetState(ResourceType type)
 void RenderSystem::Bind(ShaderProgramRef resource)
 {
 	assert(IsValid(resource));
-	if( m_cache.CurrentShaderProgram == resource->id ) return;
-	m_cache.CurrentShaderProgram = resource->id;
-	glUseProgram(resource->id);
+	if( m_cache.CurrentShaderProgram == *resource ) return;
+	m_cache.CurrentShaderProgram = *resource;
+	glUseProgram(*resource);
 }
 //-----------------------------------------------------------------------------
 void RenderSystem::Bind(VertexBufferRef resource)
 {
 	if( !resource ) return;
 	assert(IsValid(resource));
-	if( m_cache.CurrentVBO == resource->id ) return;
-	m_cache.CurrentVBO = resource->id;
-	glBindBuffer(GL_ARRAY_BUFFER, resource->id);
+	if( m_cache.CurrentVBO == *resource ) return;
+	m_cache.CurrentVBO = *resource;
+	glBindBuffer(GL_ARRAY_BUFFER, *resource);
 }
 //-----------------------------------------------------------------------------
 void RenderSystem::Bind(IndexBufferRef resource)
 {
 	if( !resource ) return;
 	assert(IsValid(resource));
-	if( m_cache.CurrentIBO == resource->id ) return;
-	m_cache.CurrentIBO = resource->id;
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, resource->id);
+	if( m_cache.CurrentIBO == *resource ) return;
+	m_cache.CurrentIBO = *resource;
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, *resource);
 }
 //-----------------------------------------------------------------------------
 void RenderSystem::Bind(const VertexAttribute& attribute)
@@ -629,31 +597,31 @@ void RenderSystem::Bind(Texture2DRef resource, unsigned slot)
 {
 	if (!resource) return;
 	assert(IsValid(resource));
-	if( m_cache.CurrentTexture2D[slot] == resource->id ) return;
-	m_cache.CurrentTexture2D[slot] = resource->id;
+	if( m_cache.CurrentTexture2D[slot] == *resource ) return;
+	m_cache.CurrentTexture2D[slot] = *resource;
 	glActiveTexture(GL_TEXTURE0 + slot);
-	glBindTexture(GL_TEXTURE_2D, resource->id);
+	glBindTexture(GL_TEXTURE_2D, *resource);
 }
 //-----------------------------------------------------------------------------
 void RenderSystem::Bind(FramebufferRef resource)
 {
 	if( !resource ) return;
 	assert(IsValid(resource));
-	if( m_cache.CurrentFramebuffer == resource->id ) return;
-	m_cache.CurrentFramebuffer = resource->id;
-	glBindFramebuffer(GL_FRAMEBUFFER, resource->id);
+	if( m_cache.CurrentFramebuffer == *resource ) return;
+	m_cache.CurrentFramebuffer = *resource;
+	glBindFramebuffer(GL_FRAMEBUFFER, *resource);
 }
 //-----------------------------------------------------------------------------
 void RenderSystem::Draw(VertexArrayRef vao, PrimitiveTopology primitive)
 {
 	assert(IsValid(vao));
 
-	if( m_cache.CurrentVAO != vao->id )
+	if( m_cache.CurrentVAO != *vao )
 	{
-		m_cache.CurrentVAO = vao->id;
+		m_cache.CurrentVAO = *vao;
 		m_cache.CurrentVBO = 0;
 		m_cache.CurrentIBO = 0;
-		glBindVertexArray(vao->id);
+		glBindVertexArray(*vao);
 		Bind(vao->vbo);
 		Bind(vao->ibo);
 	}
@@ -669,35 +637,29 @@ void RenderSystem::Draw(VertexArrayRef vao, PrimitiveTopology primitive)
 	}
 }
 //-----------------------------------------------------------------------------
-unsigned RenderSystem::compileShader(GLenum openGLshaderType, const std::string& source)
+ShaderRef RenderSystem::compileShader(ShaderType type, const std::string& source)
 {
 	const char* shaderText = source.data();
 	const GLint lenShaderText = static_cast<GLint>(source.size());
-	const GLuint shaderId = glCreateShader(openGLshaderType);
-	glShaderSource(shaderId, 1, &shaderText, &lenShaderText);
-	glCompileShader(shaderId);
+
+	ShaderRef shader(new Shader(type));
+	glShaderSource(*shader, 1, &shaderText, &lenShaderText);
+	glCompileShader(*shader);
 
 	GLint compileStatus = GL_FALSE;
-	glGetShaderiv(shaderId, GL_COMPILE_STATUS, &compileStatus);
+	glGetShaderiv(*shader, GL_COMPILE_STATUS, &compileStatus);
 	if( compileStatus == GL_FALSE )
 	{
 		GLint infoLogSize;
-		glGetShaderiv(shaderId, GL_INFO_LOG_LENGTH, &infoLogSize);
+		glGetShaderiv(*shader, GL_INFO_LOG_LENGTH, &infoLogSize);
 		std::vector<GLchar> errorInfo(static_cast<size_t>(infoLogSize));
-		glGetShaderInfoLog(shaderId, (GLsizei)errorInfo.size(), nullptr, &errorInfo[0]);
-		glDeleteShader(shaderId);
+		glGetShaderInfoLog(*shader, (GLsizei)errorInfo.size(), nullptr, &errorInfo[0]);
 
-		std::string shaderName;
-		switch( openGLshaderType )
-		{
-		case GL_VERTEX_SHADER: shaderName = "Vertex "; break;
-		case GL_FRAGMENT_SHADER: shaderName = "Fragment "; break;
-		case GL_GEOMETRY_SHADER: shaderName = "Geometry "; break;
-		}
-		Error(shaderName + "Shader compilation failed : " + std::string(&errorInfo[0]) + ", Source: " + source);
-		return 0;
+		const std::string shaderName = ConvertToStr(type);
+		Error(shaderName + " Shader compilation failed : " + std::string(&errorInfo[0]) + ", Source: " + source);
+		return {};
 	}
 
-	return shaderId;
+	return shader;
 }
 //-----------------------------------------------------------------------------

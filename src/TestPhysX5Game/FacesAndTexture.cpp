@@ -5,7 +5,7 @@
 
 FacesAndTexture::FacesAndTexture(SystemRef& systemRef, const std::vector<VertexBase> &vertices, const std::string &textureName)
 	: m_mesh(vertices, GL_TRIANGLES),
-	m_texture(Texture::LoadToCache(systemRef, "textures/" + textureName + ".png"))
+	m_texture(Texture2::LoadToCache(systemRef, "textures/" + textureName + ".png"))
 {
 }
 

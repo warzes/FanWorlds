@@ -21,7 +21,7 @@ public:
 	void Draw(Renderer &renderer) override;
 
 private:
-	Texture* m_texture = nullptr;
+	Texture2* m_texture = nullptr;
 	MeshBase m_mesh;
 
 	physx::PxTriangleMesh *m_collider = nullptr;

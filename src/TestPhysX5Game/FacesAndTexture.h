@@ -3,7 +3,7 @@
 #include "MeshBase.h"
 #include "Renderer.h"
 
-class Texture;
+class Texture2;
 
 class FacesAndTexture
 {
@@ -16,5 +16,5 @@ public:
 
 private:
 	MeshBase m_mesh;
-	MoveOnly<Texture *> m_texture;
+	MoveOnly<Texture2 *> m_texture;
 };

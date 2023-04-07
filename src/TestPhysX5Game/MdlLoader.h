@@ -12,9 +12,9 @@ public:
 
 	[[nodiscard]] std::vector<physx::PxVec3> GetColliderTriangles();
 
-	[[nodiscard]] Texture* GetTexture() const
+	[[nodiscard]] Texture2* GetTexture() const
 	{
-		return new Texture{ m_systemRef.GetRenderSystem(), {m_skinWidth, m_skinHeight}, m_textureData.data()};
+		return new Texture2{ m_systemRef.GetRenderSystem(), {m_skinWidth, m_skinHeight}, m_textureData.data()};
 	}
 
 	[[nodiscard]] MeshBase GetMesh() const

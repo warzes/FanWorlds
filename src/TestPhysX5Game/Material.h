@@ -4,10 +4,10 @@
 
 struct Material2
 {
-	Texture *Diffuse = nullptr;
-	Texture *Emissive = nullptr;
+	Texture2 *Diffuse = nullptr;
+	Texture2 *Emissive = nullptr;
 
-	void Bind(Texture &diffuseFallback, Texture &emissiveFallback) const
+	void Bind(Texture2 &diffuseFallback, Texture2 &emissiveFallback) const
 	{
 		(Diffuse ? *Diffuse : diffuseFallback).Bind(0);
 		(Emissive ? *Emissive : emissiveFallback).Bind(1);
