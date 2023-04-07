@@ -401,6 +401,28 @@ private:
 	std::string m_src;
 };
 
+struct ShaderAttributeInfo
+{
+	unsigned typeId;
+	unsigned type;
+	int numType;
+	std::string name;
+	int location;
+};
+
+struct Uniform 
+{ 
+	int location = -1; 
+	unsigned programId = 0; 
+};
+
+static_assert(sizeof(Uniform) == 8, "Uniform size changed!!!");
+inline bool operator==(const Uniform& Left, const Uniform& Right) noexcept { return Left.location == Right.location && Left.programId == Right.programId; }
+
+//=============================================================================
+// Buffer Core
+//=============================================================================
+
 struct VertexAttribute
 {
 	unsigned location/* = -1*/;  // если -1, то берется индекс массива атрибутов
@@ -411,22 +433,9 @@ struct VertexAttribute
 	const void* offset; // (void*)offsetof(Vertex, TexCoord)}
 };
 
-struct ShaderAttributeInfo
-{
-	unsigned typeId;
-	unsigned type;
-	int numType;
-	std::string name;
-	int location;
-};
-
-struct Uniform { int location = -1; unsigned programId = 0; };
-bool operator==(const Uniform& Left, const Uniform& Right) noexcept;
-
 //=============================================================================
 // Texture Core
 //=============================================================================
-
 
 struct Texture2DInfo
 {

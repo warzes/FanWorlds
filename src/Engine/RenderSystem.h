@@ -18,19 +18,27 @@ class RenderSystem : public BaseClass
 {
 	friend class EngineDevice;
 public:
+	//-------------------------------------------------------------------------
+	// Core
+	//-------------------------------------------------------------------------
 	void Init(const RenderCreateInfo& createInfo);
 	void Close();
-
 	const Capabilities& GetCapabilities() const { return m_capabilities; }
 
 	void BeginFrame();
 	void EndFrame();
 
-	// current frame buffer
+	//-------------------------------------------------------------------------
+	// Current Frame Set
+	//-------------------------------------------------------------------------
+
 	void SetClearColor(const glm::vec3& color);
 	void Clear();
 	void SetViewport(int width, int height);
 
+	//-------------------------------------------------------------------------
+	// Create Render Resource
+	//-------------------------------------------------------------------------
 	ShaderProgramRef CreateShaderProgram(const ShaderSource& vertexShaderSource, const ShaderSource& fragmentShaderSource);
 	VertexBufferRef CreateVertexBuffer(ResourceUsage usage, unsigned vertexCount, unsigned vertexSize, const void* data);
 	IndexBufferRef CreateIndexBuffer(ResourceUsage usage, unsigned indexCount, IndexType indexFormat, const void* data);
@@ -53,6 +61,9 @@ public:
 
 	FramebufferRef CreateFramebuffer(FramebufferAttachment attachment, Texture2DRef texture);
 
+	//-------------------------------------------------------------------------
+	// Validation
+	//-------------------------------------------------------------------------
 	inline bool IsValid(ShaderRef resource) const { return resource && resource->IsValid(); }
 	inline bool IsValid(ShaderProgramRef resource) const { return resource && resource->IsValid(); }
 	inline bool IsValid(const Uniform& uniform) const { return uniform.location >= 0; }
@@ -62,8 +73,11 @@ public:
 	inline bool IsValid(Texture2DRef resource) const { return resource && resource->IsValid(); }
 	inline bool IsValid(GeometryBufferRef resource) const { return IsValid(resource->vao); }
 	inline bool IsValid(FramebufferRef resource) const { return resource && resource->IsValid(); }
-
 	bool IsReadyUniform(const Uniform& uniform) const;
+
+	//-------------------------------------------------------------------------
+	// Shader Op
+	//-------------------------------------------------------------------------
 
 	std::vector<ShaderAttributeInfo> GetAttributesInfo(ShaderProgramRef resource) const;
 	Uniform GetUniform(ShaderProgramRef program, const char* uniformName) const;
@@ -85,9 +99,15 @@ public:
 	void SetUniform(const std::string& uniformName, const glm::mat3& value);
 	void SetUniform(const std::string& uniformName, const glm::mat4& value);
 
+	//-------------------------------------------------------------------------
+	// Buffer Op
+	//-------------------------------------------------------------------------
 	void UpdateBuffer(VertexBufferRef vbo, unsigned offset, unsigned vertexCount, unsigned vertexSize, const void* data);
 	void UpdateBuffer(IndexBufferRef ibo, unsigned offset, unsigned indexCount, unsigned indexSize, const void* data);
 
+	//-------------------------------------------------------------------------
+	// Current State Set
+	//-------------------------------------------------------------------------
 	void ResetState(ResourceType type);
 	void Bind(ShaderProgramRef resource);
 	void Bind(VertexBufferRef resource);
@@ -96,6 +116,9 @@ public:
 	void Bind(Texture2DRef resource, unsigned slot = 0);
 	void Bind(FramebufferRef resource);
 
+	//-------------------------------------------------------------------------
+	// Draw
+	//-------------------------------------------------------------------------
 	void Draw(VertexArrayRef vao, PrimitiveTopology primitive = PrimitiveTopology::Triangles);
 
 private:

@@ -10,14 +10,6 @@ Shader::Shader(ShaderType type)
 	m_ownership = true;
 }
 //-----------------------------------------------------------------------------
-// если какая-то структура была изменена, надо не забыть внести изменения в operator==
-static_assert(sizeof(Uniform) == 8, "Uniform changed!!!");
-//-----------------------------------------------------------------------------
-bool operator==(const Uniform& Left, const Uniform& Right) noexcept
-{
-	return Left.location == Right.location && Left.programId == Right.programId;
-}
-//-----------------------------------------------------------------------------
 bool ShaderSource::LoadFromFile(const std::string& file)
 {
 	// TODO: возможно заменить fstream на file?

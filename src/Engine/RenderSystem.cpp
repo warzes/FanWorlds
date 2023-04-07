@@ -1,6 +1,21 @@
 #include "stdafx.h"
 #include "RenderSystem.h"
 #include "TranslateToGL.h"
+
+https://www.materialmaker.org
+https://caiorss.github.io/C-Cpp-Notes/computer-graphics.html#org27558dd
+https://www.dhpoware.com/demos/index.html
+
+
+физика
+https ://github.com/Kazade/bounce
+возможно есть пример тут - https ://github.com/Kazade/simulant-engine
+	или после булета
+
+	https ://github.com/polymonster/maths
+
+
+
 //-----------------------------------------------------------------------------
 // Use discrete GPU by default.
 extern "C" 
@@ -260,6 +275,7 @@ void RenderSystem::UpdateBuffer(VertexBufferRef vbo, unsigned offset, unsigned v
 
 	if( vbo->count != vertexCount || vbo->size != vertexSize || vbo->usage != ResourceUsage::Dynamic )
 	{
+		// TODO: а точно работает?
 		glBufferData(GL_ARRAY_BUFFER, vertexCount * vertexSize, data, TranslateToGL(ResourceUsage::Dynamic));
 		vbo->usage = ResourceUsage::Dynamic;
 	}
@@ -279,6 +295,7 @@ void RenderSystem::UpdateBuffer(IndexBufferRef ibo, unsigned offset, unsigned in
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, *ibo);
 	if( ibo->count != indexCount || ibo->size != indexSize || ibo->usage != ResourceUsage::Dynamic )
 	{
+		// TODO: а точно работает?
 		glBufferData(GL_ELEMENT_ARRAY_BUFFER, indexCount * indexSize, data, TranslateToGL(ResourceUsage::Dynamic));
 		ibo->usage = ResourceUsage::Dynamic;
 	}
