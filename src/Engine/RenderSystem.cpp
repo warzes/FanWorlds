@@ -1,21 +1,6 @@
 #include "stdafx.h"
 #include "RenderSystem.h"
 #include "TranslateToGL.h"
-
-https://www.materialmaker.org
-https://caiorss.github.io/C-Cpp-Notes/computer-graphics.html#org27558dd
-https://www.dhpoware.com/demos/index.html
-
-
-физика
-https ://github.com/Kazade/bounce
-возможно есть пример тут - https ://github.com/Kazade/simulant-engine
-	или после булета
-
-	https ://github.com/polymonster/maths
-
-
-
 //-----------------------------------------------------------------------------
 // Use discrete GPU by default.
 extern "C" 
@@ -138,31 +123,32 @@ bool RenderSystem::IsReadyUniform(const Uniform& uniform) const
 	return IsValid(uniform) && uniform.programId == m_cache.CurrentShaderProgram;
 }
 //-----------------------------------------------------------------------------
-std::vector<ShaderAttributeInfo> RenderSystem::GetAttributesInfo(ShaderProgramRef resource) const
+std::vector<ShaderAttributeInfo> RenderSystem::GetAttributesInfo(ShaderProgramRef program) const
 {
-	if( !IsValid(resource) ) return {};
+	assert(IsValid(program));
+	if( !IsValid(program) ) return {};
 
 	int activeAttribsCount = 0;
-	glGetProgramiv(*resource, GL_ACTIVE_ATTRIBUTES, &activeAttribsCount);
+	glGetProgramiv(*program, GL_ACTIVE_ATTRIBUTES, &activeAttribsCount);
 	int maxNameLength = 0;
-	glGetProgramiv(*resource, GL_ACTIVE_ATTRIBUTE_MAX_LENGTH, &maxNameLength);
+	glGetProgramiv(*program, GL_ACTIVE_ATTRIBUTE_MAX_LENGTH, &maxNameLength);
 
 	std::string name;
 	name.resize(static_cast<size_t>(maxNameLength));
 
 	std::vector<ShaderAttributeInfo> attribs(static_cast<size_t>(activeAttribsCount));
-	for( int i = 0; i < activeAttribsCount; i++ )
+	for( size_t i = 0; i < static_cast<size_t>(activeAttribsCount); i++ )
 	{
 		GLint size;
 		GLenum type = 0;
-		glGetActiveAttrib(*resource, (GLuint)i, maxNameLength, nullptr, &size, &type, name.data());
+		glGetActiveAttrib(*program, (GLuint)i, maxNameLength, nullptr, &size, &type, name.data());
 
 		attribs[i] = {
 			.typeId = type,
 			.type = GetAttributeType(type),
 			.numType = GetAttributeSize(type),
 			.name = name,
-			.location = glGetAttribLocation(*resource, name.c_str())
+			.location = glGetAttribLocation(*program, name.c_str())
 		};
 	}
 
@@ -273,16 +259,11 @@ void RenderSystem::UpdateBuffer(VertexBufferRef vbo, unsigned offset, unsigned v
 
 	glBindBuffer(GL_ARRAY_BUFFER, *vbo);
 
-	if( vbo->count != vertexCount || vbo->size != vertexSize || vbo->usage != ResourceUsage::Dynamic )
-	{
-		// TODO: а точно работает?
-		glBufferData(GL_ARRAY_BUFFER, vertexCount * vertexSize, data, TranslateToGL(ResourceUsage::Dynamic));
-		vbo->usage = ResourceUsage::Dynamic;
-	}
+	if( offset == 0 && (vbo->count != vertexCount || vbo->size != vertexSize) )
+		glBufferData(GL_ARRAY_BUFFER, vertexCount * vertexSize, data, TranslateToGL(vbo->usage));
 	else
-	{
 		glBufferSubData(GL_ARRAY_BUFFER, offset, vertexCount * vertexSize, data);
-	}
+
 	vbo->count = vertexCount;
 	vbo->size = vertexSize;
 
@@ -293,20 +274,39 @@ void RenderSystem::UpdateBuffer(IndexBufferRef ibo, unsigned offset, unsigned in
 {
 	assert(IsValid(ibo));
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, *ibo);
-	if( ibo->count != indexCount || ibo->size != indexSize || ibo->usage != ResourceUsage::Dynamic )
-	{
-		// TODO: а точно работает?
-		glBufferData(GL_ELEMENT_ARRAY_BUFFER, indexCount * indexSize, data, TranslateToGL(ResourceUsage::Dynamic));
-		ibo->usage = ResourceUsage::Dynamic;
-	}
+	if(offset == 0 && (ibo->count != indexCount || ibo->size != indexSize) )
+		glBufferData(GL_ELEMENT_ARRAY_BUFFER, indexCount * indexSize, data, TranslateToGL(ibo->usage));
 	else
-	{
 		glBufferSubData(GL_ELEMENT_ARRAY_BUFFER, offset, indexCount * indexSize, data);
-	}
+
 	ibo->count = indexCount;
 	ibo->size = indexSize;
 
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_cache.CurrentIBO); // restore current ib
+}
+//-----------------------------------------------------------------------------
+void* RenderSystem::MapBuffer(VertexBufferRef vbo)
+{
+	Bind(vbo);
+	return glMapBufferRange(GL_ARRAY_BUFFER, /*offset*/0, /*size*/vbo->count* vbo->size, GL_MAP_WRITE_BIT);
+}
+//-----------------------------------------------------------------------------
+void RenderSystem::UnmapBuffer(VertexBufferRef vbo)
+{
+	assert(*vbo == m_cache.CurrentVBO);
+	if (*vbo == m_cache.CurrentVBO) glUnmapBuffer(GL_ARRAY_BUFFER);
+}
+//-----------------------------------------------------------------------------
+void* RenderSystem::MapBuffer(IndexBufferRef ibo)
+{
+	Bind(ibo);
+	return glMapBufferRange(GL_ELEMENT_ARRAY_BUFFER, /*offset*/0, /*size*/ibo->count * ibo->size, GL_MAP_WRITE_BIT);
+}
+//-----------------------------------------------------------------------------
+void RenderSystem::UnmapBuffer(IndexBufferRef ibo)
+{
+	assert(*ibo == m_cache.CurrentIBO);
+	if (*ibo == m_cache.CurrentIBO) glUnmapBuffer(GL_ELEMENT_ARRAY_BUFFER);
 }
 //-----------------------------------------------------------------------------
 void RenderSystem::ResetState(ResourceType type)

@@ -1,19 +1,4 @@
-
-тайлы такие но 3д - https://www.youtube.com/watch?v=xIhp8oRx6DU
-
-https://www.materialmaker.org
-https://caiorss.github.io/C-Cpp-Notes/computer-graphics.html#org27558dd
-https://www.dhpoware.com/demos/index.html
-
-
-физика
-https ://github.com/Kazade/bounce
-возможно есть пример тут - https ://github.com/Kazade/simulant-engine
-	или после булета
-
-	https ://github.com/polymonster/maths
-
-
+тут доделать против часовой стрелки
 
 
 https ://www.materialmaker.org

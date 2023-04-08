@@ -79,7 +79,7 @@ public:
 	// Shader Op
 	//-------------------------------------------------------------------------
 
-	std::vector<ShaderAttributeInfo> GetAttributesInfo(ShaderProgramRef resource) const;
+	std::vector<ShaderAttributeInfo> GetAttributesInfo(ShaderProgramRef program) const;
 	Uniform GetUniform(ShaderProgramRef program, const char* uniformName) const;
 
 	void SetUniform(const Uniform& uniform, int value);
@@ -104,6 +104,12 @@ public:
 	//-------------------------------------------------------------------------
 	void UpdateBuffer(VertexBufferRef vbo, unsigned offset, unsigned vertexCount, unsigned vertexSize, const void* data);
 	void UpdateBuffer(IndexBufferRef ibo, unsigned offset, unsigned indexCount, unsigned indexSize, const void* data);
+
+	void* MapBuffer(VertexBufferRef vbo);
+	void UnmapBuffer(VertexBufferRef vbo);
+	void* MapBuffer(IndexBufferRef ibo);
+	void UnmapBuffer(IndexBufferRef ibo);
+
 
 	//-------------------------------------------------------------------------
 	// Current State Set

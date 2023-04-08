@@ -1,7 +1,9 @@
 ﻿#include "stdafx.h"
 // Basic Example
 #include "001_Triangle.h"
-#include "002_Quad.h"
+#include "002_DinamicVertex.h"
+#include "003_BufferMapping.h"
+#include "004_Quad.h"
 // Other
 #include "001_MonkeyScenes.h"
 //-----------------------------------------------------------------------------
@@ -25,8 +27,10 @@ int main(
 	while( 1 )
 	{
 		std::cout << "Select Example (q - exit):" << std::endl;
-		std::cout << "    b1 - Basic Triangle Draw" << std::endl;
-		std::cout << "    b2 - Basic Quad Draw" << std::endl;
+		std::cout << "    b1 - Basic Draw Triangle" << std::endl;
+		std::cout << "    b2 - Dinamic Vertex" << std::endl;
+		std::cout << "    b3 - Buffer Mapping" << std::endl;
+		std::cout << "    b4 - Draw Quad" << std::endl;
 
 		std::cout << "    o1 - Monkey Scenes" << std::endl;
 		std::cout << std::endl;
@@ -44,7 +48,9 @@ int main(
 			engineDevice->RunApp(std::make_shared<x>()); \
 		}
 		START_SCENE("b1", _001Triangle);
-		START_SCENE("b2", _002Quad);
+		START_SCENE("b2", _002DinamicVertex);
+		START_SCENE("b3", _003BufferMapping);
+		START_SCENE("b4", _004Quad);
 		START_SCENE("o1", _001MonkeyScenes);
 
 #undef START_SCENE

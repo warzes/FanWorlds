@@ -63,10 +63,10 @@ enum class BlendFactor : uint8_t
 };
 
 //=============================================================================
-// Raster enum
+// Rasterizer enum
 //=============================================================================
 
-enum class RasterCullMode : uint8_t
+enum class RasterizerCullMode : uint8_t
 {
 	Back,
 	Front,
@@ -79,11 +79,14 @@ enum class FaceOrientation : uint8_t
 	Ccw,
 };
 
-enum class RasterFillMode : uint8_t // TODO: нет функции TranslateToGL
+enum class RasterizerFillMode : uint8_t // TODO: нет функции TranslateToGL
 {
 	Solid,
 	Wireframe,
+	Point
 };
+
+// ERasterizerFillMode
 
 //=============================================================================
 // DepthStencil enum

@@ -31,10 +31,10 @@ public:
 	PhysicsSystem& GetPhysicsSystem();
 	const PhysicsSystem& GetPhysicsSystem() const;
 
-	void Print(const std::string& msg);
-	void Warning(const std::string& msg);
-	void Error(const std::string& msg);
-	void Fatal(const std::string& msg);
+	void Print(const std::string& msg) const;
+	void Warning(const std::string& msg) const;
+	void Error(const std::string& msg) const;
+	void Fatal(const std::string& msg) const;
 
 	int GetWindowWidth() const;
 	int GetWindowHeight() const;

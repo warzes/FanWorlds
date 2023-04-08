@@ -1,9 +1,18 @@
 #include "stdafx.h"
-#include "002_Quad.h"
+#include "002_DinamicVertex.h"
 //-----------------------------------------------------------------------------
-bool _002Quad::Create()
+struct testVertex
 {
-	Print("002_Quad Create");
+	glm::vec3 pos;
+	glm::vec3 color;
+};
+//-----------------------------------------------------------------------------
+static float pos = 0.0f;
+static bool invert = false;
+//-----------------------------------------------------------------------------
+bool _002DinamicVertex::Create()
+{
+	Print("002DinamicVertex Create");
 
 	const char* vertexShaderText = R"(
 #version 330 core
@@ -34,49 +43,32 @@ void main()
 }
 )";
 
-	struct testVertex
-	{
-		glm::vec3 pos;
-		glm::vec3 color;
-	}
-	vert[] =
-	{
-		{{  0.5f,  0.5f, 4.0f}, {1.0f, 0.0f, 0.0f}}, // top right
-		{{  0.5f, -0.5f, 4.0f}, {0.0f, 1.0f, 0.0f}}, // bottom right
-		{{ -0.5f, -0.5f, 4.0f}, {0.0f, 0.0f, 1.0f}}, // bottom left
-		{{ -0.5f,  0.5f, 4.0f}, {0.0f, 1.0f, 1.0f}}, // top left
-	};
-
-	unsigned int indices[] = {  // note that we start from 0!
-		0, 1, 3,   // first triangle
-		1, 2, 3    // second triangle
-	};
-
-	//glEnable(GL_CULL_FACE); // для теста - квад выше против часой стрелки
+	glEnable(GL_CULL_FACE); // для теста - треугольник выше против часой стрелки
 
 	auto& renderSystem = GetRenderSystem();
 
 	m_shader = renderSystem.CreateShaderProgram({ vertexShaderText }, { fragmentShaderText });
 	m_uniformProjectionMatrix = renderSystem.GetUniform(m_shader, "projectionMatrix");
-
-	m_geom = renderSystem.CreateGeometryBuffer(ResourceUsage::Static, Countof(vert), sizeof(testVertex), vert, Countof(indices), IndexType::Uint32, indices, m_shader);
+	m_vb = renderSystem.CreateVertexBuffer(ResourceUsage::Dynamic, 1, sizeof(testVertex), nullptr);
+	m_vao = renderSystem.CreateVertexArray(m_vb, nullptr, m_shader);
 
 	return true;
 }
 //-----------------------------------------------------------------------------
-void _002Quad::Destroy()
+void _002DinamicVertex::Destroy()
 {
 	m_shader.reset();
-	m_geom.reset();
+	m_vb.reset();
+	m_vao.reset();
 
-	Print("002_Quad Destroy");
+	Print("002DinamicVertex Destroy");
 }
 //-----------------------------------------------------------------------------
-void _002Quad::Render()
+void _002DinamicVertex::Render()
 {
 	auto& renderSystem = GetRenderSystem();
 
-	if( m_windowWidth != GetWindowWidth() || m_windowHeight != GetWindowHeight() )
+	if (m_windowWidth != GetWindowWidth() || m_windowHeight != GetWindowHeight())
 	{
 		m_windowWidth = GetWindowWidth();
 		m_windowHeight = GetWindowHeight();
@@ -84,15 +76,30 @@ void _002Quad::Render()
 		renderSystem.SetViewport(m_windowWidth, m_windowHeight);
 	}
 
+	{
+		testVertex vert[] =
+		{
+			{{-1.0f, -1.0f, 4.0f}, {1.0f, 0.0f, 0.0f}},
+			{{ 1.0f, -1.0f, 4.0f}, {0.0f, 1.0f, 0.0f}},
+			{{ pos,   1.0f, 4.0f}, {0.0f, 0.0f, 1.0f}}
+		};
+		renderSystem.UpdateBuffer(m_vb, 0, Countof(vert), sizeof(testVertex), vert);
+	}
+
 	renderSystem.Clear();
 	renderSystem.Bind(m_shader);
 	renderSystem.SetUniform(m_uniformProjectionMatrix, m_perspective);
-	renderSystem.Draw(m_geom->vao);
+	renderSystem.Draw(m_vao);
 }
 //-----------------------------------------------------------------------------
-void _002Quad::Update(float deltaTime)
+void _002DinamicVertex::Update(float deltaTime)
 {
-	if( GetInput().IsKeyDown(Input::KEY_ESCAPE) )
+	pos += deltaTime * (invert ? -1.0f : 1.0f);
+
+	if (pos < -1.0f || pos > 1.0f)
+		invert = !invert;
+
+	if (GetInput().IsKeyDown(Input::KEY_ESCAPE))
 	{
 		BaseClass::ExitRequest();
 		return;

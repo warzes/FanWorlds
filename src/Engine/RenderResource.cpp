@@ -134,9 +134,6 @@ VertexArrayRef RenderSystem::CreateVertexArray(VertexBufferRef vbo, IndexBufferR
 //-----------------------------------------------------------------------------
 VertexArrayRef RenderSystem::CreateVertexArray(VertexBufferRef vbo, IndexBufferRef ibo, ShaderProgramRef shaders)
 {
-	assert(IsValid(shaders));
-	if (!IsValid(shaders)) return {};
-
 	auto attribInfo = GetAttributesInfo(shaders);
 	if (attribInfo.empty()) return {};
 

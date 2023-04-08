@@ -59,13 +59,13 @@ inline GLenum TranslateToGL(BlendFactor func)
 	return 0;
 }
 //-----------------------------------------------------------------------------
-inline GLenum TranslateToGL(RasterCullMode face)
+inline GLenum TranslateToGL(RasterizerCullMode face)
 {
 	switch( face )
 	{
-	case RasterCullMode::Back:         return GL_BACK;
-	case RasterCullMode::Front:        return GL_FRONT;
-	case RasterCullMode::FrontAndBack: return GL_FRONT_AND_BACK;
+	case RasterizerCullMode::Back:         return GL_BACK;
+	case RasterizerCullMode::Front:        return GL_FRONT;
+	case RasterizerCullMode::FrontAndBack: return GL_FRONT_AND_BACK;
 	default: break;
 	}
 	assert(false && "Unknown RasterCullMode");
