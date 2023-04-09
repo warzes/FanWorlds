@@ -277,7 +277,13 @@ void RenderSystem::UpdateBuffer(GPUBufferRef buffer, unsigned offset, unsigned c
 void* RenderSystem::MapBuffer(GPUBufferRef buffer)
 {
 	Bind(buffer);
-	return glMapBufferRange(TranslateToGL(buffer->type), /*offset*/0, /*size*/buffer->count * buffer->size, GL_MAP_WRITE_BIT);
+	return glMapBuffer(TranslateToGL(buffer->type), GL_WRITE_ONLY);
+}
+//-----------------------------------------------------------------------------
+void* RenderSystem::MapBuffer(GPUBufferRef buffer, unsigned offset, unsigned size)
+{
+	Bind(buffer);
+	return glMapBufferRange(TranslateToGL(buffer->type), offset, size, GL_MAP_WRITE_BIT);
 }
 //-----------------------------------------------------------------------------
 void RenderSystem::UnmapBuffer(GPUBufferRef buffer)
@@ -387,9 +393,9 @@ void RenderSystem::Draw(VertexArrayRef vao, PrimitiveTopology primitive)
 		m_cache.CurrentVBO = 0;
 		m_cache.CurrentIBO = 0;
 		glBindVertexArray(*vao);
-		Bind(vao->vbo);
-		Bind(vao->ibo);
 	}
+	Bind(vao->vbo);
+	Bind(vao->ibo);
 
 	if( vao->ibo )
 	{

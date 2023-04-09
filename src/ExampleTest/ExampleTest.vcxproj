@@ -99,6 +99,8 @@
     <ClCompile Include="003_BufferMapping.cpp" />
     <ClCompile Include="004_Quad.cpp" />
     <ClCompile Include="005_BasicTexture.cpp" />
+    <ClCompile Include="006_MultipleLights.cpp" />
+    <ClCompile Include="007_BasicObjModel.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
@@ -112,6 +114,8 @@
     <ClInclude Include="003_BufferMapping.h" />
     <ClInclude Include="004_Quad.h" />
     <ClInclude Include="005_BasicTexture.h" />
+    <ClInclude Include="006_MultipleLights.h" />
+    <ClInclude Include="007_BasicObjModel.h" />
     <ClInclude Include="stdafx.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

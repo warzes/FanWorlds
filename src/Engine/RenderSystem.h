@@ -103,7 +103,9 @@ public:
 	//-------------------------------------------------------------------------
 	void UpdateBuffer(GPUBufferRef buffer, unsigned offset, unsigned count, unsigned size, const void* data);
 
+
 	void* MapBuffer(GPUBufferRef buffer);
+	void* MapBuffer(GPUBufferRef buffer, unsigned offset, unsigned size);
 	void UnmapBuffer(GPUBufferRef buffer);
 
 	//-------------------------------------------------------------------------
