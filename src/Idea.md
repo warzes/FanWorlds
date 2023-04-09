@@ -1,4 +1,5 @@
 сделать такое из вокселей
+https://www.youtube.com/watch?v=CZMXE2n0vNg&t=1399s
 https ://www.youtube.com/watch?v=rR-JmkoLM2g
 с элементами отсюда
 https ://www.youtube.com/watch?v=2sbk45Hy90Y

@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="GameApp.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="stdafx.cpp" />
+    <ClCompile Include="DrawGrid.cpp">
+      <Filter>Framework\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="Ray.cpp">
+      <Filter>Framework\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="GridMap.cpp">
+      <Filter>Framework\GridMap</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="GameApp.h" />
+    <ClInclude Include="stdafx.h" />
+    <ClInclude Include="DrawGrid.h">
+      <Filter>Framework\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="SpaceMath.h">
+      <Filter>Framework\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="Ray.h">
+      <Filter>Framework\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="GridMap.h">
+      <Filter>Framework\GridMap</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Framework">
+      <UniqueIdentifier>{9cb54e2f-5bad-47f1-a8e0-95867c1327be}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\Utility">
+      <UniqueIdentifier>{bbd98bff-4d1a-4669-a112-03ad8e01fb73}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\ShaderLib">
+      <UniqueIdentifier>{88cb4e8a-76d3-45df-ba1b-39e314baabea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\GridMap">
+      <UniqueIdentifier>{c6ca4954-fe7b-4ebf-bfb6-4d7e2be57092}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

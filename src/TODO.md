@@ -3,7 +3,7 @@ OpenGL
 ===============================================================================
 - ResourceUsage у меня не совсем правильный. На самом деле это две вещи первая это DRAW/READ/COPY, вторая STATIC/DYNAMIC/STREAM
 
-- объединить буферы в один класс
+- Удалить GeometryBuffer - хватит VertexArray - то есть добавить метод который его создает по всем данным
 
 - Storage Buffer - http://steps3d.narod.ru/tutorials/buffer-storage-tutorial.html
 
