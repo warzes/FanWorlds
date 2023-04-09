@@ -28,7 +28,7 @@ public:
 
 	static void BindDefault();
 
-	void Clear();
+	void ClearFrame();
 
 	void BindColorTexture(GLuint unit, GLuint attachment);
 

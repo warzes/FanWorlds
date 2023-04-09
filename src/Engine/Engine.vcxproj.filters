@@ -147,6 +147,9 @@
     <ClInclude Include="Capabilities.h">
       <Filter>RenderAPI</Filter>
     </ClInclude>
+    <ClInclude Include="RenderResourceEnums.h">
+      <Filter>RenderAPI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Core">

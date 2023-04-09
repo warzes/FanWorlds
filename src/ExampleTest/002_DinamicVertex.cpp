@@ -86,7 +86,7 @@ void _002DinamicVertex::Render()
 		renderSystem.UpdateBuffer(m_vb, 0, Countof(vert), sizeof(testVertex), vert);
 	}
 
-	renderSystem.Clear();
+	renderSystem.ClearFrame();
 	renderSystem.Bind(m_shader);
 	renderSystem.SetUniform(m_uniformProjectionMatrix, m_perspective);
 	renderSystem.Draw(m_vao);

@@ -115,7 +115,7 @@ void Framebuffer2::BindDefault()
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 }
 //-----------------------------------------------------------------------------
-void Framebuffer2::Clear() 
+void Framebuffer2::ClearFrame() 
 {
 	static constexpr GLfloat CLEAR_COLOR[4]{ 0.0f, 0.0f, 0.0f, 0.0f };
 	for (int i = 0; i < m_numColorAttachments; i++) 

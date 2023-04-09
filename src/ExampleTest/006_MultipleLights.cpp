@@ -284,7 +284,7 @@ void _006MultipleLights::Render()
 		renderSystem.SetViewport(m_windowWidth, m_windowHeight);
 	}
 
-	renderSystem.Clear();
+	renderSystem.ClearFrame();
 	renderSystem.Bind(m_lightingShader);
     renderSystem.SetUniform("material.diffuse", 0);
     renderSystem.SetUniform("material.specular", 1);

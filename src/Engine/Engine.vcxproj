@@ -139,6 +139,7 @@
     <ClInclude Include="PhysicsScene.h" />
     <ClInclude Include="PhysicsSystem.h" />
     <ClInclude Include="PhysicsUtilities.h" />
+    <ClInclude Include="RenderResourceEnums.h" />
     <ClInclude Include="RenderResource.h" />
     <ClInclude Include="RenderSystem.h" />
     <ClInclude Include="STBImageLoader.h" />

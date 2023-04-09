@@ -91,7 +91,7 @@ void _005BasicTexture::Render()
 		renderSystem.SetViewport(m_windowWidth, m_windowHeight);
 	}
 
-	renderSystem.Clear();
+	renderSystem.ClearFrame();
 	renderSystem.Bind(m_texture, 0);
 	renderSystem.Bind(m_shader);
 	renderSystem.SetUniform(m_uniformProjectionMatrix, m_perspective);

@@ -214,7 +214,7 @@ void DeferredRenderer::DrawToGBuffers()
 	m_gBuffers->Bind();
 	glViewport(0, 0, m_gBuffers->Size().x, m_gBuffers->Size().y);
 
-	m_gBuffers->Clear();
+	m_gBuffers->ClearFrame();
 
 	glEnable(GL_DEPTH_TEST);
 	glEnable(GL_CULL_FACE);

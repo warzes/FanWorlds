@@ -33,7 +33,7 @@ public:
 	//-------------------------------------------------------------------------
 
 	void SetClearColor(const glm::vec3& color);
-	void Clear();
+	void ClearFrame();
 	void SetViewport(int width, int height);
 
 	//-------------------------------------------------------------------------
@@ -112,6 +112,8 @@ public:
 	// Current State Set
 	//-------------------------------------------------------------------------
 	void ResetState(ResourceType type);
+	void Bind(DepthState state);
+	void Bind(StencilState state);
 	void Bind(ShaderProgramRef resource);
 	void Bind(GPUBufferRef buffer);
 	void Bind(const VertexAttribute& Attribute);
@@ -133,6 +135,7 @@ private:
 	void initializeCapabilities(bool print);
 
 	ShaderRef compileShader(ShaderType type, const std::string& source);
+	void setClearMask(bool color, bool depth, bool stensil);
 
 	int m_mainFramebufferWidth = 0;
 	int m_mainFramebufferHeight = 0;
@@ -147,6 +150,11 @@ private:
 		unsigned CurrentVAO = 0;
 		unsigned CurrentTexture2D[MaxBindingTextures] = { 0 };
 		unsigned CurrentFramebuffer = 0;
+
+		DepthState CurrentDepthState{};
+		StencilState CurrentStencilState{};
+
+		GLbitfield CurrentClearMask = 0;
 	} m_cache;
 
 	unsigned& getCurrentCacheBufferFromType(BufferType type)

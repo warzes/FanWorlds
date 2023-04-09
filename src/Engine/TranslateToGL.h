@@ -1,6 +1,44 @@
 #pragma once
 
 #include "RenderResource.h"
+
+//-----------------------------------------------------------------------------
+inline GLenum TranslateToGL(ComparisonFunc func)
+{
+	switch (func)
+	{
+	case ComparisonFunc::Never:    return GL_NEVER;
+	case ComparisonFunc::Equal:    return GL_EQUAL;
+	case ComparisonFunc::Less:     return GL_LESS;
+	case ComparisonFunc::LEqual:   return GL_LEQUAL;
+	case ComparisonFunc::Greater:  return GL_GREATER;
+	case ComparisonFunc::GEqual:   return GL_GEQUAL;
+	case ComparisonFunc::NotEqual: return GL_NOTEQUAL;
+	case ComparisonFunc::Always:   return GL_ALWAYS;
+
+	default: break;
+	}
+	assert(false && "Unknown ComparisonFunc");
+	return 0;
+}
+//-----------------------------------------------------------------------------
+inline GLenum TranslateToGL(StencilOp op)
+{
+	switch (op)
+	{
+	case StencilOp::Keep:     return GL_KEEP;
+	case StencilOp::Zero:     return GL_ZERO;
+	case StencilOp::Replace:  return GL_REPLACE;
+	case StencilOp::IncrSat:  return GL_INCR;
+	case StencilOp::DecrSat:  return GL_DECR;
+	case StencilOp::Invert:   return GL_INVERT;
+	case StencilOp::IncrWrap: return GL_INCR_WRAP;
+	case StencilOp::DecrWrap: return GL_DECR_WRAP;
+	default: break;
+	}
+	assert(false && "Unknown StencilOp");
+	return 0;
+}
 //-----------------------------------------------------------------------------
 inline GLenum TranslateToGL(BlendOp op)
 {
@@ -68,42 +106,6 @@ inline GLenum TranslateToGL(FaceOrientation orientation)
 	default: break;
 	}
 	assert(false && "Unknown FaceOrientation");
-	return 0;
-}
-//-----------------------------------------------------------------------------
-inline GLenum TranslateToGL(StencilOp op)
-{
-	switch( op )
-	{
-	case StencilOp::Keep:     return GL_KEEP;
-	case StencilOp::Zero:     return GL_ZERO;
-	case StencilOp::Replace:  return GL_REPLACE;
-	case StencilOp::IncrSat:  return GL_INCR;
-	case StencilOp::DecrSat:  return GL_DECR;
-	case StencilOp::Invert:   return GL_INVERT;
-	case StencilOp::IncrWrap: return GL_INCR_WRAP;
-	case StencilOp::DecrWrap: return GL_DECR_WRAP;
-	default: break;
-	}
-	assert(false && "Unknown StencilOp");
-	return 0;
-}
-//-----------------------------------------------------------------------------
-inline GLenum TranslateToGL(ComparisonFunc func)
-{
-	switch( func )
-	{
-	case ComparisonFunc::Lequal:   return GL_LEQUAL;
-	case ComparisonFunc::Gequal:   return GL_GEQUAL;
-	case ComparisonFunc::Less:     return GL_LESS;
-	case ComparisonFunc::Greater:  return GL_GREATER;
-	case ComparisonFunc::Equal:    return GL_EQUAL;
-	case ComparisonFunc::Notequal: return GL_NOTEQUAL;
-	case ComparisonFunc::Always:   return GL_ALWAYS;
-	case ComparisonFunc::Never:    return GL_NEVER;
-	default: break;
-	}
-	assert(false && "Unknown ComparisonFunc");
 	return 0;
 }
 //-----------------------------------------------------------------------------

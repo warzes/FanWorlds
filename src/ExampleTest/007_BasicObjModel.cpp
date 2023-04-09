@@ -85,7 +85,7 @@ void _007BasicObjModel::Render()
 		renderSystem.SetViewport(m_windowWidth, m_windowHeight);
 	}
 
-	renderSystem.Clear();
+	renderSystem.ClearFrame();
 	renderSystem.Bind(m_shader);
 	renderSystem.SetUniform(m_uniformProjectionMatrix, m_perspective);
 	renderSystem.SetUniform(m_uniformViewMatrix, m_camera.GetViewMatrix());

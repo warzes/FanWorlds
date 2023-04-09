@@ -91,7 +91,7 @@ void _003BufferMapping::Render()
 		renderSystem.UnmapBuffer(m_vb);
 	}
 
-	renderSystem.Clear();
+	renderSystem.ClearFrame();
 	renderSystem.Bind(m_shader);
 	renderSystem.SetUniform(m_uniformProjectionMatrix, m_perspective);
 	renderSystem.Draw(m_vao);

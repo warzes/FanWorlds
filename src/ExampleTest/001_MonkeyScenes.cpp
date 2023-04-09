@@ -451,7 +451,7 @@ void _001MonkeyScenes::Render()
     renderSystem.Bind(shadowMapFbo);
     renderSystem.SetClearColor({ 1.0f, 1.0f, 1.0f });
     renderSystem.SetViewport(SHADOWMAP_SIZE, SHADOWMAP_SIZE);
-    renderSystem.Clear();
+    renderSystem.ClearFrame();
 
     renderSystem.Bind(simpleDepthShader);
     renderSystem.SetUniform("lightSpaceMatrix", lightSpaceMatrix);
@@ -472,7 +472,7 @@ void _001MonkeyScenes::Render()
     {
         renderSystem.Bind(blurFbo);
         renderSystem.SetViewport(SHADOWMAP_SIZE, SHADOWMAP_SIZE);
-        renderSystem.Clear();
+        renderSystem.ClearFrame();
 
         // Blur shadowMapTexture (horizontally) to blurTexture.
         renderSystem.Bind(shadowMapTexture, 0);
@@ -482,7 +482,7 @@ void _001MonkeyScenes::Render()
         // Blur blurTexture vertically and write to shadowMapTexture.
         renderSystem.Bind(shadowMapFbo);
         renderSystem.SetViewport(SHADOWMAP_SIZE, SHADOWMAP_SIZE);
-        renderSystem.Clear();
+        renderSystem.ClearFrame();
 
         renderSystem.Bind(blurTexture, 0);
         renderSystem.SetUniform("horizontal", false);
@@ -495,7 +495,7 @@ void _001MonkeyScenes::Render()
 #endif
     renderSystem.SetViewport(m_windowWidth, m_windowHeight);
     renderSystem.SetClearColor({ 0.412f, 0.733f, 0.929f });
-    renderSystem.Clear();
+    renderSystem.ClearFrame();
 
     renderSystem.Bind(shader);
     renderSystem.SetUniform("projection", proj);

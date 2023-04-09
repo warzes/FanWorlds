@@ -1,4 +1,4 @@
-#include "stdafx.h"
+﻿#include "stdafx.h"
 #include "RenderSystem.h"
 #include "TranslateToGL.h"
 //-----------------------------------------------------------------------------
@@ -67,11 +67,22 @@ void RenderSystem::Init(const RenderCreateInfo& createInfo)
 
 	initializeCapabilities(true);
 
+	// не использовать Bind(state) так как дефолтные значения из кеша могут не соответствовать установкам.
+
+	// set default depth state
 	glEnable(GL_DEPTH_TEST);
+	glDepthFunc(GL_LESS);
+	glDepthMask(GL_TRUE);
+
+	// set defautl stensil state
+	// TODO: проставить дефолтные значения StencilState
+
 	//glEnable(GL_CULL_FACE);
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	glClearColor(createInfo.clearColor.x, createInfo.clearColor.y, createInfo.clearColor.z, 1.0f);
+
+	setClearMask(true, true, false);
 }
 //-----------------------------------------------------------------------------
 void RenderSystem::Close()
@@ -95,8 +106,6 @@ void RenderSystem::BeginFrame()
 		m_mainFramebufferHeight = GetWindowHeight();
 		//glViewport(0, 0, m_mainFramebufferWidth, m_mainFramebufferHeight);
 	}
-
-	//glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 }
 //-----------------------------------------------------------------------------
 void RenderSystem::EndFrame()
@@ -108,9 +117,9 @@ void RenderSystem::SetClearColor(const glm::vec3& color)
 	glClearColor(color.x, color.y, color.z, 1.0f);
 }
 //-----------------------------------------------------------------------------
-void RenderSystem::Clear()
+void RenderSystem::ClearFrame()
 {
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	glClear(m_cache.CurrentClearMask);
 }
 //-----------------------------------------------------------------------------
 void RenderSystem::SetViewport(int width, int height)
@@ -332,6 +341,57 @@ void RenderSystem::ResetState(ResourceType type)
 	}
 }
 //-----------------------------------------------------------------------------
+void RenderSystem::Bind(DepthState state)
+{
+	if (m_cache.CurrentDepthState.enable != state.enable)
+	{
+		if (state.enable) glEnable(GL_DEPTH_TEST);
+		else glDisable(GL_DEPTH_TEST);
+		setClearMask(true, state.enable, m_cache.CurrentStencilState.enable);
+	}
+
+	if (m_cache.CurrentDepthState.depthFunc != state.depthFunc)
+		glDepthFunc(TranslateToGL(state.depthFunc));
+
+	if (m_cache.CurrentDepthState.depthWrite != state.depthWrite)
+		glDepthMask(state.depthWrite ? GL_TRUE : GL_FALSE);
+
+	m_cache.CurrentDepthState = state;
+}
+//-----------------------------------------------------------------------------
+void RenderSystem::Bind(StencilState state)
+{
+	StencilState& cache = m_cache.CurrentStencilState;
+	if (cache.enable != state.enable)
+	{
+		if (state.enable) glEnable(GL_STENCIL_TEST);
+		else glDisable(GL_STENCIL_TEST);
+
+		setClearMask(true, m_cache.CurrentDepthState.enable, state.enable);
+	}
+
+	if (cache.stencilRef != state.stencilRef || cache.readMask != state.readMask
+		|| cache.stencilFuncFront != state.stencilFuncFront
+		|| cache.stencilFailOpFront != state.stencilFailOpFront
+		|| cache.stencilZFailOpFront != state.stencilZFailOpFront
+		|| cache.stencilPassOpFront != state.stencilPassOpFront
+		|| cache.stencilFuncBack != state.stencilFuncBack
+		|| cache.stencilFailOpBack != state.stencilFailOpBack
+		|| cache.stencilZFailOpBack != state.stencilZFailOpBack
+		|| cache.stencilPassOpBack != state.stencilPassOpBack)
+	{
+		glStencilFuncSeparate(GL_FRONT, TranslateToGL(state.stencilFuncFront), state.stencilRef, state.readMask);
+		glStencilOpSeparate(GL_FRONT, TranslateToGL(state.stencilFailOpFront), TranslateToGL(state.stencilZFailOpFront), TranslateToGL(state.stencilPassOpFront));
+		glStencilFuncSeparate(GL_BACK, TranslateToGL(state.stencilFuncBack), state.stencilRef, state.readMask);
+		glStencilOpSeparate(GL_BACK, TranslateToGL(state.stencilFailOpBack), TranslateToGL(state.stencilZFailOpBack), TranslateToGL(state.stencilPassOpBack));
+	}
+
+	if (cache.writeMask != state.writeMask)
+		glStencilMask(state.writeMask);
+
+	cache = state;
+}
+//-----------------------------------------------------------------------------
 void RenderSystem::Bind(ShaderProgramRef resource)
 {
 	assert(IsValid(resource));
@@ -424,5 +484,12 @@ void RenderSystem::initializeCapabilities(bool print)
 	glGetIntegerv(GL_MAX_UNIFORM_BLOCK_SIZE, &openGLValue);
 	m_capabilities.maximumUniformBufferSize = static_cast<uint32_t>(openGLValue);
 	if( print ) Print("    > Maximum Uniform Buffer Size = " + std::to_string(m_capabilities.maximumUniformBufferSize));
+}
+//-----------------------------------------------------------------------------
+void RenderSystem::setClearMask(bool color, bool depth, bool stensil)
+{
+	m_cache.CurrentClearMask = color ? GL_COLOR_BUFFER_BIT : 0;
+	if (depth)   m_cache.CurrentClearMask |= GL_DEPTH_BUFFER_BIT;
+	if (stensil) m_cache.CurrentClearMask |= GL_STENCIL_BUFFER_BIT;
 }
 //-----------------------------------------------------------------------------
