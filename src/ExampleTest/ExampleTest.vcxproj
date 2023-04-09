@@ -98,6 +98,7 @@
     <ClCompile Include="002_DinamicVertex.cpp" />
     <ClCompile Include="003_BufferMapping.cpp" />
     <ClCompile Include="004_Quad.cpp" />
+    <ClCompile Include="005_BasicTexture.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
@@ -110,6 +111,7 @@
     <ClInclude Include="002_DinamicVertex.h" />
     <ClInclude Include="003_BufferMapping.h" />
     <ClInclude Include="004_Quad.h" />
+    <ClInclude Include="005_BasicTexture.h" />
     <ClInclude Include="stdafx.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

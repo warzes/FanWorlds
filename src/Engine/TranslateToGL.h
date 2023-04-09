@@ -2,19 +2,6 @@
 
 #include "RenderResource.h"
 //-----------------------------------------------------------------------------
-inline GLenum TranslateToGL(ResourceUsage usage)
-{
-	switch( usage )
-	{
-	case ResourceUsage::Static:  return GL_STATIC_DRAW;
-	case ResourceUsage::Dynamic: return GL_DYNAMIC_DRAW;
-	case ResourceUsage::Stream:  return GL_STREAM_DRAW;
-	default: break;
-	}
-	assert(false && "Unknown ResourceUsage");
-	return 0;
-}
-//-----------------------------------------------------------------------------
 inline GLenum TranslateToGL(BlendOp op)
 {
 	switch( op )
@@ -179,15 +166,15 @@ inline GLenum TranslateToGL(BufferUsage usage)
 {
 	switch( usage )
 	{
-	case BufferUsage::StreamDraw:  return GL_STREAM_DRAW;
-	case BufferUsage::StreamRead:  return GL_STREAM_READ;
-	case BufferUsage::StreamCopy:  return GL_STREAM_COPY;
 	case BufferUsage::StaticDraw:  return GL_STATIC_DRAW;
-	case BufferUsage::StaticRead:  return GL_STATIC_READ;
-	case BufferUsage::StaticCopy:  return GL_STATIC_COPY;
 	case BufferUsage::DynamicDraw: return GL_DYNAMIC_DRAW;
+	case BufferUsage::StreamDraw:  return GL_STREAM_DRAW;
 	case BufferUsage::DynamicRead: return GL_DYNAMIC_READ;
+	case BufferUsage::StaticRead:  return GL_STATIC_READ;
+	case BufferUsage::StreamRead:  return GL_STREAM_READ;
+	case BufferUsage::StaticCopy:  return GL_STATIC_COPY;
 	case BufferUsage::DynamicCopy: return GL_DYNAMIC_COPY;
+	case BufferUsage::StreamCopy:  return GL_STREAM_COPY;
 	default: break;
 	}	
 	assert(false && "Unknown BufferUsage");

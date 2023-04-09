@@ -18,14 +18,6 @@ enum class ResourceType : uint8_t
 	Framebuffer
 };
 
-// TODO: возможно удалить заменив на BufferUsage (или наоборот)
-enum class ResourceUsage : uint8_t
-{
-	Static,
-	Dynamic,
-	Stream,
-};
-
 //=============================================================================
 // Blend enum
 //=============================================================================
@@ -152,16 +144,18 @@ enum class BufferType : uint8_t
 	UniformBuffer
 };
 
-enum class BufferUsage : uint8_t // TODO: а возможно разбить по контектсу - у буферов свои, у текстур свои.
+enum class BufferUsage : uint8_t
 {
-	StreamDraw,
-	StreamRead,
-	StreamCopy,
 	StaticDraw,
-	StaticRead,
-	StaticCopy,
 	DynamicDraw,
+	StreamDraw,
+
+	StaticRead,
 	DynamicRead,
+	StreamRead,
+
+	StaticCopy,
+	StreamCopy,
 	DynamicCopy
 };
 
@@ -442,8 +436,6 @@ struct VertexAttribute
 
 struct Texture2DInfo
 {
-	ResourceUsage usage = ResourceUsage::Static;
-
 	TextureMinFilter minFilter = TextureMinFilter::NearestMipmapNearest;
 	TextureMagFilter magFilter = TextureMagFilter::Nearest;
 	TextureAddressMode wrapS = TextureAddressMode::Repeat;
@@ -528,55 +520,36 @@ using ShaderProgramRef = std::shared_ptr<ShaderProgram>;
 static_assert(sizeof(ShaderProgram) == 8, "ShaderProgram size changed!!!");
 inline bool operator==(ShaderProgramRef Left, ShaderProgramRef Right) noexcept { return *Left == *Right; }
 
-// TODO: GPUBuffer
-class VertexBuffer : public glObject
+class GPUBuffer : public glObject
 {
 public:
-	VertexBuffer() = delete;
-	VertexBuffer(GLuint handle, ResourceUsage Usage, unsigned Count, unsigned Size) : usage(Usage), count(Count), size(Size) { m_handle = handle; m_ownership = false; }
-	VertexBuffer(ResourceUsage Usage, unsigned Count, unsigned Size) : usage(Usage), count(Count), size(Size) { glGenBuffers(1, &m_handle); m_ownership = true; }
-	VertexBuffer(VertexBuffer&&) noexcept = default;
-	VertexBuffer(const VertexBuffer&) = delete;
-	~VertexBuffer() { if( m_ownership ) glDeleteBuffers(1, &m_handle); }
-	VertexBuffer& operator=(VertexBuffer&&) noexcept = default;
-	VertexBuffer& operator=(const VertexBuffer&) = delete;
+	GPUBuffer() = delete;
+	GPUBuffer(GLuint handle, BufferType Type, BufferUsage Usage, unsigned Count, unsigned Size) : type(Type), usage(Usage), count(Count), size(Size) { m_handle = handle; m_ownership = false; }
+	GPUBuffer(BufferType Type, BufferUsage Usage, unsigned Count, unsigned Size) : type(Type), usage(Usage), count(Count), size(Size) { glGenBuffers(1, &m_handle); m_ownership = true; }
+	GPUBuffer(GPUBuffer&&) noexcept = default;
+	GPUBuffer(const GPUBuffer&) = delete;
+	~GPUBuffer() { if( m_ownership ) glDeleteBuffers(1, &m_handle); }
+	GPUBuffer& operator=(GPUBuffer&&) noexcept = default;
+	GPUBuffer& operator=(const GPUBuffer&) = delete;
 
-	bool operator==(const VertexBuffer& ref) noexcept { return m_handle == ref.m_handle && m_ownership == ref.m_ownership && usage == ref.usage && count == ref.count && size == ref.size; }
+	bool operator==(const GPUBuffer& ref) noexcept { return m_handle == ref.m_handle &&  m_ownership == ref.m_ownership &&  usage == ref.usage && count == ref.count && size == ref.size && type == ref.type; }
 
-	ResourceUsage usage = ResourceUsage::Static;
+	BufferType type = BufferType::ArrayBuffer;
+	BufferUsage usage = BufferUsage::StaticDraw;
 	unsigned count = 0;
 	unsigned size = 0; 
 };
-using VertexBufferRef = std::shared_ptr<VertexBuffer>;
+using GPUBufferRef = std::shared_ptr<GPUBuffer>;
 
-static_assert(sizeof(VertexBuffer) == 20, "VertexBuffer size changed!!!");
-inline bool operator==(VertexBufferRef Left, VertexBufferRef Right) noexcept { return *Left == *Right; }
-
-class IndexBuffer : public VertexBuffer
-{
-public:
-	IndexBuffer() = delete;
-	IndexBuffer(GLuint handle, ResourceUsage Usage, unsigned Count, unsigned Size) : VertexBuffer(handle, Usage, Count, Size) { }
-	IndexBuffer(ResourceUsage Usage, unsigned Count, unsigned Size) : VertexBuffer(Usage, Count, Size) {}
-	IndexBuffer(IndexBuffer&&) = default;
-	IndexBuffer(const IndexBuffer&) = delete;
-	~IndexBuffer() { if( m_ownership ) glDeleteBuffers(1, &m_handle); }
-	IndexBuffer& operator=(IndexBuffer&&) = default;
-	IndexBuffer& operator=(const IndexBuffer&) = delete;
-
-	bool operator==(const IndexBuffer& ref) noexcept { return m_handle == ref.m_handle && m_ownership == ref.m_ownership && usage == ref.usage && count == ref.count && size == ref.size; }
-};
-using IndexBufferRef = std::shared_ptr<IndexBuffer>;
-
-static_assert(sizeof(IndexBuffer) == 20, "IndexBuffer size changed!!!");
-inline bool operator==(IndexBufferRef Left, IndexBufferRef Right) noexcept { return *Left == *Right; }
+static_assert(sizeof(GPUBuffer) == 20, "GPUBuffer size changed!!!");
+inline bool operator==(GPUBufferRef Left, GPUBufferRef Right) noexcept { return *Left == *Right; }
 
 class VertexArray : public glObject
 {
 public:
 	VertexArray() = delete;
-	VertexArray(GLuint handle, VertexBufferRef Vbo, IndexBufferRef Ibo, unsigned AttribsCount) : vbo(Vbo), ibo(Ibo), attribsCount(AttribsCount) { m_handle = handle; m_ownership = false; }
-	VertexArray(VertexBufferRef Vbo, IndexBufferRef Ibo, unsigned AttribsCount) : vbo(Vbo), ibo(Ibo), attribsCount(AttribsCount) { glGenVertexArrays(1, &m_handle); m_ownership = true; }
+	VertexArray(GLuint handle, GPUBufferRef Vbo, GPUBufferRef Ibo, unsigned AttribsCount) : vbo(Vbo), ibo(Ibo), attribsCount(AttribsCount) { m_handle = handle; m_ownership = false; }
+	VertexArray(GPUBufferRef Vbo, GPUBufferRef Ibo, unsigned AttribsCount) : vbo(Vbo), ibo(Ibo), attribsCount(AttribsCount) { glGenVertexArrays(1, &m_handle); m_ownership = true; }
 	VertexArray(VertexArray&&) = default;
 	VertexArray(const VertexArray&) = delete;
 	~VertexArray() { if( m_ownership ) glDeleteVertexArrays(1, &m_handle); }
@@ -585,8 +558,8 @@ public:
 
 	bool operator==(const VertexArray& ref) noexcept { return m_handle == ref.m_handle && m_ownership == ref.m_ownership && vbo == ref.vbo && ibo == ref.ibo && attribsCount == ref.attribsCount; }
 
-	VertexBufferRef vbo = nullptr;
-	IndexBufferRef ibo = nullptr;
+	GPUBufferRef vbo = nullptr;
+	GPUBufferRef ibo = nullptr;
 	unsigned attribsCount = 0;
 };
 using VertexArrayRef = std::shared_ptr<VertexArray>;
@@ -602,9 +575,10 @@ public:
 	GeometryBuffer& operator=(GeometryBuffer&&) = default;
 	GeometryBuffer& operator=(const GeometryBuffer&) = delete;
 
-	std::shared_ptr<VertexBuffer> vb = nullptr;
-	std::shared_ptr<IndexBuffer> ib = nullptr;
-	std::shared_ptr<VertexArray> vao = nullptr;
+	GPUBufferRef GetVBO() { return vao->vbo; }
+	GPUBufferRef GetIBO() { return vao->ibo; }
+
+	VertexArrayRef vao = nullptr;
 };
 using GeometryBufferRef = std::shared_ptr<GeometryBuffer>;
 

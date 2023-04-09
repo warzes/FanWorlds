@@ -1,6 +1,6 @@
 #pragma once
 
-class _002DinamicVertex final : public IApp
+class _005BasicTexture final : public IApp
 {
 	bool Create() final;
 	void Destroy() final;
@@ -15,6 +15,6 @@ private:
 	ShaderProgramRef m_shader;
 	Uniform m_uniformProjectionMatrix;
 	glm::mat4 m_perspective;
-	GPUBufferRef m_vb;
-	VertexArrayRef m_vao;
+	GeometryBufferRef m_geom;
+	Texture2DRef m_texture;
 };

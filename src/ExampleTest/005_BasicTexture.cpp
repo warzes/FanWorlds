@@ -1,50 +1,53 @@
 #include "stdafx.h"
-#include "004_Quad.h"
+#include "005_BasicTexture.h"
 //-----------------------------------------------------------------------------
-bool _004Quad::Create()
+bool _005BasicTexture::Create()
 {
-	Print("004_Quad Create");
+	Print("005_BasicTexture Create");
 
 	const char* vertexShaderText = R"(
 #version 330 core
 
-layout(location = 0) in vec3 position;
-layout(location = 1) in vec3 color;
+layout(location = 0) in vec3 aPosition;
+layout(location = 1) in vec2 aTexCoord;
 
 uniform mat4 projectionMatrix;
 
 out vec3 fragmentColor;
+out vec2 TexCoord;
 
 void main()
 {
-	gl_Position   = projectionMatrix * vec4(position, 1.0);
-	fragmentColor = color;
+	gl_Position = projectionMatrix * vec4(aPosition, 1.0);
+	TexCoord    = aTexCoord;
 }
 )";
 
 	const char* fragmentShaderText = R"(
 #version 330 core
 
-in vec3 fragmentColor;
-out vec4 color;
+in vec2 TexCoord;
+out vec4 FragColor;
+
+uniform sampler2D Texture;
 
 void main()
 {
-	color = vec4(fragmentColor, 1.0);
+	FragColor = texture(Texture, TexCoord);
 }
 )";
 
 	struct testVertex
 	{
 		glm::vec3 pos;
-		glm::vec3 color;
+		glm::vec2 texCoord;
 	}
 	vert[] =
 	{
-		{{ -0.5f,  0.5f, 4.0f}, {0.0f, 1.0f, 1.0f}}, // top left
-		{{  0.5f,  0.5f, 4.0f}, {1.0f, 0.0f, 0.0f}}, // top right
-		{{  0.5f, -0.5f, 4.0f}, {0.0f, 1.0f, 0.0f}}, // bottom right
-		{{ -0.5f, -0.5f, 4.0f}, {0.0f, 0.0f, 1.0f}}, // bottom left
+		{{ -0.5f,  0.5f, 2.0f}, {0.0f, 0.0f}}, // top left
+		{{  0.5f,  0.5f, 2.0f}, {1.0f, 0.0f}}, // top right
+		{{  0.5f, -0.5f, 2.0f}, {1.0f, 1.0f}}, // bottom right
+		{{ -0.5f, -0.5f, 2.0f}, {0.0f, 1.0f}}, // bottom left
 
 	};
 
@@ -62,22 +65,25 @@ void main()
 
 	m_geom = renderSystem.CreateGeometryBuffer(BufferUsage::StaticDraw, Countof(vert), sizeof(testVertex), vert, Countof(indices), IndexType::Uint32, indices, m_shader);
 
+	m_texture = renderSystem.CreateTexture2D("../ExampleData/textures/1mx1m.png");
+
 	return true;
 }
 //-----------------------------------------------------------------------------
-void _004Quad::Destroy()
+void _005BasicTexture::Destroy()
 {
 	m_shader.reset();
 	m_geom.reset();
+	m_texture.reset();
 
-	Print("004_Quad Destroy");
+	Print("005_BasicTexture Destroy");
 }
 //-----------------------------------------------------------------------------
-void _004Quad::Render()
+void _005BasicTexture::Render()
 {
 	auto& renderSystem = GetRenderSystem();
 
-	if( m_windowWidth != GetWindowWidth() || m_windowHeight != GetWindowHeight() )
+	if (m_windowWidth != GetWindowWidth() || m_windowHeight != GetWindowHeight())
 	{
 		m_windowWidth = GetWindowWidth();
 		m_windowHeight = GetWindowHeight();
@@ -86,14 +92,16 @@ void _004Quad::Render()
 	}
 
 	renderSystem.Clear();
+	renderSystem.Bind(m_texture, 0);
 	renderSystem.Bind(m_shader);
 	renderSystem.SetUniform(m_uniformProjectionMatrix, m_perspective);
+	renderSystem.SetUniform("Texture", 0);
 	renderSystem.Draw(m_geom->vao);
 }
 //-----------------------------------------------------------------------------
-void _004Quad::Update(float deltaTime)
+void _005BasicTexture::Update(float deltaTime)
 {
-	if( GetInput().IsKeyDown(Input::KEY_ESCAPE) )
+	if (GetInput().IsKeyDown(Input::KEY_ESCAPE))
 	{
 		BaseClass::ExitRequest();
 		return;

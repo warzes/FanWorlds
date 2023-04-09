@@ -40,21 +40,21 @@ public:
 	// Create Render Resource
 	//-------------------------------------------------------------------------
 	ShaderProgramRef CreateShaderProgram(const ShaderSource& vertexShaderSource, const ShaderSource& fragmentShaderSource);
-	VertexBufferRef CreateVertexBuffer(ResourceUsage usage, unsigned vertexCount, unsigned vertexSize, const void* data);
-	IndexBufferRef CreateIndexBuffer(ResourceUsage usage, unsigned indexCount, IndexType indexFormat, const void* data);
-	VertexArrayRef CreateVertexArray(VertexBufferRef vbo, IndexBufferRef ibo, const std::vector<VertexAttribute>& attribs);
-	VertexArrayRef CreateVertexArray(VertexBufferRef vbo, IndexBufferRef ibo, ShaderProgramRef shaders);
+	GPUBufferRef CreateVertexBuffer(BufferUsage usage, unsigned vertexCount, unsigned vertexSize, const void* data);
+	GPUBufferRef CreateIndexBuffer(BufferUsage usage, unsigned indexCount, IndexType indexFormat, const void* data);
+	VertexArrayRef CreateVertexArray(GPUBufferRef vbo, GPUBufferRef ibo, const std::vector<VertexAttribute>& attribs);
+	VertexArrayRef CreateVertexArray(GPUBufferRef vbo, GPUBufferRef ibo, ShaderProgramRef shaders);
 
-	GeometryBufferRef CreateGeometryBuffer(ResourceUsage usage,
+	GeometryBufferRef CreateGeometryBuffer(BufferUsage usage,
 		/*vertex*/unsigned vertexCount, unsigned vertexSize, const void* vertexData,
 		/*index*/unsigned indexCount, IndexType indexFormat, const void* indexData,
 		ShaderProgramRef shaders);
-	GeometryBufferRef CreateGeometryBuffer(ResourceUsage usage,
+	GeometryBufferRef CreateGeometryBuffer(BufferUsage usage,
 		/*vertex*/unsigned vertexCount, unsigned vertexSize, const void* vertexData,
 		/*index*/unsigned indexCount, IndexType indexFormat, const void* indexData,
 		const std::vector<VertexAttribute>& attribs);
-	GeometryBufferRef CreateGeometryBuffer(ResourceUsage usage, unsigned vertexCount, unsigned vertexSize, const void* vertexData, ShaderProgramRef shaders);
-	GeometryBufferRef CreateGeometryBuffer(ResourceUsage usage, unsigned vertexCount, unsigned vertexSize, const void* vertexData, const std::vector<VertexAttribute>& attribs);
+	GeometryBufferRef CreateGeometryBuffer(BufferUsage usage, unsigned vertexCount, unsigned vertexSize, const void* vertexData, ShaderProgramRef shaders);
+	GeometryBufferRef CreateGeometryBuffer(BufferUsage usage, unsigned vertexCount, unsigned vertexSize, const void* vertexData, const std::vector<VertexAttribute>& attribs);
 
 	Texture2DRef CreateTexture2D(const char* fileName, bool useCache = true, const Texture2DInfo& textureInfo = {});
 	Texture2DRef CreateTexture2D(const Texture2DCreateInfo& createInfo, const Texture2DInfo& textureInfo = {});
@@ -67,8 +67,7 @@ public:
 	inline bool IsValid(ShaderRef resource) const { return resource && resource->IsValid(); }
 	inline bool IsValid(ShaderProgramRef resource) const { return resource && resource->IsValid(); }
 	inline bool IsValid(const Uniform& uniform) const { return uniform.location >= 0; }
-	inline bool IsValid(VertexBufferRef resource) const { return resource && resource->IsValid(); }
-	inline bool IsValid(IndexBufferRef resource) const { return resource && resource->IsValid(); }
+	inline bool IsValid(GPUBufferRef resource) const { return resource && resource->IsValid(); }
 	inline bool IsValid(VertexArrayRef resource) const { return resource && resource->IsValid(); }
 	inline bool IsValid(Texture2DRef resource) const { return resource && resource->IsValid(); }
 	inline bool IsValid(GeometryBufferRef resource) const { return IsValid(resource->vao); }
@@ -102,22 +101,17 @@ public:
 	//-------------------------------------------------------------------------
 	// Buffer Op
 	//-------------------------------------------------------------------------
-	void UpdateBuffer(VertexBufferRef vbo, unsigned offset, unsigned vertexCount, unsigned vertexSize, const void* data);
-	void UpdateBuffer(IndexBufferRef ibo, unsigned offset, unsigned indexCount, unsigned indexSize, const void* data);
+	void UpdateBuffer(GPUBufferRef buffer, unsigned offset, unsigned count, unsigned size, const void* data);
 
-	void* MapBuffer(VertexBufferRef vbo);
-	void UnmapBuffer(VertexBufferRef vbo);
-	void* MapBuffer(IndexBufferRef ibo);
-	void UnmapBuffer(IndexBufferRef ibo);
-
+	void* MapBuffer(GPUBufferRef buffer);
+	void UnmapBuffer(GPUBufferRef buffer);
 
 	//-------------------------------------------------------------------------
 	// Current State Set
 	//-------------------------------------------------------------------------
 	void ResetState(ResourceType type);
 	void Bind(ShaderProgramRef resource);
-	void Bind(VertexBufferRef resource);
-	void Bind(IndexBufferRef resource);
+	void Bind(GPUBufferRef buffer);
 	void Bind(const VertexAttribute& Attribute);
 	void Bind(Texture2DRef resource, unsigned slot = 0);
 	void Bind(FramebufferRef resource);
@@ -152,5 +146,17 @@ private:
 		unsigned CurrentTexture2D[MaxBindingTextures] = { 0 };
 		unsigned CurrentFramebuffer = 0;
 	} m_cache;
+
+	unsigned& getCurrentCacheBufferFromType(BufferType type)
+	{
+		if (type == BufferType::ArrayBuffer) return m_cache.CurrentVBO;
+		else if(type == BufferType::ElementArrayBuffer) return m_cache.CurrentIBO;
+		else
+		{
+			assert(1 && "not impl!");
+			return m_cache.CurrentVBO;
+		}
+	}
+
 	std::unordered_map<std::string, Texture2DRef> m_cacheFileTextures2D;
 };

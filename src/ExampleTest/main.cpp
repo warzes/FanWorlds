@@ -4,6 +4,7 @@
 #include "002_DinamicVertex.h"
 #include "003_BufferMapping.h"
 #include "004_Quad.h"
+#include "005_BasicTexture.h"
 // Other
 #include "001_MonkeyScenes.h"
 //-----------------------------------------------------------------------------
@@ -31,6 +32,7 @@ int main(
 		std::cout << "    b2 - Dinamic Vertex" << std::endl;
 		std::cout << "    b3 - Buffer Mapping" << std::endl;
 		std::cout << "    b4 - Draw Quad" << std::endl;
+		std::cout << "    b5 - Draw Basic Texture" << std::endl;
 
 		std::cout << "    o1 - Monkey Scenes" << std::endl;
 		std::cout << std::endl;
@@ -51,6 +53,7 @@ int main(
 		START_SCENE("b2", _002DinamicVertex);
 		START_SCENE("b3", _003BufferMapping);
 		START_SCENE("b4", _004Quad);
+		START_SCENE("b5", _005BasicTexture);
 		START_SCENE("o1", _001MonkeyScenes);
 
 #undef START_SCENE

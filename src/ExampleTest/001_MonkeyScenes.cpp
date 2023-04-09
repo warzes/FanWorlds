@@ -377,7 +377,7 @@ void main()
         uniformModelProjectionMatrix = renderSystem.GetUniform(shaderModel, "uProjection");
 
 
-        m_geom = renderSystem.CreateGeometryBuffer(ResourceUsage::Static,
+        m_geom = renderSystem.CreateGeometryBuffer(BufferUsage::StaticDraw,
             Countof(vert), sizeof(testVertex), vert,
             Countof(indexs), IndexType::Uint32, indexs, 
             m_tempShader);

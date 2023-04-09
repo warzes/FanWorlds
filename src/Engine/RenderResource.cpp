@@ -73,9 +73,9 @@ ShaderProgramRef RenderSystem::CreateShaderProgram(const ShaderSource& vertexSha
 	return resource;
 }
 //-----------------------------------------------------------------------------
-VertexBufferRef RenderSystem::CreateVertexBuffer(ResourceUsage usage, unsigned vertexCount, unsigned vertexSize, const void* data)
+GPUBufferRef RenderSystem::CreateVertexBuffer(BufferUsage usage, unsigned vertexCount, unsigned vertexSize, const void* data)
 {
-	VertexBufferRef resource(new VertexBuffer(usage, vertexCount, vertexSize));
+	GPUBufferRef resource(new GPUBuffer(BufferType::ArrayBuffer, usage, vertexCount, vertexSize));
 	if (!IsValid(resource))
 	{
 		Error("VertexBuffer create failed!");
@@ -87,10 +87,10 @@ VertexBufferRef RenderSystem::CreateVertexBuffer(ResourceUsage usage, unsigned v
 	return resource;
 }
 //-----------------------------------------------------------------------------
-IndexBufferRef RenderSystem::CreateIndexBuffer(ResourceUsage usage, unsigned indexCount, IndexType indexFormat, const void * data)
+GPUBufferRef RenderSystem::CreateIndexBuffer(BufferUsage usage, unsigned indexCount, IndexType indexFormat, const void * data)
 {
 	const unsigned indexSize = SizeIndexType(indexFormat);
-	IndexBufferRef resource(new IndexBuffer(usage, indexCount, indexSize));
+	GPUBufferRef resource(new GPUBuffer(BufferType::ElementArrayBuffer, usage, indexCount, indexSize));
 	if (!IsValid(resource))
 	{
 		Error("IndexBuffer create failed!");
@@ -102,11 +102,21 @@ IndexBufferRef RenderSystem::CreateIndexBuffer(ResourceUsage usage, unsigned ind
 	return resource;
 }
 //-----------------------------------------------------------------------------
-VertexArrayRef RenderSystem::CreateVertexArray(VertexBufferRef vbo, IndexBufferRef ibo, const std::vector<VertexAttribute>& attribs)
+VertexArrayRef RenderSystem::CreateVertexArray(GPUBufferRef vbo, GPUBufferRef ibo, const std::vector<VertexAttribute>& attribs)
 {
 	if (vbo == nullptr || attribs.size() == 0)
 	{
 		Error("VertexBuffer is null");
+		return {};
+	}
+	if (vbo->type != BufferType::ArrayBuffer)
+	{
+		Error("vbo is not VertexBuffer valid!");
+		return {};
+	}
+	if (ibo && ibo->type != BufferType::ElementArrayBuffer)
+	{
+		Error("øbo is not IndexBuffer valid!");
 		return {};
 	}
 
@@ -132,7 +142,7 @@ VertexArrayRef RenderSystem::CreateVertexArray(VertexBufferRef vbo, IndexBufferR
 	return resource;
 }
 //-----------------------------------------------------------------------------
-VertexArrayRef RenderSystem::CreateVertexArray(VertexBufferRef vbo, IndexBufferRef ibo, ShaderProgramRef shaders)
+VertexArrayRef RenderSystem::CreateVertexArray(GPUBufferRef vbo, GPUBufferRef ibo, ShaderProgramRef shaders)
 {
 	auto attribInfo = GetAttributesInfo(shaders);
 	if (attribInfo.empty()) return {};
@@ -183,31 +193,32 @@ VertexArrayRef RenderSystem::CreateVertexArray(VertexBufferRef vbo, IndexBufferR
 	return CreateVertexArray(vbo, ibo, attribs);
 }
 //-----------------------------------------------------------------------------
-GeometryBufferRef RenderSystem::CreateGeometryBuffer(ResourceUsage usage, unsigned vertexCount, unsigned vertexSize, const void* vertexData, unsigned indexCount, IndexType indexFormat, const void* indexData, ShaderProgramRef shaders)
+GeometryBufferRef RenderSystem::CreateGeometryBuffer(BufferUsage usage, unsigned vertexCount, unsigned vertexSize, const void* vertexData, unsigned indexCount, IndexType indexFormat, const void* indexData, ShaderProgramRef shaders)
 {
 	assert(IsValid(shaders));
 
 	GeometryBufferRef geom(new GeometryBuffer());
 
-	geom->vb = CreateVertexBuffer(usage, vertexCount, vertexSize, vertexData);
-	if (!IsValid(geom->vb))
+	GPUBufferRef vb = CreateVertexBuffer(usage, vertexCount, vertexSize, vertexData);
+	if (!IsValid(vb))
 	{
 		Error("GeometryBuffer::VertexBuffer create failed!!");
 		return {};
 	}
 
 	const bool isIndexBuffer = indexCount > 0;
+	GPUBufferRef ib = nullptr;
 	if (isIndexBuffer)
 	{
-		geom->ib = CreateIndexBuffer(usage, indexCount, indexFormat, indexData);
-		if (!IsValid(geom->ib))
+		ib = CreateIndexBuffer(usage, indexCount, indexFormat, indexData);
+		if (!IsValid(ib))
 		{
 			Error("GeometryBuffer::IndexBuffer create failed!!");
 			return {};
 		}
 	}
 
-	geom->vao = CreateVertexArray(geom->vb, geom->ib, shaders);
+	geom->vao = CreateVertexArray(vb, ib, shaders);
 	if (!IsValid(geom->vao))
 	{
 		Error("GeometryBuffer::VertexArray create failed!!");
@@ -216,29 +227,30 @@ GeometryBufferRef RenderSystem::CreateGeometryBuffer(ResourceUsage usage, unsign
 	return geom;
 }
 //-----------------------------------------------------------------------------
-GeometryBufferRef RenderSystem::CreateGeometryBuffer(ResourceUsage usage, unsigned vertexCount, unsigned vertexSize, const void* vertexData, unsigned indexCount, IndexType indexFormat, const void* indexData, const std::vector<VertexAttribute>& attribs)
+GeometryBufferRef RenderSystem::CreateGeometryBuffer(BufferUsage usage, unsigned vertexCount, unsigned vertexSize, const void* vertexData, unsigned indexCount, IndexType indexFormat, const void* indexData, const std::vector<VertexAttribute>& attribs)
 {
 	GeometryBufferRef geom(new GeometryBuffer());
 
-	geom->vb = CreateVertexBuffer(usage, vertexCount, vertexSize, vertexData);
-	if (!IsValid(geom->vb))
+	GPUBufferRef vb = CreateVertexBuffer(usage, vertexCount, vertexSize, vertexData);
+	if (!IsValid(vb))
 	{
 		Error("GeometryBuffer::VertexBuffer create failed!!");
 		return {};
 	}
 
 	const bool isIndexBuffer = indexCount > 0;
+	GPUBufferRef ib = nullptr;
 	if (isIndexBuffer)
 	{
-		geom->ib = CreateIndexBuffer(usage, indexCount, indexFormat, indexData);
-		if (!IsValid(geom->ib))
+		ib = CreateIndexBuffer(usage, indexCount, indexFormat, indexData);
+		if (!IsValid(ib))
 		{
 			Error("GeometryBuffer::IndexBuffer create failed!!");
 			return {};
 		}
 	}
 
-	geom->vao = CreateVertexArray(geom->vb, geom->ib, attribs);
+	geom->vao = CreateVertexArray(vb, ib, attribs);
 	if (!IsValid(geom->vao))
 	{
 		Error("GeometryBuffer::VertexArray create failed!!");
@@ -247,12 +259,12 @@ GeometryBufferRef RenderSystem::CreateGeometryBuffer(ResourceUsage usage, unsign
 	return geom;
 }
 //-----------------------------------------------------------------------------
-GeometryBufferRef RenderSystem::CreateGeometryBuffer(ResourceUsage usage, unsigned vertexCount, unsigned vertexSize, const void* vertexData, ShaderProgramRef shaders)
+GeometryBufferRef RenderSystem::CreateGeometryBuffer(BufferUsage usage, unsigned vertexCount, unsigned vertexSize, const void* vertexData, ShaderProgramRef shaders)
 {
 	return CreateGeometryBuffer(usage, vertexCount, vertexSize, vertexData, 0, {}, nullptr, shaders);
 }
 //-----------------------------------------------------------------------------
-GeometryBufferRef RenderSystem::CreateGeometryBuffer(ResourceUsage usage, unsigned vertexCount, unsigned vertexSize, const void* vertexData, const std::vector<VertexAttribute>& attribs)
+GeometryBufferRef RenderSystem::CreateGeometryBuffer(BufferUsage usage, unsigned vertexCount, unsigned vertexSize, const void* vertexData, const std::vector<VertexAttribute>& attribs)
 {
 	return CreateGeometryBuffer(usage, vertexCount, vertexSize, vertexData, 0, {}, nullptr, attribs);
 }

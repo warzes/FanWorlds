@@ -253,60 +253,36 @@ void RenderSystem::SetUniform(const std::string& uniformName, const glm::mat4& v
 	glUniformMatrix4fv(glGetUniformLocation(m_cache.CurrentShaderProgram, uniformName.c_str()), 1, GL_FALSE, glm::value_ptr(value));
 }
 //-----------------------------------------------------------------------------
-void RenderSystem::UpdateBuffer(VertexBufferRef vbo, unsigned offset, unsigned vertexCount, unsigned vertexSize, const void* data)
+void RenderSystem::UpdateBuffer(GPUBufferRef buffer, unsigned offset, unsigned count, unsigned size, const void* data)
 {
-	assert(IsValid(vbo));
+	assert(IsValid(buffer));
+	const GLenum target = TranslateToGL(buffer->type);
 
-	glBindBuffer(GL_ARRAY_BUFFER, *vbo);
+	glBindBuffer(target, *buffer);
 
-	if( offset == 0 && (vbo->count != vertexCount || vbo->size != vertexSize) )
-		glBufferData(GL_ARRAY_BUFFER, vertexCount * vertexSize, data, TranslateToGL(vbo->usage));
+	if( offset == 0 && (buffer->count != count || buffer->size != size) )
+		glBufferData(target, count * size, data, TranslateToGL(buffer->usage));
 	else
-		glBufferSubData(GL_ARRAY_BUFFER, offset, vertexCount * vertexSize, data);
+		glBufferSubData(target, offset, count * size, data);
 
-	vbo->count = vertexCount;
-	vbo->size = vertexSize;
+	buffer->count = count;
+	buffer->size = size;
 
-	glBindBuffer(GL_ARRAY_BUFFER, m_cache.CurrentVBO); // restore current vb
+	// restore current buffer
+	if (target == GL_ARRAY_BUFFER)              glBindBuffer(target, m_cache.CurrentVBO);
+	else if (target == GL_ELEMENT_ARRAY_BUFFER) glBindBuffer(target, m_cache.CurrentIBO);
+	else assert(1 && "not impl!");
 }
 //-----------------------------------------------------------------------------
-void RenderSystem::UpdateBuffer(IndexBufferRef ibo, unsigned offset, unsigned indexCount, unsigned indexSize, const void* data)
+void* RenderSystem::MapBuffer(GPUBufferRef buffer)
 {
-	assert(IsValid(ibo));
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, *ibo);
-	if(offset == 0 && (ibo->count != indexCount || ibo->size != indexSize) )
-		glBufferData(GL_ELEMENT_ARRAY_BUFFER, indexCount * indexSize, data, TranslateToGL(ibo->usage));
-	else
-		glBufferSubData(GL_ELEMENT_ARRAY_BUFFER, offset, indexCount * indexSize, data);
-
-	ibo->count = indexCount;
-	ibo->size = indexSize;
-
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_cache.CurrentIBO); // restore current ib
+	Bind(buffer);
+	return glMapBufferRange(TranslateToGL(buffer->type), /*offset*/0, /*size*/buffer->count * buffer->size, GL_MAP_WRITE_BIT);
 }
 //-----------------------------------------------------------------------------
-void* RenderSystem::MapBuffer(VertexBufferRef vbo)
+void RenderSystem::UnmapBuffer(GPUBufferRef buffer)
 {
-	Bind(vbo);
-	return glMapBufferRange(GL_ARRAY_BUFFER, /*offset*/0, /*size*/vbo->count* vbo->size, GL_MAP_WRITE_BIT);
-}
-//-----------------------------------------------------------------------------
-void RenderSystem::UnmapBuffer(VertexBufferRef vbo)
-{
-	assert(*vbo == m_cache.CurrentVBO);
-	if (*vbo == m_cache.CurrentVBO) glUnmapBuffer(GL_ARRAY_BUFFER);
-}
-//-----------------------------------------------------------------------------
-void* RenderSystem::MapBuffer(IndexBufferRef ibo)
-{
-	Bind(ibo);
-	return glMapBufferRange(GL_ELEMENT_ARRAY_BUFFER, /*offset*/0, /*size*/ibo->count * ibo->size, GL_MAP_WRITE_BIT);
-}
-//-----------------------------------------------------------------------------
-void RenderSystem::UnmapBuffer(IndexBufferRef ibo)
-{
-	assert(*ibo == m_cache.CurrentIBO);
-	if (*ibo == m_cache.CurrentIBO) glUnmapBuffer(GL_ELEMENT_ARRAY_BUFFER);
+	glUnmapBuffer(TranslateToGL(buffer->type));
 }
 //-----------------------------------------------------------------------------
 void RenderSystem::ResetState(ResourceType type)
@@ -358,22 +334,15 @@ void RenderSystem::Bind(ShaderProgramRef resource)
 	glUseProgram(*resource);
 }
 //-----------------------------------------------------------------------------
-void RenderSystem::Bind(VertexBufferRef resource)
+void RenderSystem::Bind(GPUBufferRef buffer)
 {
-	if( !resource ) return;
-	assert(IsValid(resource));
-	if( m_cache.CurrentVBO == *resource ) return;
-	m_cache.CurrentVBO = *resource;
-	glBindBuffer(GL_ARRAY_BUFFER, *resource);
-}
-//-----------------------------------------------------------------------------
-void RenderSystem::Bind(IndexBufferRef resource)
-{
-	if( !resource ) return;
-	assert(IsValid(resource));
-	if( m_cache.CurrentIBO == *resource ) return;
-	m_cache.CurrentIBO = *resource;
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, *resource);
+	if( !buffer) return;
+	assert(IsValid(buffer));
+
+	unsigned& currentBufferType = getCurrentCacheBufferFromType(buffer->type);
+	if (currentBufferType == *buffer) return;
+	currentBufferType = *buffer;
+	glBindBuffer(TranslateToGL(buffer->type), *buffer);
 }
 //-----------------------------------------------------------------------------
 void RenderSystem::Bind(const VertexAttribute& attribute)

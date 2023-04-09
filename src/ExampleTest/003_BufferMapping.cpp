@@ -56,7 +56,7 @@ void main()
 		{{ 1.0f, -1.0f, 4.0f}, {0.0f, 1.0f, 0.0f}},
 		{{ 0.0f,  1.0f, 4.0f}, {0.0f, 0.0f, 1.0f}}
 	};
-	m_vb = renderSystem.CreateVertexBuffer(ResourceUsage::Dynamic, Countof(vert), sizeof(testVertex), vert);
+	m_vb = renderSystem.CreateVertexBuffer(BufferUsage::DynamicDraw, Countof(vert), sizeof(testVertex), vert);
 	m_vao = renderSystem.CreateVertexArray(m_vb, nullptr, m_shader);
 
 	return true;

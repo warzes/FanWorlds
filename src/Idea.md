@@ -1,3 +1,28 @@
+сделать такое из вокселей
+https ://www.youtube.com/watch?v=rR-JmkoLM2g
+с элементами отсюда
+https ://www.youtube.com/watch?v=2sbk45Hy90Y
+https://www.youtube.com/watch?v=9QwwL7jRzqU - оружие
+не забыть про тот майкрафт на рпг ин бокс
+https ://www.youtube.com/watch?v=O3uUrk55ZbI
+графику как тут - https ://zeromatrix.itch.io/dungeoninmypocket
+	а также не забыть про скрины в папке идей
+
+	некоторые вещи геймплея из microcraft
+	поискать картинки voxel dungeons для вдохновения
+
+
+описать план разработки - сначала выделить сущности типа игрока, карты, мира, врагов.
+придерживаться идеи - каждую сущность делать отдельно.
+
+модели делать  магивоксель или другом воксельном редакторе - например goxel
+не забыть про тот генератор текстур на годоте
+
+стейты из yoyoyoy
+
+
+
+
 
 тайлы такие но 3д - https://www.youtube.com/watch?v=xIhp8oRx6DU
 

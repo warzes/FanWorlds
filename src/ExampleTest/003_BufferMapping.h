@@ -15,6 +15,6 @@ private:
 	ShaderProgramRef m_shader;
 	Uniform m_uniformProjectionMatrix;
 	glm::mat4 m_perspective;
-	VertexBufferRef m_vb;
+	GPUBufferRef m_vb;
 	VertexArrayRef m_vao;
 };

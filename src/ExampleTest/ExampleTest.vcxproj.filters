@@ -18,6 +18,9 @@
     <ClCompile Include="003_BufferMapping.cpp">
       <Filter>BasicExample</Filter>
     </ClCompile>
+    <ClCompile Include="005_BasicTexture.cpp">
+      <Filter>BasicExample</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h" />
@@ -34,6 +37,9 @@
       <Filter>BasicExample</Filter>
     </ClInclude>
     <ClInclude Include="003_BufferMapping.h">
+      <Filter>BasicExample</Filter>
+    </ClInclude>
+    <ClInclude Include="005_BasicTexture.h">
       <Filter>BasicExample</Filter>
     </ClInclude>
   </ItemGroup>
