@@ -150,6 +150,9 @@
     <ClInclude Include="RenderResourceEnums.h">
       <Filter>RenderAPI</Filter>
     </ClInclude>
+    <ClInclude Include="Span.h">
+      <Filter>Core\Object</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Core">

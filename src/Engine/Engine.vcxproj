@@ -142,6 +142,7 @@
     <ClInclude Include="RenderResourceEnums.h" />
     <ClInclude Include="RenderResource.h" />
     <ClInclude Include="RenderSystem.h" />
+    <ClInclude Include="Span.h" />
     <ClInclude Include="STBImageLoader.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="StringUtils.h" />

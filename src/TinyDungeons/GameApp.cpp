@@ -3,11 +3,18 @@
 #include "SpaceMath.h"
 #include "Ray.h"
 
+https://github.com/ufbx/ufbx
+
 //план
-//- https://github.com/warzes/LiliEngine__ - отсюда взять шейдер с туманом.
+// 
 //- вместо белого в блокинге использовать оттенки золотого на синем фоне
 //- посмотреть редактор - https://www.youtube.com/watch?v=GukhptdHlPk
 //
+// по кубо-редактору
+//	https://www.youtube.com/watch?v=GfInoloaQJs
+// и сцена под него - https://lettier.github.io/3d-game-shaders-for-beginners/normal-mapping.html
+// 
+// 
 //начало идеи
 //	https://www.youtube.com/watch?v=tAr8zYDdI8s
 //	процесс - https://www.youtube.com/watch?v=CZMXE2n0vNg&t=1399s
@@ -75,11 +82,20 @@ uniform mat4 uProjection;
 out vec3 fNormal;
 out vec3 fColor;
 out vec2 fTexCoord;
+out float visibility;
+
+const float density = 0.03;
+const float gradient = 1.5;
 
 void main()
 {
+	vec4 vertPosRelativeToCamera = uView * uWorld * vec4(aPos, 1.0);
+	float dist = length(vertPosRelativeToCamera.xyz);
+	visibility = exp(-pow((dist * density), gradient));
+	visibility = clamp(visibility, 0.0, 1.0);
+
 	gl_Position = uProjection * uView * uWorld * vec4(aPos, 1.0);
-	fNormal = aNormal;
+	fNormal = mat3(transpose(inverse(uWorld))) * aNormal;
 	fColor = aColor;
 	fTexCoord = aTexCoord;
 }
@@ -91,6 +107,7 @@ void main()
 in vec3 fNormal;
 in vec3 fColor;
 in vec2 fTexCoord;
+in float visibility;
 
 uniform sampler2D DiffuseTexture;
 
@@ -98,9 +115,30 @@ out vec4 fragColor;
 
 void main()
 {
-	vec4 textureClr = texture(DiffuseTexture, fTexCoord) * vec4(fColor, 1.0);
-	if (textureClr.a < 0.02) discard;
-	fragColor = textureClr;
+	vec4 texture =  texture(DiffuseTexture, fTexCoord);
+	//if (texture.a < 0.02) discard;
+
+
+	vec3 fogColor = vec3(0.4, 0.5, 0.4);
+	vec3 lightDirection = vec3(0.0, 0.8, -0.2);
+	vec3 norm = normalize(fNormal);
+	float shadow = dot(norm, lightDirection);
+	if(shadow <= 0.0)
+	{
+		shadow = 0.0;
+	}
+
+	vec3 objectColor = texture.rgb * fColor;
+	objectColor = fColor;
+
+	fragColor = (vec4(objectColor, 1.0) * (shadow + 0.3)) * 0.7;
+	fragColor = mix(vec4(fogColor, 1.0), fragColor, visibility);
+	fragColor.a = texture.a;
+
+	// HDR tonemapping
+	//color = color / (color + vec3(1.0));
+	// gamma correct
+	//color = pow(color, vec3(1.0 / 2.2));
 }
 )";
 
