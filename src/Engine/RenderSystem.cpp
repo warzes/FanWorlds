@@ -266,8 +266,10 @@ void RenderSystem::UpdateBuffer(GPUBufferRef buffer, unsigned offset, unsigned c
 {
 	assert(IsValid(buffer));
 	const GLenum target = TranslateToGL(buffer->type);
+	const unsigned id = *buffer;
+	const unsigned cacheId = getCurrentCacheBufferFromType(buffer->type);
 
-	glBindBuffer(target, *buffer);
+	if ( cacheId != id ) glBindBuffer(target, id);
 
 	if( offset == 0 && (buffer->count != count || buffer->size != size) )
 		glBufferData(target, count * size, data, TranslateToGL(buffer->usage));
@@ -278,26 +280,28 @@ void RenderSystem::UpdateBuffer(GPUBufferRef buffer, unsigned offset, unsigned c
 	buffer->size = size;
 
 	// restore current buffer
-	if (target == GL_ARRAY_BUFFER)              glBindBuffer(target, m_cache.CurrentVBO);
-	else if (target == GL_ELEMENT_ARRAY_BUFFER) glBindBuffer(target, m_cache.CurrentIBO);
-	else assert(1 && "not impl!");
+	if( cacheId != id ) glBindBuffer(target, cacheId);
 }
 //-----------------------------------------------------------------------------
 void* RenderSystem::MapBuffer(GPUBufferRef buffer)
 {
+	assert(IsValid(buffer));
 	Bind(buffer);
 	return glMapBuffer(TranslateToGL(buffer->type), GL_WRITE_ONLY);
 }
 //-----------------------------------------------------------------------------
 void* RenderSystem::MapBuffer(GPUBufferRef buffer, unsigned offset, unsigned size)
 {
+	assert(IsValid(buffer));
 	Bind(buffer);
 	return glMapBufferRange(TranslateToGL(buffer->type), offset, size, GL_MAP_WRITE_BIT);
 }
 //-----------------------------------------------------------------------------
-void RenderSystem::UnmapBuffer(GPUBufferRef buffer)
+bool RenderSystem::UnmapBuffer(GPUBufferRef buffer)
 {
-	glUnmapBuffer(TranslateToGL(buffer->type));
+	assert(IsValid(buffer));
+	assert(*buffer == getCurrentCacheBufferFromType(buffer->type));
+	return GL_TRUE == glUnmapBuffer(TranslateToGL(buffer->type));
 }
 //-----------------------------------------------------------------------------
 void RenderSystem::ResetState(ResourceType type)
@@ -484,6 +488,16 @@ void RenderSystem::initializeCapabilities(bool print)
 	glGetIntegerv(GL_MAX_UNIFORM_BLOCK_SIZE, &openGLValue);
 	m_capabilities.maximumUniformBufferSize = static_cast<uint32_t>(openGLValue);
 	if( print ) Print("    > Maximum Uniform Buffer Size = " + std::to_string(m_capabilities.maximumUniformBufferSize));
+}
+//-----------------------------------------------------------------------------
+bool RenderSystem::checkCurrentFrameBuffer() const
+{
+	if( glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE )
+	{
+		Error("FRAMEBUFFER:: Framebuffer is not complete!");
+		return false;
+	}
+	return true;
 }
 //-----------------------------------------------------------------------------
 void RenderSystem::setClearMask(bool color, bool depth, bool stensil)

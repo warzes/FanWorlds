@@ -16,6 +16,35 @@ enum class ResourceType : uint8_t
 	Framebuffer
 };
 
+enum class ImageFormat : uint8_t
+{
+	None = 0,
+	R8,
+	RG8,
+	RGBA8,
+	A8,
+	R16,
+	RG16,
+	RGBA16,
+	R16F,
+	RG16F,
+	RGBA16F,
+	R32F,
+	RG32F,
+	RGB32F,
+	RGBA32F,
+	R32U,
+	RG32U,
+	RGBA32U,
+	D16,
+	D32,
+	D24S8,
+
+	DXT1,
+	DXT3,
+	DXT5,
+};
+
 //=============================================================================
 // Depth Stencil enum
 //=============================================================================

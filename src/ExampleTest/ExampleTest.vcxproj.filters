@@ -27,6 +27,9 @@
     <ClCompile Include="007_BasicObjModel.cpp">
       <Filter>BasicExample</Filter>
     </ClCompile>
+    <ClCompile Include="008_Framebuffer.cpp">
+      <Filter>BasicExample</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h" />
@@ -54,6 +57,9 @@
     <ClInclude Include="007_BasicObjModel.h">
       <Filter>BasicExample</Filter>
     </ClInclude>
+    <ClInclude Include="008_Framebuffer.h">
+      <Filter>BasicExample</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="BasicExample">
@@ -61,6 +67,9 @@
     </Filter>
     <Filter Include="Other">
       <UniqueIdentifier>{073d3036-3d4c-48b5-99ad-b20fec3b5a02}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Bullet Physics">
+      <UniqueIdentifier>{b4fd0667-ad76-4e42-908a-52136449f9ed}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

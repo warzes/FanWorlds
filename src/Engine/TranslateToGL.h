@@ -1,7 +1,39 @@
 #pragma once
 
 #include "RenderResource.h"
-
+//-----------------------------------------------------------------------------
+inline GLint TranslateToGL(ImageFormat format)
+{
+	switch( format )
+	{
+	case ImageFormat::R8:              return GL_R8;
+	case ImageFormat::RG8:             return GL_RG8;
+	case ImageFormat::RGBA8:           return GL_RGBA8;
+	case ImageFormat::A8:              return GL_ALPHA;
+	case ImageFormat::R16:             return GL_R16;
+	case ImageFormat::RG16:            return GL_RG16;
+	case ImageFormat::RGBA16:          return GL_RGBA16;
+	case ImageFormat::R16F:            return GL_R16F;
+	case ImageFormat::RG16F:           return GL_RG16F;
+	case ImageFormat::RGBA16F:         return GL_RGBA16F;
+	case ImageFormat::R32F:            return GL_R32F;
+	case ImageFormat::RG32F:           return GL_RG32F;
+	case ImageFormat::RGB32F:          return GL_RGB32F;
+	case ImageFormat::RGBA32F:         return GL_RGBA32F;
+	case ImageFormat::R32U:            return GL_R32UI;
+	case ImageFormat::RG32U:           return GL_RG32UI;
+	case ImageFormat::RGBA32U:         return GL_RGBA32UI;
+	case ImageFormat::D16:             return GL_DEPTH_COMPONENT16;
+	case ImageFormat::D32:             return GL_DEPTH_COMPONENT32;
+	case ImageFormat::D24S8:           return GL_DEPTH24_STENCIL8;
+	//case ImageFormat::DXT1:            return GL_COMPRESSED_RGBA_S3TC_DXT1_EXT;
+	//case ImageFormat::DXT3:            return GL_COMPRESSED_RGBA_S3TC_DXT3_EXT;
+	//case ImageFormat::DXT5:            return GL_COMPRESSED_RGBA_S3TC_DXT5_EXT;
+	default: break;
+	}
+	assert(false && "Unknown ImageFormat");
+	return 0;
+}
 //-----------------------------------------------------------------------------
 inline GLenum TranslateToGL(ComparisonFunc func)
 {
@@ -424,7 +456,7 @@ inline bool GetTextureFormatType(TexelsFormat inFormat, GLenum textureType, GLen
 	else if( inFormat == TexelsFormat::RGB_U8 )
 	{
 		format = GL_RGB;
-		internalFormat = GL_RGB8;
+		internalFormat = GL_RGB;
 		oglType = GL_UNSIGNED_BYTE;
 	}
 	else if( inFormat == TexelsFormat::RGBA_U8 )

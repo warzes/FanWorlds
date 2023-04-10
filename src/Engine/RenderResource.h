@@ -326,11 +326,18 @@ public:
 	Renderbuffer& operator=(Renderbuffer&&) noexcept = default;
 	Renderbuffer& operator=(const Renderbuffer&) = delete;
 
-	bool operator==(const Renderbuffer& ref) noexcept { return m_handle == ref.m_handle && m_ownership == ref.m_ownership; }
+	bool operator==(const Renderbuffer& ref) noexcept { return m_handle == ref.m_handle && m_ownership == ref.m_ownership && format == ref.format && size == ref.size && multisample == ref.multisample; }
+
+	unsigned Width() const { return size.x; }
+	unsigned Height() const { return size.y; }
+
+	ImageFormat format;
+	glm::uvec2 size = glm::uvec2{ 0 };
+	int multisample = 1;
 };
 using RenderbufferRef = std::shared_ptr<Renderbuffer>;
 
-static_assert(sizeof(Renderbuffer) == 8, "Renderbuffer size changed!!!");
+static_assert(sizeof(Renderbuffer) == 24, "Renderbuffer size changed!!!");
 inline bool operator==(RenderbufferRef Left, RenderbufferRef Right) noexcept { return *Left == *Right; }
 
 class Framebuffer : public glObject
@@ -344,14 +351,18 @@ public:
 	Framebuffer& operator=(Framebuffer&&) = default;
 	Framebuffer& operator=(const Framebuffer&) = delete;
 
-	bool operator==(const Framebuffer& ref) noexcept { return m_handle == ref.m_handle && m_ownership == ref.m_ownership && texture == ref.texture; }
+	bool operator==(const Framebuffer& ref) noexcept { return m_handle == ref.m_handle && m_ownership == ref.m_ownership && size == ref.size && colorTexture == ref.colorTexture && colorBuffer == ref.colorBuffer && depthStencilTexture == ref.depthStencilTexture && depthStencilBuffer ==ref.depthStencilBuffer; }
 
-	Texture2DRef texture;
+	glm::uvec2 size = glm::uvec2(0);
+	Texture2DRef colorTexture = nullptr;
+	RenderbufferRef colorBuffer = nullptr;
+	Texture2DRef depthStencilTexture = nullptr;
+	RenderbufferRef depthStencilBuffer = nullptr;
 };
 
 using FramebufferRef = std::shared_ptr<Framebuffer>;
 
-static_assert(sizeof(Framebuffer) == 24, "Framebuffer size changed!!!");
+static_assert(sizeof(Framebuffer) == 80, "Framebuffer size changed!!!");
 inline bool operator==(FramebufferRef Left, FramebufferRef Right) noexcept { return *Left == *Right; }
 
 #if USE_OPENGL_VERSION == OPENGL40

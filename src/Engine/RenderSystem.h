@@ -59,7 +59,17 @@ public:
 	Texture2DRef CreateTexture2D(const char* fileName, bool useCache = true, const Texture2DInfo& textureInfo = {});
 	Texture2DRef CreateTexture2D(const Texture2DCreateInfo& createInfo, const Texture2DInfo& textureInfo = {});
 
-	FramebufferRef CreateFramebuffer(FramebufferAttachment attachment, Texture2DRef texture);
+	RenderbufferRef CreateRenderbuffer(const glm::uvec2& size, ImageFormat format, int multisample = 1);
+
+	// разница между текстурой и рендербуфером в фреймбуфере - текстуру можно сразу биндить
+
+	FramebufferRef CreateFramebuffer(RenderbufferRef colorBuffer);
+	FramebufferRef CreateFramebuffer(RenderbufferRef colorBuffer, RenderbufferRef depthStencilBuffer);
+	FramebufferRef CreateFramebuffer(Texture2DRef colorTexture);
+	FramebufferRef CreateFramebuffer(Texture2DRef colorTexture, RenderbufferRef depthStencilBuffer);
+	FramebufferRef CreateFramebuffer(Texture2DRef colorTexture, Texture2DRef depthStencilTexture);
+
+	FramebufferRef CreateFramebuffer(FramebufferAttachment attachment, Texture2DRef texture); // TODO: delete
 
 	//-------------------------------------------------------------------------
 	// Validation
@@ -103,10 +113,9 @@ public:
 	//-------------------------------------------------------------------------
 	void UpdateBuffer(GPUBufferRef buffer, unsigned offset, unsigned count, unsigned size, const void* data);
 
-
 	void* MapBuffer(GPUBufferRef buffer);
 	void* MapBuffer(GPUBufferRef buffer, unsigned offset, unsigned size);
-	void UnmapBuffer(GPUBufferRef buffer);
+	bool UnmapBuffer(GPUBufferRef buffer);
 
 	//-------------------------------------------------------------------------
 	// Current State Set
@@ -135,6 +144,12 @@ private:
 	void initializeCapabilities(bool print);
 
 	ShaderRef compileShader(ShaderType type, const std::string& source);
+	void attachmentFrameBufferColor(FramebufferRef fbo, RenderbufferRef colorBuffer);
+	void attachmentFrameBufferColor(FramebufferRef fbo, Texture2DRef colorTexture);
+	void attachmentFrameBufferDepthStencil(FramebufferRef fbo, RenderbufferRef depthStencilBuffer);
+	void attachmentFrameBufferDepthStencil(FramebufferRef fbo, Texture2DRef depthStencilTexture);
+	bool checkCurrentFrameBuffer() const;
+
 	void setClearMask(bool color, bool depth, bool stensil);
 
 	int m_mainFramebufferWidth = 0;

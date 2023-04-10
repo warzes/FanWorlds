@@ -7,6 +7,7 @@
 #include "005_BasicTexture.h"
 #include "006_MultipleLights.h"
 #include "007_BasicObjModel.h"
+#include "008_Framebuffer.h"
 // Other
 #include "001_MonkeyScenes.h"
 //-----------------------------------------------------------------------------
@@ -37,6 +38,7 @@ int main(
 		std::cout << "    b5 - Draw Basic Texture" << std::endl;
 		std::cout << "    b6 - Basic Multiple Lights" << std::endl;
 		std::cout << "    b7 - Basic ObjModel Loader" << std::endl;
+		std::cout << "    b8 - Framebuffer" << std::endl;
 
 		std::cout << "    o1 - Monkey Scenes" << std::endl;
 		std::cout << std::endl;
@@ -60,6 +62,8 @@ int main(
 		START_SCENE("b5", _005BasicTexture);
 		START_SCENE("b6", _006MultipleLights);
 		START_SCENE("b7", _007BasicObjModel);
+		START_SCENE("b8", _008Framebuffer);
+
 		START_SCENE("o1", _001MonkeyScenes);
 
 #undef START_SCENE

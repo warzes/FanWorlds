@@ -12,7 +12,15 @@ public:
 	Material& operator=(Material&&) = default;
 	Material& operator=(const Material&) = delete;
 
+	inline bool HasDiffuseMap() const { return diffuseTexture != nullptr; }
+	inline bool HasSpecularMap() const { return specularTexture != nullptr; }
+	inline bool HasNormalMap() const { return normalTexture != nullptr; }
+	inline bool HasEmissiveMap() const { return emissiveTexture != nullptr; }
+
 	Texture2DRef diffuseTexture = nullptr;
+	Texture2DRef specularTexture = nullptr;
+	Texture2DRef normalTexture = nullptr;
+	Texture2DRef emissiveTexture = nullptr;
 
 	glm::vec3 ambientColor = glm::vec3{ 1.0f };
 	glm::vec3 diffuseColor = glm::vec3{ 1.0f };
