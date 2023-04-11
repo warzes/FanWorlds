@@ -151,7 +151,16 @@
       <Filter>RenderAPI</Filter>
     </ClInclude>
     <ClInclude Include="Span.h">
-      <Filter>Core\Object</Filter>
+      <Filter>Core\Container</Filter>
+    </ClInclude>
+    <ClInclude Include="Color.h">
+      <Filter>Core\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseType.h">
+      <Filter>Core\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="AABB.h">
+      <Filter>Core\Math</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

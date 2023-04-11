@@ -39,6 +39,7 @@
 #include <stb/stb_image.h>
 
 #include <tiny_obj_loader.h>
+#include <OpenFBX/ofbx.h>
 
 /*
 Left handed
@@ -69,7 +70,6 @@ Left handed
 #include <PxPhysicsAPI.h>
 
 #include <physfs/physfs.h>
-
 
 #if defined(_MSC_VER)
 #	pragma warning(pop)

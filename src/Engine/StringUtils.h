@@ -1,5 +1,7 @@
 #pragma once
 
+#include "Span.h"
+
 namespace StringUtils
 {
 	// case-insensitive string comparison

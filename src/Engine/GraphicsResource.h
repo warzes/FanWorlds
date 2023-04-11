@@ -1,6 +1,7 @@
 #pragma once
 
 #include "RenderResource.h"
+#include "AABB.h"
 
 class Material
 {
@@ -49,15 +50,17 @@ public:
 	Mesh& operator=(Mesh&&) = default;
 	Mesh& operator=(const Mesh&) = delete;
 
+	glm::vec3 GetWorldPos() const { return globalAABB.GetCenter(); }
+
 	std::vector<VertexMesh> vertices;
 	std::vector<uint32_t> indices;
 	Material material;
+	std::string meshName;
 
 	GeometryBufferRef geometry;
 
-	// bouncing box
-	glm::vec3 min;
-	glm::vec3 max;
+	// global bouncing box
+	AABB globalAABB;
 };
 
 class Model
@@ -72,7 +75,6 @@ public:
 
 	std::vector<Mesh> subMeshes;
 	// bouncing box
-	glm::vec3 min;
-	glm::vec3 max;
+	AABB aabb;
 };
 using ModelRef = std::shared_ptr<Model>;

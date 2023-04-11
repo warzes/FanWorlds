@@ -82,6 +82,12 @@
     <ClCompile Include="tiny_obj_loader.cpp">
       <Filter>tiny_obj_loader</Filter>
     </ClCompile>
+    <ClCompile Include="miniz\miniz.c">
+      <Filter>miniz</Filter>
+    </ClCompile>
+    <ClCompile Include="OpenFBX\ofbx.cpp">
+      <Filter>OpenFBX</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="glfw">
@@ -119,6 +125,12 @@
     </Filter>
     <Filter Include="other">
       <UniqueIdentifier>{0f2c76b0-a8ee-4c46-b2f3-39c498dbd73e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="miniz">
+      <UniqueIdentifier>{03d24896-f6da-4c89-a0c6-42d19d96bc93}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="OpenFBX">
+      <UniqueIdentifier>{0e0565ef-a470-4978-9026-75bfe3c8a4cf}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -1018,6 +1030,12 @@
     </ClInclude>
     <ClInclude Include="mdspan.hpp">
       <Filter>other</Filter>
+    </ClInclude>
+    <ClInclude Include="miniz\miniz.h">
+      <Filter>miniz</Filter>
+    </ClInclude>
+    <ClInclude Include="OpenFBX\ofbx.h">
+      <Filter>OpenFBX</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

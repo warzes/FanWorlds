@@ -91,6 +91,8 @@
   <ItemGroup>
     <ClCompile Include="glad\gl.c" />
     <ClCompile Include="glfw.c" />
+    <ClCompile Include="miniz\miniz.c" />
+    <ClCompile Include="OpenFBX\ofbx.cpp" />
     <ClCompile Include="physfs\physfs.c" />
     <ClCompile Include="physfs\physfs_archiver_7z.c" />
     <ClCompile Include="physfs\physfs_archiver_dir.c" />
@@ -409,6 +411,8 @@
     <ClInclude Include="glm\vector_relational.hpp" />
     <ClInclude Include="KHR\khrplatform.h" />
     <ClInclude Include="mdspan.hpp" />
+    <ClInclude Include="miniz\miniz.h" />
+    <ClInclude Include="OpenFBX\ofbx.h" />
     <ClInclude Include="physfs\physfs.h" />
     <ClInclude Include="physfs\physfs_casefolding.h" />
     <ClInclude Include="physfs\physfs_internal.h" />

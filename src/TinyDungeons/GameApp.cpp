@@ -3,8 +3,6 @@
 #include "SpaceMath.h"
 #include "Ray.h"
 
-https://github.com/ufbx/ufbx
-
 //план
 // 
 //- вместо белого в блокинге использовать оттенки золотого на синем фоне
@@ -149,7 +147,9 @@ void main()
 
 	m_textureModel = renderSystem.CreateTexture2D("../ExampleData/textures/container2.png");
 
-	m_model = graphicsSystem.CreateModel("../ExampleData/models/crate.obj", "../ExampleData/models/");
+	m_model = graphicsSystem.CreateModel("../ExampleData/models/Torus.obj", "../ExampleData/models/");
+
+	//m_model = graphicsSystem.CreateModel("../ExampleData/models/crate.obj", "../ExampleData/models/");
 
 	{
 		constexpr const char* vertexShaderLineText = R"(
@@ -194,6 +194,8 @@ void GameApp::Destroy()
 	m_gridDrawer.Destroy();
 }
 
+unsigned currentMesh = 0;
+
 void GameApp::Render()
 {
 	auto& renderSystem = GetRenderSystem();
@@ -234,9 +236,8 @@ void GameApp::Render()
 
 		// draw cube
 		{
-			glm::vec3 cubePos = glm::floor(m_3dCursorPos) + 0.5f;
-			cubePos.y = m_3dCursorPos.y + 0.5f;
-
+			glm::vec3 cubePos = glm::floor(m_3dCursorPos + 0.5f);
+			cubePos.y =0;
 			glm::mat4 world = glm::translate(glm::mat4(1.0f), cubePos);
 
 			renderSystem.Bind(m_textureModel); // TODO: нужен метод для установки материала в модель
@@ -245,14 +246,21 @@ void GameApp::Render()
 			renderSystem.SetUniform(m_uniformViewMatrix, m_camera.GetViewMatrix());
 			renderSystem.SetUniform(m_uniformWorldMatrix, world);
 			renderSystem.SetUniform("DiffuseTexture", 0);
-			graphicsSystem.Draw(m_model);
-		}
-		
-	}
+			//graphicsSystem.Draw(m_model);
 
+			Mesh& mesh = m_model->subMeshes[currentMesh];
+			glm::vec3 wpos = mesh.GetWorldPos();
+			glm::vec3 expos = mesh.globalAABB.GetExtents();
+			glm::vec3 mpos = -wpos + cubePos;
+			mpos.y += expos.y;
+			world = glm::translate(glm::mat4(1.0f), mpos);
+			renderSystem.SetUniform(m_uniformWorldMatrix, world);
+			graphicsSystem.Draw(mesh);
 
-
-	
+			std::string text = std::to_string(mpos.x) + ":" + std::to_string(mpos.z);
+			puts(text.c_str());
+		}		
+	}	
 
 	m_gridDrawer.Draw(renderSystem, m_perspective * m_camera.GetViewMatrix(), {0.0f, 0.0f, 0.0f}, 1000.0f);
 }
@@ -264,6 +272,11 @@ void GameApp::Update(float deltaTime)
 		BaseClass::ExitRequest();
 		return;
 	}
+
+	if( GetInput().GetMouseWheelMove() > 0.0f && currentMesh < m_model->subMeshes.size()-1)
+		currentMesh++;
+	if( GetInput().GetMouseWheelMove() < 0.0f && currentMesh > 0 )
+		currentMesh--;
 
 	if (GetInput().IsMouseButtonDown(1))
 	{
