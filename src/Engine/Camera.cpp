@@ -1,6 +1,19 @@
 #include "stdafx.h"
 #include "Camera.h"
 //-----------------------------------------------------------------------------
+void Camera::Teleport(const glm::vec3& pos)
+{
+	const glm::vec3 oldTarget = GetNormalizedViewVector();
+	position = pos;
+	target = pos + oldTarget;
+}
+//-----------------------------------------------------------------------------
+void Camera::Teleport(const glm::vec3& pos, const glm::vec3& forwardLook)
+{
+	position = pos;
+	target = pos + forwardLook;
+}
+//-----------------------------------------------------------------------------
 void Camera::MoveBy(float distance)
 {
 	const glm::vec3 vOffset = GetNormalizedViewVector() * distance;

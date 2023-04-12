@@ -33,6 +33,8 @@ public:
 	int GetWidth() const;
 	int GetHeight() const;
 
+	GLFWwindow* GetGLFWWindow() { return m_window; }
+
 private:
 	Window() = default;
 	Window(Window&&) = delete;

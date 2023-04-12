@@ -3,6 +3,8 @@
 class Camera
 {
 public:
+	void Teleport(const glm::vec3& pos);
+	void Teleport(const glm::vec3& pos, const glm::vec3& forwardLook);
 	void MoveBy(float distance); // перемещение вперед/назад
 	void StrafeBy(float distance); // перемещение влево/вправо
 	void RotateLeftRight(float angleInDegrees); // поворот влево/вправо

@@ -94,8 +94,12 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="DrawGrid.cpp" />
+    <ClCompile Include="EditorState.cpp" />
     <ClCompile Include="GameApp.cpp" />
+    <ClCompile Include="GameStateManager.cpp" />
+    <ClCompile Include="GameStateTest.cpp" />
     <ClCompile Include="GridMap.cpp" />
+    <ClCompile Include="IGameState.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Ray.cpp" />
     <ClCompile Include="stdafx.cpp">
@@ -105,11 +109,20 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DrawGrid.h" />
+    <ClInclude Include="EditorCore.h" />
+    <ClInclude Include="EditorState.h" />
     <ClInclude Include="GameApp.h" />
+    <ClInclude Include="GameStateManager.h" />
+    <ClInclude Include="GameStateTest.h" />
     <ClInclude Include="GridMap.h" />
+    <ClInclude Include="IGameState.h" />
     <ClInclude Include="Ray.h" />
     <ClInclude Include="SpaceMath.h" />
     <ClInclude Include="stdafx.h" />
+    <ClInclude Include="VertexFormat.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="EditorDoc.md" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

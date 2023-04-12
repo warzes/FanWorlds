@@ -17,8 +17,8 @@ out vec2 fTexCoord;
 
 void main()
 {
-	gl_Position = uViewProjection * uWorld * vec4(aPos*uGridSize, 1.0);
-	fTexCoord = aTexCoord*uGridSize;
+	gl_Position = uViewProjection * uWorld * vec4(aPos * uGridSize, 1.0);
+	fTexCoord = aTexCoord * uGridSize;
 }
 )";
 
@@ -59,7 +59,6 @@ void main()
 		{{  0.5f, 0.0f,  0.5f}, {1.0f, 0.0f}}, // top right
 		{{  0.5f, 0.0f, -0.5f}, {1.0f, 1.0f}}, // bottom right
 		{{ -0.5f, 0.0f, -0.5f}, {0.0f, 1.0f}}, // bottom left
-
 	};
 
 	unsigned int indices[] = {  // note that we start from 0!

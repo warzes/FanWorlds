@@ -62,10 +62,5 @@ public:
 	}
 
 	glm::vec3 min = glm::vec3{ std::numeric_limits<float>::max() };
-	glm::vec3 max = glm::vec3{ std::numeric_limits<int>::min() };
-
-
-
-	//glm::vec3 min = { 9999.0f, 9999.0f,9999.0f };
-	//glm::vec3 max = { -9999.0f, -9999.0f, -9999.0f };
+	glm::vec3 max = glm::vec3{ std::numeric_limits<float>::lowest() };
 };
