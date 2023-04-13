@@ -59,6 +59,9 @@
     <ClInclude Include="EditorCore.h">
       <Filter>Editor\Core</Filter>
     </ClInclude>
+    <ClInclude Include="EditorCollectModels.h">
+      <Filter>Editor\Core</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Framework">

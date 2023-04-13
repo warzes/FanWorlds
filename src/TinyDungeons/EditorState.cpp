@@ -1,6 +1,5 @@
 ﻿#include "stdafx.h"
 #include "EditorState.h"
-https://ffforever.info/index.cgi?section=dq;p=gameplay
 //-----------------------------------------------------------------------------
 bool EditorState::OnCreate()
 {
@@ -14,6 +13,8 @@ bool EditorState::OnCreate()
 
 	if( !m_gridDrawer.Create(renderSystem) )
 		return false;
+
+	m_collectModels
 
 	m_camera.position = glm::vec3(4.0f, 5.0f, -3.0f);
 	m_camera.target = glm::vec3(4.0f, 4.0f, -2.0f);
@@ -44,6 +45,8 @@ void EditorState::OnUpdate(float deltaTime)
 	if( updateImgui() ) return; // имгуи перехватил события?
 
 	cameraUpdate(deltaTime);
+
+	if ( m_mode == EditorMode::Select ) updateGridHeight();
 
 	if( GetInput().IsKeyDown(Input::KEY_ESCAPE) )
 	{
@@ -141,19 +144,39 @@ void EditorState::drawImgui()
 {
 	// Main Window
 	{
-		ImGui::Begin("Editor Menu", nullptr);
+		ImGuiWindowFlags flags = ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove;
+
+		ImGui::SetNextWindowSize(ImVec2((float)GetWindowWidth(), (float)36));
+		ImGui::SetNextWindowPos(ImVec2(0, 0));
+		ImGui::Begin("Editor Menu", nullptr, flags);
+		ImGui::SetNextItemWidth(100);
 		ImGui::Combo("Editor Mode", (int*)&m_selectMode, "Select\0Add\0");
 		ImGui::SameLine();
 		ImGui::End();
 	}
 
+	// Info map
+	{
+		ImGuiWindowFlags flags = ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove;
+		ImGui::SetNextWindowSize(ImVec2(160.0f, 50.0f));
+		ImGui::SetNextWindowPos(ImVec2(0, 36));
+		ImGui::Begin("Info", nullptr, flags);
+		ImGui::Text("Grid Height = %f", m_currentGridHeight);
+		ImGui::End();
+	}
+
+
 	// Camera Teleport Window
 	{
-		const ImS32 s32_zeroY = -500, s32_maxY = 1000;
-		ImGui::Begin("Camera Teleport Window", nullptr);
-		ImGui::SliderScalar("mouse X", ImGuiDataType_S32, &m_camTelData.x, &s32_zeroY, &s32_maxY, "%d");
+		ImGuiWindowFlags flags = ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove;
+		const ImS32 s32_zeroXZ = -100, s32_maxXZ = 1100;
+		const ImS32 s32_zeroY = -500, s32_maxY = 500;
+		ImGui::SetNextWindowSize(ImVec2(270.0f, 100.0f));
+		ImGui::SetNextWindowPos(ImVec2(160, 36));
+		ImGui::Begin("Camera Teleport Window", nullptr, flags);
+		ImGui::SliderScalar("mouse X", ImGuiDataType_S32, &m_camTelData.x, &s32_zeroXZ, &s32_maxXZ, "%d");
 		ImGui::SliderScalar("mouse Y", ImGuiDataType_S32, &m_camTelData.y, &s32_zeroY, &s32_maxY, "%d");
-		ImGui::SliderScalar("mouse Z", ImGuiDataType_S32, &m_camTelData.z, &s32_zeroY, &s32_maxY, "%d");
+		ImGui::SliderScalar("mouse Z", ImGuiDataType_S32, &m_camTelData.z, &s32_zeroXZ, &s32_maxXZ, "%d");
 		ImGui::End();
 	}
 
@@ -235,5 +258,13 @@ void EditorState::cameraUpdate(float deltaTime)
 	}
 
 	m_oldCamTelData = m_camTelData = { m_camera.position.x, m_camera.position.y, m_camera.position.z };
+}
+//-----------------------------------------------------------------------------
+void EditorState::updateGridHeight()
+{
+	float wheel = GetInput().GetMouseWheelMove();
+
+	if( wheel > 0 ) m_currentGridHeight += 1.0f;
+	else if( wheel < 0 ) m_currentGridHeight -= 1.0f;
 }
 //-----------------------------------------------------------------------------

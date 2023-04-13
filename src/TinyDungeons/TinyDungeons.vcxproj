@@ -109,6 +109,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DrawGrid.h" />
+    <ClInclude Include="EditorCollectModels.h" />
     <ClInclude Include="EditorCore.h" />
     <ClInclude Include="EditorState.h" />
     <ClInclude Include="GameApp.h" />

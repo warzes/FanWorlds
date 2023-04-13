@@ -21,6 +21,7 @@ private:
 	void drawImgui();
 	void selectMode();
 	void cameraUpdate(float deltaTime);
+	void updateGridHeight();
 
 	int m_windowWidth = 0;
 	int m_windowHeight = 0;
@@ -33,6 +34,7 @@ private:
 	bool m_isCreate = false;
 
 	DrawGrid m_gridDrawer;
+	ModelRef m_collectModels;
 
 	// editor data
 	float m_currentGridHeight = 0.0f;
