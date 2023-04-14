@@ -127,6 +127,8 @@ ModelRef GraphicsSystem::loadObjFile(const char* fileName, const char* pathMater
 	// Loop over shapes
 	for (size_t shapeId = 0; shapeId < shapes.size(); shapeId++)
 	{
+		meshes[shapeId].meshName = shapes[shapeId].name;
+
 		std::unordered_map<VertexMesh, uint32_t> uniqueVertices;
 
 		// Loop over faces(polygon)

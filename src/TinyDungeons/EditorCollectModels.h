@@ -11,7 +11,8 @@ public:
 	void NextMesh();
 	void PrevMesh();
 
-
+	unsigned GetCurrentMeshId() const { return m_currentMesh; }
+	std::string GetCurrentMeshName() const { return m_model->subMeshes[m_currentMesh].meshName; }
 
 private:
 	ShaderProgramRef m_shader;

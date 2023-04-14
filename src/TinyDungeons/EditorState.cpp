@@ -1,5 +1,55 @@
 ﻿#include "stdafx.h"
 #include "EditorState.h"
+
+запись карты в файл - возможно json
+размещение объектов мышкой
+вращение объекта (колесико)
+скейлинг (контрол колесико)
+отвязка от сетки (зажать шифт - тогда модель не привязывается к сетке по x/z)
+изменение размера ячейки сетки
+
+
+
+
+bulletOpenGL
+https ://www.rastertek.com/tutgl4linux.html
+RuinIsland_GLSL_Demo
+
+небо
+http ://steps3d.narod.ru/tutorials/sky-tutorial.html
+
+идея по траве(сам пример также у Борескова)
+выбирается зона, в зоне и создается трава.также можно и воду(пример воды тут - http://steps3d.narod.ru/tutorials/r2vb-tutorial.html или тут - http://steps3d.narod.ru/tutorials/water-tutorial.html)
+
+скелетная
+http ://steps3d.narod.ru/tutorials/skeletal-animation-tutorial.html
+
+vsm
+http ://steps3d.narod.ru/tutorials/vsm-tutorial.html
+
+ssao
+http ://steps3d.narod.ru/tutorials/ssao-tutorial.html
+
+http://steps3d.narod.ru/tutorials/lighting-tutorial.html
+
+
+
+
+
+
+идеи
+https ://assetstore.unity.com/packages/tools/level-design/roomgen-procedural-generator-215804#releases
+
+
+https://www.youtube.com/watch?v=eIp3cz2jRRM
+
+https://forum.cgpersia.com/plugins-unicrydk/
+
+вот на этом видео я придумал редактор
+https ://www.youtube.com/watch?v=48x6tHGKZ5U
+
+
+https://github.com/acdemiralp?tab=repositories
 //-----------------------------------------------------------------------------
 bool EditorState::OnCreate()
 {
