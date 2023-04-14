@@ -9,6 +9,9 @@
 изменение размера ячейки сетки
 
 
+смотреть
+https://www.youtube.com/watch?v=6-73WKpMylY
+https://www.youtube.com/watch?v=UZFZp4spkag 
 
 
 bulletOpenGL
