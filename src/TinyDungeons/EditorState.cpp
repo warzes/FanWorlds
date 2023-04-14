@@ -14,7 +14,11 @@ bool EditorState::OnCreate()
 	if( !m_gridDrawer.Create(renderSystem) )
 		return false;
 
-	m_collectModels
+	if( !m_collectModels.Create(renderSystem, graphicsSystem) )
+		return false;
+
+	if( !m_cursors.Create(renderSystem) )
+		return false;
 
 	m_camera.position = glm::vec3(4.0f, 5.0f, -3.0f);
 	m_camera.target = glm::vec3(4.0f, 4.0f, -2.0f);
@@ -24,6 +28,8 @@ bool EditorState::OnCreate()
 //-----------------------------------------------------------------------------
 void EditorState::OnDestroy()
 {
+	m_cursors.Destroy();
+	m_collectModels.Destroy();
 	m_gridDrawer.Destroy();
 	destroyImgui();
 	m_isCreate = false;
@@ -46,7 +52,17 @@ void EditorState::OnUpdate(float deltaTime)
 
 	cameraUpdate(deltaTime);
 
-	if ( m_mode == EditorMode::Select ) updateGridHeight();
+	if( m_mode == EditorMode::Select )
+	{
+		updateGridHeight();
+	}
+	else if( m_mode == EditorMode::Add )
+	{
+		if( GetInput().GetMouseWheelMove() > 0.0f )
+			m_collectModels.NextMesh();
+		if( GetInput().GetMouseWheelMove() < 0.0f )
+			m_collectModels.PrevMesh();
+	}
 
 	if( GetInput().IsKeyDown(Input::KEY_ESCAPE) )
 	{
@@ -71,6 +87,13 @@ void EditorState::OnFrame()
 	renderSystem.ClearFrame();
 
 	m_gridDrawer.Draw(renderSystem, m_perspective * m_camera.GetViewMatrix(), { 0.0f, m_currentGridHeight, 0.0f }, 1000.0f);
+
+	if( !m_freeLook && m_mode == EditorMode::Add )
+	{
+		m_cursors.Draw(renderSystem, GetInput(), m_perspective, m_camera, m_currentGridHeight);
+
+		m_collectModels.DrawPreview(renderSystem, graphicsSystem, m_perspective, m_camera.GetViewMatrix(), m_cursors.GetPos(), m_currentGridHeight);
+	}
 
 	drawImgui();
 }

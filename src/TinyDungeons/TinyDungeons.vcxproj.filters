@@ -25,6 +25,12 @@
     <ClCompile Include="EditorState.cpp">
       <Filter>Editor</Filter>
     </ClCompile>
+    <ClCompile Include="EditorCollectModels.cpp">
+      <Filter>Editor\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="EditorCursor.cpp">
+      <Filter>Editor\Core</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameApp.h" />
@@ -60,6 +66,9 @@
       <Filter>Editor\Core</Filter>
     </ClInclude>
     <ClInclude Include="EditorCollectModels.h">
+      <Filter>Editor\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="EditorCursor.h">
       <Filter>Editor\Core</Filter>
     </ClInclude>
   </ItemGroup>

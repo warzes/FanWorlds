@@ -94,6 +94,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="DrawGrid.cpp" />
+    <ClCompile Include="EditorCollectModels.cpp" />
+    <ClCompile Include="EditorCursor.cpp" />
     <ClCompile Include="EditorState.cpp" />
     <ClCompile Include="GameApp.cpp" />
     <ClCompile Include="GameStateManager.cpp" />
@@ -111,6 +113,7 @@
     <ClInclude Include="DrawGrid.h" />
     <ClInclude Include="EditorCollectModels.h" />
     <ClInclude Include="EditorCore.h" />
+    <ClInclude Include="EditorCursor.h" />
     <ClInclude Include="EditorState.h" />
     <ClInclude Include="GameApp.h" />
     <ClInclude Include="GameStateManager.h" />

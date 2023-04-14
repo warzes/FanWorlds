@@ -3,6 +3,8 @@
 #include "IGameState.h"
 #include "EditorCore.h"
 #include "DrawGrid.h"
+#include "EditorCollectModels.h"
+#include "EditorCursor.h"
 
 class EditorState final : public IGameState
 {
@@ -34,7 +36,8 @@ private:
 	bool m_isCreate = false;
 
 	DrawGrid m_gridDrawer;
-	ModelRef m_collectModels;
+	EditorCollectModels m_collectModels;
+	EditorCursor m_cursors;
 
 	// editor data
 	float m_currentGridHeight = 0.0f;
