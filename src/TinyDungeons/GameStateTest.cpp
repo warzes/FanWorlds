@@ -254,5 +254,5 @@ void GameStateTest::OnFrame()
 		}
 	}
 
-	m_gridDrawer.Draw(renderSystem, m_perspective * m_camera.GetViewMatrix(), { 0.0f, 0.0f, 0.0f }, 1000.0f);
+	m_gridDrawer.Draw(renderSystem, m_perspective * m_camera.GetViewMatrix(), { 0.0f, 0.0f, 0.0f }, 1.0f, 1000.0f);
 }

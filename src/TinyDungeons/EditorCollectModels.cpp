@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "EditorCollectModels.h"
+#include "EditorWorldObject.h"
 //-----------------------------------------------------------------------------
 bool EditorCollectModels::Create(RenderSystem& renderSystem, GraphicsSystem& graphicsSystem)
 {
@@ -83,6 +84,7 @@ void main()
 	m_uniformViewMatrix = renderSystem.GetUniform(m_shader, "uView");
 	m_uniformWorldMatrix = renderSystem.GetUniform(m_shader, "uWorld");
 
+	m_modelFileName = "../TinyDungeonsData/models/model.obj";
 	m_model = graphicsSystem.CreateModel("../TinyDungeonsData/models/model.obj", "../TinyDungeonsData/models/");
 
 	return true;
@@ -94,27 +96,44 @@ void EditorCollectModels::Destroy()
 	m_model.reset();
 }
 //-----------------------------------------------------------------------------
-void EditorCollectModels::DrawPreview(RenderSystem& renderSystem, GraphicsSystem& graphicsSystem, const glm::mat4& proj, const glm::mat4& view, const glm::vec3& cursorPos, float currentGridHeight)
+void EditorCollectModels::DrawPreview(RenderSystem& renderSystem, GraphicsSystem& graphicsSystem, const glm::mat4& proj, const glm::mat4& view, const glm::vec3& centerPos)
 {
-	glm::vec3 cubePos = glm::floor(cursorPos + 0.5f);
-	cubePos.y = currentGridHeight;
-	glm::mat4 world = glm::translate(glm::mat4(1.0f), cubePos);
+	Mesh& mesh = m_model->subMeshes[m_currentMesh];
+	const glm::vec3 wpos = mesh.GetWorldPos();
+	const glm::vec3 expos = mesh.globalAABB.GetExtents();
+
+	glm::vec3 mpos = -wpos + centerPos;
+	mpos.y += expos.y;
+	m_currentPos = mpos;
+
+	const glm::mat4 world = glm::translate(glm::mat4(1.0f), mpos);
 
 	renderSystem.Bind(m_shader);
 	renderSystem.SetUniform(m_uniformProjectionMatrix, proj);
 	renderSystem.SetUniform(m_uniformViewMatrix, view);
 	renderSystem.SetUniform(m_uniformWorldMatrix, world);
 	renderSystem.SetUniform("DiffuseTexture", 0);
-	//graphicsSystem.Draw(m_model);
-
-	Mesh& mesh = m_model->subMeshes[m_currentMesh];
-	glm::vec3 wpos = mesh.GetWorldPos();
-	glm::vec3 expos = mesh.globalAABB.GetExtents();
-	glm::vec3 mpos = -wpos + cubePos;
-	mpos.y += expos.y;
-	world = glm::translate(glm::mat4(1.0f), mpos);
-	renderSystem.SetUniform(m_uniformWorldMatrix, world);
 	graphicsSystem.Draw(mesh);
+}
+//-----------------------------------------------------------------------------
+void EditorCollectModels::Draw(RenderSystem& renderSystem, GraphicsSystem& graphicsSystem, const glm::mat4& proj, const glm::mat4& view, const EditorMap& map)
+{
+	renderSystem.Bind(m_shader);
+	renderSystem.SetUniform(m_uniformProjectionMatrix, proj);
+	renderSystem.SetUniform(m_uniformViewMatrix, view);
+	renderSystem.SetUniform("DiffuseTexture", 0);
+
+	Mesh* mesh = nullptr;
+	glm::mat4 world;
+	for( size_t i = 0; i < map.object.size(); i++ )
+	{
+		if( map.object[i].isLive == false ) continue;
+		const EditorMapObject& object = map.object[i].object;
+		mesh = &m_model->subMeshes[object.meshIndex];
+		world = glm::translate(glm::mat4(1.0f), object.position);
+		renderSystem.SetUniform(m_uniformWorldMatrix, world);
+		graphicsSystem.Draw(*mesh);
+	}
 }
 //-----------------------------------------------------------------------------
 void EditorCollectModels::NextMesh()

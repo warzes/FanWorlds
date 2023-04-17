@@ -5,6 +5,7 @@
 #include "DrawGrid.h"
 #include "EditorCollectModels.h"
 #include "EditorCursor.h"
+#include "EditorWorldObject.h"
 
 class EditorState final : public IGameState
 {
@@ -23,7 +24,8 @@ private:
 	void drawImgui();
 	void selectMode();
 	void cameraUpdate(float deltaTime);
-	void updateGridHeight();
+	void addObjectInMap();
+	void modGrid();
 
 	int m_windowWidth = 0;
 	int m_windowHeight = 0;
@@ -41,6 +43,12 @@ private:
 
 	// editor data
 	float m_currentGridHeight = 0.0f;
+	float m_currentGridStepHeight = 0.1f;
+	float m_currentSizeCell = 1.0f;
+	float m_currentSizeMap = 1000.0f;
+	glm::vec3 m_objPosition = glm::vec3(0.0f);
+
+	EditorMap m_map;
 
 	// imgui help
 	int m_selectMode = 0;

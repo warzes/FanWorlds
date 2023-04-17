@@ -1,57 +1,5 @@
 ﻿#include "stdafx.h"
 #include "EditorState.h"
-
-запись карты в файл - возможно json
-размещение объектов мышкой
-вращение объекта (колесико)
-скейлинг (контрол колесико)
-отвязка от сетки (зажать шифт - тогда модель не привязывается к сетке по x/z)
-изменение размера ячейки сетки
-
-
-смотреть
-https://www.youtube.com/watch?v=6-73WKpMylY
-
-
-bulletOpenGL
-https ://www.rastertek.com/tutgl4linux.html
-RuinIsland_GLSL_Demo
-
-небо
-http ://steps3d.narod.ru/tutorials/sky-tutorial.html
-
-идея по траве(сам пример также у Борескова)
-выбирается зона, в зоне и создается трава.также можно и воду(пример воды тут - http://steps3d.narod.ru/tutorials/r2vb-tutorial.html или тут - http://steps3d.narod.ru/tutorials/water-tutorial.html)
-
-скелетная
-http ://steps3d.narod.ru/tutorials/skeletal-animation-tutorial.html
-
-vsm
-http ://steps3d.narod.ru/tutorials/vsm-tutorial.html
-
-ssao
-http ://steps3d.narod.ru/tutorials/ssao-tutorial.html
-
-http://steps3d.narod.ru/tutorials/lighting-tutorial.html
-
-
-
-
-
-
-идеи
-https ://assetstore.unity.com/packages/tools/level-design/roomgen-procedural-generator-215804#releases
-
-
-https://www.youtube.com/watch?v=eIp3cz2jRRM
-
-https://forum.cgpersia.com/plugins-unicrydk/
-
-вот на этом видео я придумал редактор
-https ://www.youtube.com/watch?v=48x6tHGKZ5U
-
-
-https://github.com/acdemiralp?tab=repositories
 //-----------------------------------------------------------------------------
 bool EditorState::OnCreate()
 {
@@ -72,8 +20,6 @@ bool EditorState::OnCreate()
 	if( !m_cursors.Create(renderSystem) )
 		return false;
 
-	m_camera.position = glm::vec3(4.0f, 5.0f, -3.0f);
-	m_camera.target = glm::vec3(4.0f, 4.0f, -2.0f);
 	m_isCreate = true;
 	return true;
 }
@@ -89,37 +35,60 @@ void EditorState::OnDestroy()
 //-----------------------------------------------------------------------------
 void EditorState::OnActive()
 {
-	m_selectMode = 0;
-	m_mode = EditorMode::Select;
-	m_freeLook = false;
 	m_camera.Teleport(glm::vec3(4.0f, 5.0f, 2.0f), glm::vec3(0.0f, -1.0f, 1.0f));
+	m_freeLook = false;
+	m_mode = EditorMode::Select;
+	m_currentGridHeight = 0.0f;
+	m_selectMode = 0;
 	m_oldCamTelData = m_camTelData = { m_camera.position.x, m_camera.position.y, m_camera.position.z };
+
+	m_map.object.clear();
 }
 //-----------------------------------------------------------------------------
 void EditorState::OnUpdate(float deltaTime)
 {
+	Input& input = GetInput();
+
 	selectMode();
 
 	if( updateImgui() ) return; // имгуи перехватил события?
 
 	cameraUpdate(deltaTime);
 
-	if( m_mode == EditorMode::Select )
-	{
-		updateGridHeight();
-	}
-	else if( m_mode == EditorMode::Add )
-	{
-		if( GetInput().GetMouseWheelMove() > 0.0f )
-			m_collectModels.NextMesh();
-		if( GetInput().GetMouseWheelMove() < 0.0f )
-			m_collectModels.PrevMesh();
-	}
-
-	if( GetInput().IsKeyDown(Input::KEY_ESCAPE) )
+	if( input.IsKeyDown(Input::KEY_ESCAPE) )
 	{
 		BaseClass::ExitRequest();
 		return;
+	}
+
+	modGrid();
+
+
+	if( input.IsKeyDown(Input::KEY_LEFT_SHIFT) )
+	{
+		m_objPosition = {m_cursors.GetPosX(), m_currentGridHeight, m_cursors.GetPosZ()};
+	}
+	else
+		m_objPosition = {
+			floor((m_cursors.GetPosX() + 0.5f) / m_currentSizeCell) * m_currentSizeCell,
+			m_currentGridHeight,
+			floor((m_cursors.GetPosZ() + 0.5f) / m_currentSizeCell) * m_currentSizeCell };
+
+	const float wheel = input.GetMouseWheelMove();
+	if( m_mode == EditorMode::Select )
+	{		
+		if( wheel > 0 ) m_currentGridHeight += m_currentGridStepHeight;
+		else if( wheel < 0 ) m_currentGridHeight -= m_currentGridStepHeight;
+	}
+	else if( m_mode == EditorMode::Add )
+	{
+		if( wheel > 0.0f ) m_collectModels.NextMesh();
+		if( wheel < 0.0f ) m_collectModels.PrevMesh();
+
+		if( input.IsMouseButtonPressed(0) )
+		{
+			addObjectInMap();
+		}
 	}
 }
 //-----------------------------------------------------------------------------
@@ -138,14 +107,15 @@ void EditorState::OnFrame()
 
 	renderSystem.ClearFrame();
 
-	m_gridDrawer.Draw(renderSystem, m_perspective * m_camera.GetViewMatrix(), { 0.0f, m_currentGridHeight, 0.0f }, 1000.0f);
-
 	if( !m_freeLook && m_mode == EditorMode::Add )
 	{
 		m_cursors.Draw(renderSystem, GetInput(), m_perspective, m_camera, m_currentGridHeight);
-
-		m_collectModels.DrawPreview(renderSystem, graphicsSystem, m_perspective, m_camera.GetViewMatrix(), m_cursors.GetPos(), m_currentGridHeight);
+		m_collectModels.DrawPreview(renderSystem, graphicsSystem, m_perspective, m_camera.GetViewMatrix(), m_objPosition);
 	}
+
+	m_collectModels.Draw(renderSystem, graphicsSystem, m_perspective, m_camera.GetViewMatrix(), m_map);
+
+	m_gridDrawer.Draw(renderSystem, m_perspective * m_camera.GetViewMatrix(), { 0.0f, m_currentGridHeight, 0.0f }, m_currentSizeCell, m_currentSizeMap);
 
 	drawImgui();
 }
@@ -233,10 +203,25 @@ void EditorState::drawImgui()
 	// Info map
 	{
 		ImGuiWindowFlags flags = ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove;
-		ImGui::SetNextWindowSize(ImVec2(160.0f, 50.0f));
+		ImGui::SetNextWindowSize(ImVec2(150.0f, 200.0f));
 		ImGui::SetNextWindowPos(ImVec2(0, 36));
-		ImGui::Begin("Info", nullptr, flags);
-		ImGui::Text("Grid Height = %f", m_currentGridHeight);
+		ImGui::Begin("Grid", nullptr, flags);
+
+		ImGui::SetNextItemWidth(50);
+		ImGui::InputFloat("Height", &m_currentGridHeight);
+		ImGui::SetNextItemWidth(50);
+		ImGui::InputFloat("Step", &m_currentGridStepHeight);
+		ImGui::SetNextItemWidth(50);
+		ImGui::InputFloat("Step Cell", &m_currentSizeCell);
+		ImGui::SetNextItemWidth(50);
+		ImGui::InputFloat("Size Map", &m_currentSizeMap);
+
+		ImGui::Text(
+			"+/- :add height\n"
+			"CTRL+/- :add step\n"
+			"Shift+/- :add cell\n"
+			"down +and- : reset");
+
 		ImGui::End();
 	}
 
@@ -247,8 +232,8 @@ void EditorState::drawImgui()
 		const ImS32 s32_zeroXZ = -100, s32_maxXZ = 1100;
 		const ImS32 s32_zeroY = -500, s32_maxY = 500;
 		ImGui::SetNextWindowSize(ImVec2(270.0f, 100.0f));
-		ImGui::SetNextWindowPos(ImVec2(160, 36));
-		ImGui::Begin("Camera Teleport Window", nullptr, flags);
+		ImGui::SetNextWindowPos(ImVec2(150, 36));
+		ImGui::Begin("Camera Teleport", nullptr, flags);
 		ImGui::SliderScalar("mouse X", ImGuiDataType_S32, &m_camTelData.x, &s32_zeroXZ, &s32_maxXZ, "%d");
 		ImGui::SliderScalar("mouse Y", ImGuiDataType_S32, &m_camTelData.y, &s32_zeroY, &s32_maxY, "%d");
 		ImGui::SliderScalar("mouse Z", ImGuiDataType_S32, &m_camTelData.z, &s32_zeroXZ, &s32_maxXZ, "%d");
@@ -261,39 +246,26 @@ void EditorState::drawImgui()
 //-----------------------------------------------------------------------------
 void EditorState::selectMode()
 {
-	bool isChange = false;
 	if( m_selectMode == 0 && m_mode != EditorMode::Select )
 	{
 		m_mode = EditorMode::Select;
-		isChange = true;
 	}
 	else if( m_selectMode == 1 && m_mode != EditorMode::Add )
 	{
-		Print("Add Mode");
 		m_mode = EditorMode::Add;
-		isChange = true;
 	}
-
-	if( GetInput().IsKeyPressed(Input::KEY_TAB) )
+	else if( GetInput().IsKeyPressed(Input::KEY_TAB) )
 	{
 		if( m_mode == EditorMode::Select )
 		{
 			m_mode = EditorMode::Add;
 			m_selectMode = 1;
-			isChange = true;
 		}
 		else
 		{
 			m_mode = EditorMode::Select;
 			m_selectMode = 0;
-			isChange = true;
 		}
-	}
-
-	if( isChange )
-	{
-		if ( m_mode == EditorMode::Select ) Print("Select Mode");
-		if( m_mode == EditorMode::Add ) Print("Add Mode");
 	}
 }
 //-----------------------------------------------------------------------------
@@ -335,11 +307,46 @@ void EditorState::cameraUpdate(float deltaTime)
 	m_oldCamTelData = m_camTelData = { m_camera.position.x, m_camera.position.y, m_camera.position.z };
 }
 //-----------------------------------------------------------------------------
-void EditorState::updateGridHeight()
+void EditorState::addObjectInMap()
 {
-	float wheel = GetInput().GetMouseWheelMove();
+	EditorMapObject object;
+	object.fileNameModel = m_collectModels.GetFileModelName();
+	object.nameMeshInFile = m_collectModels.GetCurrentMeshName();
+	object.meshIndex = m_collectModels.GetCurrentMeshId();
+	object.position = m_collectModels.GetCurrentPosition();
+	object.scale = m_collectModels.GetCurrentScale();
+	object.rotation = m_collectModels.GetCurrentRotation();
 
-	if( wheel > 0 ) m_currentGridHeight += 1.0f;
-	else if( wheel < 0 ) m_currentGridHeight -= 1.0f;
+	m_map.AddObject(object);
+}
+//-----------------------------------------------------------------------------
+void EditorState::modGrid()
+{
+	Input& input = GetInput();
+
+	if( input.IsKeyDown(Input::KEY_KP_ADD) && input.IsKeyDown(Input::KEY_KP_SUBTRACT) )
+	{
+		m_currentGridHeight = 0.0f;
+		m_currentGridStepHeight = 0.1f;
+		m_currentSizeCell = 1.0f;
+	}
+	else if( input.IsKeyPressed(Input::KEY_KP_ADD) )
+	{
+		if( input.IsKeyDown(Input::KEY_LEFT_CONTROL) )
+			m_currentGridStepHeight += 0.1f;
+		else if( input.IsKeyDown(Input::KEY_LEFT_SHIFT) )
+			m_currentSizeCell += m_currentGridStepHeight;
+		else
+			m_currentGridHeight += m_currentGridStepHeight;
+	}
+	else if( input.IsKeyPressed(Input::KEY_KP_SUBTRACT) )
+	{
+		if( input.IsKeyDown(Input::KEY_LEFT_CONTROL) )
+			m_currentGridStepHeight -= 0.1f;
+		else if( input.IsKeyDown(Input::KEY_LEFT_SHIFT) )
+			m_currentSizeCell -= m_currentGridStepHeight;
+		else
+			m_currentGridHeight -= m_currentGridStepHeight;
+	}
 }
 //-----------------------------------------------------------------------------

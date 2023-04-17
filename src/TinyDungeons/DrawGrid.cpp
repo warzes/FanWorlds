@@ -12,13 +12,14 @@ layout(location = 1) in vec2 aTexCoord;
 uniform mat4 uWorld;
 uniform mat4 uViewProjection;
 uniform float uGridSize;
+uniform float uGridStep;
 
 out vec2 fTexCoord;
 
 void main()
 {
 	gl_Position = uViewProjection * uWorld * vec4(aPos * uGridSize, 1.0);
-	fTexCoord = aTexCoord * uGridSize;
+	fTexCoord = aTexCoord * uGridSize / uGridStep;
 }
 )";
 
@@ -46,6 +47,7 @@ void main()
 	m_uniformViewProjectionMatrix = renderSystem.GetUniform(m_shader, "uViewProjection");
 	m_uniformWorldMatrix = renderSystem.GetUniform(m_shader, "uWorld");
 	m_uniformSizeGrid = renderSystem.GetUniform(m_shader, "uGridSize");
+	m_uniformStepGrid = renderSystem.GetUniform(m_shader, "uGridStep");
 	m_uniformColor = renderSystem.GetUniform(m_shader, "uColor");
 
 	struct testVertex
@@ -81,7 +83,7 @@ void DrawGrid::Destroy()
 	m_shader.reset();
 }
 //-----------------------------------------------------------------------------
-void DrawGrid::Draw(RenderSystem& renderSystem, const glm::mat4& vpMat, const glm::vec3& pos, float size)
+void DrawGrid::Draw(RenderSystem& renderSystem, const glm::mat4& vpMat, const glm::vec3& pos, float stepGrid, float size)
 {
 	const glm::mat4 world = glm::translate(glm::mat4(1.0f), { pos.x + size / 2, pos.y, pos.z + size / 2 });
 
@@ -90,6 +92,7 @@ void DrawGrid::Draw(RenderSystem& renderSystem, const glm::mat4& vpMat, const gl
 	renderSystem.SetUniform(m_uniformViewProjectionMatrix, vpMat);
 	renderSystem.SetUniform(m_uniformWorldMatrix, world);
 	renderSystem.SetUniform(m_uniformSizeGrid, size);
+	renderSystem.SetUniform(m_uniformStepGrid, stepGrid);
 	renderSystem.SetUniform(m_uniformColor, glm::vec3(1.0f, 1.0f, 1.0f));
 	renderSystem.Draw(m_geom->vao);
 }

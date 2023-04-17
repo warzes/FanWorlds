@@ -3,5 +3,8 @@
 enum EditorMode
 {
 	Select,
-	Add
+	Add,
+	Voxel,
+	Sector,
+	Heightmap
 };

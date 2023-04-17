@@ -31,6 +31,9 @@
     <ClCompile Include="EditorCursor.cpp">
       <Filter>Editor\Core</Filter>
     </ClCompile>
+    <ClCompile Include="EditorWorldObject.cpp">
+      <Filter>Editor\Data</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameApp.h" />
@@ -71,6 +74,9 @@
     <ClInclude Include="EditorCursor.h">
       <Filter>Editor\Core</Filter>
     </ClInclude>
+    <ClInclude Include="EditorWorldObject.h">
+      <Filter>Editor\Data</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Framework">
@@ -93,6 +99,9 @@
     </Filter>
     <Filter Include="Editor\Core">
       <UniqueIdentifier>{797f73d5-91ae-4b59-af6c-fc418e10eb65}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Editor\Data">
+      <UniqueIdentifier>{e692ee14-83a3-4883-8487-af7149b6bbe1}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
