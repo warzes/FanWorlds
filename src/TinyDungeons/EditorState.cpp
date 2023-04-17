@@ -1,5 +1,6 @@
 ﻿#include "stdafx.h"
 #include "EditorState.h"
+https://sketchfab.com/3d-models/tilable-pixel-asset-pack-ca56ca86794b47c29e1592172b10d50a
 //-----------------------------------------------------------------------------
 bool EditorState::OnCreate()
 {
@@ -48,6 +49,7 @@ void EditorState::OnActive()
 void EditorState::OnUpdate(float deltaTime)
 {
 	Input& input = GetInput();
+	const float wheel = input.GetMouseWheelMove();
 
 	selectMode();
 
@@ -61,24 +63,26 @@ void EditorState::OnUpdate(float deltaTime)
 		return;
 	}
 
-	modGrid();
+	modGrid(); // изменения сетки
 
-
+	// позиция курсора в 3д мире с учетом сетки
 	if( input.IsKeyDown(Input::KEY_LEFT_SHIFT) )
-	{
 		m_objPosition = {m_cursors.GetPosX(), m_currentGridHeight, m_cursors.GetPosZ()};
-	}
 	else
 		m_objPosition = {
 			floor((m_cursors.GetPosX() + 0.5f) / m_currentSizeCell) * m_currentSizeCell,
 			m_currentGridHeight,
 			floor((m_cursors.GetPosZ() + 0.5f) / m_currentSizeCell) * m_currentSizeCell };
 
-	const float wheel = input.GetMouseWheelMove();
 	if( m_mode == EditorMode::Select )
 	{		
 		if( wheel > 0 ) m_currentGridHeight += m_currentGridStepHeight;
 		else if( wheel < 0 ) m_currentGridHeight -= m_currentGridStepHeight;
+
+		if( input.IsMouseButtonPressed(0) )
+		{
+			selectObjectInMap();
+		}
 	}
 	else if( m_mode == EditorMode::Add )
 	{
@@ -224,7 +228,6 @@ void EditorState::drawImgui()
 
 		ImGui::End();
 	}
-
 
 	// Camera Teleport Window
 	{
