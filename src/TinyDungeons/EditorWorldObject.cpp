@@ -38,3 +38,9 @@ void EditorMap::RemoveLastObject()
 	object.pop_back();
 }
 //-----------------------------------------------------------------------------
+void EditorMap::RemoveObject(unsigned id)
+{
+	if( id >= object.size() ) return;
+	object.erase(object.begin() + id);
+}
+//-----------------------------------------------------------------------------

@@ -42,7 +42,7 @@ void EditorState::OnActive()
 	m_selectEditorModeFromImGui = 0;
 	m_prevPosCameraFromImGui = m_posCameraFromImGui = { m_camera.position.x, m_camera.position.y, m_camera.position.z };
 	m_map.object.clear();
-	m_isVisibleSelectBox = false;
+	resetSelect();
 }
 //-----------------------------------------------------------------------------
 bool EditorState::createImgui()

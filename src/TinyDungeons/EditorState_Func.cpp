@@ -3,29 +3,52 @@
 //-----------------------------------------------------------------------------
 void EditorState::selectEditorMode() // переключение режимов редактора
 {
-	if(      m_selectEditorModeFromImGui == 0 && m_editorMode != EditorMode::Select )
+	bool isChange = false;
+	if( m_selectEditorModeFromImGui == 0 && m_editorMode != EditorMode::Select )
+	{
 		m_editorMode = EditorMode::Select;
+		isChange = true;
+	}
 	else if( m_selectEditorModeFromImGui == 1 && m_editorMode != EditorMode::Add )
+	{
 		m_editorMode = EditorMode::Add;
+		isChange = true;
+	}
 	else if( m_selectEditorModeFromImGui == 2 && m_editorMode != EditorMode::Voxel )
+	{
 		m_editorMode = EditorMode::Voxel;
+		isChange = true;
+	}
 	else if( m_selectEditorModeFromImGui == 3 && m_editorMode != EditorMode::Sector )
+	{
 		m_editorMode = EditorMode::Sector;
+		isChange = true;
+	}
 	else if( m_selectEditorModeFromImGui == 4 && m_editorMode != EditorMode::Heightmap )
+	{
 		m_editorMode = EditorMode::Heightmap;
+		isChange = true;
+	}
 	else if( GetInput().IsKeyPressed(Input::KEY_TAB) )
 	{
 		if( m_editorMode == EditorMode::Select )
 		{
 			m_editorMode = EditorMode::Add;
 			m_selectEditorModeFromImGui = 1;
+			isChange = true;
 		}
 		else
 		{
 			m_editorMode = EditorMode::Select;
 			m_selectEditorModeFromImGui = 0;
+			isChange = true;
 		}
 		// TODO: другие режимы
+	}
+
+	if( isChange )
+	{
+		resetSelect(); // сброс выбора, если изменен режим
 	}
 }
 //-----------------------------------------------------------------------------

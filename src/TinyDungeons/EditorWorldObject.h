@@ -33,6 +33,7 @@ class EditorMap
 public:
 	void AddObject(const EditorMapObject& object);
 	void RemoveLastObject();
+	void RemoveObject(unsigned id);
 
 	std::vector<EditorMapObjectHelper> object;
 };

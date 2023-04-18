@@ -107,16 +107,19 @@ RayCollision GetRayCollisionBox(Ray ray, const AABB& box) noexcept
 	t[3] = (box.max.y - ray.position.y) * t[9];
 	t[4] = (box.min.z - ray.position.z) * t[10];
 	t[5] = (box.max.z - ray.position.z) * t[10];
-	t[6] = (float)fmax(fmax(fmin(t[0], t[1]), fmin(t[2], t[3])), fmin(t[4], t[5]));
-	t[7] = (float)fmin(fmin(fmax(t[0], t[1]), fmax(t[2], t[3])), fmax(t[4], t[5]));
+	t[6] = fmax(fmax(fmin(t[0], t[1]), fmin(t[2], t[3])), fmin(t[4], t[5]));
+	t[7] = fmin(fmin(fmax(t[0], t[1]), fmax(t[2], t[3])), fmax(t[4], t[5]));
 
 	collision.hit = !((t[7] < 0) || (t[6] > t[7]));
 	collision.distance = t[6];
 	collision.point = ray.position + ray.direction * collision.distance;
 
 	// Get box center point
-	//collision.normal = Vector3Lerp(box.min, box.max, 0.5f);
+#if 0
+	collision.normal = Vector3Lerp(box.min, box.max, 0.5f);
+#else
 	collision.normal = glm::lerp(box.min, box.max, 0.5f);
+#endif
 
 	// Get vector center point->hit point
 	collision.normal = collision.point - collision.normal;

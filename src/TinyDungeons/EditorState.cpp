@@ -75,7 +75,7 @@ void EditorState::selectObjectInMap(Input& input)
 	const glm::vec2 mousePos = input.GetMousePosition();
 	const Ray ray = GetMouseRay(mousePos, input.GetWindowWidth(), input.GetWindowHeight(), m_perspective, m_camera);
 
-	bool find = false;
+	m_isVisibleSelectBox = false;
 	RayCollision rayCol;
 	for( size_t i = 0; i < m_map.object.size(); i++ )
 	{
@@ -89,14 +89,11 @@ void EditorState::selectObjectInMap(Input& input)
 		if( boxHitInfo.hit && (boxHitInfo.distance < rayCol.distance) ) // ищем ближайший объект
 		{
 			rayCol = boxHitInfo;
-			find = true;
+			m_isVisibleSelectBox = true;
 			m_selectBoxPos = obj.worldPosition;
 			m_selectBoxScale = obj.aabb.GetDimensions() * 1.1f;
+			m_selectObjectId = i;
 		}
-	}
-	if( find )
-	{
-		m_isVisibleSelectBox = true;
 	}
 }
 //-----------------------------------------------------------------------------
@@ -106,6 +103,12 @@ void EditorState::updateInSelectMode(Input& input)
 	{
 		// выбор объекта мышкой
 		selectObjectInMap(input);
+	}
+	// удаление выбранного объекта
+	if( input.IsKeyPressed(Input::KEY_DELETE) && m_isVisibleSelectBox )
+	{
+		m_map.RemoveObject(m_selectObjectId);
+		resetSelect();
 	}
 }
 //-----------------------------------------------------------------------------
@@ -123,6 +126,15 @@ void EditorState::updateInAddMode(Input& input)
 
 	// удаление последнего установленного объекта
 	if( input.IsKeyPressed(Input::KEY_BACKSPACE) )
+	{
 		m_map.RemoveLastObject();
+		resetSelect();
+	}
+}
+//-----------------------------------------------------------------------------
+void EditorState::resetSelect()
+{
+	m_isVisibleSelectBox = false;
+	m_selectObjectId = std::numeric_limits<unsigned>::max();
 }
 //-----------------------------------------------------------------------------

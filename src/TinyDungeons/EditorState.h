@@ -29,6 +29,7 @@ private:
 	void selectObjectInMap(Input& input);
 	void updateInSelectMode(Input& input);
 	void updateInAddMode(Input& input);
+	void resetSelect();
 
 	// Editor data
 	DrawGrid m_gridDrawer;
@@ -60,4 +61,5 @@ private:
 	glm::vec3 m_selectBoxPos;
 	glm::vec3 m_selectBoxScale;
 	bool m_isVisibleSelectBox = false;
+	unsigned m_selectObjectId = 0;
 };
