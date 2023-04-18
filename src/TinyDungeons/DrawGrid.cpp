@@ -85,7 +85,7 @@ void DrawGrid::Destroy()
 //-----------------------------------------------------------------------------
 void DrawGrid::Draw(RenderSystem& renderSystem, const glm::mat4& vpMat, const glm::vec3& pos, float stepGrid, float size)
 {
-	const glm::mat4 world = glm::translate(glm::mat4(1.0f), { pos.x + size / 2, pos.y, pos.z + size / 2 });
+	const glm::mat4 world = glm::translate(glm::mat4(1.0f), pos);
 
 	renderSystem.Bind(m_texture);
 	renderSystem.Bind(m_shader);

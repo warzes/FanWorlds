@@ -116,7 +116,7 @@ void EditorCollectModels::DrawPreview(RenderSystem& renderSystem, GraphicsSystem
 	graphicsSystem.Draw(mesh);
 }
 //-----------------------------------------------------------------------------
-void EditorCollectModels::Draw(RenderSystem& renderSystem, GraphicsSystem& graphicsSystem, const glm::mat4& proj, const glm::mat4& view, const EditorMap& map)
+void EditorCollectModels::DrawMap(RenderSystem& renderSystem, GraphicsSystem& graphicsSystem, const glm::mat4& proj, const glm::mat4& view, const EditorMap& map)
 {
 	renderSystem.Bind(m_shader);
 	renderSystem.SetUniform(m_uniformProjectionMatrix, proj);
@@ -127,7 +127,6 @@ void EditorCollectModels::Draw(RenderSystem& renderSystem, GraphicsSystem& graph
 	glm::mat4 world;
 	for( size_t i = 0; i < map.object.size(); i++ )
 	{
-		if( map.object[i].isLive == false ) continue;
 		const EditorMapObject& object = map.object[i].object;
 		mesh = &m_model->subMeshes[object.meshIndex];
 		world = glm::translate(glm::mat4(1.0f), object.position);

@@ -14,7 +14,7 @@ public:
 	Mesh2(const size_t count, const V *data, const GLenum mode)
 	{
 		m_count = static_cast<GLsizei>(count);
-		m_mode = mode;
+		m_editorMode = mode;
 
 		glCreateBuffers(1, &m_vbo);
 		glNamedBufferStorage(m_vbo, count * sizeof(V), data, 0);
@@ -28,7 +28,7 @@ public:
 	// dynamic recreate
 	explicit Mesh2(const GLenum mode)
 	{
-		m_mode = mode;
+		m_editorMode = mode;
 
 		glCreateBuffers(1, &m_vbo);
 
@@ -77,14 +77,14 @@ public:
 	void BindAndDraw() const
 	{
 		glBindVertexArray(m_vao);
-		glDrawArrays(m_mode, 0, m_count);
+		glDrawArrays(m_editorMode, 0, m_count);
 	}
 
 protected:
 	MoveOnly<GLuint>  m_vbo;
 	MoveOnly<GLuint>  m_vao;
 	MoveOnly<GLsizei> m_count;
-	MoveOnly<GLenum>  m_mode;
+	MoveOnly<GLenum>  m_editorMode;
 };
 
 static void SetupVertexArrayAttrib(

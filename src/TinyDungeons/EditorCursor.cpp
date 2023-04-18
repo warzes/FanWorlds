@@ -1,6 +1,5 @@
 #include "stdafx.h"
 #include "EditorCursor.h"
-#include "Ray.h"
 //-----------------------------------------------------------------------------
 bool EditorCursor::Create(RenderSystem& renderSystem)
 {
@@ -32,7 +31,6 @@ void main()
 	m_vboLine = renderSystem.CreateVertexBuffer(BufferUsage::DynamicDraw, 1, sizeof(float) * 3, nullptr);
 	m_vaoLine = renderSystem.CreateVertexArray(m_vboLine, nullptr, m_shaderLine);
 
-
 	return true;
 }
 //-----------------------------------------------------------------------------
@@ -43,28 +41,39 @@ void EditorCursor::Destroy()
 	m_vaoLine.reset();
 }
 //-----------------------------------------------------------------------------
-void EditorCursor::Draw(RenderSystem& renderSystem, Input& input, const glm::mat4& proj, const Camera& camera, float currentGridHeight)
+void EditorCursor::Update(Input& input, const glm::mat4& proj, const Camera& camera, float gridHeight, float sizeMap, float sizeCell)
 {
-	renderSystem.Bind(m_shaderLine);
-	renderSystem.SetUniform("uWVP", proj * camera.GetViewMatrix());
-
 	const glm::vec2 mousePos = input.GetMousePosition();
-
 	const Ray ray = GetMouseRay(mousePos, input.GetWindowWidth(), input.GetWindowHeight(), proj, camera);
-	const RayCollision rayCol = GetRayCollisionQuad(ray,
-		glm::vec3(0.0f,    currentGridHeight, 0.0f   ),
-		glm::vec3(0.0f,    currentGridHeight, 1000.0f),
-		glm::vec3(1000.0f, currentGridHeight, 1000.0f),
-		glm::vec3(1000.0f, currentGridHeight, 0.0f   ));
+	m_rayColToGrid = GetRayCollisionQuad(ray,
+		glm::vec3(0.0f,    gridHeight, 0.0f),
+		glm::vec3(0.0f,    gridHeight, sizeMap),
+		glm::vec3(sizeMap, gridHeight, sizeMap),
+		glm::vec3(sizeMap, gridHeight, 0.0f));
 
+	// позиция курсора в 3д мире с учетом сетки
+	if( input.IsKeyDown(Input::KEY_LEFT_SHIFT) )
+		m_objPosition = { GetPosX(), gridHeight, GetPosZ() };
+	else
+		m_objPosition = 
+		{
+			floor((GetPosX() + sizeCell * 0.5f) / sizeCell) * sizeCell,
+			gridHeight,
+			floor((GetPosZ() + sizeCell * 0.5f) / sizeCell) * sizeCell
+		};
+}
+//-----------------------------------------------------------------------------
+void EditorCursor::Draw(RenderSystem& renderSystem, const glm::mat4& projView, const glm::vec3& startPos, float currentGridHeight)
+{
 	const glm::vec3 lineData[] =
 	{
-		{camera.position.x, currentGridHeight + 0.1f, camera.position.z},
-		rayCol.point
+		{startPos.x, currentGridHeight + 0.1f, startPos.z},
+		m_rayColToGrid.point
 	};
-	m_pos = rayCol.point;
 
-	renderSystem.UpdateBuffer(m_vboLine, 0, 2, sizeof(lineData), lineData);
+	renderSystem.Bind(m_shaderLine);
+	renderSystem.SetUniform("uWVP", projView);
+	renderSystem.UpdateBuffer(m_vboLine, 0, Countof(lineData), sizeof(glm::vec3), lineData);
 	renderSystem.Draw(m_vaoLine, PrimitiveTopology::Lines);
 }
 //-----------------------------------------------------------------------------

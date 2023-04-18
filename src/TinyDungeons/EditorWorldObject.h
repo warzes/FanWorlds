@@ -20,14 +20,13 @@ class EditorMapObjectHelper
 {
 public:
 	EditorMapObject object;
-	bool isLive = true;
 };
 
 class EditorMap
 {
 public:
 	void AddObject(const EditorMapObject& object);
-
+	void RemoveLastObject();
 
 	std::vector<EditorMapObjectHelper> object;
 };

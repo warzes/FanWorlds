@@ -13,6 +13,11 @@ void BaseClass::ExitRequest()
 	m_engineDevice->m_isExitRequested = true;
 }
 //-----------------------------------------------------------------------------
+bool BaseClass::IsExitApp() const
+{
+	return m_engineDevice->m_isExitRequested;
+}
+//-----------------------------------------------------------------------------
 void BaseClass::Print(const std::string& msg) const
 {
 	assert(m_engineDevice);

@@ -96,6 +96,9 @@
     <ClCompile Include="DrawGrid.cpp" />
     <ClCompile Include="EditorCollectModels.cpp" />
     <ClCompile Include="EditorCursor.cpp" />
+    <ClCompile Include="EditorState_Create.cpp" />
+    <ClCompile Include="EditorState_drawImgui.cpp" />
+    <ClCompile Include="EditorState_Func.cpp" />
     <ClCompile Include="EditorWorldObject.cpp" />
     <ClCompile Include="EditorState.cpp" />
     <ClCompile Include="GameApp.cpp" />

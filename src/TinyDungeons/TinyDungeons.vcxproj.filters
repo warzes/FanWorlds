@@ -34,6 +34,15 @@
     <ClCompile Include="EditorWorldObject.cpp">
       <Filter>Editor\Data</Filter>
     </ClCompile>
+    <ClCompile Include="EditorState_Create.cpp">
+      <Filter>Editor</Filter>
+    </ClCompile>
+    <ClCompile Include="EditorState_Func.cpp">
+      <Filter>Editor</Filter>
+    </ClCompile>
+    <ClCompile Include="EditorState_drawImgui.cpp">
+      <Filter>Editor</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameApp.h" />

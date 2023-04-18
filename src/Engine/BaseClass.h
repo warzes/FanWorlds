@@ -16,6 +16,7 @@ public:
 	void InitFromOther(BaseClass* other);
 
 	void ExitRequest();
+	bool IsExitApp() const;
 	FileSystem& GetFileSystem();
 	const FileSystem& GetFileSystem() const;
 	Window& GetWindow();
