@@ -30,7 +30,7 @@ void EditorState::drawImgui()
 		ImGui::SetNextItemWidth(50.0f);
 		ImGui::InputFloat("Step", &m_currentGridStepHeight);
 		ImGui::SetNextItemWidth(50.0f);
-		ImGui::InputFloat("Step Cell", &m_currentSizeCell);
+		ImGui::InputFloat("Size Cell", &m_currentSizeCell);
 		ImGui::SetNextItemWidth(50.0f);
 		ImGui::InputFloat("Size Map", &m_currentSizeMap);
 
