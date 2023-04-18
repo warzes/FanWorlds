@@ -1,13 +1,16 @@
 #pragma once
 
-
 #define _SILENCE_CXX20_CISO646_REMOVED_WARNING
 
 #include "EngineConfiguration.h"
 
 #if defined(_MSC_VER)
+#	pragma warning(disable : 4514)
+#	pragma warning(disable : 4625)
+#	pragma warning(disable : 4626)
+#	pragma warning(disable : 4820)
+#	pragma warning(disable : 5045)
 #	pragma warning(push, 0)
-//#	pragma warning(disable : 4668)
 #	pragma warning(disable : 5039)
 #endif
 

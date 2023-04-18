@@ -34,7 +34,7 @@ void EditorState::OnFrame()
 	{
 		m_windowWidth = GetWindowWidth();
 		m_windowHeight = GetWindowHeight();
-		m_perspective = glm::perspective(glm::radians(45.0f), GetWindowSizeAspect(), 0.01f, 1000.f);
+		m_perspective = glm::perspective(glm::radians(65.0f), GetWindowSizeAspect(), 0.01f, 1000.f);
 		renderSystem.SetViewport(m_windowWidth, m_windowHeight);
 	}
 	renderSystem.ClearFrame();
@@ -42,10 +42,17 @@ void EditorState::OnFrame()
 	const glm::mat4 view = m_camera.GetViewMatrix();
 	const glm::mat4 projView = m_perspective * view;
 
+	m_cursors.Draw(renderSystem, projView, m_camera.position, m_currentGridHeight);
+
+	// отрисовка только в режиме выбора
+	if( m_editorMode == EditorMode::Select )
+	{
+		if ( m_isVisibleSelectBox )
+			m_collectModels.DrawSelBox(renderSystem, graphicsSystem, m_perspective, view, m_selectBoxPos, m_selectBoxScale);
+	}
 	// отрисовка только в режиме добавления
 	if( !m_freeLook && m_editorMode == EditorMode::Add )
 	{
-		m_cursors.Draw(renderSystem, projView, m_camera.position, m_currentGridHeight);
 		m_collectModels.DrawPreview(renderSystem, graphicsSystem, m_perspective, view, m_cursors.GetPosForObject());
 	}
 	// отрисовка всей карты
@@ -59,18 +66,38 @@ void EditorState::OnFrame()
 void EditorState::addObjectInMap()
 {
 	EditorMapObject object;
-	object.fileNameModel = m_collectModels.GetFileModelName();
-	object.nameMeshInFile = m_collectModels.GetCurrentMeshName();
-	object.meshIndex = m_collectModels.GetCurrentMeshId();
-	object.position = m_collectModels.GetCurrentPosition();
-	object.scale = m_collectModels.GetCurrentScale();
-	object.rotation = m_collectModels.GetCurrentRotation();
-
+	object.Init(m_collectModels);
 	m_map.AddObject(object);
 }
 //-----------------------------------------------------------------------------
-void EditorState::selectObjectInMap()
+void EditorState::selectObjectInMap(Input& input)
 {
+	const glm::vec2 mousePos = input.GetMousePosition();
+	const Ray ray = GetMouseRay(mousePos, input.GetWindowWidth(), input.GetWindowHeight(), m_perspective, m_camera);
+
+	bool find = false;
+	RayCollision rayCol;
+	for( size_t i = 0; i < m_map.object.size(); i++ )
+	{
+		auto& obj = m_map.object[i].object;
+
+		AABB temp;
+		temp.min = obj.aabb.min + obj.worldPosition;
+		temp.max = obj.aabb.max + obj.worldPosition;
+
+		RayCollision boxHitInfo = GetRayCollisionBox(ray, temp);
+		if( boxHitInfo.hit && (boxHitInfo.distance < rayCol.distance) ) // ищем ближайший объект
+		{
+			rayCol = boxHitInfo;
+			find = true;
+			m_selectBoxPos = obj.worldPosition;
+			m_selectBoxScale = obj.aabb.GetDimensions() * 1.1f;
+		}
+	}
+	if( find )
+	{
+		m_isVisibleSelectBox = true;
+	}
 }
 //-----------------------------------------------------------------------------
 void EditorState::updateInSelectMode(Input& input)
@@ -78,7 +105,7 @@ void EditorState::updateInSelectMode(Input& input)
 	if( input.IsMouseButtonPressed(0) )
 	{
 		// выбор объекта мышкой
-		selectObjectInMap();
+		selectObjectInMap(input);
 	}
 }
 //-----------------------------------------------------------------------------
@@ -94,11 +121,8 @@ void EditorState::updateInAddMode(Input& input)
 		addObjectInMap();
 	}
 
+	// удаление последнего установленного объекта
 	if( input.IsKeyPressed(Input::KEY_BACKSPACE) )
 		m_map.RemoveLastObject();
-}
-//-----------------------------------------------------------------------------
-void EditorState::removeLastObject()
-{
 }
 //-----------------------------------------------------------------------------

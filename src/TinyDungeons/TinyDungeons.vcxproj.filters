@@ -113,7 +113,4 @@
       <UniqueIdentifier>{e692ee14-83a3-4883-8487-af7149b6bbe1}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
-  <ItemGroup>
-    <None Include="EditorDoc.md" />
-  </ItemGroup>
 </Project>

@@ -241,7 +241,7 @@ void GameStateTest::OnFrame()
 			//graphicsSystem.Draw(m_model);
 
 			Mesh& mesh = m_model->subMeshes[currentMesh];
-			glm::vec3 wpos = mesh.GetWorldPos();
+			glm::vec3 wpos = mesh.GetMeshPos();
 			glm::vec3 expos = mesh.globalAABB.GetExtents();
 			glm::vec3 mpos = -wpos + cubePos;
 			mpos.y += expos.y;

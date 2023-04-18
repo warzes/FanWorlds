@@ -86,3 +86,76 @@ RayCollision GetRayCollisionQuad(const Ray& ray, const glm::vec3& p1, const glm:
 	return collision;
 }
 //-----------------------------------------------------------------------------
+RayCollision GetRayCollisionBox(Ray ray, const AABB& box) noexcept
+{
+#if 1
+	RayCollision collision = {};
+	collision.hit = false;
+
+	// Note: If ray.position is inside the box, the distance is negative (as if the ray was reversed)
+	// Reversing ray.direction will give use the correct result.
+	const bool insideBox = box.Contains(ray.position);
+	if( insideBox ) ray.direction = -ray.direction;
+
+	float t[11] = { 0 };
+	t[8] = 1.0f / ray.direction.x;
+	t[9] = 1.0f / ray.direction.y;
+	t[10] = 1.0f / ray.direction.z;
+	t[0] = (box.min.x - ray.position.x) * t[8];
+	t[1] = (box.max.x - ray.position.x) * t[8];
+	t[2] = (box.min.y - ray.position.y) * t[9];
+	t[3] = (box.max.y - ray.position.y) * t[9];
+	t[4] = (box.min.z - ray.position.z) * t[10];
+	t[5] = (box.max.z - ray.position.z) * t[10];
+	t[6] = (float)fmax(fmax(fmin(t[0], t[1]), fmin(t[2], t[3])), fmin(t[4], t[5]));
+	t[7] = (float)fmin(fmin(fmax(t[0], t[1]), fmax(t[2], t[3])), fmax(t[4], t[5]));
+
+	collision.hit = !((t[7] < 0) || (t[6] > t[7]));
+	collision.distance = t[6];
+	collision.point = ray.position + ray.direction * collision.distance;
+
+	// Get box center point
+	//collision.normal = Vector3Lerp(box.min, box.max, 0.5f);
+	collision.normal = glm::lerp(box.min, box.max, 0.5f);
+
+	// Get vector center point->hit point
+	collision.normal = collision.point - collision.normal;
+	// Scale vector to unit cube
+	// NOTE: We use an additional .01 to fix numerical errors
+	collision.normal = collision.normal * 2.01f;
+	collision.normal = collision.normal / (box.max - box.min);
+	// The relevant elements of the vector are now slightly larger than 1.0f (or smaller than -1.0f)
+	// and the others are somewhere between -1.0 and 1.0 casting to int is exactly our wanted normal!
+	collision.normal.x = (float)((int)collision.normal.x);
+	collision.normal.y = (float)((int)collision.normal.y);
+	collision.normal.z = (float)((int)collision.normal.z);
+	collision.normal = glm::normalize(collision.normal);
+
+	if( insideBox )
+	{
+		// Reset ray.direction
+		ray.direction = -ray.direction;
+		// Fix result
+		collision.distance *= -1.0f;
+		collision.normal = -collision.normal;
+	}
+
+	return collision;
+#else
+	RayCollision collision = {};
+	collision.hit = false;
+
+
+	glm::vec3 tMin = (box.min - ray.position) / ray.direction;
+	glm::vec3 tMax = (box.max - ray.position) / ray.direction;
+	glm::vec3 t1 = glm::min(tMin, tMax);
+	glm::vec3 t2 = glm::max(tMin, tMax);
+	float tNear = glm::max(glm::max(t1.x, t1.y), t1.z);
+	float tFar = glm::min(glm::min(t2.x, t2.y), t2.z);
+	collision.hit = tNear < tFar;
+
+	// TODO: доделать остальное
+	return collision;
+#endif
+}
+//-----------------------------------------------------------------------------

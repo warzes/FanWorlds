@@ -50,7 +50,14 @@ public:
 	Mesh& operator=(Mesh&&) = default;
 	Mesh& operator=(const Mesh&) = delete;
 
-	glm::vec3 GetWorldPos() const { return globalAABB.GetCenter(); }
+	glm::vec3 GetMeshPos() const { return globalAABB.GetCenter(); }
+	AABB GetLocalAABB() const 
+	{ 
+		AABB temp;
+		temp.min = globalAABB.min - GetMeshPos();
+		temp.max = globalAABB.max - GetMeshPos();
+		return temp;
+	}
 
 	std::vector<VertexMesh> vertices;
 	std::vector<uint32_t> indices;

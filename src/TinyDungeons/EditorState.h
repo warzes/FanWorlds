@@ -26,10 +26,16 @@ private:
 	void cameraUpdate(Input& input, float deltaTime);
 	void addObjectInMap();
 	void changeGrid(Input& input);
-	void selectObjectInMap();
+	void selectObjectInMap(Input& input);
 	void updateInSelectMode(Input& input);
 	void updateInAddMode(Input& input);
-	void removeLastObject();
+
+	// Editor data
+	DrawGrid m_gridDrawer;
+	EditorCollectModels m_collectModels;
+	EditorCursor m_cursors;
+	EditorMap m_map;
+	bool m_isCreate = false;
 
 	// viewport info
 	int m_windowWidth = 0;
@@ -43,21 +49,15 @@ private:
 	// editor mode
 	EditorMode m_editorMode = EditorMode::Select;
 	int m_selectEditorModeFromImGui = 0;
-
-
-
 	
-	bool m_isCreate = false;
-
-	DrawGrid m_gridDrawer;
-	EditorCollectModels m_collectModels;
-	EditorCursor m_cursors;
-
-	// editor data
+	// grid data
 	float m_currentGridHeight = 0.0f;
 	float m_currentGridStepHeight = 0.1f;
 	float m_currentSizeCell = 1.0f;
 	float m_currentSizeMap = 1000.0f;
 
-	EditorMap m_map;
+	// select data
+	glm::vec3 m_selectBoxPos;
+	glm::vec3 m_selectBoxScale;
+	bool m_isVisibleSelectBox = false;
 };

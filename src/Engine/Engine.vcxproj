@@ -123,7 +123,6 @@
     <ClInclude Include="BaseClass.h" />
     <ClInclude Include="BaseFunc.h" />
     <ClInclude Include="BaseMacros.h" />
-    <ClInclude Include="BaseType.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Capabilities.h" />
     <ClInclude Include="Color.h" />

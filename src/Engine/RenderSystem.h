@@ -35,6 +35,7 @@ public:
 	void SetClearColor(const glm::vec3& color);
 	void ClearFrame();
 	void SetViewport(int width, int height);
+	void SetViewport(int x, int y, int width, int height);
 
 	//-------------------------------------------------------------------------
 	// Create Render Resource

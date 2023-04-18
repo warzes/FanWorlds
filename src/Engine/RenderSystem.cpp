@@ -124,7 +124,12 @@ void RenderSystem::ClearFrame()
 //-----------------------------------------------------------------------------
 void RenderSystem::SetViewport(int width, int height)
 {
-	glViewport(0, 0, width, height);
+	SetViewport(0, 0, width, height);
+}
+//-----------------------------------------------------------------------------
+void RenderSystem::SetViewport(int x, int y, int width, int height)
+{
+	glViewport(x, y, width, height);
 }
 //-----------------------------------------------------------------------------
 bool RenderSystem::IsReadyUniform(const Uniform& uniform) const
