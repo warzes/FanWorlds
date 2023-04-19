@@ -12,6 +12,10 @@ void EditorState::drawImgui()
 		ImGui::SetNextWindowSize(ImVec2((float)GetWindowWidth(), 36.0f));
 		ImGui::SetNextWindowPos(ImVec2(0.0f, 0.0f));
 		ImGui::Begin("Editor Menu", nullptr, flags);
+		ImGui::Button("New Map");
+		ImGui::SameLine();
+		ImGui::Button("Open Map");
+		ImGui::SameLine();
 		ImGui::SetNextItemWidth(100.0f);
 		ImGui::Combo("Editor Mode", (int*)&m_selectEditorModeFromImGui, "Select\0Add\0Voxel\0Sector\0Heightmap\0");
 		ImGui::SameLine();
@@ -58,6 +62,25 @@ void EditorState::drawImgui()
 		ImGui::SetNextItemWidth(210.0f);
 		ImGui::SliderScalar("Z", ImGuiDataType_S32, &m_posCameraFromImGui.z, &s32_zeroXZ, &s32_maxXZ, "%d");
 		ImGui::End();
+	}
+
+	// Object Inspect
+	{
+		ImGuiWindowFlags flags = ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove;
+		ImGui::SetNextWindowSize(ImVec2(240.0f, 200.0f));
+		ImGui::SetNextWindowPos(ImVec2(GetWindowWidth() - 240.0f, 36.0f));
+		ImGui::Begin("Object Inspect", nullptr, flags);
+		ImGui::End();
+	}
+
+	if (m_visibleNewMapWindow) // окно создания новой карты
+	{
+		// TODO:
+	}
+
+	if (m_visibleLoadMapWindow) // окно открытия карты
+	{
+		// TODO:
 	}
 
 	ImGui::Render();

@@ -30,17 +30,29 @@ void EditorMapObject::Init(const EditorCollectModels& models)
 void EditorMap::AddObject(const EditorMapObject& obj)
 {
 	object.push_back({ obj });
+	m_edit = true;
 }
 //-----------------------------------------------------------------------------
 void EditorMap::RemoveLastObject()
 {
 	if( object.empty() ) return;
 	object.pop_back();
+	m_edit = true;
 }
 //-----------------------------------------------------------------------------
 void EditorMap::RemoveObject(unsigned id)
 {
 	if( id >= object.size() ) return;
 	object.erase(object.begin() + id);
+	m_edit = true;
+}
+//-----------------------------------------------------------------------------
+void EditorMap::Update()
+{
+	if (!m_edit) return;
+
+тут сохранение карты
+
+	m_edit = false;
 }
 //-----------------------------------------------------------------------------

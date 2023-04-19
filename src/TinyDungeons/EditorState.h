@@ -62,4 +62,7 @@ private:
 	glm::vec3 m_selectBoxScale;
 	bool m_isVisibleSelectBox = false;
 	unsigned m_selectObjectId = 0;
-};
+
+	// imgui
+	bool m_visibleNewMapWindow = true;
+	bool m_visibleLoadMapWindow = true;};

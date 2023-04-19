@@ -24,6 +24,7 @@ public:
 	glm::vec3 GetCurrentWorldPosition() const { return m_currentWorldPos; }
 	glm::vec3 GetCurrentScale() const { return m_currentScale; }
 	glm::quat GetCurrentRotation() const { return m_currentRotation; }
+	float GetCurrentRotationY() const { return m_currentRotationY; }
 	AABB GetCurrentAABB() const { return m_model->subMeshes[m_currentMesh].GetLocalAABB(); }
 
 private:
@@ -44,4 +45,5 @@ private:
 	glm::vec3 m_currentWorldPos = glm::vec3(0.0f);
 	glm::vec3 m_currentScale = glm::vec3(1.0f);
 	glm::quat m_currentRotation = glm::quat(1.0f, 0.0f, 0.0f, 0.0f);
+	float m_currentRotationY = 45.0f; // TODO: в будущем удалить
 };

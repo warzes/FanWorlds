@@ -35,5 +35,9 @@ public:
 	void RemoveLastObject();
 	void RemoveObject(unsigned id);
 
+	void Update();
+
 	std::vector<EditorMapObjectHelper> object;
+
+	bool m_edit = true;
 };
