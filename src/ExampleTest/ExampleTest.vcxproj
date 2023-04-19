@@ -93,10 +93,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="001_BPMinimap.cpp" />
+    <ClCompile Include="001_BPMinimal.cpp" />
     <ClCompile Include="001_MonkeyScenes.cpp" />
     <ClCompile Include="001_Triangle..cpp" />
     <ClCompile Include="002_DinamicVertex.cpp" />
+    <ClCompile Include="002_BPRaycasting.cpp" />
     <ClCompile Include="003_BufferMapping.cpp" />
     <ClCompile Include="004_Quad.cpp" />
     <ClCompile Include="005_BasicTexture.cpp" />
@@ -108,12 +109,14 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="XXX_BPExample.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="001_BPMinimap.h" />
+    <ClInclude Include="001_BPMinimal.h" />
     <ClInclude Include="001_MonkeyScenes.h" />
     <ClInclude Include="001_Triangle.h" />
     <ClInclude Include="002_DinamicVertex.h" />
+    <ClInclude Include="002_BPRaycasting.h" />
     <ClInclude Include="003_BufferMapping.h" />
     <ClInclude Include="004_Quad.h" />
     <ClInclude Include="005_BasicTexture.h" />
@@ -121,6 +124,7 @@
     <ClInclude Include="007_BasicObjModel.h" />
     <ClInclude Include="008_Framebuffer.h" />
     <ClInclude Include="stdafx.h" />
+    <ClInclude Include="XXX_BPExample.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

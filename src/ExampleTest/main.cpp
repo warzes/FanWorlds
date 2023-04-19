@@ -9,7 +9,9 @@
 #include "007_BasicObjModel.h"
 #include "008_Framebuffer.h"
 // Bullet Physics
-#include "001_BPMinimap.h"
+#include "001_BPMinimal.h"
+#include "002_BPRaycasting.h"
+#include "XXX_BPExample.h"
 // Other
 #include "001_MonkeyScenes.h"
 //-----------------------------------------------------------------------------
@@ -45,6 +47,8 @@ int main(
 		
 		std::cout << "Bullet Physics:" << std::endl;
 		std::cout << "    bp1 - Minimal" << std::endl;
+		std::cout << "    bp2 - Raycasting" << std::endl;
+		std::cout << "    bpx - example" << std::endl;
 		
 		std::cout << "Other:" << std::endl;
 		std::cout << "    o1 - Monkey Scenes" << std::endl;
@@ -71,7 +75,9 @@ int main(
 		START_SCENE("b7", _007BasicObjModel);
 		START_SCENE("b8", _008Framebuffer);
 
-		START_SCENE("bp1", _001BPMinimap);
+		START_SCENE("bp1", _001BPMinimal);
+		START_SCENE("bp2", _002BPRaycasting);
+		START_SCENE("bpx", XXXBPExample);
 
 		START_SCENE("o1", _001MonkeyScenes);
 

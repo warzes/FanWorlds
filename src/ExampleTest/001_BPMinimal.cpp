@@ -1,7 +1,7 @@
 #include "stdafx.h"
-#include "001_BPMinimap.h"
+#include "001_BPMinimal.h"
 //-----------------------------------------------------------------------------
-GameObject::GameObject(btCollisionShape* pShape, float mass, const btVector3 &initialPosition, const btQuaternion &initialRotation)
+_001GameObject::_001GameObject(btCollisionShape* pShape, float mass, const btVector3 &initialPosition, const btQuaternion &initialRotation)
 {
 	// store the shape for later usage
 	m_pShape = pShape;
@@ -14,7 +14,7 @@ GameObject::GameObject(btCollisionShape* pShape, float mass, const btVector3 &in
 
 	// create the motion state from the
 	// initial transform
-	m_pMotionState = new OpenGLMotionState(transform);
+	m_pMotionState = new _001OpenGLMotionState(transform);
 
 	// calculate the local inertia
 	btVector3 localInertia(0, 0, 0);
@@ -35,16 +35,16 @@ GameObject::GameObject(btCollisionShape* pShape, float mass, const btVector3 &in
 	m_pBody = new btRigidBody(cInfo);
 }
 //-----------------------------------------------------------------------------
-GameObject::~GameObject()
+_001GameObject::~_001GameObject()
 {
 	delete m_pBody;
 	delete m_pMotionState;
 	delete m_pShape;
 }
 //-----------------------------------------------------------------------------
-bool _001BPMinimap::Create()
+bool _001BPMinimal::Create()
 {
-	Print("001_BPMinimap Create");
+	Print("_001BPMinimal Create");
 
 	constexpr const char* vertexShaderText = R"(
 #version 330 core
@@ -112,7 +112,7 @@ void main()
 	// create the constraint solver
 	m_pSolver = new btSequentialImpulseConstraintSolver();
 	// create the world
-	m_pWorld = new btDiscreteDynamicsWorld(m_pDispatcher, m_pBroadphase, m_pSolver, m_pCollisionConfiguration);
+	m_dynamicsWorld = new btDiscreteDynamicsWorld(m_pDispatcher, m_pBroadphase, m_pSolver, m_pCollisionConfiguration);
 
 	// create our scene's physics objects
 	//CreateObjects();
@@ -131,9 +131,9 @@ void main()
 	return true;
 }
 //-----------------------------------------------------------------------------
-void _001BPMinimap::Destroy()
+void _001BPMinimal::Destroy()
 {
-	delete m_pWorld;
+	delete m_dynamicsWorld;
 	delete m_pSolver;
 	delete m_pBroadphase;
 	delete m_pDispatcher;
@@ -145,10 +145,10 @@ void _001BPMinimap::Destroy()
 	m_model.reset();
 	m_texture.reset();
 
-	Print("001_BPMinimap Destroy");
+	Print("_001BPMinimal Destroy");
 }
 //-----------------------------------------------------------------------------
-void _001BPMinimap::Render()
+void _001BPMinimal::Render()
 {
 	auto& renderSystem = GetRenderSystem();
 	auto& graphicsSystem = GetGraphicsSystem();
@@ -176,7 +176,7 @@ void _001BPMinimap::Render()
 	for( auto i = m_objects.begin(); i != m_objects.end(); ++i )
 	{
 		// get the object from the iterator
-		GameObject* pObj = *i;
+		_001GameObject* pObj = *i;
 
 		// read the transform
 		pObj->GetTransform(transform);
@@ -208,7 +208,7 @@ void _001BPMinimap::Render()
 	}
 }
 //-----------------------------------------------------------------------------
-void _001BPMinimap::Update(float deltaTime)
+void _001BPMinimal::Update(float deltaTime)
 {
 	if( GetInput().IsKeyDown(Input::KEY_ESCAPE) )
 	{
@@ -232,14 +232,14 @@ void _001BPMinimap::Update(float deltaTime)
 		if( delta.y != 0.0f )  m_camera.RotateUpDown(-delta.y * mouseSensitivity);
 	}
 
-	m_pWorld->stepSimulation(deltaTime);
+	m_dynamicsWorld->stepSimulation(deltaTime);
 }
 //-----------------------------------------------------------------------------
-GameObject* _001BPMinimap::CreateGameObject(btCollisionShape* pShape, const float &mass, const btVector3 &initialPosition, const btQuaternion &initialRotation)
+_001GameObject* _001BPMinimal::CreateGameObject(btCollisionShape* pShape, const float &mass, const btVector3 &initialPosition, const btQuaternion &initialRotation)
 {
-	GameObject* pObject = new GameObject(pShape, mass, initialPosition, initialRotation);
+	_001GameObject* pObject = new _001GameObject(pShape, mass, initialPosition, initialRotation);
 	m_objects.push_back(pObject);
-	m_pWorld->addRigidBody(pObject->GetRigidBody());
+	m_dynamicsWorld->addRigidBody(pObject->GetRigidBody());
 	return pObject;
 }
 //-----------------------------------------------------------------------------

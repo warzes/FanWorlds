@@ -8,6 +8,7 @@
 #include <Engine/BaseFunc.h>
 #include <Engine/EngineDevice.h>
 #include <Engine/Camera.h>
+#include <TinyDungeons/Ray.h>
 
 #include <BulletLib/btBulletCollisionCommon.h>
 #include <BulletLib/btBulletDynamicsCommon.h>

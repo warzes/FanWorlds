@@ -30,7 +30,13 @@
     <ClCompile Include="008_Framebuffer.cpp">
       <Filter>BasicExample</Filter>
     </ClCompile>
-    <ClCompile Include="001_BPMinimap.cpp">
+    <ClCompile Include="001_BPMinimal.cpp">
+      <Filter>Bullet Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="002_BPRaycasting.cpp">
+      <Filter>Bullet Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="XXX_BPExample.cpp">
       <Filter>Bullet Physics</Filter>
     </ClCompile>
   </ItemGroup>
@@ -63,7 +69,13 @@
     <ClInclude Include="008_Framebuffer.h">
       <Filter>BasicExample</Filter>
     </ClInclude>
-    <ClInclude Include="001_BPMinimap.h">
+    <ClInclude Include="001_BPMinimal.h">
+      <Filter>Bullet Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="002_BPRaycasting.h">
+      <Filter>Bullet Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="XXX_BPExample.h">
       <Filter>Bullet Physics</Filter>
     </ClInclude>
   </ItemGroup>
