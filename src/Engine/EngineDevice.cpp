@@ -4,6 +4,7 @@
 #if defined(_MSC_VER)
 #	pragma comment( lib, "3rdparty.lib" )
 #	pragma comment( lib, "PhysX5Lib.lib" )
+#	pragma comment( lib, "BulletLib.lib" )
 #endif
 //-----------------------------------------------------------------------------
 EngineDevice::~EngineDevice()

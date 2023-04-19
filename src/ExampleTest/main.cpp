@@ -8,6 +8,8 @@
 #include "006_MultipleLights.h"
 #include "007_BasicObjModel.h"
 #include "008_Framebuffer.h"
+// Bullet Physics
+#include "001_BPMinimap.h"
 // Other
 #include "001_MonkeyScenes.h"
 //-----------------------------------------------------------------------------
@@ -31,6 +33,7 @@ int main(
 	while( 1 )
 	{
 		std::cout << "Select Example (q - exit):" << std::endl;
+		std::cout << "Basic:" << std::endl;
 		std::cout << "    b1 - Basic Draw Triangle" << std::endl;
 		std::cout << "    b2 - Dinamic Vertex" << std::endl;
 		std::cout << "    b3 - Buffer Mapping" << std::endl;
@@ -38,8 +41,12 @@ int main(
 		std::cout << "    b5 - Draw Basic Texture" << std::endl;
 		std::cout << "    b6 - Basic Multiple Lights" << std::endl;
 		std::cout << "    b7 - Basic ObjModel Loader" << std::endl;
-		std::cout << "    b8 - Framebuffer" << std::endl;
-
+		std::cout << "    b8 - Framebuffer" << std::endl;		
+		
+		std::cout << "Bullet Physics:" << std::endl;
+		std::cout << "    bp1 - Minimal" << std::endl;
+		
+		std::cout << "Other:" << std::endl;
 		std::cout << "    o1 - Monkey Scenes" << std::endl;
 		std::cout << std::endl;
 
@@ -63,6 +70,8 @@ int main(
 		START_SCENE("b6", _006MultipleLights);
 		START_SCENE("b7", _007BasicObjModel);
 		START_SCENE("b8", _008Framebuffer);
+
+		START_SCENE("bp1", _001BPMinimap);
 
 		START_SCENE("o1", _001MonkeyScenes);
 

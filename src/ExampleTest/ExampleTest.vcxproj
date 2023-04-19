@@ -93,6 +93,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="001_BPMinimap.cpp" />
     <ClCompile Include="001_MonkeyScenes.cpp" />
     <ClCompile Include="001_Triangle..cpp" />
     <ClCompile Include="002_DinamicVertex.cpp" />
@@ -109,6 +110,7 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="001_BPMinimap.h" />
     <ClInclude Include="001_MonkeyScenes.h" />
     <ClInclude Include="001_Triangle.h" />
     <ClInclude Include="002_DinamicVertex.h" />
