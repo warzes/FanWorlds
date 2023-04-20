@@ -127,6 +127,29 @@ void main()
 		CreateGameObject(new btBoxShape(btVector3(1, 1, 1)), 1.0, btVector3(1.25f, 20.0f, 0.0f));
 	}
 
+
+	m_characterShape = new btCapsuleShape(0.5f, 1.8f);
+	float mass = 2.0f;
+	btVector3 localInertia = btVector3(0.0f, 0.0f, 0.0f); 	// calculate the local inertia
+	m_characterShape->calculateLocalInertia(mass, localInertia);
+
+	// create the initial transform
+	btTransform transform;
+	transform.setIdentity();
+	transform.setOrigin(btVector3(0.0f, 10.0f, -2.0f));
+	transform.setRotation(btQuaternion(0, 0, 1, 1));
+	// create the motion state from the initial transform
+	m_pMotionState = new XXXOpenGLMotionState(transform);
+
+	// create the rigid body construction info using the mass, motion state and shape
+	btRigidBody::btRigidBodyConstructionInfo cInfo(mass, m_pMotionState, m_characterShape, localInertia);
+
+	m_characterBody = new  btRigidBody(cInfo);
+
+	m_dynamicsWorld->addRigidBody(m_characterBody);
+
+	m_character = new DynamicCharacterController(m_characterBody, m_characterShape);
+
 	GetInput().SetMouseLock(true);
 	return true;
 }
@@ -222,16 +245,32 @@ void XXXBPExample::Update(float deltaTime)
 		const float moveSpeed = 10.0f * deltaTime;
 		const glm::vec3 oldCameraPos = m_camera.position;
 
-		if( GetInput().IsKeyDown(Input::KEY_W) ) m_camera.MoveBy(moveSpeed);
-		if( GetInput().IsKeyDown(Input::KEY_S) ) m_camera.MoveBy(-moveSpeed);
-		if( GetInput().IsKeyDown(Input::KEY_A) ) m_camera.StrafeBy(moveSpeed);
-		if( GetInput().IsKeyDown(Input::KEY_D) ) m_camera.StrafeBy(-moveSpeed);
+		//if( GetInput().IsKeyDown(Input::KEY_W) ) m_camera.MoveBy(moveSpeed);
+		//if( GetInput().IsKeyDown(Input::KEY_S) ) m_camera.MoveBy(-moveSpeed);
+		//if( GetInput().IsKeyDown(Input::KEY_A) ) m_camera.StrafeBy(moveSpeed);
+		//if( GetInput().IsKeyDown(Input::KEY_D) ) m_camera.StrafeBy(-moveSpeed);
 
 		glm::vec2 delta = GetInput().GetMouseDeltaPosition();
 		if( delta.x != 0.0f )  m_camera.RotateLeftRight(delta.x * mouseSensitivity);
 		if( delta.y != 0.0f )  m_camera.RotateUpDown(-delta.y * mouseSensitivity);
 	}
 
+	btVector3 camdir = { 0.0, 0.0, 0.0 };
+	if( GetInput().IsKeyDown(Input::KEY_W) )  camdir.setValue(0,0,1 * deltaTime);
+	if( GetInput().IsKeyDown(Input::KEY_S) ) camdir.setValue(0, 0, -1* deltaTime);
+	if( GetInput().IsKeyDown(Input::KEY_A) ) camdir.setValue(-1 * deltaTime, 0, 0);
+	if( GetInput().IsKeyDown(Input::KEY_D) ) camdir.setValue(1 * deltaTime, 0, 0);
+
+	m_characterBody->applyCentralImpulse(camdir);
+	//m_character->setMovementDirection(camdir);
+	m_character->updateAction(m_dynamicsWorld, deltaTime);
+	btScalar transform[16];
+	m_pMotionState->GetWorldTransform(transform);
+	//btTransform trans;	
+	//m_character->getBody()->getMotionState()->getWorldTransform(trans);
+	//trans.getOpenGLMatrix(transform);
+	m_camera.position = { transform[12], transform[13], transform[14] };
+	
 	const float fixedTimeStep = 1 / 60.0f;
 	m_dynamicsWorld->stepSimulation(deltaTime, 5, fixedTimeStep);
 }

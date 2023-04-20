@@ -14,10 +14,9 @@ public:
 
 	glm::vec3 worldPosition;
 	glm::vec3 scale;
-	glm::quat rotation;
+	glm::vec3 eulerRot;
 
 	// temp - not save in json file
-	glm::vec3 modelPosition;
 	unsigned meshIndex = 0;
 	AABB aabb;
 };

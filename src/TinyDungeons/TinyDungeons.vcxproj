@@ -107,6 +107,7 @@
     <ClCompile Include="GridMap.cpp" />
     <ClCompile Include="IGameState.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="MeshLibrary.cpp" />
     <ClCompile Include="Ray.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
@@ -125,6 +126,7 @@
     <ClInclude Include="GameStateTest.h" />
     <ClInclude Include="GridMap.h" />
     <ClInclude Include="IGameState.h" />
+    <ClInclude Include="MeshLibrary.h" />
     <ClInclude Include="Ray.h" />
     <ClInclude Include="SpaceMath.h" />
     <ClInclude Include="stdafx.h" />

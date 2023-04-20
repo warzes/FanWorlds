@@ -1,10 +1,9 @@
 ﻿#include "stdafx.h"
 #include "EditorState.h"
-
 в рпг ин боксе посмотреть что может редактор
 
-план:
-- сделать CollectMeshes
+план :
+-сделать CollectMeshes
 - вращение объекта
 - отображение свойств объекта в инспекторе
 - в инспекторе показывать координаты с возможностью редактировтаь
@@ -15,9 +14,6 @@
 - возможность накладывать текстуру
 - окно выбора меша
 - окно выбора текстуры
-
-
-
 
 
 карта - в рпг mz есть первый мир - можно ее.или из Лрпг
@@ -160,8 +156,20 @@ void EditorState::updateInSelectMode(Input& input)
 void EditorState::updateInAddMode(Input& input)
 {
 	const float wheel = input.GetMouseWheelMove();
-	if( wheel > 0.0f ) m_collectModels.NextMesh();
-	if( wheel < 0.0f ) m_collectModels.PrevMesh();
+	if( wheel > 0.0f )
+	{
+		if( input.IsKeyDown(Input::KEY_X) ) m_collectModels.RotationX(45.0f);
+		else if( input.IsKeyDown(Input::KEY_Y) ) m_collectModels.RotationY(45.0f);
+		else if ( input.IsKeyDown(Input::KEY_Z) ) m_collectModels.RotationZ(45.0f);
+		else m_collectModels.NextMesh();
+	}
+	else if( wheel < 0.0f )
+	{
+		if( input.IsKeyDown(Input::KEY_X) ) m_collectModels.RotationX(-45.0f);
+		else if( input.IsKeyDown(Input::KEY_Y) ) m_collectModels.RotationY(-45.0f);
+		else if( input.IsKeyDown(Input::KEY_Z) ) m_collectModels.RotationZ(-45.0f);
+		else m_collectModels.PrevMesh();
+	}
 
 	if( input.IsMouseButtonPressed(0) )
 	{

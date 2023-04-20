@@ -39,6 +39,9 @@
     <ClCompile Include="XXX_BPExample.cpp">
       <Filter>Bullet Physics</Filter>
     </ClCompile>
+    <ClCompile Include="DynamicCharacterController.cpp">
+      <Filter>Bullet Physics</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h" />
@@ -76,6 +79,9 @@
       <Filter>Bullet Physics</Filter>
     </ClInclude>
     <ClInclude Include="XXX_BPExample.h">
+      <Filter>Bullet Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="DynamicCharacterController.h">
       <Filter>Bullet Physics</Filter>
     </ClInclude>
   </ItemGroup>

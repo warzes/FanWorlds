@@ -43,6 +43,9 @@
     <ClCompile Include="EditorState_drawImgui.cpp">
       <Filter>Editor</Filter>
     </ClCompile>
+    <ClCompile Include="MeshLibrary.cpp">
+      <Filter>Framework</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameApp.h" />
@@ -85,6 +88,9 @@
     </ClInclude>
     <ClInclude Include="EditorWorldObject.h">
       <Filter>Editor\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="MeshLibrary.h">
+      <Filter>Framework</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

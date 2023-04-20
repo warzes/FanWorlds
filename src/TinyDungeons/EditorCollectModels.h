@@ -1,5 +1,7 @@
 #pragma once
 
+#include "MeshLibrary.h"
+
 class EditorMap;
 
 class EditorCollectModels
@@ -13,19 +15,19 @@ public:
 
 	void DrawMap(RenderSystem& renderSystem, GraphicsSystem& graphicsSystem, const glm::mat4& proj, const glm::mat4& view, const EditorMap& map);
 
-
 	void NextMesh();
 	void PrevMesh();
 
 	unsigned GetCurrentMeshId() const { return m_currentMesh; }
-	std::string GetCurrentMeshName() const { return m_model->subMeshes[m_currentMesh].meshName; }
+	std::string GetCurrentMeshName() const { return m_meshLib.meshes[m_currentMesh].meshName; }
 	std::string GetFileModelName() const { return m_modelFileName; }
-	glm::vec3 GetCurrentModelPosition() const { return m_currentModelPos; }
 	glm::vec3 GetCurrentWorldPosition() const { return m_currentWorldPos; }
 	glm::vec3 GetCurrentScale() const { return m_currentScale; }
-	glm::quat GetCurrentRotation() const { return m_currentRotation; }
-	float GetCurrentRotationY() const { return m_currentRotationY; }
-	AABB GetCurrentAABB() const { return m_model->subMeshes[m_currentMesh].GetLocalAABB(); }
+	glm::vec3 GetCurrentRotation() const { return m_currentEulerRot; }
+	void RotationX(float degrees) { m_currentEulerRot.x += degrees; }
+	void RotationY(float degrees) { m_currentEulerRot.y += degrees; }
+	void RotationZ(float degrees) { m_currentEulerRot.z += degrees; }
+	AABB GetCurrentAABB() const { return m_meshLib.meshes[m_currentMesh].globalAABB; }
 
 private:
 	ShaderProgramRef m_shader;
@@ -33,7 +35,7 @@ private:
 	Uniform m_uniformViewMatrix;
 	Uniform m_uniformWorldMatrix;
 
-	ModelRef m_model;
+	MeshLibrary m_meshLib;
 	std::string m_modelFileName;
 
 	ModelRef m_modelSelBox;
@@ -41,9 +43,7 @@ private:
 	Uniform m_uniformSelBoxWVPMatrix;
 
 	unsigned m_currentMesh = 0;
-	glm::vec3 m_currentModelPos = glm::vec3(0.0f);
 	glm::vec3 m_currentWorldPos = glm::vec3(0.0f);
 	glm::vec3 m_currentScale = glm::vec3(1.0f);
-	glm::quat m_currentRotation = glm::quat(1.0f, 0.0f, 0.0f, 0.0f);
-	float m_currentRotationY = 45.0f; // TODO: в будущем удалить
+	glm::vec3 m_currentEulerRot = { 0.0f, 45.0f, 0.0f };
 };

@@ -5,9 +5,8 @@
 EditorMapObject& EditorMapObject::operator=(const EditorMapObject& ref)
 {
 	worldPosition = ref.worldPosition;
-	modelPosition = ref.modelPosition;
 	scale = ref.scale;
-	rotation = ref.rotation;
+	eulerRot = ref.eulerRot;
 	meshIndex = ref.meshIndex;
 
 	fileNameModel = ref.fileNameModel;
@@ -20,10 +19,9 @@ void EditorMapObject::Init(const EditorCollectModels& models)
 	fileNameModel = models.GetFileModelName();
 	nameMeshInFile = models.GetCurrentMeshName();
 	meshIndex = models.GetCurrentMeshId();
-	modelPosition = models.GetCurrentModelPosition();
 	worldPosition = models.GetCurrentWorldPosition();
 	scale = models.GetCurrentScale();
-	rotation = models.GetCurrentRotation();
+	eulerRot = models.GetCurrentRotation();
 	aabb = models.GetCurrentAABB();
 }
 //-----------------------------------------------------------------------------
@@ -50,8 +48,6 @@ void EditorMap::RemoveObject(unsigned id)
 void EditorMap::Update()
 {
 	if (!m_edit) return;
-
-тут сохранение карты
 
 	m_edit = false;
 }

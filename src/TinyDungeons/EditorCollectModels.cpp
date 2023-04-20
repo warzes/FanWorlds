@@ -1,13 +1,6 @@
 #include "stdafx.h"
 #include "EditorCollectModels.h"
 #include "EditorWorldObject.h"
-
-как сделать вращение и упростить загрузку мешей?
-- надо добавить новый класс аналогичный Model. Возможно назвать CollectModel. Этот класс также грузит модель и сабмеши, но при этом сбрасывает координаты всех сабмешей в ноль. плюс нельзя рисовать его цельным, только сабмеши по индексу.
-потому что сейчас координаты объекта ненулевые, из-за чего вращение неправильное.
-
-
-
 //-----------------------------------------------------------------------------
 bool EditorCollectModels::Create(RenderSystem& renderSystem, GraphicsSystem& graphicsSystem)
 {
@@ -126,7 +119,8 @@ void main()
 	}
 
 	m_modelFileName = "../TinyDungeonsData/models/model.obj";
-	m_model = graphicsSystem.CreateModel("../TinyDungeonsData/models/model.obj", "../TinyDungeonsData/models/");
+	 ModelRef model = graphicsSystem.CreateModel("../TinyDungeonsData/models/model.obj", "../TinyDungeonsData/models/");
+	m_meshLib.Create(renderSystem, model);
 	
 	m_modelSelBox = graphicsSystem.CreateModel("../TinyDungeonsData/models/selBox.obj", "../TinyDungeonsData/models/");
 
@@ -136,27 +130,26 @@ void main()
 void EditorCollectModels::Destroy()
 {
 	m_shader.reset();
-	m_model.reset();
+	m_meshLib.Destroy();
 	m_modelSelBox.reset();
 	m_shaderSelBox.reset();
 }
 //-----------------------------------------------------------------------------
 void EditorCollectModels::DrawPreview(RenderSystem& renderSystem, GraphicsSystem& graphicsSystem, const glm::mat4& proj, const glm::mat4& view, const glm::vec3& centerPos)
 {
-	Mesh& mesh = m_model->subMeshes[m_currentMesh];
+	Mesh& mesh = m_meshLib.meshes[m_currentMesh];
 	
-	const glm::vec3 meshPos = mesh.GetMeshPos(); // позиция меша внутри модели
 	const float extent = mesh.globalAABB.GetExtents().y; // приподымаем модель по сетке на половину высоты меша
-
-	// модельная позиция (относительно других мешей внутри модели)
-	m_currentModelPos = centerPos - meshPos;
-	m_currentModelPos.y += extent;
-
-	// мировая позиция
 	m_currentWorldPos = centerPos;
 	m_currentWorldPos.y += extent;
 
-	const glm::mat4 world = glm::translate(glm::mat4(1.0f), m_currentModelPos);
+	// TODO: refact
+	const glm::mat4 translate = glm::translate(glm::mat4(1.0f), m_currentWorldPos);
+	const glm::mat4 transformX = glm::rotate(glm::mat4(1.0f), glm::radians(m_currentEulerRot.x), glm::vec3(1.0f, 0.0f, 0.0f));
+	const glm::mat4 transformY = glm::rotate(glm::mat4(1.0f), glm::radians(m_currentEulerRot.y), glm::vec3(0.0f, 1.0f, 0.0f));
+	const glm::mat4 transformZ = glm::rotate(glm::mat4(1.0f), glm::radians(m_currentEulerRot.z), glm::vec3(0.0f, 0.0f, 1.0f));
+	const glm::mat4 rotaionMatrix = transformY * transformX * transformZ;
+	const glm::mat4 world = translate * rotaionMatrix /** scale*/;
 
 	renderSystem.Bind(m_shader);
 	renderSystem.SetUniform(m_uniformProjectionMatrix, proj);
@@ -181,21 +174,28 @@ void EditorCollectModels::DrawMap(RenderSystem& renderSystem, GraphicsSystem& gr
 	renderSystem.SetUniform(m_uniformViewMatrix, view);
 	renderSystem.SetUniform("DiffuseTexture", 0);
 
-	Mesh* mesh = nullptr;
+	constexpr glm::mat4 init = glm::mat4(1.0f);
 	glm::mat4 world;
 	for( size_t i = 0; i < map.object.size(); i++ )
 	{
 		const EditorMapObject& object = map.object[i].object;
-		mesh = &m_model->subMeshes[object.meshIndex];
-		world = glm::translate(glm::mat4(1.0f), object.modelPosition);
+		Mesh& mesh = m_meshLib.meshes[object.meshIndex];
+
+		// TODO: refact
+		const glm::mat4 translate = glm::translate(glm::mat4(1.0f), object.worldPosition);
+		const glm::mat4 transformX = glm::rotate(glm::mat4(1.0f), glm::radians(object.eulerRot.x), glm::vec3(1.0f, 0.0f, 0.0f));
+		const glm::mat4 transformY = glm::rotate(glm::mat4(1.0f), glm::radians(object.eulerRot.y), glm::vec3(0.0f, 1.0f, 0.0f));
+		const glm::mat4 transformZ = glm::rotate(glm::mat4(1.0f), glm::radians(object.eulerRot.z), glm::vec3(0.0f, 0.0f, 1.0f));
+		const glm::mat4 rotaionMatrix = transformY * transformX * transformZ;
+		world = translate * rotaionMatrix /** scale*/;
 		renderSystem.SetUniform(m_uniformWorldMatrix, world);
-		graphicsSystem.Draw(*mesh);
+		graphicsSystem.Draw(mesh);
 	}
 }
 //-----------------------------------------------------------------------------
 void EditorCollectModels::NextMesh()
 {
-	if( m_currentMesh < m_model->subMeshes.size() - 1 )
+	if( m_currentMesh < m_meshLib.meshes.size() - 1 )
 		m_currentMesh++;
 }
 //-----------------------------------------------------------------------------

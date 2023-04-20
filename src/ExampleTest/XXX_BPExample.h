@@ -1,6 +1,11 @@
 #pragma once
 
-#pragma once
+#include "DynamicCharacterController.h"
+
+inline btVector3 TobtVector3(const glm::vec3& v)
+{
+	return { v.x, v.y, v.z };
+}
 
 class XXXOpenGLMotionState : public btDefaultMotionState
 {
@@ -36,6 +41,9 @@ private:
 	XXXOpenGLMotionState* m_pMotionState;
 };
 
+
+
+
 class XXXBPExample final : public IApp
 {
 	bool Create() final;
@@ -51,7 +59,6 @@ class XXXBPExample final : public IApp
 		const btQuaternion &initialRotation = btQuaternion(0, 0, 1, 1));
 
 	void AddBody(btRigidBody* body);
-
 private:
 	int m_windowWidth = 0;
 	int m_windowHeight = 0;
@@ -71,9 +78,14 @@ private:
 	btCollisionConfiguration* m_collisionConfiguration = nullptr; // Allows to configure Bullet collision detection stack allocator size, default collision algorithms and persistent manifold pool size
 	btCollisionDispatcher* m_dispatcher = nullptr; // A collision dispatcher iterates over each pair, searches for a matching collision algorithm based on the types of objects involved and executes the collision algorithm computing contact points.
 	btConstraintSolver* m_constraintSolver = nullptr;
-
 	btDynamicsWorld* m_dynamicsWorld = nullptr; // Stores all btCollisionObjects and provides an interface to perform queries.
 
 	// an array of our game objects
 	std::vector<XXXGameObject*> m_objects;
+
+	DynamicCharacterController* m_character;
+	btRigidBody *m_characterBody;
+	btCapsuleShape *m_characterShape;
+	XXXOpenGLMotionState* m_pMotionState;
+
 };
