@@ -83,16 +83,12 @@ int main(
 		START_SCENE("b4", _004Quad);
 		START_SCENE("b5", _005BasicTexture);
 		START_SCENE("b6", _006DiffuseLighting);
-		//START_SCENE("b7", _006DiffuseLighting);
-		//START_SCENE("b8", _006DiffuseLighting);
+		START_SCENE("b7", _007AmbientLighting);
+		START_SCENE("b8", _008SpecularLighting);
 		//START_SCENE("b9", _006DiffuseLighting);
 		START_SCENE("b10", _010OtherMultipleLights);
 		START_SCENE("b11", _011BasicObjModel);
 		START_SCENE("b12", _012Framebuffer);
-
-
-
-
 
 		START_SCENE("bp1", _001BPMinimal);
 		START_SCENE("bp2", _002BPRaycasting);
