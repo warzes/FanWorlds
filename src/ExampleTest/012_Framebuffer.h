@@ -1,6 +1,6 @@
 #pragma once
 
-class _008Framebuffer final : public IApp
+class _012Framebuffer final : public IApp
 {
 	bool Create() final;
 	void Destroy() final;

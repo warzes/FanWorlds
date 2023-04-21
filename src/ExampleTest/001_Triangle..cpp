@@ -74,7 +74,7 @@ void _001Triangle::Render()
 	{
 		m_windowWidth = GetWindowWidth();
 		m_windowHeight = GetWindowHeight();
-		m_perspective = glm::perspective(glm::radians(45.0f), GetWindowSizeAspect(), 0.01f, 1000.f);
+		m_perspective = glm::perspective(glm::radians(45.0f), GetWindowSizeAspect(), 0.01f, 100.f);
 		renderSystem.SetViewport(m_windowWidth, m_windowHeight);
 	}
 

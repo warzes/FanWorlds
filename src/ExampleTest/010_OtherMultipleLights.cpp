@@ -1,5 +1,5 @@
 #include "stdafx.h"
-#include "006_MultipleLights.h"
+#include "010_OtherMultipleLights.h"
 //-----------------------------------------------------------------------------
 glm::vec3 lightPos(1.2f, 1.0f, 2.0f);
 // positions of the point lights
@@ -23,9 +23,9 @@ glm::vec3 cubePositions[] = {
     glm::vec3(-1.3f,  1.0f, -1.5f)
 };
 //-----------------------------------------------------------------------------
-bool _006MultipleLights::Create()
+bool _010OtherMultipleLights::Create()
 {
-	Print("006_MultipleLights Create");
+	Print("_010OtherMultipleLights Create");
 
     auto& renderSystem = GetRenderSystem();
 
@@ -95,7 +95,7 @@ struct SpotLight {
   
     vec3 ambient;
     vec3 diffuse;
-    vec3 specular;       
+    vec3 specular;
 };
 
 #define NR_POINT_LIGHTS 4
@@ -261,7 +261,7 @@ vec3 CalcSpotLight(SpotLight light, vec3 normal, vec3 fragPos, vec3 viewDir)
 	return true;
 }
 //-----------------------------------------------------------------------------
-void _006MultipleLights::Destroy()
+void _010OtherMultipleLights::Destroy()
 {
     GetInput().SetMouseLock(false);
     m_lightingShader.reset();
@@ -269,10 +269,10 @@ void _006MultipleLights::Destroy()
     m_diffuseMap.reset();
     m_specularMap.reset();
 
-	Print("006_MultipleLights Destroy");
+	Print("_010OtherMultipleLights Destroy");
 }
 //-----------------------------------------------------------------------------
-void _006MultipleLights::Render()
+void _010OtherMultipleLights::Render()
 {
 	auto& renderSystem = GetRenderSystem();
 
@@ -371,7 +371,7 @@ void _006MultipleLights::Render()
     }
 }
 //-----------------------------------------------------------------------------
-void _006MultipleLights::Update(float deltaTime)
+void _010OtherMultipleLights::Update(float deltaTime)
 {
 	if (GetInput().IsKeyDown(Input::KEY_ESCAPE))
 	{

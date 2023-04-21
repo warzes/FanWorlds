@@ -1,6 +1,12 @@
 #pragma once
 
-class _007BasicObjModel final : public IApp
+struct _006LightClass
+{
+	glm::vec4 diffuseColor;
+	glm::vec3 direction;
+};
+
+class _006DiffuseLighting final : public IApp
 {
 	bool Create() final;
 	void Destroy() final;
@@ -16,8 +22,17 @@ private:
 	Uniform m_uniformProjectionMatrix;
 	Uniform m_uniformViewMatrix;
 	Uniform m_uniformWorldMatrix;
+	Uniform m_uniformLightDirection;
+	Uniform m_uniformLightColor;
 
 	glm::mat4 m_perspective;
-	ModelRef m_model;
+
+	GeometryBufferRef m_geom;
+	Texture2DRef m_texture;
+
+	_006LightClass m_diffuse;
+
 	Camera m_camera;
+
+	float m_rotation = 360.0f;
 };

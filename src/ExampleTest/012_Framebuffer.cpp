@@ -1,9 +1,9 @@
 #include "stdafx.h"
-#include "008_Framebuffer.h"
+#include "012_Framebuffer.h"
 //-----------------------------------------------------------------------------
-bool _008Framebuffer::Create()
+bool _012Framebuffer::Create()
 {
-	Print("008 Framebuffer Create");
+	Print("008 _012Framebuffer Create");
 
 	auto& renderSystem = GetRenderSystem();
 
@@ -170,7 +170,7 @@ void main()
 	return true;
 }
 //-----------------------------------------------------------------------------
-void _008Framebuffer::Destroy()
+void _012Framebuffer::Destroy()
 {
 	GetInput().SetMouseLock(false);
 	m_shader.reset();
@@ -188,7 +188,7 @@ void _008Framebuffer::Destroy()
 	Print("008 Framebuffer Destroy");
 }
 //-----------------------------------------------------------------------------
-void _008Framebuffer::Render()
+void _012Framebuffer::Render()
 {
 	auto& renderSystem = GetRenderSystem();
 	
@@ -246,7 +246,7 @@ void _008Framebuffer::Render()
 	renderSystem.Draw(m_geomQuad->vao);
 }
 //-----------------------------------------------------------------------------
-void _008Framebuffer::Update(float deltaTime)
+void _012Framebuffer::Update(float deltaTime)
 {
 	if( GetInput().IsKeyDown(Input::KEY_ESCAPE) )
 	{

@@ -5,9 +5,13 @@
 #include "003_BufferMapping.h"
 #include "004_Quad.h"
 #include "005_BasicTexture.h"
-#include "006_MultipleLights.h"
-#include "007_BasicObjModel.h"
-#include "008_Framebuffer.h"
+#include "006_DiffuseLighting.h"
+#include "007_AmbientLighting.h"
+#include "008_SpecularLighting.h"
+#include "009_MultiplePointLights.h"
+#include "010_OtherMultipleLights.h"
+#include "011_BasicObjModel.h"
+#include "012_Framebuffer.h"
 // Bullet Physics
 #include "001_BPMinimal.h"
 #include "002_BPRaycasting.h"
@@ -44,10 +48,14 @@ int main(
 		std::cout << "    b3 - Buffer Mapping" << std::endl;
 		std::cout << "    b4 - Draw Quad" << std::endl;
 		std::cout << "    b5 - Draw Basic Texture" << std::endl;
-		std::cout << "    b6 - Basic Multiple Lights" << std::endl;
-		std::cout << "    b7 - Basic ObjModel Loader" << std::endl;
-		std::cout << "    b8 - Framebuffer" << std::endl;		
-		
+		std::cout << "    b6 - Diffuse Lighting" << std::endl;
+		std::cout << "    b7 - Ambient Lighting" << std::endl;
+		std::cout << "    b8 - Specular Lighting" << std::endl;
+		std::cout << "    b9 - Multiple Point Lights" << std::endl;
+		std::cout << "   b10 - Other Multiple Lights" << std::endl;
+		std::cout << "   b11 - Basic ObjModel Loader" << std::endl;
+		std::cout << "   b12 - Framebuffer" << std::endl;
+
 		std::cout << "Bullet Physics:" << std::endl;
 		std::cout << "    bp1 - Minimal" << std::endl;
 		std::cout << "    bp2 - Raycasting" << std::endl;
@@ -74,9 +82,17 @@ int main(
 		START_SCENE("b3", _003BufferMapping);
 		START_SCENE("b4", _004Quad);
 		START_SCENE("b5", _005BasicTexture);
-		START_SCENE("b6", _006MultipleLights);
-		START_SCENE("b7", _007BasicObjModel);
-		START_SCENE("b8", _008Framebuffer);
+		START_SCENE("b6", _006DiffuseLighting);
+		//START_SCENE("b7", _006DiffuseLighting);
+		//START_SCENE("b8", _006DiffuseLighting);
+		//START_SCENE("b9", _006DiffuseLighting);
+		START_SCENE("b10", _010OtherMultipleLights);
+		START_SCENE("b11", _011BasicObjModel);
+		START_SCENE("b12", _012Framebuffer);
+
+
+
+
 
 		START_SCENE("bp1", _001BPMinimal);
 		START_SCENE("bp2", _002BPRaycasting);

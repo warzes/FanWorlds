@@ -1,9 +1,9 @@
 #include "stdafx.h"
-#include "007_BasicObjModel.h"
+#include "011_BasicObjModel.h"
 //-----------------------------------------------------------------------------
-bool _007BasicObjModel::Create()
+bool _011BasicObjModel::Create()
 {
-	Print("007_BasicObjModel Create");
+	Print("_011BasicObjModel Create");
 
 	constexpr const char* vertexShaderText = R"(
 #version 330 core
@@ -63,16 +63,16 @@ void main()
 	return true;
 }
 //-----------------------------------------------------------------------------
-void _007BasicObjModel::Destroy()
+void _011BasicObjModel::Destroy()
 {
 	GetInput().SetMouseLock(false);
 	m_shader.reset();
 	m_model.reset();
 
-	Print("007_BasicObjModel Destroy");
+	Print("_011BasicObjModel Destroy");
 }
 //-----------------------------------------------------------------------------
-void _007BasicObjModel::Render()
+void _011BasicObjModel::Render()
 {
 	auto& renderSystem = GetRenderSystem();
 	auto& graphicsSystem = GetGraphicsSystem();
@@ -94,7 +94,7 @@ void _007BasicObjModel::Render()
 	graphicsSystem.Draw(m_model);
 }
 //-----------------------------------------------------------------------------
-void _007BasicObjModel::Update(float deltaTime)
+void _011BasicObjModel::Update(float deltaTime)
 {
 	if (GetInput().IsKeyDown(Input::KEY_ESCAPE))
 	{

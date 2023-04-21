@@ -1,6 +1,6 @@
 #pragma once
 
-class _006MultipleLights final : public IApp
+class _011BasicObjModel final : public IApp
 {
 	bool Create() final;
 	void Destroy() final;
@@ -12,11 +12,12 @@ private:
 	int m_windowWidth = 0;
 	int m_windowHeight = 0;
 
-	ShaderProgramRef m_lightingShader;
-	GeometryBufferRef m_cube;
-	Texture2DRef m_diffuseMap;
-	Texture2DRef m_specularMap;
+	ShaderProgramRef m_shader;
+	Uniform m_uniformProjectionMatrix;
+	Uniform m_uniformViewMatrix;
+	Uniform m_uniformWorldMatrix;
 
-	Camera m_camera;
 	glm::mat4 m_perspective;
+	ModelRef m_model;
+	Camera m_camera;
 };
