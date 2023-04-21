@@ -102,6 +102,7 @@
     <ClCompile Include="GraphicsSystem.cpp" />
     <ClCompile Include="Input.cpp" />
     <ClCompile Include="LogSystem.cpp" />
+    <ClCompile Include="Math.cpp" />
     <ClCompile Include="OpenGLUtil.cpp" />
     <ClCompile Include="PhysicsErrorCallback.cpp" />
     <ClCompile Include="PhysicsLayer.cpp" />
@@ -135,6 +136,7 @@
     <ClInclude Include="IApp.h" />
     <ClInclude Include="Input.h" />
     <ClInclude Include="LogSystem.h" />
+    <ClInclude Include="MathCoreFunc.h" />
     <ClInclude Include="OpenGLUtil.h" />
     <ClInclude Include="PhysicsErrorCallback.h" />
     <ClInclude Include="PhysicsLayer.h" />

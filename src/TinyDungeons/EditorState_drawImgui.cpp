@@ -39,10 +39,10 @@ void EditorState::drawImgui()
 		ImGui::InputFloat("Size Map", &m_currentSizeMap);
 
 		ImGui::Text(
-			"+/- :add height\n"
-			"CTRL+/- :add step\n"
-			"Shift+/- :add cell\n"
-			"down +and- : reset");
+			"Q/E : floor height\n"
+			"CTRL Q/E : offset\n"
+			"Shift Q/E : cell size\n"
+			"QE : reset");
 
 		ImGui::End();
 	}
@@ -54,7 +54,7 @@ void EditorState::drawImgui()
 		const ImS32 s32_zeroY = -500, s32_maxY = 500;
 		ImGui::SetNextWindowSize(ImVec2(240.0f, 100.0f));
 		ImGui::SetNextWindowPos(ImVec2(150.0f, 36.0f));
-		ImGui::Begin("Camera Teleport", nullptr, flags);
+		ImGui::Begin("Camera", nullptr, flags);
 		ImGui::SetNextItemWidth(210.0f);
 		ImGui::SliderScalar("X", ImGuiDataType_S32, &m_posCameraFromImGui.x, &s32_zeroXZ, &s32_maxXZ, "%d");
 		ImGui::SetNextItemWidth(210.0f);

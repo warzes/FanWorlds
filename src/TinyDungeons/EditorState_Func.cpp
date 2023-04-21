@@ -94,8 +94,8 @@ void EditorState::cameraUpdate(Input& input, float deltaTime)
 	if( input.IsKeyDown(Input::KEY_S) ) m_camera.MoveBy(-moveSpeed);
 	if( input.IsKeyDown(Input::KEY_A) ) m_camera.StrafeBy(moveSpeed);
 	if( input.IsKeyDown(Input::KEY_D) ) m_camera.StrafeBy(-moveSpeed);
-	if( input.IsKeyDown(Input::KEY_Q) ) m_camera.RotateLeftRight(-moveSpeed * 12.0f);
-	if( input.IsKeyDown(Input::KEY_E) ) m_camera.RotateLeftRight(moveSpeed * 12.0f);
+	//if( input.IsKeyDown(Input::KEY_Q) ) m_camera.RotateLeftRight(-moveSpeed * 12.0f);
+	//if( input.IsKeyDown(Input::KEY_E) ) m_camera.RotateLeftRight(moveSpeed * 12.0f);
 
 	if( m_freeLook )
 	{
@@ -109,13 +109,13 @@ void EditorState::cameraUpdate(Input& input, float deltaTime)
 //-----------------------------------------------------------------------------
 void EditorState::changeGrid(Input& input)
 {
-	if( input.IsKeyDown(Input::KEY_KP_ADD) && input.IsKeyDown(Input::KEY_KP_SUBTRACT) ) // сброс сетки на дефолтную
+	if( input.IsKeyDown(Input::KEY_Q) && input.IsKeyDown(Input::KEY_E) ) // сброс сетки на дефолтную
 	{
 		m_currentGridHeight = 0.0f;
 		m_currentGridStepHeight = 0.1f;
 		m_currentSizeCell = 1.0f;
 	}
-	else if( input.IsKeyPressed(Input::KEY_KP_ADD) )
+	else if( input.IsKeyPressed(Input::KEY_E) )
 	{
 		if( input.IsKeyDown(Input::KEY_LEFT_CONTROL) )
 			m_currentGridStepHeight += 0.1f;
@@ -124,7 +124,7 @@ void EditorState::changeGrid(Input& input)
 		else
 			m_currentGridHeight += m_currentGridStepHeight;
 	}
-	else if( input.IsKeyPressed(Input::KEY_KP_SUBTRACT) )
+	else if( input.IsKeyPressed(Input::KEY_Q) )
 	{
 		if( input.IsKeyDown(Input::KEY_LEFT_CONTROL) )
 			m_currentGridStepHeight -= 0.1f;

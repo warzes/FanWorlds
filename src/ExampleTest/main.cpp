@@ -14,6 +14,9 @@
 #include "XXX_BPExample.h"
 // Other
 #include "001_MonkeyScenes.h"
+
+// физику с булета посмотреть в urho/rbfx
+
 //-----------------------------------------------------------------------------
 #if defined(_MSC_VER)
 #	pragma comment( lib, "Engine.lib" )
