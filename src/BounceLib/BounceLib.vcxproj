@@ -1,0 +1,296 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="bounce.h" />
+    <ClInclude Include="cloth\cloth.h" />
+    <ClInclude Include="cloth\cloth_collision.h" />
+    <ClInclude Include="cloth\cloth_contact_manager.h" />
+    <ClInclude Include="cloth\cloth_force_solver.h" />
+    <ClInclude Include="cloth\cloth_mesh.h" />
+    <ClInclude Include="cloth\cloth_solver.h" />
+    <ClInclude Include="cloth\cloth_triangle.h" />
+    <ClInclude Include="cloth\contacts\cloth_contact_solver.h" />
+    <ClInclude Include="cloth\contacts\cloth_particle_body_contact.h" />
+    <ClInclude Include="cloth\contacts\cloth_particle_triangle_contact.h" />
+    <ClInclude Include="cloth\forces\force.h" />
+    <ClInclude Include="cloth\forces\mouse_force.h" />
+    <ClInclude Include="cloth\forces\shear_force.h" />
+    <ClInclude Include="cloth\forces\spring_force.h" />
+    <ClInclude Include="cloth\forces\strech_force.h" />
+    <ClInclude Include="cloth\garment\garment.h" />
+    <ClInclude Include="cloth\garment\garment_mesh.h" />
+    <ClInclude Include="cloth\garment\sewing_pattern.h" />
+    <ClInclude Include="cloth\garment_cloth_mesh.h" />
+    <ClInclude Include="cloth\grid_cloth_mesh.h" />
+    <ClInclude Include="cloth\particle.h" />
+    <ClInclude Include="collision\broad_phase.h" />
+    <ClInclude Include="collision\collision.h" />
+    <ClInclude Include="collision\gjk\gjk.h" />
+    <ClInclude Include="collision\gjk\gjk_proxy.h" />
+    <ClInclude Include="collision\sat\sat.h" />
+    <ClInclude Include="collision\sat\sat_edge_and_hull.h" />
+    <ClInclude Include="collision\sat\sat_vertex_and_hull.h" />
+    <ClInclude Include="collision\shapes\aabb3.h" />
+    <ClInclude Include="collision\shapes\box_hull.h" />
+    <ClInclude Include="collision\shapes\capsule.h" />
+    <ClInclude Include="collision\shapes\grid_mesh.h" />
+    <ClInclude Include="collision\shapes\hull.h" />
+    <ClInclude Include="collision\shapes\mesh.h" />
+    <ClInclude Include="collision\shapes\qhull.h" />
+    <ClInclude Include="collision\shapes\sphere.h" />
+    <ClInclude Include="collision\shapes\triangle_hull.h" />
+    <ClInclude Include="collision\trees\dynamic_tree.h" />
+    <ClInclude Include="collision\trees\static_tree.h" />
+    <ClInclude Include="common\draw.h" />
+    <ClInclude Include="common\geometry.h" />
+    <ClInclude Include="common\math\mat.h" />
+    <ClInclude Include="common\math\mat22.h" />
+    <ClInclude Include="common\math\mat33.h" />
+    <ClInclude Include="common\math\mat44.h" />
+    <ClInclude Include="common\math\math.h" />
+    <ClInclude Include="common\math\quat.h" />
+    <ClInclude Include="common\math\transform.h" />
+    <ClInclude Include="common\math\vec2.h" />
+    <ClInclude Include="common\math\vec3.h" />
+    <ClInclude Include="common\math\vec4.h" />
+    <ClInclude Include="common\memory\block_pool.h" />
+    <ClInclude Include="common\memory\stack_allocator.h" />
+    <ClInclude Include="common\settings.h" />
+    <ClInclude Include="common\template\array.h" />
+    <ClInclude Include="common\template\list.h" />
+    <ClInclude Include="common\template\object_array.h" />
+    <ClInclude Include="common\template\queue.h" />
+    <ClInclude Include="common\template\stack.h" />
+    <ClInclude Include="common\time.h" />
+    <ClInclude Include="dynamics\body.h" />
+    <ClInclude Include="dynamics\contacts\collide\clip.h" />
+    <ClInclude Include="dynamics\contacts\collide\collide.h" />
+    <ClInclude Include="dynamics\contacts\contact.h" />
+    <ClInclude Include="dynamics\contacts\contact_cluster.h" />
+    <ClInclude Include="dynamics\contacts\contact_solver.h" />
+    <ClInclude Include="dynamics\contacts\convex_contact.h" />
+    <ClInclude Include="dynamics\contacts\manifold.h" />
+    <ClInclude Include="dynamics\contacts\mesh_contact.h" />
+    <ClInclude Include="dynamics\contact_manager.h" />
+    <ClInclude Include="dynamics\island.h" />
+    <ClInclude Include="dynamics\joints\cone_joint.h" />
+    <ClInclude Include="dynamics\joints\joint.h" />
+    <ClInclude Include="dynamics\joints\joint_solver.h" />
+    <ClInclude Include="dynamics\joints\mouse_joint.h" />
+    <ClInclude Include="dynamics\joints\revolute_joint.h" />
+    <ClInclude Include="dynamics\joints\sphere_joint.h" />
+    <ClInclude Include="dynamics\joints\spring_joint.h" />
+    <ClInclude Include="dynamics\joints\weld_joint.h" />
+    <ClInclude Include="dynamics\joint_manager.h" />
+    <ClInclude Include="dynamics\shapes\capsule_shape.h" />
+    <ClInclude Include="dynamics\shapes\hull_shape.h" />
+    <ClInclude Include="dynamics\shapes\mesh_shape.h" />
+    <ClInclude Include="dynamics\shapes\shape.h" />
+    <ClInclude Include="dynamics\shapes\sphere_shape.h" />
+    <ClInclude Include="dynamics\time_step.h" />
+    <ClInclude Include="dynamics\world.h" />
+    <ClInclude Include="dynamics\world_listeners.h" />
+    <ClInclude Include="garment\triangle\triangle.h" />
+    <ClInclude Include="meshgen\cylinder_mesh.h" />
+    <ClInclude Include="meshgen\sphere_mesh.h" />
+    <ClInclude Include="quickhull\qh_hull.h" />
+    <ClInclude Include="rope\rope.h" />
+    <ClInclude Include="rope\spatial.h" />
+    <ClInclude Include="softbody\block_softbody_mesh.h" />
+    <ClInclude Include="softbody\contacts\softbody_contact_solver.h" />
+    <ClInclude Include="softbody\contacts\softbody_node_body_contact.h" />
+    <ClInclude Include="softbody\softbody.h" />
+    <ClInclude Include="softbody\softbody_contact_manager.h" />
+    <ClInclude Include="softbody\softbody_force_solver.h" />
+    <ClInclude Include="softbody\softbody_mesh.h" />
+    <ClInclude Include="softbody\softbody_node.h" />
+    <ClInclude Include="softbody\softbody_solver.h" />
+    <ClInclude Include="sparse\dense_vec3.h" />
+    <ClInclude Include="sparse\diag_mat33.h" />
+    <ClInclude Include="sparse\sparse_mat33.h" />
+    <ClInclude Include="sparse\sparse_mat33_view.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="cloth\cloth.cpp" />
+    <ClCompile Include="cloth\cloth_contact_manager.cpp" />
+    <ClCompile Include="cloth\cloth_force_solver.cpp" />
+    <ClCompile Include="cloth\cloth_solver.cpp" />
+    <ClCompile Include="cloth\cloth_triangle.cpp" />
+    <ClCompile Include="cloth\contacts\cloth_contact_solver.cpp" />
+    <ClCompile Include="cloth\contacts\cloth_particle_body_contact.cpp" />
+    <ClCompile Include="cloth\contacts\cloth_particle_triangle_contact.cpp" />
+    <ClCompile Include="cloth\forces\force.cpp" />
+    <ClCompile Include="cloth\forces\mouse_force.cpp" />
+    <ClCompile Include="cloth\forces\shear_force.cpp" />
+    <ClCompile Include="cloth\forces\spring_force.cpp" />
+    <ClCompile Include="cloth\forces\strech_force.cpp" />
+    <ClCompile Include="cloth\garment\garment_mesh.cpp" />
+    <ClCompile Include="cloth\garment_cloth_mesh.cpp" />
+    <ClCompile Include="cloth\particle.cpp" />
+    <ClCompile Include="collision\broad_phase.cpp" />
+    <ClCompile Include="collision\collision.cpp" />
+    <ClCompile Include="collision\gjk\gjk.cpp" />
+    <ClCompile Include="collision\gjk\gjk_feature_pair.cpp" />
+    <ClCompile Include="collision\sat\sat.cpp" />
+    <ClCompile Include="collision\sat\sat_edge_and_hull.cpp" />
+    <ClCompile Include="collision\sat\sat_vertex_and_hull.cpp" />
+    <ClCompile Include="collision\shapes\hull.cpp" />
+    <ClCompile Include="collision\shapes\qhull.cpp" />
+    <ClCompile Include="collision\trees\dynamic_tree.cpp" />
+    <ClCompile Include="collision\trees\static_tree.cpp" />
+    <ClCompile Include="common\math\math.cpp" />
+    <ClCompile Include="common\memory\block_pool.cpp" />
+    <ClCompile Include="common\memory\stack_allocator.cpp" />
+    <ClCompile Include="common\settings.cpp" />
+    <ClCompile Include="dynamics\body.cpp" />
+    <ClCompile Include="dynamics\contacts\collide\clip.cpp" />
+    <ClCompile Include="dynamics\contacts\collide\collide.cpp" />
+    <ClCompile Include="dynamics\contacts\collide\collide_capsules.cpp" />
+    <ClCompile Include="dynamics\contacts\collide\collide_capsule_hull.cpp" />
+    <ClCompile Include="dynamics\contacts\collide\collide_hulls.cpp" />
+    <ClCompile Include="dynamics\contacts\collide\collide_hulls_cache.cpp" />
+    <ClCompile Include="dynamics\contacts\collide\collide_spheres.cpp" />
+    <ClCompile Include="dynamics\contacts\collide\collide_sphere_capsule.cpp" />
+    <ClCompile Include="dynamics\contacts\collide\collide_sphere_hull.cpp" />
+    <ClCompile Include="dynamics\contacts\contact.cpp" />
+    <ClCompile Include="dynamics\contacts\contact_cluster.cpp" />
+    <ClCompile Include="dynamics\contacts\contact_solver.cpp" />
+    <ClCompile Include="dynamics\contacts\convex_contact.cpp" />
+    <ClCompile Include="dynamics\contacts\manifold.cpp" />
+    <ClCompile Include="dynamics\contacts\mesh_contact.cpp" />
+    <ClCompile Include="dynamics\contact_manager.cpp" />
+    <ClCompile Include="dynamics\draw_world.cpp" />
+    <ClCompile Include="dynamics\island.cpp" />
+    <ClCompile Include="dynamics\joints\cone_joint.cpp" />
+    <ClCompile Include="dynamics\joints\joint.cpp" />
+    <ClCompile Include="dynamics\joints\joint_solver.cpp" />
+    <ClCompile Include="dynamics\joints\mouse_joint.cpp" />
+    <ClCompile Include="dynamics\joints\revolute_joint.cpp" />
+    <ClCompile Include="dynamics\joints\sphere_joint.cpp" />
+    <ClCompile Include="dynamics\joints\spring_joint.cpp" />
+    <ClCompile Include="dynamics\joints\weld_joint.cpp" />
+    <ClCompile Include="dynamics\joint_manager.cpp" />
+    <ClCompile Include="dynamics\shapes\capsule_shape.cpp" />
+    <ClCompile Include="dynamics\shapes\hull_shape.cpp" />
+    <ClCompile Include="dynamics\shapes\mesh_shape.cpp" />
+    <ClCompile Include="dynamics\shapes\shape.cpp" />
+    <ClCompile Include="dynamics\shapes\sphere_shape.cpp" />
+    <ClCompile Include="dynamics\world.cpp" />
+    <ClCompile Include="garment\triangle\triangle.c" />
+    <ClCompile Include="garment\triangle\tricall.c" />
+    <ClCompile Include="meshgen\cylinder_mesh.cpp" />
+    <ClCompile Include="meshgen\sphere_mesh.cpp" />
+    <ClCompile Include="quickhull\qh_hull.cpp" />
+    <ClCompile Include="rope\rope.cpp" />
+    <ClCompile Include="softbody\contacts\softbody_contact_solver.cpp" />
+    <ClCompile Include="softbody\contacts\softbody_node_body_contact.cpp" />
+    <ClCompile Include="softbody\softbody.cpp" />
+    <ClCompile Include="softbody\softbody_contact_manager.cpp" />
+    <ClCompile Include="softbody\softbody_force_solver.cpp" />
+    <ClCompile Include="softbody\softbody_mesh.cpp" />
+    <ClCompile Include="softbody\softbody_node.cpp" />
+    <ClCompile Include="softbody\softbody_solver.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="collision\shapes\hull.inl" />
+    <None Include="garment\triangle\A.poly" />
+    <None Include="garment\triangle\makefile" />
+    <None Include="garment\triangle\README" />
+    <None Include="quickhull\qh_hull.inl" />
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>16.0</VCProjectVersion>
+    <Keyword>Win32Proj</Keyword>
+    <ProjectGuid>{CEE5AB96-D27C-40FF-B815-449FCB438372}</ProjectGuid>
+    <RootNamespace>My3rdparty</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <OutDir>$(SolutionDir)..\_lib\$(Configuration)\$(PlatformTarget)\</OutDir>
+    <IntDir>$(SolutionDir)..\_obj\$(Configuration)\$(PlatformTarget)\$(ProjectName)\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <OutDir>$(SolutionDir)..\_lib\$(Configuration)\$(PlatformTarget)\</OutDir>
+    <IntDir>$(SolutionDir)..\_obj\$(Configuration)\$(PlatformTarget)\$(ProjectName)\</IntDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>TurnOffAllWarnings</WarningLevel>
+      <SDLCheck>false</SDLCheck>
+      <PreprocessorDefinitions>_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(SolutionDir)3rdparty\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+    <Link>
+      <SubSystem>
+      </SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+    <Lib />
+    <Lib />
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>TurnOffAllWarnings</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>false</SDLCheck>
+      <PreprocessorDefinitions>NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(SolutionDir)3rdparty\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>
+      </SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+    <Lib />
+    <Lib />
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

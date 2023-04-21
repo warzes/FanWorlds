@@ -5,6 +5,8 @@
 #	pragma comment( lib, "3rdparty.lib" )
 #	pragma comment( lib, "PhysX5Lib.lib" )
 #	pragma comment( lib, "BulletLib.lib" )
+#	pragma comment( lib, "BounceLib.lib" )
+#	pragma comment( lib, "solid3Lib.lib" )
 #endif
 //-----------------------------------------------------------------------------
 EngineDevice::~EngineDevice()

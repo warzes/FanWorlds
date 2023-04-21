@@ -118,5 +118,14 @@
     <Filter Include="Editor\Data">
       <UniqueIdentifier>{e692ee14-83a3-4883-8487-af7149b6bbe1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="_DOC">
+      <UniqueIdentifier>{327a31f3-bac5-4982-9061-9ece4e7540bd}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Editor.md">
+      <Filter>_DOC</Filter>
+    </None>
+    <None Include="GameIdea.md" />
   </ItemGroup>
 </Project>

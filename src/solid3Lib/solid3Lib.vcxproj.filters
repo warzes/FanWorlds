@@ -1,0 +1,346 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="broad">
+      <UniqueIdentifier>{8b55e0c2-2283-470d-a965-c7c7329ce9be}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="complex">
+      <UniqueIdentifier>{b5de892d-2479-42f8-a5a8-234f642610a5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="convex">
+      <UniqueIdentifier>{d0cc41a2-8597-48e4-b0eb-0c3ce76324e3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MT">
+      <UniqueIdentifier>{b2a3c474-4d8b-4b64-a1f5-6f21b2c17e0a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="qhull">
+      <UniqueIdentifier>{e1e78a58-2c46-4c25-b1b3-c2ebef9a0b5b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="dynamics">
+      <UniqueIdentifier>{e10f84e8-6e81-4173-b2e0-9b86f6ba7920}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="broad\BP_Scene.h">
+      <Filter>broad</Filter>
+    </ClInclude>
+    <ClInclude Include="broad\BP_Endpoint.h">
+      <Filter>broad</Filter>
+    </ClInclude>
+    <ClInclude Include="broad\BP_EndpointList.h">
+      <Filter>broad</Filter>
+    </ClInclude>
+    <ClInclude Include="broad\BP_Proxy.h">
+      <Filter>broad</Filter>
+    </ClInclude>
+    <ClInclude Include="broad\BP_ProxyList.h">
+      <Filter>broad</Filter>
+    </ClInclude>
+    <ClInclude Include="complex\DT_Complex.h">
+      <Filter>complex</Filter>
+    </ClInclude>
+    <ClInclude Include="complex\DT_BBoxTree.h">
+      <Filter>complex</Filter>
+    </ClInclude>
+    <ClInclude Include="complex\DT_CBox.h">
+      <Filter>complex</Filter>
+    </ClInclude>
+    <ClInclude Include="convex\DT_IndexArray.h">
+      <Filter>convex</Filter>
+    </ClInclude>
+    <ClInclude Include="convex\DT_LineSegment.h">
+      <Filter>convex</Filter>
+    </ClInclude>
+    <ClInclude Include="convex\DT_Minkowski.h">
+      <Filter>convex</Filter>
+    </ClInclude>
+    <ClInclude Include="convex\DT_PenDepth.h">
+      <Filter>convex</Filter>
+    </ClInclude>
+    <ClInclude Include="convex\DT_Point.h">
+      <Filter>convex</Filter>
+    </ClInclude>
+    <ClInclude Include="convex\DT_Polyhedron.h">
+      <Filter>convex</Filter>
+    </ClInclude>
+    <ClInclude Include="convex\DT_Polytope.h">
+      <Filter>convex</Filter>
+    </ClInclude>
+    <ClInclude Include="convex\DT_Shape.h">
+      <Filter>convex</Filter>
+    </ClInclude>
+    <ClInclude Include="convex\DT_Sphere.h">
+      <Filter>convex</Filter>
+    </ClInclude>
+    <ClInclude Include="convex\DT_Transform.h">
+      <Filter>convex</Filter>
+    </ClInclude>
+    <ClInclude Include="convex\DT_Triangle.h">
+      <Filter>convex</Filter>
+    </ClInclude>
+    <ClInclude Include="convex\DT_TriEdge.h">
+      <Filter>convex</Filter>
+    </ClInclude>
+    <ClInclude Include="convex\DT_VertexBase.h">
+      <Filter>convex</Filter>
+    </ClInclude>
+    <ClInclude Include="convex\DT_Accuracy.h">
+      <Filter>convex</Filter>
+    </ClInclude>
+    <ClInclude Include="convex\DT_Array.h">
+      <Filter>convex</Filter>
+    </ClInclude>
+    <ClInclude Include="convex\DT_Box.h">
+      <Filter>convex</Filter>
+    </ClInclude>
+    <ClInclude Include="convex\DT_Cone.h">
+      <Filter>convex</Filter>
+    </ClInclude>
+    <ClInclude Include="convex\DT_Convex.h">
+      <Filter>convex</Filter>
+    </ClInclude>
+    <ClInclude Include="convex\DT_Cylinder.h">
+      <Filter>convex</Filter>
+    </ClInclude>
+    <ClInclude Include="convex\DT_GJK.h">
+      <Filter>convex</Filter>
+    </ClInclude>
+    <ClInclude Include="convex\DT_Hull.h">
+      <Filter>convex</Filter>
+    </ClInclude>
+    <ClInclude Include="MT\Interval.h">
+      <Filter>MT</Filter>
+    </ClInclude>
+    <ClInclude Include="MT\Matrix3x3.h">
+      <Filter>MT</Filter>
+    </ClInclude>
+    <ClInclude Include="MT\Quaternion.h">
+      <Filter>MT</Filter>
+    </ClInclude>
+    <ClInclude Include="MT\Transform.h">
+      <Filter>MT</Filter>
+    </ClInclude>
+    <ClInclude Include="MT\Tuple3.h">
+      <Filter>MT</Filter>
+    </ClInclude>
+    <ClInclude Include="MT\Tuple4.h">
+      <Filter>MT</Filter>
+    </ClInclude>
+    <ClInclude Include="MT\Vector3.h">
+      <Filter>MT</Filter>
+    </ClInclude>
+    <ClInclude Include="qhull\geom.h">
+      <Filter>qhull</Filter>
+    </ClInclude>
+    <ClInclude Include="qhull\io.h">
+      <Filter>qhull</Filter>
+    </ClInclude>
+    <ClInclude Include="qhull\mem.h">
+      <Filter>qhull</Filter>
+    </ClInclude>
+    <ClInclude Include="qhull\merge.h">
+      <Filter>qhull</Filter>
+    </ClInclude>
+    <ClInclude Include="qhull\poly.h">
+      <Filter>qhull</Filter>
+    </ClInclude>
+    <ClInclude Include="qhull\qhull.h">
+      <Filter>qhull</Filter>
+    </ClInclude>
+    <ClInclude Include="qhull\qhull_a.h">
+      <Filter>qhull</Filter>
+    </ClInclude>
+    <ClInclude Include="qhull\qset.h">
+      <Filter>qhull</Filter>
+    </ClInclude>
+    <ClInclude Include="qhull\stat.h">
+      <Filter>qhull</Filter>
+    </ClInclude>
+    <ClInclude Include="qhull\user.h">
+      <Filter>qhull</Filter>
+    </ClInclude>
+    <ClInclude Include="Kinetic.h">
+      <Filter>dynamics</Filter>
+    </ClInclude>
+    <ClInclude Include="Dynamic.h">
+      <Filter>dynamics</Filter>
+    </ClInclude>
+    <ClInclude Include="RigidBody.h">
+      <Filter>dynamics</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="broad\BP_C-api.cpp">
+      <Filter>broad</Filter>
+    </ClCompile>
+    <ClCompile Include="broad\BP_EndpointList.cpp">
+      <Filter>broad</Filter>
+    </ClCompile>
+    <ClCompile Include="broad\BP_Proxy.cpp">
+      <Filter>broad</Filter>
+    </ClCompile>
+    <ClCompile Include="broad\BP_Scene.cpp">
+      <Filter>broad</Filter>
+    </ClCompile>
+    <ClCompile Include="complex\DT_BBoxTree.cpp">
+      <Filter>complex</Filter>
+    </ClCompile>
+    <ClCompile Include="complex\DT_Complex.cpp">
+      <Filter>complex</Filter>
+    </ClCompile>
+    <ClCompile Include="convex\DT_LineSegment.cpp">
+      <Filter>convex</Filter>
+    </ClCompile>
+    <ClCompile Include="convex\DT_PenDepth.cpp">
+      <Filter>convex</Filter>
+    </ClCompile>
+    <ClCompile Include="convex\DT_Point.cpp">
+      <Filter>convex</Filter>
+    </ClCompile>
+    <ClCompile Include="convex\DT_Polyhedron.cpp">
+      <Filter>convex</Filter>
+    </ClCompile>
+    <ClCompile Include="convex\DT_Polytope.cpp">
+      <Filter>convex</Filter>
+    </ClCompile>
+    <ClCompile Include="convex\DT_Sphere.cpp">
+      <Filter>convex</Filter>
+    </ClCompile>
+    <ClCompile Include="convex\DT_Triangle.cpp">
+      <Filter>convex</Filter>
+    </ClCompile>
+    <ClCompile Include="convex\DT_TriEdge.cpp">
+      <Filter>convex</Filter>
+    </ClCompile>
+    <ClCompile Include="convex\DT_Accuracy.cpp">
+      <Filter>convex</Filter>
+    </ClCompile>
+    <ClCompile Include="convex\DT_Box.cpp">
+      <Filter>convex</Filter>
+    </ClCompile>
+    <ClCompile Include="convex\DT_Cone.cpp">
+      <Filter>convex</Filter>
+    </ClCompile>
+    <ClCompile Include="convex\DT_Convex.cpp">
+      <Filter>convex</Filter>
+    </ClCompile>
+    <ClCompile Include="convex\DT_Cylinder.cpp">
+      <Filter>convex</Filter>
+    </ClCompile>
+    <ClCompile Include="qhull\geom.c">
+      <Filter>qhull</Filter>
+    </ClCompile>
+    <ClCompile Include="qhull\geom2.c">
+      <Filter>qhull</Filter>
+    </ClCompile>
+    <ClCompile Include="qhull\global.c">
+      <Filter>qhull</Filter>
+    </ClCompile>
+    <ClCompile Include="qhull\io.c">
+      <Filter>qhull</Filter>
+    </ClCompile>
+    <ClCompile Include="qhull\mem.c">
+      <Filter>qhull</Filter>
+    </ClCompile>
+    <ClCompile Include="qhull\merge.c">
+      <Filter>qhull</Filter>
+    </ClCompile>
+    <ClCompile Include="qhull\poly.c">
+      <Filter>qhull</Filter>
+    </ClCompile>
+    <ClCompile Include="qhull\poly2.c">
+      <Filter>qhull</Filter>
+    </ClCompile>
+    <ClCompile Include="qhull\qconvex.c">
+      <Filter>qhull</Filter>
+    </ClCompile>
+    <ClCompile Include="qhull\qdelaun.c">
+      <Filter>qhull</Filter>
+    </ClCompile>
+    <ClCompile Include="qhull\qhalf.c">
+      <Filter>qhull</Filter>
+    </ClCompile>
+    <ClCompile Include="qhull\qhull.c">
+      <Filter>qhull</Filter>
+    </ClCompile>
+    <ClCompile Include="qhull\qhull_interface.cpp">
+      <Filter>qhull</Filter>
+    </ClCompile>
+    <ClCompile Include="qhull\qset.c">
+      <Filter>qhull</Filter>
+    </ClCompile>
+    <ClCompile Include="qhull\qvoronoi.c">
+      <Filter>qhull</Filter>
+    </ClCompile>
+    <ClCompile Include="qhull\rbox.c">
+      <Filter>qhull</Filter>
+    </ClCompile>
+    <ClCompile Include="qhull\stat.c">
+      <Filter>qhull</Filter>
+    </ClCompile>
+    <ClCompile Include="qhull\unix.c">
+      <Filter>qhull</Filter>
+    </ClCompile>
+    <ClCompile Include="qhull\user.c">
+      <Filter>qhull</Filter>
+    </ClCompile>
+    <ClCompile Include="qhull\user_eg.c">
+      <Filter>qhull</Filter>
+    </ClCompile>
+    <ClCompile Include="qhull\user_eg2.c">
+      <Filter>qhull</Filter>
+    </ClCompile>
+    <ClCompile Include="Kinetic.cpp">
+      <Filter>dynamics</Filter>
+    </ClCompile>
+    <ClCompile Include="Dynamic.cpp">
+      <Filter>dynamics</Filter>
+    </ClCompile>
+    <ClCompile Include="RigidBody.cpp">
+      <Filter>dynamics</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="qhull\index.htm">
+      <Filter>qhull</Filter>
+    </None>
+    <None Include="qhull\MBorland">
+      <Filter>qhull</Filter>
+    </None>
+    <None Include="qhull\qh-geom.htm">
+      <Filter>qhull</Filter>
+    </None>
+    <None Include="qhull\qh-globa.htm">
+      <Filter>qhull</Filter>
+    </None>
+    <None Include="qhull\qh-io.htm">
+      <Filter>qhull</Filter>
+    </None>
+    <None Include="qhull\qh-mem.htm">
+      <Filter>qhull</Filter>
+    </None>
+    <None Include="qhull\qh-merge.htm">
+      <Filter>qhull</Filter>
+    </None>
+    <None Include="qhull\qh-poly.htm">
+      <Filter>qhull</Filter>
+    </None>
+    <None Include="qhull\qh-qhull.htm">
+      <Filter>qhull</Filter>
+    </None>
+    <None Include="qhull\qh-set.htm">
+      <Filter>qhull</Filter>
+    </None>
+    <None Include="qhull\qh-stat.htm">
+      <Filter>qhull</Filter>
+    </None>
+    <None Include="qhull\qh-user.htm">
+      <Filter>qhull</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="qhull\Changes.txt">
+      <Filter>qhull</Filter>
+    </Text>
+  </ItemGroup>
+</Project>

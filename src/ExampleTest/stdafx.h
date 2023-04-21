@@ -13,6 +13,9 @@
 #include <BulletLib/btBulletCollisionCommon.h>
 #include <BulletLib/btBulletDynamicsCommon.h>
 
+#define NOMINMAX
+#include <BounceLib/bounce.h>
+
 #include <iostream>
 
 #if defined(_MSC_VER)

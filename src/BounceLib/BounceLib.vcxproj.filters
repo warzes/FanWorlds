@@ -1,0 +1,663 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="cloth">
+      <UniqueIdentifier>{14b1f5ac-17c8-422a-a0ba-62b44fde23bc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="collision">
+      <UniqueIdentifier>{a7465dad-d12d-4d1d-b34a-0a375edf4b6e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="common">
+      <UniqueIdentifier>{e9c05e7e-d5de-4220-b924-e1c88140831f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="dynamics">
+      <UniqueIdentifier>{e8222d42-2612-4379-9cdd-5559e4a59055}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="garment">
+      <UniqueIdentifier>{4482ebbb-6eb7-41f8-bfe9-083897ecc76e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="meshgen">
+      <UniqueIdentifier>{eff51374-3fc2-4216-ab77-4d7842d4b3ec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="quickhull">
+      <UniqueIdentifier>{37a1bf79-18ab-44c4-90e9-6df0b246b918}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="rope">
+      <UniqueIdentifier>{4266ee0e-dc30-4422-bbaf-f7edc114522c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="softbody">
+      <UniqueIdentifier>{5808ae64-1eb5-484c-8d4b-64e85f49e56f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="sparse">
+      <UniqueIdentifier>{a2d2f4b1-67a0-450f-9889-4cf4cea3bac8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cloth\contacts">
+      <UniqueIdentifier>{4056d3f9-cfd0-4292-a192-01336c361dbe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cloth\forces">
+      <UniqueIdentifier>{8f0acb64-10e6-4276-abeb-193a284f2aab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cloth\garment">
+      <UniqueIdentifier>{f13b1ec6-0d1b-4813-bacb-94e99d259345}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="collision\gjk">
+      <UniqueIdentifier>{cc3b7f94-5f9a-4b7c-b174-8a5bc17275fe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="collision\sat">
+      <UniqueIdentifier>{8ad7a02a-4ef9-4b9a-a745-c19c2c63f973}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="collision\shapes">
+      <UniqueIdentifier>{85275810-cef4-4eb6-b33b-f94e12b9be1a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="collision\trees">
+      <UniqueIdentifier>{ea6eda31-0b9a-490e-b83e-ca3d91ab17b5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="common\math">
+      <UniqueIdentifier>{b021660e-f8fb-47e7-85fe-7e65b0842e3f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="common\memory">
+      <UniqueIdentifier>{66ad85b0-deb5-4ba8-8bb8-ce1eb62681e4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="common\template">
+      <UniqueIdentifier>{7d94ae6e-f41e-48c2-bc33-295eb643a72d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="dynamics\contacts">
+      <UniqueIdentifier>{918160e4-4285-4d1f-88bd-7353da41b867}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="dynamics\joints">
+      <UniqueIdentifier>{149255f8-9458-484f-9613-7c9458b875ee}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="dynamics\shapes">
+      <UniqueIdentifier>{b1a886c2-1702-4cf5-af41-d6ec4cdf2f0f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="dynamics\contacts\collide">
+      <UniqueIdentifier>{1cfa36f9-5ab3-4106-90c3-bb257164260c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="garment\triangle">
+      <UniqueIdentifier>{77ed4b2e-a074-4bad-83df-341c525ea4d0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="softbody\contacts">
+      <UniqueIdentifier>{cc479915-ae3b-4e46-bb55-fb1d32510cfe}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="bounce.h" />
+    <ClInclude Include="cloth\contacts\cloth_contact_solver.h">
+      <Filter>cloth\contacts</Filter>
+    </ClInclude>
+    <ClInclude Include="cloth\contacts\cloth_particle_body_contact.h">
+      <Filter>cloth\contacts</Filter>
+    </ClInclude>
+    <ClInclude Include="cloth\contacts\cloth_particle_triangle_contact.h">
+      <Filter>cloth\contacts</Filter>
+    </ClInclude>
+    <ClInclude Include="cloth\forces\force.h">
+      <Filter>cloth\forces</Filter>
+    </ClInclude>
+    <ClInclude Include="cloth\forces\mouse_force.h">
+      <Filter>cloth\forces</Filter>
+    </ClInclude>
+    <ClInclude Include="cloth\forces\shear_force.h">
+      <Filter>cloth\forces</Filter>
+    </ClInclude>
+    <ClInclude Include="cloth\forces\spring_force.h">
+      <Filter>cloth\forces</Filter>
+    </ClInclude>
+    <ClInclude Include="cloth\forces\strech_force.h">
+      <Filter>cloth\forces</Filter>
+    </ClInclude>
+    <ClInclude Include="cloth\garment\garment.h">
+      <Filter>cloth\garment</Filter>
+    </ClInclude>
+    <ClInclude Include="cloth\garment\garment_mesh.h">
+      <Filter>cloth\garment</Filter>
+    </ClInclude>
+    <ClInclude Include="cloth\garment\sewing_pattern.h">
+      <Filter>cloth\garment</Filter>
+    </ClInclude>
+    <ClInclude Include="cloth\cloth.h">
+      <Filter>cloth</Filter>
+    </ClInclude>
+    <ClInclude Include="cloth\cloth_collision.h">
+      <Filter>cloth</Filter>
+    </ClInclude>
+    <ClInclude Include="cloth\cloth_contact_manager.h">
+      <Filter>cloth</Filter>
+    </ClInclude>
+    <ClInclude Include="cloth\cloth_force_solver.h">
+      <Filter>cloth</Filter>
+    </ClInclude>
+    <ClInclude Include="cloth\cloth_mesh.h">
+      <Filter>cloth</Filter>
+    </ClInclude>
+    <ClInclude Include="cloth\cloth_solver.h">
+      <Filter>cloth</Filter>
+    </ClInclude>
+    <ClInclude Include="cloth\cloth_triangle.h">
+      <Filter>cloth</Filter>
+    </ClInclude>
+    <ClInclude Include="cloth\garment_cloth_mesh.h">
+      <Filter>cloth</Filter>
+    </ClInclude>
+    <ClInclude Include="cloth\grid_cloth_mesh.h">
+      <Filter>cloth</Filter>
+    </ClInclude>
+    <ClInclude Include="cloth\particle.h">
+      <Filter>cloth</Filter>
+    </ClInclude>
+    <ClInclude Include="collision\broad_phase.h">
+      <Filter>collision</Filter>
+    </ClInclude>
+    <ClInclude Include="collision\collision.h">
+      <Filter>collision</Filter>
+    </ClInclude>
+    <ClInclude Include="collision\gjk\gjk.h">
+      <Filter>collision\gjk</Filter>
+    </ClInclude>
+    <ClInclude Include="collision\gjk\gjk_proxy.h">
+      <Filter>collision\gjk</Filter>
+    </ClInclude>
+    <ClInclude Include="collision\sat\sat.h">
+      <Filter>collision\sat</Filter>
+    </ClInclude>
+    <ClInclude Include="collision\sat\sat_edge_and_hull.h">
+      <Filter>collision\sat</Filter>
+    </ClInclude>
+    <ClInclude Include="collision\sat\sat_vertex_and_hull.h">
+      <Filter>collision\sat</Filter>
+    </ClInclude>
+    <ClInclude Include="collision\shapes\aabb3.h">
+      <Filter>collision\shapes</Filter>
+    </ClInclude>
+    <ClInclude Include="collision\shapes\box_hull.h">
+      <Filter>collision\shapes</Filter>
+    </ClInclude>
+    <ClInclude Include="collision\shapes\capsule.h">
+      <Filter>collision\shapes</Filter>
+    </ClInclude>
+    <ClInclude Include="collision\shapes\grid_mesh.h">
+      <Filter>collision\shapes</Filter>
+    </ClInclude>
+    <ClInclude Include="collision\shapes\hull.h">
+      <Filter>collision\shapes</Filter>
+    </ClInclude>
+    <ClInclude Include="collision\shapes\mesh.h">
+      <Filter>collision\shapes</Filter>
+    </ClInclude>
+    <ClInclude Include="collision\shapes\qhull.h">
+      <Filter>collision\shapes</Filter>
+    </ClInclude>
+    <ClInclude Include="collision\shapes\sphere.h">
+      <Filter>collision\shapes</Filter>
+    </ClInclude>
+    <ClInclude Include="collision\shapes\triangle_hull.h">
+      <Filter>collision\shapes</Filter>
+    </ClInclude>
+    <ClInclude Include="collision\trees\dynamic_tree.h">
+      <Filter>collision\trees</Filter>
+    </ClInclude>
+    <ClInclude Include="collision\trees\static_tree.h">
+      <Filter>collision\trees</Filter>
+    </ClInclude>
+    <ClInclude Include="common\draw.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="common\geometry.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="common\settings.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="common\time.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="common\math\mat.h">
+      <Filter>common\math</Filter>
+    </ClInclude>
+    <ClInclude Include="common\math\mat22.h">
+      <Filter>common\math</Filter>
+    </ClInclude>
+    <ClInclude Include="common\math\mat33.h">
+      <Filter>common\math</Filter>
+    </ClInclude>
+    <ClInclude Include="common\math\mat44.h">
+      <Filter>common\math</Filter>
+    </ClInclude>
+    <ClInclude Include="common\math\math.h">
+      <Filter>common\math</Filter>
+    </ClInclude>
+    <ClInclude Include="common\math\quat.h">
+      <Filter>common\math</Filter>
+    </ClInclude>
+    <ClInclude Include="common\math\transform.h">
+      <Filter>common\math</Filter>
+    </ClInclude>
+    <ClInclude Include="common\math\vec2.h">
+      <Filter>common\math</Filter>
+    </ClInclude>
+    <ClInclude Include="common\math\vec3.h">
+      <Filter>common\math</Filter>
+    </ClInclude>
+    <ClInclude Include="common\math\vec4.h">
+      <Filter>common\math</Filter>
+    </ClInclude>
+    <ClInclude Include="common\memory\block_pool.h">
+      <Filter>common\memory</Filter>
+    </ClInclude>
+    <ClInclude Include="common\memory\stack_allocator.h">
+      <Filter>common\memory</Filter>
+    </ClInclude>
+    <ClInclude Include="common\template\array.h">
+      <Filter>common\template</Filter>
+    </ClInclude>
+    <ClInclude Include="common\template\list.h">
+      <Filter>common\template</Filter>
+    </ClInclude>
+    <ClInclude Include="common\template\object_array.h">
+      <Filter>common\template</Filter>
+    </ClInclude>
+    <ClInclude Include="common\template\queue.h">
+      <Filter>common\template</Filter>
+    </ClInclude>
+    <ClInclude Include="common\template\stack.h">
+      <Filter>common\template</Filter>
+    </ClInclude>
+    <ClInclude Include="dynamics\contacts\collide\clip.h">
+      <Filter>dynamics\contacts\collide</Filter>
+    </ClInclude>
+    <ClInclude Include="dynamics\contacts\collide\collide.h">
+      <Filter>dynamics\contacts\collide</Filter>
+    </ClInclude>
+    <ClInclude Include="dynamics\contacts\contact.h">
+      <Filter>dynamics\contacts</Filter>
+    </ClInclude>
+    <ClInclude Include="dynamics\contacts\contact_cluster.h">
+      <Filter>dynamics\contacts</Filter>
+    </ClInclude>
+    <ClInclude Include="dynamics\contacts\contact_solver.h">
+      <Filter>dynamics\contacts</Filter>
+    </ClInclude>
+    <ClInclude Include="dynamics\contacts\convex_contact.h">
+      <Filter>dynamics\contacts</Filter>
+    </ClInclude>
+    <ClInclude Include="dynamics\contacts\manifold.h">
+      <Filter>dynamics\contacts</Filter>
+    </ClInclude>
+    <ClInclude Include="dynamics\contacts\mesh_contact.h">
+      <Filter>dynamics\contacts</Filter>
+    </ClInclude>
+    <ClInclude Include="dynamics\joints\cone_joint.h">
+      <Filter>dynamics\joints</Filter>
+    </ClInclude>
+    <ClInclude Include="dynamics\joints\joint.h">
+      <Filter>dynamics\joints</Filter>
+    </ClInclude>
+    <ClInclude Include="dynamics\joints\joint_solver.h">
+      <Filter>dynamics\joints</Filter>
+    </ClInclude>
+    <ClInclude Include="dynamics\joints\mouse_joint.h">
+      <Filter>dynamics\joints</Filter>
+    </ClInclude>
+    <ClInclude Include="dynamics\joints\revolute_joint.h">
+      <Filter>dynamics\joints</Filter>
+    </ClInclude>
+    <ClInclude Include="dynamics\joints\sphere_joint.h">
+      <Filter>dynamics\joints</Filter>
+    </ClInclude>
+    <ClInclude Include="dynamics\joints\spring_joint.h">
+      <Filter>dynamics\joints</Filter>
+    </ClInclude>
+    <ClInclude Include="dynamics\joints\weld_joint.h">
+      <Filter>dynamics\joints</Filter>
+    </ClInclude>
+    <ClInclude Include="dynamics\shapes\capsule_shape.h">
+      <Filter>dynamics\shapes</Filter>
+    </ClInclude>
+    <ClInclude Include="dynamics\shapes\hull_shape.h">
+      <Filter>dynamics\shapes</Filter>
+    </ClInclude>
+    <ClInclude Include="dynamics\shapes\mesh_shape.h">
+      <Filter>dynamics\shapes</Filter>
+    </ClInclude>
+    <ClInclude Include="dynamics\shapes\shape.h">
+      <Filter>dynamics\shapes</Filter>
+    </ClInclude>
+    <ClInclude Include="dynamics\shapes\sphere_shape.h">
+      <Filter>dynamics\shapes</Filter>
+    </ClInclude>
+    <ClInclude Include="dynamics\body.h">
+      <Filter>dynamics</Filter>
+    </ClInclude>
+    <ClInclude Include="dynamics\contact_manager.h">
+      <Filter>dynamics</Filter>
+    </ClInclude>
+    <ClInclude Include="dynamics\island.h">
+      <Filter>dynamics</Filter>
+    </ClInclude>
+    <ClInclude Include="dynamics\joint_manager.h">
+      <Filter>dynamics</Filter>
+    </ClInclude>
+    <ClInclude Include="dynamics\time_step.h">
+      <Filter>dynamics</Filter>
+    </ClInclude>
+    <ClInclude Include="dynamics\world.h">
+      <Filter>dynamics</Filter>
+    </ClInclude>
+    <ClInclude Include="dynamics\world_listeners.h">
+      <Filter>dynamics</Filter>
+    </ClInclude>
+    <ClInclude Include="garment\triangle\triangle.h">
+      <Filter>garment\triangle</Filter>
+    </ClInclude>
+    <ClInclude Include="meshgen\cylinder_mesh.h">
+      <Filter>meshgen</Filter>
+    </ClInclude>
+    <ClInclude Include="meshgen\sphere_mesh.h">
+      <Filter>meshgen</Filter>
+    </ClInclude>
+    <ClInclude Include="quickhull\qh_hull.h">
+      <Filter>quickhull</Filter>
+    </ClInclude>
+    <ClInclude Include="rope\rope.h">
+      <Filter>rope</Filter>
+    </ClInclude>
+    <ClInclude Include="rope\spatial.h">
+      <Filter>rope</Filter>
+    </ClInclude>
+    <ClInclude Include="softbody\block_softbody_mesh.h">
+      <Filter>softbody</Filter>
+    </ClInclude>
+    <ClInclude Include="softbody\softbody.h">
+      <Filter>softbody</Filter>
+    </ClInclude>
+    <ClInclude Include="softbody\softbody_contact_manager.h">
+      <Filter>softbody</Filter>
+    </ClInclude>
+    <ClInclude Include="softbody\softbody_force_solver.h">
+      <Filter>softbody</Filter>
+    </ClInclude>
+    <ClInclude Include="softbody\softbody_mesh.h">
+      <Filter>softbody</Filter>
+    </ClInclude>
+    <ClInclude Include="softbody\softbody_node.h">
+      <Filter>softbody</Filter>
+    </ClInclude>
+    <ClInclude Include="softbody\softbody_solver.h">
+      <Filter>softbody</Filter>
+    </ClInclude>
+    <ClInclude Include="softbody\contacts\softbody_contact_solver.h">
+      <Filter>softbody\contacts</Filter>
+    </ClInclude>
+    <ClInclude Include="softbody\contacts\softbody_node_body_contact.h">
+      <Filter>softbody\contacts</Filter>
+    </ClInclude>
+    <ClInclude Include="sparse\dense_vec3.h">
+      <Filter>sparse</Filter>
+    </ClInclude>
+    <ClInclude Include="sparse\diag_mat33.h">
+      <Filter>sparse</Filter>
+    </ClInclude>
+    <ClInclude Include="sparse\sparse_mat33.h">
+      <Filter>sparse</Filter>
+    </ClInclude>
+    <ClInclude Include="sparse\sparse_mat33_view.h">
+      <Filter>sparse</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="cloth\contacts\cloth_contact_solver.cpp">
+      <Filter>cloth\contacts</Filter>
+    </ClCompile>
+    <ClCompile Include="cloth\contacts\cloth_particle_body_contact.cpp">
+      <Filter>cloth\contacts</Filter>
+    </ClCompile>
+    <ClCompile Include="cloth\contacts\cloth_particle_triangle_contact.cpp">
+      <Filter>cloth\contacts</Filter>
+    </ClCompile>
+    <ClCompile Include="cloth\forces\force.cpp">
+      <Filter>cloth\forces</Filter>
+    </ClCompile>
+    <ClCompile Include="cloth\forces\mouse_force.cpp">
+      <Filter>cloth\forces</Filter>
+    </ClCompile>
+    <ClCompile Include="cloth\forces\shear_force.cpp">
+      <Filter>cloth\forces</Filter>
+    </ClCompile>
+    <ClCompile Include="cloth\forces\spring_force.cpp">
+      <Filter>cloth\forces</Filter>
+    </ClCompile>
+    <ClCompile Include="cloth\forces\strech_force.cpp">
+      <Filter>cloth\forces</Filter>
+    </ClCompile>
+    <ClCompile Include="cloth\garment\garment_mesh.cpp">
+      <Filter>cloth\garment</Filter>
+    </ClCompile>
+    <ClCompile Include="cloth\cloth.cpp">
+      <Filter>cloth</Filter>
+    </ClCompile>
+    <ClCompile Include="cloth\cloth_contact_manager.cpp">
+      <Filter>cloth</Filter>
+    </ClCompile>
+    <ClCompile Include="cloth\cloth_force_solver.cpp">
+      <Filter>cloth</Filter>
+    </ClCompile>
+    <ClCompile Include="cloth\cloth_solver.cpp">
+      <Filter>cloth</Filter>
+    </ClCompile>
+    <ClCompile Include="cloth\cloth_triangle.cpp">
+      <Filter>cloth</Filter>
+    </ClCompile>
+    <ClCompile Include="cloth\garment_cloth_mesh.cpp">
+      <Filter>cloth</Filter>
+    </ClCompile>
+    <ClCompile Include="cloth\particle.cpp">
+      <Filter>cloth</Filter>
+    </ClCompile>
+    <ClCompile Include="collision\broad_phase.cpp">
+      <Filter>collision</Filter>
+    </ClCompile>
+    <ClCompile Include="collision\collision.cpp">
+      <Filter>collision</Filter>
+    </ClCompile>
+    <ClCompile Include="collision\gjk\gjk.cpp">
+      <Filter>collision\gjk</Filter>
+    </ClCompile>
+    <ClCompile Include="collision\gjk\gjk_feature_pair.cpp">
+      <Filter>collision\gjk</Filter>
+    </ClCompile>
+    <ClCompile Include="collision\sat\sat.cpp">
+      <Filter>collision\sat</Filter>
+    </ClCompile>
+    <ClCompile Include="collision\sat\sat_edge_and_hull.cpp">
+      <Filter>collision\sat</Filter>
+    </ClCompile>
+    <ClCompile Include="collision\sat\sat_vertex_and_hull.cpp">
+      <Filter>collision\sat</Filter>
+    </ClCompile>
+    <ClCompile Include="collision\shapes\hull.cpp">
+      <Filter>collision\shapes</Filter>
+    </ClCompile>
+    <ClCompile Include="collision\shapes\qhull.cpp">
+      <Filter>collision\shapes</Filter>
+    </ClCompile>
+    <ClCompile Include="collision\trees\dynamic_tree.cpp">
+      <Filter>collision\trees</Filter>
+    </ClCompile>
+    <ClCompile Include="collision\trees\static_tree.cpp">
+      <Filter>collision\trees</Filter>
+    </ClCompile>
+    <ClCompile Include="common\settings.cpp">
+      <Filter>common</Filter>
+    </ClCompile>
+    <ClCompile Include="common\math\math.cpp">
+      <Filter>common\math</Filter>
+    </ClCompile>
+    <ClCompile Include="common\memory\block_pool.cpp">
+      <Filter>common\memory</Filter>
+    </ClCompile>
+    <ClCompile Include="common\memory\stack_allocator.cpp">
+      <Filter>common\memory</Filter>
+    </ClCompile>
+    <ClCompile Include="dynamics\contacts\collide\clip.cpp">
+      <Filter>dynamics\contacts\collide</Filter>
+    </ClCompile>
+    <ClCompile Include="dynamics\contacts\collide\collide.cpp">
+      <Filter>dynamics\contacts\collide</Filter>
+    </ClCompile>
+    <ClCompile Include="dynamics\contacts\collide\collide_capsule_hull.cpp">
+      <Filter>dynamics\contacts\collide</Filter>
+    </ClCompile>
+    <ClCompile Include="dynamics\contacts\collide\collide_capsules.cpp">
+      <Filter>dynamics\contacts\collide</Filter>
+    </ClCompile>
+    <ClCompile Include="dynamics\contacts\collide\collide_hulls.cpp">
+      <Filter>dynamics\contacts\collide</Filter>
+    </ClCompile>
+    <ClCompile Include="dynamics\contacts\collide\collide_hulls_cache.cpp">
+      <Filter>dynamics\contacts\collide</Filter>
+    </ClCompile>
+    <ClCompile Include="dynamics\contacts\collide\collide_sphere_capsule.cpp">
+      <Filter>dynamics\contacts\collide</Filter>
+    </ClCompile>
+    <ClCompile Include="dynamics\contacts\collide\collide_sphere_hull.cpp">
+      <Filter>dynamics\contacts\collide</Filter>
+    </ClCompile>
+    <ClCompile Include="dynamics\contacts\collide\collide_spheres.cpp">
+      <Filter>dynamics\contacts\collide</Filter>
+    </ClCompile>
+    <ClCompile Include="dynamics\contacts\contact.cpp">
+      <Filter>dynamics\contacts</Filter>
+    </ClCompile>
+    <ClCompile Include="dynamics\contacts\contact_cluster.cpp">
+      <Filter>dynamics\contacts</Filter>
+    </ClCompile>
+    <ClCompile Include="dynamics\contacts\contact_solver.cpp">
+      <Filter>dynamics\contacts</Filter>
+    </ClCompile>
+    <ClCompile Include="dynamics\contacts\convex_contact.cpp">
+      <Filter>dynamics\contacts</Filter>
+    </ClCompile>
+    <ClCompile Include="dynamics\contacts\manifold.cpp">
+      <Filter>dynamics\contacts</Filter>
+    </ClCompile>
+    <ClCompile Include="dynamics\contacts\mesh_contact.cpp">
+      <Filter>dynamics\contacts</Filter>
+    </ClCompile>
+    <ClCompile Include="dynamics\joints\cone_joint.cpp">
+      <Filter>dynamics\joints</Filter>
+    </ClCompile>
+    <ClCompile Include="dynamics\joints\joint.cpp">
+      <Filter>dynamics\joints</Filter>
+    </ClCompile>
+    <ClCompile Include="dynamics\joints\joint_solver.cpp">
+      <Filter>dynamics\joints</Filter>
+    </ClCompile>
+    <ClCompile Include="dynamics\joints\mouse_joint.cpp">
+      <Filter>dynamics\joints</Filter>
+    </ClCompile>
+    <ClCompile Include="dynamics\joints\revolute_joint.cpp">
+      <Filter>dynamics\joints</Filter>
+    </ClCompile>
+    <ClCompile Include="dynamics\joints\sphere_joint.cpp">
+      <Filter>dynamics\joints</Filter>
+    </ClCompile>
+    <ClCompile Include="dynamics\joints\spring_joint.cpp">
+      <Filter>dynamics\joints</Filter>
+    </ClCompile>
+    <ClCompile Include="dynamics\joints\weld_joint.cpp">
+      <Filter>dynamics\joints</Filter>
+    </ClCompile>
+    <ClCompile Include="dynamics\shapes\capsule_shape.cpp">
+      <Filter>dynamics\shapes</Filter>
+    </ClCompile>
+    <ClCompile Include="dynamics\shapes\hull_shape.cpp">
+      <Filter>dynamics\shapes</Filter>
+    </ClCompile>
+    <ClCompile Include="dynamics\shapes\mesh_shape.cpp">
+      <Filter>dynamics\shapes</Filter>
+    </ClCompile>
+    <ClCompile Include="dynamics\shapes\shape.cpp">
+      <Filter>dynamics\shapes</Filter>
+    </ClCompile>
+    <ClCompile Include="dynamics\shapes\sphere_shape.cpp">
+      <Filter>dynamics\shapes</Filter>
+    </ClCompile>
+    <ClCompile Include="dynamics\body.cpp">
+      <Filter>dynamics</Filter>
+    </ClCompile>
+    <ClCompile Include="dynamics\contact_manager.cpp">
+      <Filter>dynamics</Filter>
+    </ClCompile>
+    <ClCompile Include="dynamics\draw_world.cpp">
+      <Filter>dynamics</Filter>
+    </ClCompile>
+    <ClCompile Include="dynamics\island.cpp">
+      <Filter>dynamics</Filter>
+    </ClCompile>
+    <ClCompile Include="dynamics\joint_manager.cpp">
+      <Filter>dynamics</Filter>
+    </ClCompile>
+    <ClCompile Include="dynamics\world.cpp">
+      <Filter>dynamics</Filter>
+    </ClCompile>
+    <ClCompile Include="garment\triangle\triangle.c">
+      <Filter>garment\triangle</Filter>
+    </ClCompile>
+    <ClCompile Include="garment\triangle\tricall.c">
+      <Filter>garment\triangle</Filter>
+    </ClCompile>
+    <ClCompile Include="meshgen\cylinder_mesh.cpp">
+      <Filter>meshgen</Filter>
+    </ClCompile>
+    <ClCompile Include="meshgen\sphere_mesh.cpp">
+      <Filter>meshgen</Filter>
+    </ClCompile>
+    <ClCompile Include="quickhull\qh_hull.cpp">
+      <Filter>quickhull</Filter>
+    </ClCompile>
+    <ClCompile Include="rope\rope.cpp">
+      <Filter>rope</Filter>
+    </ClCompile>
+    <ClCompile Include="softbody\softbody.cpp">
+      <Filter>softbody</Filter>
+    </ClCompile>
+    <ClCompile Include="softbody\softbody_contact_manager.cpp">
+      <Filter>softbody</Filter>
+    </ClCompile>
+    <ClCompile Include="softbody\softbody_force_solver.cpp">
+      <Filter>softbody</Filter>
+    </ClCompile>
+    <ClCompile Include="softbody\softbody_mesh.cpp">
+      <Filter>softbody</Filter>
+    </ClCompile>
+    <ClCompile Include="softbody\softbody_node.cpp">
+      <Filter>softbody</Filter>
+    </ClCompile>
+    <ClCompile Include="softbody\softbody_solver.cpp">
+      <Filter>softbody</Filter>
+    </ClCompile>
+    <ClCompile Include="softbody\contacts\softbody_contact_solver.cpp">
+      <Filter>softbody\contacts</Filter>
+    </ClCompile>
+    <ClCompile Include="softbody\contacts\softbody_node_body_contact.cpp">
+      <Filter>softbody\contacts</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="collision\shapes\hull.inl">
+      <Filter>collision\shapes</Filter>
+    </None>
+    <None Include="garment\triangle\A.poly">
+      <Filter>garment\triangle</Filter>
+    </None>
+    <None Include="garment\triangle\makefile">
+      <Filter>garment\triangle</Filter>
+    </None>
+    <None Include="garment\triangle\README">
+      <Filter>garment\triangle</Filter>
+    </None>
+    <None Include="quickhull\qh_hull.inl">
+      <Filter>quickhull</Filter>
+    </None>
+  </ItemGroup>
+</Project>

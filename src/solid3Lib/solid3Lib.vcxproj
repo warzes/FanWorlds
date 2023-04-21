@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="broad\BP_Endpoint.h" />
+    <ClInclude Include="broad\BP_EndpointList.h" />
+    <ClInclude Include="broad\BP_Proxy.h" />
+    <ClInclude Include="broad\BP_ProxyList.h" />
+    <ClInclude Include="broad\BP_Scene.h" />
+    <ClInclude Include="complex\DT_BBoxTree.h" />
+    <ClInclude Include="complex\DT_CBox.h" />
+    <ClInclude Include="complex\DT_Complex.h" />
+    <ClInclude Include="convex\DT_Accuracy.h" />
+    <ClInclude Include="convex\DT_Array.h" />
+    <ClInclude Include="convex\DT_Box.h" />
+    <ClInclude Include="convex\DT_Cone.h" />
+    <ClInclude Include="convex\DT_Convex.h" />
+    <ClInclude Include="convex\DT_Cylinder.h" />
+    <ClInclude Include="convex\DT_GJK.h" />
+    <ClInclude Include="convex\DT_Hull.h" />
+    <ClInclude Include="convex\DT_IndexArray.h" />
+    <ClInclude Include="convex\DT_LineSegment.h" />
+    <ClInclude Include="convex\DT_Minkowski.h" />
+    <ClInclude Include="convex\DT_PenDepth.h" />
+    <ClInclude Include="convex\DT_Point.h" />
+    <ClInclude Include="convex\DT_Polyhedron.h" />
+    <ClInclude Include="convex\DT_Polytope.h" />
+    <ClInclude Include="convex\DT_Shape.h" />
+    <ClInclude Include="convex\DT_Sphere.h" />
+    <ClInclude Include="convex\DT_Transform.h" />
+    <ClInclude Include="convex\DT_Triangle.h" />
+    <ClInclude Include="convex\DT_TriEdge.h" />
+    <ClInclude Include="convex\DT_VertexBase.h" />
+    <ClInclude Include="DT_AlgoTable.h" />
+    <ClInclude Include="DT_Encounter.h" />
+    <ClInclude Include="DT_Object.h" />
+    <ClInclude Include="DT_Response.h" />
+    <ClInclude Include="DT_RespTable.h" />
+    <ClInclude Include="DT_Scene.h" />
+    <ClInclude Include="Dynamic.h" />
+    <ClInclude Include="GEN_MinMax.h" />
+    <ClInclude Include="GEN_random.h" />
+    <ClInclude Include="Kinetic.h" />
+    <ClInclude Include="MT\Interval.h" />
+    <ClInclude Include="MT\Matrix3x3.h" />
+    <ClInclude Include="MT\Quaternion.h" />
+    <ClInclude Include="MT\Transform.h" />
+    <ClInclude Include="MT\Tuple3.h" />
+    <ClInclude Include="MT\Tuple4.h" />
+    <ClInclude Include="MT\Vector3.h" />
+    <ClInclude Include="MT_BBox.h" />
+    <ClInclude Include="MT_Interval.h" />
+    <ClInclude Include="MT_Matrix3x3.h" />
+    <ClInclude Include="MT_Point3.h" />
+    <ClInclude Include="MT_Quaternion.h" />
+    <ClInclude Include="MT_Scalar.h" />
+    <ClInclude Include="MT_ScalarTracer.h" />
+    <ClInclude Include="MT_Transform.h" />
+    <ClInclude Include="MT_Vector3.h" />
+    <ClInclude Include="qhull\geom.h" />
+    <ClInclude Include="qhull\io.h" />
+    <ClInclude Include="qhull\mem.h" />
+    <ClInclude Include="qhull\merge.h" />
+    <ClInclude Include="qhull\poly.h" />
+    <ClInclude Include="qhull\qhull.h" />
+    <ClInclude Include="qhull\qhull_a.h" />
+    <ClInclude Include="qhull\qset.h" />
+    <ClInclude Include="qhull\stat.h" />
+    <ClInclude Include="qhull\user.h" />
+    <ClInclude Include="RigidBody.h" />
+    <ClInclude Include="SOLID.h" />
+    <ClInclude Include="SOLID_broad.h" />
+    <ClInclude Include="SOLID_types.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="broad\BP_C-api.cpp" />
+    <ClCompile Include="broad\BP_EndpointList.cpp" />
+    <ClCompile Include="broad\BP_Proxy.cpp" />
+    <ClCompile Include="broad\BP_Scene.cpp" />
+    <ClCompile Include="complex\DT_BBoxTree.cpp" />
+    <ClCompile Include="complex\DT_Complex.cpp" />
+    <ClCompile Include="convex\DT_Accuracy.cpp" />
+    <ClCompile Include="convex\DT_Box.cpp" />
+    <ClCompile Include="convex\DT_Cone.cpp" />
+    <ClCompile Include="convex\DT_Convex.cpp" />
+    <ClCompile Include="convex\DT_Cylinder.cpp" />
+    <ClCompile Include="convex\DT_LineSegment.cpp" />
+    <ClCompile Include="convex\DT_PenDepth.cpp" />
+    <ClCompile Include="convex\DT_Point.cpp" />
+    <ClCompile Include="convex\DT_Polyhedron.cpp" />
+    <ClCompile Include="convex\DT_Polytope.cpp" />
+    <ClCompile Include="convex\DT_Sphere.cpp" />
+    <ClCompile Include="convex\DT_Triangle.cpp" />
+    <ClCompile Include="convex\DT_TriEdge.cpp" />
+    <ClCompile Include="DT_C-api.cpp" />
+    <ClCompile Include="DT_Encounter.cpp" />
+    <ClCompile Include="DT_Object.cpp" />
+    <ClCompile Include="DT_RespTable.cpp" />
+    <ClCompile Include="DT_Scene.cpp" />
+    <ClCompile Include="Dynamic.cpp" />
+    <ClCompile Include="Kinetic.cpp" />
+    <ClCompile Include="qhull\geom.c" />
+    <ClCompile Include="qhull\geom2.c" />
+    <ClCompile Include="qhull\global.c" />
+    <ClCompile Include="qhull\io.c" />
+    <ClCompile Include="qhull\mem.c" />
+    <ClCompile Include="qhull\merge.c" />
+    <ClCompile Include="qhull\poly.c" />
+    <ClCompile Include="qhull\poly2.c" />
+    <ClCompile Include="qhull\qconvex.c" />
+    <ClCompile Include="qhull\qdelaun.c" />
+    <ClCompile Include="qhull\qhalf.c" />
+    <ClCompile Include="qhull\qhull.c" />
+    <ClCompile Include="qhull\qhull_interface.cpp" />
+    <ClCompile Include="qhull\qset.c" />
+    <ClCompile Include="qhull\qvoronoi.c" />
+    <ClCompile Include="qhull\rbox.c" />
+    <ClCompile Include="qhull\stat.c" />
+    <ClCompile Include="qhull\unix.c" />
+    <ClCompile Include="qhull\user.c" />
+    <ClCompile Include="qhull\user_eg.c" />
+    <ClCompile Include="qhull\user_eg2.c" />
+    <ClCompile Include="RigidBody.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="qhull\index.htm">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+    <None Include="qhull\MBorland" />
+    <None Include="qhull\qh-geom.htm">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+    <None Include="qhull\qh-globa.htm">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+    <None Include="qhull\qh-io.htm">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+    <None Include="qhull\qh-mem.htm">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+    <None Include="qhull\qh-merge.htm">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+    <None Include="qhull\qh-poly.htm">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+    <None Include="qhull\qh-qhull.htm">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+    <None Include="qhull\qh-set.htm">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+    <None Include="qhull\qh-stat.htm">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+    <None Include="qhull\qh-user.htm">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="qhull\Changes.txt" />
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>16.0</VCProjectVersion>
+    <Keyword>Win32Proj</Keyword>
+    <ProjectGuid>{437EBAAD-ED3B-4FC7-B2AD-315E9006E2A4}</ProjectGuid>
+    <RootNamespace>My3rdparty</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <OutDir>$(SolutionDir)..\_lib\$(Configuration)\$(PlatformTarget)\</OutDir>
+    <IntDir>$(SolutionDir)..\_obj\$(Configuration)\$(PlatformTarget)\$(ProjectName)\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <OutDir>$(SolutionDir)..\_lib\$(Configuration)\$(PlatformTarget)\</OutDir>
+    <IntDir>$(SolutionDir)..\_obj\$(Configuration)\$(PlatformTarget)\$(ProjectName)\</IntDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>TurnOffAllWarnings</WarningLevel>
+      <SDLCheck>false</SDLCheck>
+      <PreprocessorDefinitions>_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(SolutionDir)3rdparty\;$(ProjectDir)broad\;$(ProjectDir)complex\;$(ProjectDir)convex\;$(ProjectDir)MT\;$(ProjectDir)qhull\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+    <Link>
+      <SubSystem>
+      </SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+    <Lib />
+    <Lib />
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>TurnOffAllWarnings</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>false</SDLCheck>
+      <PreprocessorDefinitions>NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(SolutionDir)3rdparty\;$(ProjectDir)broad\;$(ProjectDir)complex\;$(ProjectDir)convex\;$(ProjectDir)MT\;$(ProjectDir)qhull\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>
+      </SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+    <Lib />
+    <Lib />
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
