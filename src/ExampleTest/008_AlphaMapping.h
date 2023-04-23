@@ -1,6 +1,6 @@
 #pragma once
 
-class _011BasicObjModel final : public IApp
+class _008AlphaMapping final : public IApp
 {
 	bool Create() final;
 	void Destroy() final;
@@ -14,10 +14,9 @@ private:
 
 	ShaderProgramRef m_shader;
 	Uniform m_uniformProjectionMatrix;
-	Uniform m_uniformViewMatrix;
-	Uniform m_uniformWorldMatrix;
-
 	glm::mat4 m_perspective;
-	ModelRef m_model;
-	Camera m_camera;
+	GeometryBufferRef m_geom;
+	Texture2DRef m_texture1;
+	Texture2DRef m_texture2;
+	Texture2DRef m_texture3;
 };

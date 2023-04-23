@@ -1,9 +1,9 @@
 #include "stdafx.h"
-#include "008_SpecularLighting.h"
+#include "011_SpecularLighting.h"
 //-----------------------------------------------------------------------------
-bool _008SpecularLighting::Create()
+bool _011SpecularLighting::Create()
 {
-	Print("_008SpecularLighting Create");
+	Print("_011SpecularLighting Create");
 
 	const char* vertexShaderText = R"(
 #version 330 core
@@ -195,16 +195,16 @@ void main()
 	return true;
 }
 //-----------------------------------------------------------------------------
-void _008SpecularLighting::Destroy()
+void _011SpecularLighting::Destroy()
 {
 	m_shader.reset();
 	m_geom.reset();
 	m_texture.reset();
 
-	Print("_008SpecularLighting Destroy");
+	Print("_011SpecularLighting Destroy");
 }
 //-----------------------------------------------------------------------------
-void _008SpecularLighting::Render()
+void _011SpecularLighting::Render()
 {
 	auto& renderSystem = GetRenderSystem();
 
@@ -236,7 +236,7 @@ void _008SpecularLighting::Render()
 	renderSystem.Draw(m_geom->vao);
 }
 //-----------------------------------------------------------------------------
-void _008SpecularLighting::Update(float deltaTime)
+void _011SpecularLighting::Update(float deltaTime)
 {
 	if (GetInput().IsKeyDown(Input::KEY_ESCAPE))
 	{

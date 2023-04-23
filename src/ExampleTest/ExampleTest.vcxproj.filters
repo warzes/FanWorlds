@@ -21,13 +21,13 @@
     <ClCompile Include="005_BasicTexture.cpp">
       <Filter>BasicExample</Filter>
     </ClCompile>
-    <ClCompile Include="010_OtherMultipleLights.cpp">
+    <ClCompile Include="013_OtherMultipleLights.cpp">
       <Filter>BasicExample</Filter>
     </ClCompile>
-    <ClCompile Include="011_BasicObjModel.cpp">
+    <ClCompile Include="016_BasicObjModel.cpp">
       <Filter>BasicExample</Filter>
     </ClCompile>
-    <ClCompile Include="012_Framebuffer.cpp">
+    <ClCompile Include="017_Framebuffer.cpp">
       <Filter>BasicExample</Filter>
     </ClCompile>
     <ClCompile Include="001_BPMinimal.cpp">
@@ -42,16 +42,31 @@
     <ClCompile Include="DynamicCharacterController.cpp">
       <Filter>Bullet Physics</Filter>
     </ClCompile>
-    <ClCompile Include="006_DiffuseLighting.cpp">
+    <ClCompile Include="009_DiffuseLighting.cpp">
       <Filter>BasicExample</Filter>
     </ClCompile>
-    <ClCompile Include="007_AmbientLighting.cpp">
+    <ClCompile Include="010_AmbientLighting.cpp">
       <Filter>BasicExample</Filter>
     </ClCompile>
-    <ClCompile Include="008_SpecularLighting.cpp">
+    <ClCompile Include="011_SpecularLighting.cpp">
       <Filter>BasicExample</Filter>
     </ClCompile>
-    <ClCompile Include="009_MultiplePointLights.cpp">
+    <ClCompile Include="012_MultiplePointLights.cpp">
+      <Filter>BasicExample</Filter>
+    </ClCompile>
+    <ClCompile Include="006_Multitexturing.cpp">
+      <Filter>BasicExample</Filter>
+    </ClCompile>
+    <ClCompile Include="007_LightMaps.cpp">
+      <Filter>BasicExample</Filter>
+    </ClCompile>
+    <ClCompile Include="008_AlphaMapping.cpp">
+      <Filter>BasicExample</Filter>
+    </ClCompile>
+    <ClCompile Include="014_NormalMapping.cpp">
+      <Filter>BasicExample</Filter>
+    </ClCompile>
+    <ClCompile Include="015_SpecularMapping.cpp">
       <Filter>BasicExample</Filter>
     </ClCompile>
   </ItemGroup>
@@ -75,13 +90,13 @@
     <ClInclude Include="005_BasicTexture.h">
       <Filter>BasicExample</Filter>
     </ClInclude>
-    <ClInclude Include="010_OtherMultipleLights.h">
+    <ClInclude Include="013_OtherMultipleLights.h">
       <Filter>BasicExample</Filter>
     </ClInclude>
-    <ClInclude Include="011_BasicObjModel.h">
+    <ClInclude Include="016_BasicObjModel.h">
       <Filter>BasicExample</Filter>
     </ClInclude>
-    <ClInclude Include="012_Framebuffer.h">
+    <ClInclude Include="017_Framebuffer.h">
       <Filter>BasicExample</Filter>
     </ClInclude>
     <ClInclude Include="001_BPMinimal.h">
@@ -96,16 +111,31 @@
     <ClInclude Include="DynamicCharacterController.h">
       <Filter>Bullet Physics</Filter>
     </ClInclude>
-    <ClInclude Include="006_DiffuseLighting.h">
+    <ClInclude Include="009_DiffuseLighting.h">
       <Filter>BasicExample</Filter>
     </ClInclude>
-    <ClInclude Include="007_AmbientLighting.h">
+    <ClInclude Include="010_AmbientLighting.h">
       <Filter>BasicExample</Filter>
     </ClInclude>
-    <ClInclude Include="008_SpecularLighting.h">
+    <ClInclude Include="011_SpecularLighting.h">
       <Filter>BasicExample</Filter>
     </ClInclude>
-    <ClInclude Include="009_MultiplePointLights.h">
+    <ClInclude Include="012_MultiplePointLights.h">
+      <Filter>BasicExample</Filter>
+    </ClInclude>
+    <ClInclude Include="006_Multitexturing.h">
+      <Filter>BasicExample</Filter>
+    </ClInclude>
+    <ClInclude Include="007_LightMaps.h">
+      <Filter>BasicExample</Filter>
+    </ClInclude>
+    <ClInclude Include="008_AlphaMapping.h">
+      <Filter>BasicExample</Filter>
+    </ClInclude>
+    <ClInclude Include="014_NormalMapping.h">
+      <Filter>BasicExample</Filter>
+    </ClInclude>
+    <ClInclude Include="015_SpecularMapping.h">
       <Filter>BasicExample</Filter>
     </ClInclude>
   </ItemGroup>

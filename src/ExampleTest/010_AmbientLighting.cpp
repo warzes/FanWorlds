@@ -1,9 +1,9 @@
 #include "stdafx.h"
-#include "007_AmbientLighting.h"
+#include "010_AmbientLighting.h"
 //-----------------------------------------------------------------------------
-bool _007AmbientLighting::Create()
+bool _010AmbientLighting::Create()
 {
-	Print("_007AmbientLighting Create");
+	Print("_010AmbientLighting Create");
 
 	const char* vertexShaderText = R"(
 #version 330 core
@@ -147,16 +147,16 @@ void main()
 	return true;
 }
 //-----------------------------------------------------------------------------
-void _007AmbientLighting::Destroy()
+void _010AmbientLighting::Destroy()
 {
 	m_shader.reset();
 	m_geom.reset();
 	m_texture.reset();
 
-	Print("_007AmbientLighting Destroy");
+	Print("_010AmbientLighting Destroy");
 }
 //-----------------------------------------------------------------------------
-void _007AmbientLighting::Render()
+void _010AmbientLighting::Render()
 {
 	auto& renderSystem = GetRenderSystem();
 
@@ -183,7 +183,7 @@ void _007AmbientLighting::Render()
 	renderSystem.Draw(m_geom->vao);
 }
 //-----------------------------------------------------------------------------
-void _007AmbientLighting::Update(float deltaTime)
+void _010AmbientLighting::Update(float deltaTime)
 {
 	if (GetInput().IsKeyDown(Input::KEY_ESCAPE))
 	{

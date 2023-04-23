@@ -1,12 +1,6 @@
 #pragma once
 
-struct _006LightClass
-{
-	glm::vec4 diffuseColor;
-	glm::vec3 direction;
-};
-
-class _006DiffuseLighting final : public IApp
+class _015SpecularMapping final : public IApp
 {
 	bool Create() final;
 	void Destroy() final;
@@ -22,17 +16,19 @@ private:
 	Uniform m_uniformProjectionMatrix;
 	Uniform m_uniformViewMatrix;
 	Uniform m_uniformWorldMatrix;
+	Uniform m_uniformCameraPosition;
+
 	Uniform m_uniformLightDirection;
-	Uniform m_uniformLightColor;
+	Uniform m_uniformDiffuseLightColor;
+	Uniform m_uniformSpecularColor;
+	Uniform m_uniformSpecularPower;
 
 	glm::mat4 m_perspective;
-
 	GeometryBufferRef m_geom;
-	Texture2DRef m_texture;
-
-	_006LightClass m_diffuse;
+	Texture2DRef m_texture1;
+	Texture2DRef m_texture2;
+	Texture2DRef m_texture3;
 
 	Camera m_camera;
-
 	float m_rotation = 360.0f;
 };

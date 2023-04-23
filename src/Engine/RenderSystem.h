@@ -99,6 +99,8 @@ public:
 	void SetUniform(const Uniform& uniform, const glm::vec4& value);
 	void SetUniform(const Uniform& uniform, const glm::mat3& value);
 	void SetUniform(const Uniform& uniform, const glm::mat4& value);
+	void SetUniform3(const Uniform& uniform, unsigned number, float* value);
+	void SetUniform4(const Uniform& uniform, unsigned number, float* value);
 
 	// не рекомендуется - только для быстрого теста
 	void SetUniform(const std::string& uniformName, int value);

@@ -1,9 +1,9 @@
 #include "stdafx.h"
-#include "005_BasicTexture.h"
+#include "008_AlphaMapping.h"
 //-----------------------------------------------------------------------------
-bool _005BasicTexture::Create()
+bool _008AlphaMapping::Create()
 {
-	Print("005_BasicTexture Create");
+	Print("_008AlphaMapping Create");
 
 	const char* vertexShaderText = R"(
 #version 330 core
@@ -26,13 +26,28 @@ void main()
 #version 330 core
 
 in vec2 TexCoord;
-out vec4 FragColor;
+out vec4 outputColor;
 
-uniform sampler2D Texture;
+uniform sampler2D Texture1;
+uniform sampler2D Texture2;
+uniform sampler2D Texture3;
 
 void main()
 {
-	FragColor = texture(Texture, TexCoord);
+	// Get the pixel color from the first texture.
+	vec4 color1 = texture(Texture1, TexCoord);
+
+	// Get the pixel color from the second texture.
+	vec4 color2 = texture(Texture2, TexCoord);
+
+	// Get the pixel color from the alpha texture.
+	vec4 alphaValue = texture(Texture3, TexCoord);
+
+	// Combine the two textures based on the alpha value.
+	vec4 blendColor = (alphaValue * color1) + ((1.0 - alphaValue) * color2);
+
+	// Saturate the final color value.
+	outputColor = clamp(blendColor, 0.0f, 1.0f);
 }
 )";
 
@@ -64,21 +79,25 @@ void main()
 
 	m_geom = renderSystem.CreateGeometryBuffer(BufferUsage::StaticDraw, Countof(vert), sizeof(testVertex), vert, Countof(indices), IndexType::Uint32, indices, m_shader);
 
-	m_texture = renderSystem.CreateTexture2D("../ExampleData/textures/1mx1m.png");
+	m_texture1 = renderSystem.CreateTexture2D("../ExampleData/textures/stone01.png");
+	m_texture2 = renderSystem.CreateTexture2D("../ExampleData/textures/dirt01.png");
+	m_texture3 = renderSystem.CreateTexture2D("../ExampleData/textures/alpha01.png");
 
 	return true;
 }
 //-----------------------------------------------------------------------------
-void _005BasicTexture::Destroy()
+void _008AlphaMapping::Destroy()
 {
 	m_shader.reset();
 	m_geom.reset();
-	m_texture.reset();
+	m_texture1.reset();
+	m_texture2.reset();
+	m_texture3.reset();
 
-	Print("005_BasicTexture Destroy");
+	Print("_008AlphaMapping Destroy");
 }
 //-----------------------------------------------------------------------------
-void _005BasicTexture::Render()
+void _008AlphaMapping::Render()
 {
 	auto& renderSystem = GetRenderSystem();
 
@@ -91,14 +110,18 @@ void _005BasicTexture::Render()
 	}
 
 	renderSystem.ClearFrame();
-	renderSystem.Bind(m_texture, 0);
+	renderSystem.Bind(m_texture1, 0);
+	renderSystem.Bind(m_texture2, 1);
+	renderSystem.Bind(m_texture3, 2);
 	renderSystem.Bind(m_shader);
 	renderSystem.SetUniform(m_uniformProjectionMatrix, m_perspective);
-	renderSystem.SetUniform("Texture", 0);
+	renderSystem.SetUniform("Texture1", 0);
+	renderSystem.SetUniform("Texture2", 1);
+	renderSystem.SetUniform("Texture3", 2);
 	renderSystem.Draw(m_geom->vao);
 }
 //-----------------------------------------------------------------------------
-void _005BasicTexture::Update(float deltaTime)
+void _008AlphaMapping::Update(float deltaTime)
 {
 	if (GetInput().IsKeyDown(Input::KEY_ESCAPE))
 	{

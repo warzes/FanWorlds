@@ -1,9 +1,9 @@
 #include "stdafx.h"
-#include "006_DiffuseLighting.h"
+#include "009_DiffuseLighting.h"
 //-----------------------------------------------------------------------------
-bool _006DiffuseLighting::Create()
+bool _009DiffuseLighting::Create()
 {
-	Print("_006DiffuseLighting Create");
+	Print("_009DiffuseLighting Create");
 
 	const char* vertexShaderText = R"(
 #version 330 core
@@ -104,16 +104,16 @@ void main()
 	return true;
 }
 //-----------------------------------------------------------------------------
-void _006DiffuseLighting::Destroy()
+void _009DiffuseLighting::Destroy()
 {
 	m_shader.reset();
 	m_geom.reset();
 	m_texture.reset();
 
-	Print("_006DiffuseLighting Destroy");
+	Print("_009DiffuseLighting Destroy");
 }
 //-----------------------------------------------------------------------------
-void _006DiffuseLighting::Render()
+void _009DiffuseLighting::Render()
 {
 	auto& renderSystem = GetRenderSystem();
 
@@ -139,14 +139,13 @@ void _006DiffuseLighting::Render()
 	renderSystem.Draw(m_geom->vao);
 }
 //-----------------------------------------------------------------------------
-void _006DiffuseLighting::Update(float deltaTime)
+void _009DiffuseLighting::Update(float deltaTime)
 {
 	if (GetInput().IsKeyDown(Input::KEY_ESCAPE))
 	{
 		BaseClass::ExitRequest();
 		return;
 	}
-
 
 	m_rotation -= 0.0174532925f * 3000.0f * deltaTime;
 	if (m_rotation <= 0.0f)

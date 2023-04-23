@@ -1,13 +1,15 @@
 #pragma once
 
-struct _007LightClass
+struct _011LightClass
 {
 	glm::vec4 diffuseColor;
 	glm::vec3 direction;
 	glm::vec4 ambientLight;
+	glm::vec4 specularColor;
+	float specularPower;
 };
 
-class _007AmbientLighting final : public IApp
+class _011SpecularLighting final : public IApp
 {
 	bool Create() final;
 	void Destroy() final;
@@ -23,16 +25,19 @@ private:
 	Uniform m_uniformProjectionMatrix;
 	Uniform m_uniformViewMatrix;
 	Uniform m_uniformWorldMatrix;
+	Uniform m_uniformCameraPosition;
 	Uniform m_uniformLightDirection;
 	Uniform m_uniformLightDiffuseColor;
 	Uniform m_uniformLightAmbientColor;
+	Uniform m_uniformLightSpecularPower;
+	Uniform m_uniformLightSpecularColor;
 
 	glm::mat4 m_perspective;
 
 	GeometryBufferRef m_geom;
 	Texture2DRef m_texture;
 
-	_007LightClass m_light;
+	_011LightClass m_light;
 
 	Camera m_camera;
 

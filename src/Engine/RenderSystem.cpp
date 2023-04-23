@@ -225,6 +225,18 @@ void RenderSystem::SetUniform(const Uniform& uniform, const glm::mat4& value)
 	glUniformMatrix4fv(uniform.location, 1, GL_FALSE, glm::value_ptr(value));
 }
 //-----------------------------------------------------------------------------
+void RenderSystem::SetUniform3(const Uniform& uniform, unsigned number, float* value)
+{
+	assert(IsReadyUniform(uniform));
+	glUniform3fv(uniform.location, number, value);
+}
+//-----------------------------------------------------------------------------
+void RenderSystem::SetUniform4(const Uniform& uniform, unsigned number, float* value)
+{
+	assert(IsReadyUniform(uniform));
+	glUniform4fv(uniform.location, number, value);
+}
+//-----------------------------------------------------------------------------
 void RenderSystem::SetUniform(const std::string& uniformName, int value)
 {
 	assert(m_cache.CurrentShaderProgram > 0);

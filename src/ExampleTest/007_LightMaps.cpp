@@ -1,9 +1,9 @@
 #include "stdafx.h"
-#include "005_BasicTexture.h"
+#include "007_LightMaps.h"
 //-----------------------------------------------------------------------------
-bool _005BasicTexture::Create()
+bool _007LightMaps::Create()
 {
-	Print("005_BasicTexture Create");
+	Print("_007LightMaps Create");
 
 	const char* vertexShaderText = R"(
 #version 330 core
@@ -26,13 +26,20 @@ void main()
 #version 330 core
 
 in vec2 TexCoord;
-out vec4 FragColor;
+out vec4 outputColor;
 
-uniform sampler2D Texture;
+uniform sampler2D Texture1;
+uniform sampler2D Texture2;
 
 void main()
 {
-	FragColor = texture(Texture, TexCoord);
+	// Get the pixel color from the color texture.
+	vec4 color = texture(Texture1, TexCoord);
+	// Get the pixel color from the light map.
+	vec4 lightColor = texture(Texture2, TexCoord);
+
+	// Combine the color texture with the light map and return the combined pixel value.
+	outputColor = color * lightColor;
 }
 )";
 
@@ -64,21 +71,23 @@ void main()
 
 	m_geom = renderSystem.CreateGeometryBuffer(BufferUsage::StaticDraw, Countof(vert), sizeof(testVertex), vert, Countof(indices), IndexType::Uint32, indices, m_shader);
 
-	m_texture = renderSystem.CreateTexture2D("../ExampleData/textures/1mx1m.png");
+	m_texture1 = renderSystem.CreateTexture2D("../ExampleData/textures/stone01.png");
+	m_texture2 = renderSystem.CreateTexture2D("../ExampleData/textures/light01.png");
 
 	return true;
 }
 //-----------------------------------------------------------------------------
-void _005BasicTexture::Destroy()
+void _007LightMaps::Destroy()
 {
 	m_shader.reset();
 	m_geom.reset();
-	m_texture.reset();
+	m_texture1.reset();
+	m_texture2.reset();
 
-	Print("005_BasicTexture Destroy");
+	Print("_007LightMaps Destroy");
 }
 //-----------------------------------------------------------------------------
-void _005BasicTexture::Render()
+void _007LightMaps::Render()
 {
 	auto& renderSystem = GetRenderSystem();
 
@@ -91,14 +100,16 @@ void _005BasicTexture::Render()
 	}
 
 	renderSystem.ClearFrame();
-	renderSystem.Bind(m_texture, 0);
+	renderSystem.Bind(m_texture1, 0);
+	renderSystem.Bind(m_texture2, 1);
 	renderSystem.Bind(m_shader);
 	renderSystem.SetUniform(m_uniformProjectionMatrix, m_perspective);
-	renderSystem.SetUniform("Texture", 0);
+	renderSystem.SetUniform("Texture1", 0);
+	renderSystem.SetUniform("Texture2", 1);
 	renderSystem.Draw(m_geom->vao);
 }
 //-----------------------------------------------------------------------------
-void _005BasicTexture::Update(float deltaTime)
+void _007LightMaps::Update(float deltaTime)
 {
 	if (GetInput().IsKeyDown(Input::KEY_ESCAPE))
 	{
