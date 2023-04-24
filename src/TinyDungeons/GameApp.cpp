@@ -1,5 +1,47 @@
 #include "stdafx.h"
 #include "GameApp.h"
+
+
+шутер в стиле
+https ://youdoyoubuddy.itch.io/lead-haul
+
+использовать тайл
+https ://little-martian.itch.io/retro-texture-pack
+https://merchant-shade.itch.io/16x16-mini-world-sprites
+перерисовать:
+https://brysiaa.itch.io/pixel-tileset-grass-island
+
+
+
+повторить одну из этмх
+https ://youdoyoubuddy.itch.io/lead-haul
+https://freds72.itch.io/poom
+
+
+Может это
+https ://github.com/ScrappyCocco/ScrapEngine
+физика - реакт
+
+тайлы отсюда
+https ://github.com/jdah/microcraft
+
+
+повторить это
+вода и трава - https ://github.com/leaf3d/leaf3d
+	небо - https ://github.com/shff/opengl_sky
+
+	https ://github.com/staniks/worship-mirror
+
+
+
+
+
+
+
+
+
+
+
 //план
 //- посмотреть редактор - https://www.youtube.com/watch?v=GukhptdHlPk
 // по кубо-редактору
