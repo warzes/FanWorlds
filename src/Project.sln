@@ -72,6 +72,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "BounceLib", "BounceLib\Boun
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "solid3Lib", "solid3Lib\solid3Lib.vcxproj", "{437EBAAD-ED3B-4FC7-B2AD-315E9006E2A4}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SimplePhysicsTest", "SimplePhysicsTest\SimplePhysicsTest.vcxproj", "{266234C5-6958-4771-B9F7-2A42F2147567}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -122,6 +124,10 @@ Global
 		{437EBAAD-ED3B-4FC7-B2AD-315E9006E2A4}.Debug|x64.Build.0 = Debug|x64
 		{437EBAAD-ED3B-4FC7-B2AD-315E9006E2A4}.Release|x64.ActiveCfg = Release|x64
 		{437EBAAD-ED3B-4FC7-B2AD-315E9006E2A4}.Release|x64.Build.0 = Release|x64
+		{266234C5-6958-4771-B9F7-2A42F2147567}.Debug|x64.ActiveCfg = Debug|x64
+		{266234C5-6958-4771-B9F7-2A42F2147567}.Debug|x64.Build.0 = Debug|x64
+		{266234C5-6958-4771-B9F7-2A42F2147567}.Release|x64.ActiveCfg = Release|x64
+		{266234C5-6958-4771-B9F7-2A42F2147567}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
