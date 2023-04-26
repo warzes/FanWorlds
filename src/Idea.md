@@ -1,8 +1,6 @@
 смотреть
 https://www.youtube.com/watch?v=6-73WKpMylY
 
-bulletOpenGL
-https ://www.rastertek.com/tutgl4linux.html
 RuinIsland_GLSL_Demo
 
 небо
@@ -23,27 +21,16 @@ http ://steps3d.narod.ru/tutorials/ssao-tutorial.html
 http://steps3d.narod.ru/tutorials/lighting-tutorial.html
 
 
-
-
-
-
 идеи
 https ://assetstore.unity.com/packages/tools/level-design/roomgen-procedural-generator-215804#releases
 
 
 https://www.youtube.com/watch?v=eIp3cz2jRRM
 
-https://forum.cgpersia.com/plugins-unicrydk/
-
 вот на этом видео я придумал редактор
-https ://www.youtube.com/watch?v=48x6tHGKZ5U
-
+https://www.youtube.com/watch?v=48x6tHGKZ5U
 
 https://github.com/acdemiralp?tab=repositories
-
-
-
-
 
 
 сделать такое из вокселей

@@ -3,6 +3,7 @@
 #include "MeshLibrary.h"
 
 class EditorMap;
+class EditorMapObject;
 
 class EditorCollectModels
 {
@@ -11,7 +12,7 @@ public:
 	void Destroy();
 
 	void DrawPreview(RenderSystem& renderSystem, GraphicsSystem& graphicsSystem, const glm::mat4& proj, const glm::mat4& view, const glm::vec3& centerPos);
-	void DrawSelBox(RenderSystem& renderSystem, GraphicsSystem& graphicsSystem, const glm::mat4& proj, const glm::mat4& view, const glm::vec3& pos, const glm::vec3& scale);
+	void DrawSelBox(RenderSystem& renderSystem, GraphicsSystem& graphicsSystem, const glm::mat4& proj, const glm::mat4& view, const glm::vec3& pos, const glm::vec3& eulerRot, const glm::vec3& scales);
 
 	void DrawMap(RenderSystem& renderSystem, GraphicsSystem& graphicsSystem, const glm::mat4& proj, const glm::mat4& view, const EditorMap& map);
 
@@ -30,6 +31,11 @@ public:
 	AABB GetCurrentAABB() const { return m_meshLib.meshes[m_currentMesh].globalAABB; }
 
 private:
+	void resetTransform();
+	glm::mat4 computeCurrentTransform();
+	void computeTransform(const EditorMapObject& object, glm::mat4& world);
+
+
 	ShaderProgramRef m_shader;
 	Uniform m_uniformProjectionMatrix;
 	Uniform m_uniformViewMatrix;
@@ -42,8 +48,10 @@ private:
 	ShaderProgramRef m_shaderSelBox;
 	Uniform m_uniformSelBoxWVPMatrix;
 
+	Texture2DRef m_tempTexture;
+
 	unsigned m_currentMesh = 0;
 	glm::vec3 m_currentWorldPos = glm::vec3(0.0f);
 	glm::vec3 m_currentScale = glm::vec3(1.0f);
-	glm::vec3 m_currentEulerRot = { 0.0f, 45.0f, 0.0f };
+	glm::vec3 m_currentEulerRot = { 0.0f, 0.0f, 0.0f };
 };

@@ -53,12 +53,13 @@ private:
 	
 	// grid data
 	float m_currentGridHeight = 0.0f;
-	float m_currentGridStepHeight = 0.1f;
+	float m_currentGridStepHeight = 0.5f;
 	float m_currentSizeCell = 1.0f;
 	float m_currentSizeMap = 1000.0f;
 
 	// select data
 	glm::vec3 m_selectBoxPos;
+	glm::vec3 m_selectBoxEulerRot;
 	glm::vec3 m_selectBoxScale;
 	bool m_isVisibleSelectBox = false;
 	unsigned m_selectObjectId = 0;

@@ -76,7 +76,7 @@ void main()
 	// HDR tonemapping
 	//fragColor.rgb = fragColor.rgb / (fragColor.rgb + vec3(1.0));
 	// gamma correct
-	//fragColor.rgb = pow(fragColor.rgb, vec3(1.0 / 2.2));
+	fragColor.rgb = pow(fragColor.rgb, vec3(1.0 / 2.2));
 }
 )";
 
@@ -119,10 +119,19 @@ void main()
 	}
 
 	m_modelFileName = "../TinyDungeonsData/models/model.obj";
-	 ModelRef model = graphicsSystem.CreateModel("../TinyDungeonsData/models/model.obj", "../TinyDungeonsData/models/");
+	 ModelRef model = graphicsSystem.CreateModel("../TinyDungeonsData/models/myModel.obj", "../TinyDungeonsData/models/");
 	m_meshLib.Create(renderSystem, model);
 	
 	m_modelSelBox = graphicsSystem.CreateModel("../TinyDungeonsData/models/selBox.obj", "../TinyDungeonsData/models/");
+
+	m_tempTexture = renderSystem.CreateTexture2D("../\TinyDungeonsData/textures/temp.png");
+
+	for (size_t i = 0; i < m_meshLib.meshes.size(); i++)
+	{
+		Mesh& mesh = m_meshLib.meshes[i];
+		mesh.material.diffuseTexture = m_tempTexture;
+	}
+
 
 	return true;
 }
@@ -143,25 +152,25 @@ void EditorCollectModels::DrawPreview(RenderSystem& renderSystem, GraphicsSystem
 	m_currentWorldPos = centerPos;
 	m_currentWorldPos.y += extent;
 
-	// TODO: refact
-	const glm::mat4 translate = glm::translate(glm::mat4(1.0f), m_currentWorldPos);
-	const glm::mat4 transformX = glm::rotate(glm::mat4(1.0f), glm::radians(m_currentEulerRot.x), glm::vec3(1.0f, 0.0f, 0.0f));
-	const glm::mat4 transformY = glm::rotate(glm::mat4(1.0f), glm::radians(m_currentEulerRot.y), glm::vec3(0.0f, 1.0f, 0.0f));
-	const glm::mat4 transformZ = glm::rotate(glm::mat4(1.0f), glm::radians(m_currentEulerRot.z), glm::vec3(0.0f, 0.0f, 1.0f));
-	const glm::mat4 rotaionMatrix = transformY * transformX * transformZ;
-	const glm::mat4 world = translate * rotaionMatrix /** scale*/;
-
 	renderSystem.Bind(m_shader);
 	renderSystem.SetUniform(m_uniformProjectionMatrix, proj);
 	renderSystem.SetUniform(m_uniformViewMatrix, view);
-	renderSystem.SetUniform(m_uniformWorldMatrix, world);
+	renderSystem.SetUniform(m_uniformWorldMatrix, computeCurrentTransform());
 	renderSystem.SetUniform("DiffuseTexture", 0);
 	graphicsSystem.Draw(mesh);
 }
 //-----------------------------------------------------------------------------
-void EditorCollectModels::DrawSelBox(RenderSystem& renderSystem, GraphicsSystem& graphicsSystem, const glm::mat4& proj, const glm::mat4& view, const glm::vec3& pos, const glm::vec3& scale)
+void EditorCollectModels::DrawSelBox(RenderSystem& renderSystem, GraphicsSystem& graphicsSystem, const glm::mat4& proj, const glm::mat4& view, const glm::vec3& pos, const glm::vec3& eulerRot, const glm::vec3& scales)
 {
-	const glm::mat4 world = glm::scale(glm::translate(glm::mat4(1.0f), pos), scale);
+	const glm::mat4 one = glm::mat4(1.0f);
+	const glm::mat4 translate = glm::translate(one, pos);
+	const glm::mat4 scale = glm::scale(one, scales);
+	const glm::mat4 transformX = glm::rotate(one, glm::radians(eulerRot.x), glm::vec3(1.0f, 0.0f, 0.0f));
+	const glm::mat4 transformY = glm::rotate(one, glm::radians(eulerRot.y), glm::vec3(0.0f, 1.0f, 0.0f));
+	const glm::mat4 transformZ = glm::rotate(one, glm::radians(eulerRot.z), glm::vec3(0.0f, 0.0f, 1.0f));
+	const glm::mat4 rotaionMatrix = transformY * transformX * transformZ;
+	const glm::mat4 world = translate * rotaionMatrix * scale;
+
 	renderSystem.Bind(m_shaderSelBox);
 	renderSystem.SetUniform(m_uniformSelBoxWVPMatrix, proj * view * world);
 	graphicsSystem.Draw(m_modelSelBox);
@@ -180,14 +189,7 @@ void EditorCollectModels::DrawMap(RenderSystem& renderSystem, GraphicsSystem& gr
 	{
 		const EditorMapObject& object = map.object[i].object;
 		Mesh& mesh = m_meshLib.meshes[object.meshIndex];
-
-		// TODO: refact
-		const glm::mat4 translate = glm::translate(glm::mat4(1.0f), object.worldPosition);
-		const glm::mat4 transformX = glm::rotate(glm::mat4(1.0f), glm::radians(object.eulerRot.x), glm::vec3(1.0f, 0.0f, 0.0f));
-		const glm::mat4 transformY = glm::rotate(glm::mat4(1.0f), glm::radians(object.eulerRot.y), glm::vec3(0.0f, 1.0f, 0.0f));
-		const glm::mat4 transformZ = glm::rotate(glm::mat4(1.0f), glm::radians(object.eulerRot.z), glm::vec3(0.0f, 0.0f, 1.0f));
-		const glm::mat4 rotaionMatrix = transformY * transformX * transformZ;
-		world = translate * rotaionMatrix /** scale*/;
+		computeTransform(object, world);
 		renderSystem.SetUniform(m_uniformWorldMatrix, world);
 		graphicsSystem.Draw(mesh);
 	}
@@ -195,12 +197,40 @@ void EditorCollectModels::DrawMap(RenderSystem& renderSystem, GraphicsSystem& gr
 //-----------------------------------------------------------------------------
 void EditorCollectModels::NextMesh()
 {
+	resetTransform();
 	if( m_currentMesh < m_meshLib.meshes.size() - 1 )
 		m_currentMesh++;
 }
 //-----------------------------------------------------------------------------
 void EditorCollectModels::PrevMesh()
 {
+	resetTransform();
 	if( m_currentMesh > 0 ) m_currentMesh--;
+}
+//-----------------------------------------------------------------------------
+void EditorCollectModels::resetTransform()
+{
+	m_currentScale = glm::vec3(1.0f);
+	m_currentEulerRot = { 0.0f, 0.0f, 0.0f };
+}
+//-----------------------------------------------------------------------------
+glm::mat4 EditorCollectModels::computeCurrentTransform()
+{
+	const glm::mat4 translate = glm::translate(glm::mat4(1.0f), m_currentWorldPos);
+	const glm::mat4 transformX = glm::rotate(glm::mat4(1.0f), glm::radians(m_currentEulerRot.x), glm::vec3(1.0f, 0.0f, 0.0f));
+	const glm::mat4 transformY = glm::rotate(glm::mat4(1.0f), glm::radians(m_currentEulerRot.y), glm::vec3(0.0f, 1.0f, 0.0f));
+	const glm::mat4 transformZ = glm::rotate(glm::mat4(1.0f), glm::radians(m_currentEulerRot.z), glm::vec3(0.0f, 0.0f, 1.0f));
+	const glm::mat4 rotaionMatrix = transformY * transformX * transformZ;
+	return translate * rotaionMatrix /** scale*/;
+}
+//-----------------------------------------------------------------------------
+void EditorCollectModels::computeTransform(const EditorMapObject& object, glm::mat4& world)
+{
+	const glm::mat4 translate = glm::translate(glm::mat4(1.0f), object.worldPosition);
+	const glm::mat4 transformX = glm::rotate(glm::mat4(1.0f), glm::radians(object.eulerRot.x), glm::vec3(1.0f, 0.0f, 0.0f));
+	const glm::mat4 transformY = glm::rotate(glm::mat4(1.0f), glm::radians(object.eulerRot.y), glm::vec3(0.0f, 1.0f, 0.0f));
+	const glm::mat4 transformZ = glm::rotate(glm::mat4(1.0f), glm::radians(object.eulerRot.z), glm::vec3(0.0f, 0.0f, 1.0f));
+	const glm::mat4 rotaionMatrix = transformY * transformX * transformZ;
+	world = translate * rotaionMatrix /** scale*/;
 }
 //-----------------------------------------------------------------------------

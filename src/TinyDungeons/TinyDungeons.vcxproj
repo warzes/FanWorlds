@@ -96,6 +96,7 @@
     <ClCompile Include="DrawGrid.cpp" />
     <ClCompile Include="EditorCollectModels.cpp" />
     <ClCompile Include="EditorCursor.cpp" />
+    <ClCompile Include="EditorSelectorObject.cpp" />
     <ClCompile Include="EditorState_Create.cpp" />
     <ClCompile Include="EditorState_drawImgui.cpp" />
     <ClCompile Include="EditorState_Func.cpp" />
@@ -128,6 +129,7 @@
     <ClInclude Include="IGameState.h" />
     <ClInclude Include="MeshLibrary.h" />
     <ClInclude Include="Ray.h" />
+    <ClInclude Include="EditorSelectorObject.h" />
     <ClInclude Include="SpaceMath.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="VertexFormat.h" />

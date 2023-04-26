@@ -112,7 +112,7 @@ void EditorState::changeGrid(Input& input)
 	if( input.IsKeyDown(Input::KEY_Q) && input.IsKeyDown(Input::KEY_E) ) // сброс сетки на дефолтную
 	{
 		m_currentGridHeight = 0.0f;
-		m_currentGridStepHeight = 0.1f;
+		m_currentGridStepHeight = 0.5f;
 		m_currentSizeCell = 1.0f;
 	}
 	else if( input.IsKeyPressed(Input::KEY_E) )

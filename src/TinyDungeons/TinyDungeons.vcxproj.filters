@@ -46,6 +46,9 @@
     <ClCompile Include="MeshLibrary.cpp">
       <Filter>Framework</Filter>
     </ClCompile>
+    <ClCompile Include="EditorSelectorObject.cpp">
+      <Filter>Editor\Core</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameApp.h" />
@@ -91,6 +94,9 @@
     </ClInclude>
     <ClInclude Include="MeshLibrary.h">
       <Filter>Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="EditorSelectorObject.h">
+      <Filter>Editor\Core</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

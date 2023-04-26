@@ -50,7 +50,7 @@ void EditorState::OnFrame()
 	if( m_editorMode == EditorMode::Select )
 	{
 		if ( m_isVisibleSelectBox )
-			m_collectModels.DrawSelBox(renderSystem, graphicsSystem, m_perspective, view, m_selectBoxPos, m_selectBoxScale);
+			m_collectModels.DrawSelBox(renderSystem, graphicsSystem, m_perspective, view, m_selectBoxPos, m_selectBoxEulerRot, m_selectBoxScale);
 	}
 	// отрисовка только в режиме добавления
 	if( !m_freeLook && m_editorMode == EditorMode::Add )
@@ -93,6 +93,7 @@ void EditorState::selectObjectInMap(Input& input)
 			rayCol = boxHitInfo;
 			m_isVisibleSelectBox = true;
 			m_selectBoxPos = obj.worldPosition;
+			m_selectBoxEulerRot = obj.eulerRot;
 			m_selectBoxScale = obj.aabb.GetDimensions() * 1.1f;
 			m_selectObjectId = i;
 		}
