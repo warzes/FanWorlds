@@ -65,6 +65,12 @@
     <ClCompile Include="Math.cpp">
       <Filter>Core\Math</Filter>
     </ClCompile>
+    <ClCompile Include="Path.cpp">
+      <Filter>Core\IO</Filter>
+    </ClCompile>
+    <ClCompile Include="Error.cpp">
+      <Filter>Core\Logging</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h" />
@@ -164,6 +170,12 @@
     </ClInclude>
     <ClInclude Include="MathCoreFunc.h">
       <Filter>Core\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Path.h">
+      <Filter>Core\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="Error.h">
+      <Filter>Core\Logging</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -39,6 +39,24 @@ void EngineDevice::RunApp(std::shared_ptr<IApp> app)
 
 		while( !m_isExitRequested )
 		{
+			extern bool IsError; // ==> Error.cpp
+			extern bool IsFatal; // ==> Error.cpp
+			extern std::string ErrorText; // ==> Error.cpp
+			
+			if( IsFatal )
+			{
+				m_logSystem.Fatal(ErrorText);
+				ErrorText = "";
+				IsFatal = false;
+				break;
+			}
+			if( IsError )
+			{
+				m_logSystem.Error(ErrorText);
+				ErrorText = "";
+				IsError = false;
+			}
+
 			update();
 			render();
 			present();

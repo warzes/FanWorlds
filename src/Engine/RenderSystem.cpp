@@ -122,6 +122,12 @@ void RenderSystem::ClearFrame()
 	glClear(m_cache.CurrentClearMask);
 }
 //-----------------------------------------------------------------------------
+void RenderSystem::ClearFrame(const glm::vec3& color)
+{
+	glClearColor(color.x, color.y, color.z, 1.0f);
+	ClearFrame();
+}
+//-----------------------------------------------------------------------------
 void RenderSystem::SetViewport(int width, int height)
 {
 	SetViewport(0, 0, width, height);
@@ -130,6 +136,15 @@ void RenderSystem::SetViewport(int width, int height)
 void RenderSystem::SetViewport(int x, int y, int width, int height)
 {
 	glViewport(x, y, width, height);
+}
+//-----------------------------------------------------------------------------
+void RenderSystem::MainScreen()
+{
+	if( m_cache.CurrentFramebuffer > 0 )
+	{
+		m_cache.CurrentFramebuffer = 0;
+		glBindFramebuffer(GL_FRAMEBUFFER, 0);
+	}
 }
 //-----------------------------------------------------------------------------
 bool RenderSystem::IsReadyUniform(const Uniform& uniform) const

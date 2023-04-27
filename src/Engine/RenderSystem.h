@@ -29,13 +29,15 @@ public:
 	void EndFrame();
 
 	//-------------------------------------------------------------------------
-	// Current Frame Set
+	// Config Current Frame Set
 	//-------------------------------------------------------------------------
 
 	void SetClearColor(const glm::vec3& color);
 	void ClearFrame();
+	void ClearFrame(const glm::vec3& color);
 	void SetViewport(int width, int height);
 	void SetViewport(int x, int y, int width, int height);
+	void MainScreen();
 
 	//-------------------------------------------------------------------------
 	// Create Render Resource
