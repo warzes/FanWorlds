@@ -132,6 +132,11 @@
     <None Include="Editor.md">
       <Filter>_DOC</Filter>
     </None>
-    <None Include="GameIdea.md" />
+    <None Include="GameIdea.md">
+      <Filter>_DOC</Filter>
+    </None>
+    <None Include="Link.md">
+      <Filter>_DOC</Filter>
+    </None>
   </ItemGroup>
 </Project>

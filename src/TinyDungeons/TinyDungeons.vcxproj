@@ -137,6 +137,7 @@
   <ItemGroup>
     <None Include="Editor.md" />
     <None Include="GameIdea.md" />
+    <None Include="Link.md" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
