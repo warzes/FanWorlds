@@ -20,3 +20,5 @@ Thumbs.db
 /bin/Release/TestPhysX5Game.*
 /bin/Debug/TinyDungeons.*
 /bin/Release/TinyDungeons.*
+/bin/Debug/SimplePhysicsTest.*
+/bin/Release/SimplePhysicsTest.*

@@ -58,7 +58,7 @@ private:
 	Uniform m_uniformWorldMatrix;
 
 	glm::mat4 m_perspective;
-	ModelRef m_model;
+	ModelRef m_modelBox;
 	Texture2DRef m_texture;
 	Camera m_camera;
 

@@ -98,7 +98,7 @@ void main()
 	m_uniformViewMatrix = renderSystem.GetUniform(m_shader, "uView");
 	m_uniformWorldMatrix = renderSystem.GetUniform(m_shader, "uWorld");
 
-	m_model = graphicsSystem.CreateModel("../ExampleData/models/crate.obj", "../ExampleData/models/");
+	m_modelBox = graphicsSystem.CreateModel("../ExampleData/models/crate.obj", "../ExampleData/models/");
 	m_texture = renderSystem.CreateTexture2D("../ExampleData/textures/container2.png");
 
 	m_camera.Teleport(glm::vec3(0.0f, 0.0f, -5.0f));
@@ -142,7 +142,7 @@ void _001BPMinimal::Destroy()
 
 	GetInput().SetMouseLock(false);
 	m_shader.reset();
-	m_model.reset();
+	m_modelBox.reset();
 	m_texture.reset();
 
 	Print("_001BPMinimal Destroy");
@@ -198,7 +198,7 @@ void _001BPMinimal::Render()
 			world = glm::scale(world, glm::vec3(halfSize.x()*2.0f, halfSize.y() * 2.0f, halfSize.z() * 2.0f));
 
 			renderSystem.SetUniform(m_uniformWorldMatrix, world);
-			graphicsSystem.Draw(m_model);
+			graphicsSystem.Draw(m_modelBox);
 			break;
 		}
 		default:
