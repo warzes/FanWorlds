@@ -7,11 +7,17 @@
     <ClCompile Include="RenderUtils.cpp">
       <Filter>RenderUtils</Filter>
     </ClCompile>
+    <ClCompile Include="CameraUtils.cpp">
+      <Filter>RenderUtils</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameApp.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="RenderUtils.h">
+      <Filter>RenderUtils</Filter>
+    </ClInclude>
+    <ClInclude Include="CameraUtils.h">
       <Filter>RenderUtils</Filter>
     </ClInclude>
   </ItemGroup>
