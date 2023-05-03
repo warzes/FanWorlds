@@ -77,3 +77,12 @@ https://github.com/flexible-collision-library/fcl
 https://cornflowerblue.itch.io/the-orchids-edge
 
 https://github.com/felselva/uastar - поиск пути. может сработать на тайловой карте
+
+https://www.youtube.com/watch?v=C3s0UHpwlf8&t=9s
+
+https://www.youtube.com/watch?v=EkPfhzIbp2g
+https://www.youtube.com/watch?v=SBfZAVzbhCg
+тут еще есть и mixamo
+https://www.youtube.com/watch?v=oqKzxPMLWxo
+
+https://www.youtube.com/watch?v=0pCpRvoOTBs - навмеш

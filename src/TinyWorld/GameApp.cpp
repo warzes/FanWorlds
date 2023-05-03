@@ -1,6 +1,8 @@
 #include "stdafx.h"
 #include "GameApp.h"
 
+или новый репо?
+
 Основная идея в текстовом файле
 
 
