@@ -14,6 +14,7 @@ layout(location = 3) in vec2 aTexCoord;
 uniform mat4 uWorld;
 uniform mat4 uView;
 uniform mat4 uProjection;
+uniform vec3 uColor;
 
 out vec3 fNormal;
 out vec3 fColor;
@@ -23,7 +24,7 @@ void main()
 {
 	gl_Position = uProjection * uView * uWorld * vec4(aPos, 1.0);
 	fNormal = aNormal;
-	fColor = aColor;
+	fColor = aColor*uColor;
 	fTexCoord = aTexCoord;
 }
 )";
@@ -54,6 +55,7 @@ void main()
 	m_uniformProjectionMatrix = renderSystem.GetUniform(m_shader, "uProjection");
 	m_uniformViewMatrix = renderSystem.GetUniform(m_shader, "uView");
 	m_uniformWorldMatrix = renderSystem.GetUniform(m_shader, "uWorld");
+	m_uniformColor = renderSystem.GetUniform(m_shader, "uColor");
 
 	m_modelBox = graphicsSystem.CreateModel("../ExampleData/models/crate.obj", "../ExampleData/models/");
 	m_textureBox = renderSystem.CreateTexture2D("../ExampleData/textures/container2.png");
@@ -91,7 +93,7 @@ void RenderUtils::BeginDraw(const glm::mat4& proj, const glm::mat4& view)
 	renderSystem.SetUniform(m_uniformViewMatrix, view);
 }
 //-----------------------------------------------------------------------------
-void RenderUtils::DrawBox(const glm::vec3& position, const glm::vec3& scale)
+void RenderUtils::DrawBox(const glm::vec3& position, const glm::vec3& scale, const glm::vec3& color)
 {
 	auto& renderSystem = GetRenderSystem();
 	auto& graphicsSystem = GetGraphicsSystem();
@@ -102,10 +104,11 @@ void RenderUtils::DrawBox(const glm::vec3& position, const glm::vec3& scale)
 
 	renderSystem.Bind(m_textureBox, 0);
 	renderSystem.SetUniform(m_uniformWorldMatrix, world);
+	renderSystem.SetUniform(m_uniformColor, color);
 	graphicsSystem.Draw(m_modelBox);
 }
 //-----------------------------------------------------------------------------
-void RenderUtils::DrawSphere(const glm::vec3& position, const glm::vec3& scale)
+void RenderUtils::DrawSphere(const glm::vec3& position, const glm::vec3& scale, const glm::vec3& color)
 {
 	auto& renderSystem = GetRenderSystem();
 	auto& graphicsSystem = GetGraphicsSystem();
@@ -116,10 +119,11 @@ void RenderUtils::DrawSphere(const glm::vec3& position, const glm::vec3& scale)
 
 	renderSystem.Bind(m_textureSphere, 0);
 	renderSystem.SetUniform(m_uniformWorldMatrix, world);
+	renderSystem.SetUniform(m_uniformColor, color);
 	graphicsSystem.Draw(m_modelSphere);
 }
 //-----------------------------------------------------------------------------
-void RenderUtils::DrawAABB(const glm::vec3& position, const glm::vec3& scale)
+void RenderUtils::DrawAABB(const glm::vec3& position, const glm::vec3& scale, const glm::vec3& color)
 {
 	auto& renderSystem = GetRenderSystem();
 	auto& graphicsSystem = GetGraphicsSystem();
@@ -130,6 +134,7 @@ void RenderUtils::DrawAABB(const glm::vec3& position, const glm::vec3& scale)
 
 	renderSystem.Bind(m_textureAABB, 0);
 	renderSystem.SetUniform(m_uniformWorldMatrix, world);
+	renderSystem.SetUniform(m_uniformColor, color);
 	graphicsSystem.Draw(m_modelAABB);
 }
 //-----------------------------------------------------------------------------

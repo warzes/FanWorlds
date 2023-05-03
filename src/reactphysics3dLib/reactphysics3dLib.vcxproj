@@ -1,0 +1,302 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="body\CollisionBody.h" />
+    <ClInclude Include="body\RigidBody.h" />
+    <ClInclude Include="collision\broadphase\DynamicAABBTree.h" />
+    <ClInclude Include="collision\Collider.h" />
+    <ClInclude Include="collision\CollisionCallback.h" />
+    <ClInclude Include="collision\ContactManifold.h" />
+    <ClInclude Include="collision\ContactManifoldInfo.h" />
+    <ClInclude Include="collision\ContactPair.h" />
+    <ClInclude Include="collision\ContactPointInfo.h" />
+    <ClInclude Include="collision\ConvexMesh.h" />
+    <ClInclude Include="collision\HalfEdgeStructure.h" />
+    <ClInclude Include="collision\HeightField.h" />
+    <ClInclude Include="collision\narrowphase\CapsuleVsCapsuleAlgorithm.h" />
+    <ClInclude Include="collision\narrowphase\CapsuleVsConvexPolyhedronAlgorithm.h" />
+    <ClInclude Include="collision\narrowphase\CollisionDispatch.h" />
+    <ClInclude Include="collision\narrowphase\ConvexPolyhedronVsConvexPolyhedronAlgorithm.h" />
+    <ClInclude Include="collision\narrowphase\GJK\GJKAlgorithm.h" />
+    <ClInclude Include="collision\narrowphase\GJK\VoronoiSimplex.h" />
+    <ClInclude Include="collision\narrowphase\NarrowPhaseAlgorithm.h" />
+    <ClInclude Include="collision\narrowphase\NarrowPhaseInfoBatch.h" />
+    <ClInclude Include="collision\narrowphase\NarrowPhaseInput.h" />
+    <ClInclude Include="collision\narrowphase\SAT\SATAlgorithm.h" />
+    <ClInclude Include="collision\narrowphase\SphereVsCapsuleAlgorithm.h" />
+    <ClInclude Include="collision\narrowphase\SphereVsConvexPolyhedronAlgorithm.h" />
+    <ClInclude Include="collision\narrowphase\SphereVsSphereAlgorithm.h" />
+    <ClInclude Include="collision\OverlapCallback.h" />
+    <ClInclude Include="collision\PolygonVertexArray.h" />
+    <ClInclude Include="collision\RaycastInfo.h" />
+    <ClInclude Include="collision\shapes\AABB.h" />
+    <ClInclude Include="collision\shapes\BoxShape.h" />
+    <ClInclude Include="collision\shapes\CapsuleShape.h" />
+    <ClInclude Include="collision\shapes\CollisionShape.h" />
+    <ClInclude Include="collision\shapes\ConcaveMeshShape.h" />
+    <ClInclude Include="collision\shapes\ConcaveShape.h" />
+    <ClInclude Include="collision\shapes\ConvexMeshShape.h" />
+    <ClInclude Include="collision\shapes\ConvexPolyhedronShape.h" />
+    <ClInclude Include="collision\shapes\ConvexShape.h" />
+    <ClInclude Include="collision\shapes\HeightFieldShape.h" />
+    <ClInclude Include="collision\shapes\SphereShape.h" />
+    <ClInclude Include="collision\shapes\TriangleShape.h" />
+    <ClInclude Include="collision\TriangleMesh.h" />
+    <ClInclude Include="collision\TriangleVertexArray.h" />
+    <ClInclude Include="collision\VertexArray.h" />
+    <ClInclude Include="components\BallAndSocketJointComponents.h" />
+    <ClInclude Include="components\ColliderComponents.h" />
+    <ClInclude Include="components\CollisionBodyComponents.h" />
+    <ClInclude Include="components\Components.h" />
+    <ClInclude Include="components\FixedJointComponents.h" />
+    <ClInclude Include="components\HingeJointComponents.h" />
+    <ClInclude Include="components\JointComponents.h" />
+    <ClInclude Include="components\RigidBodyComponents.h" />
+    <ClInclude Include="components\SliderJointComponents.h" />
+    <ClInclude Include="components\TransformComponents.h" />
+    <ClInclude Include="configuration.h" />
+    <ClInclude Include="constraint\BallAndSocketJoint.h" />
+    <ClInclude Include="constraint\ContactPoint.h" />
+    <ClInclude Include="constraint\FixedJoint.h" />
+    <ClInclude Include="constraint\HingeJoint.h" />
+    <ClInclude Include="constraint\Joint.h" />
+    <ClInclude Include="constraint\SliderJoint.h" />
+    <ClInclude Include="containers\Array.h" />
+    <ClInclude Include="containers\containers_common.h" />
+    <ClInclude Include="containers\Deque.h" />
+    <ClInclude Include="containers\LinkedList.h" />
+    <ClInclude Include="containers\Map.h" />
+    <ClInclude Include="containers\Pair.h" />
+    <ClInclude Include="containers\Set.h" />
+    <ClInclude Include="containers\Stack.h" />
+    <ClInclude Include="decimal.h" />
+    <ClInclude Include="engine\Entity.h" />
+    <ClInclude Include="engine\EntityManager.h" />
+    <ClInclude Include="engine\EventListener.h" />
+    <ClInclude Include="engine\Island.h" />
+    <ClInclude Include="engine\Islands.h" />
+    <ClInclude Include="engine\Material.h" />
+    <ClInclude Include="engine\OverlappingPairs.h" />
+    <ClInclude Include="engine\PhysicsCommon.h" />
+    <ClInclude Include="engine\PhysicsWorld.h" />
+    <ClInclude Include="mathematics\mathematics.h" />
+    <ClInclude Include="mathematics\mathematics_common.h" />
+    <ClInclude Include="mathematics\mathematics_functions.h" />
+    <ClInclude Include="mathematics\Matrix2x2.h" />
+    <ClInclude Include="mathematics\Matrix3x3.h" />
+    <ClInclude Include="mathematics\Quaternion.h" />
+    <ClInclude Include="mathematics\Ray.h" />
+    <ClInclude Include="mathematics\Transform.h" />
+    <ClInclude Include="mathematics\Vector2.h" />
+    <ClInclude Include="mathematics\Vector3.h" />
+    <ClInclude Include="memory\DefaultAllocator.h" />
+    <ClInclude Include="memory\HeapAllocator.h" />
+    <ClInclude Include="memory\MemoryAllocator.h" />
+    <ClInclude Include="memory\MemoryManager.h" />
+    <ClInclude Include="memory\PoolAllocator.h" />
+    <ClInclude Include="memory\SingleFrameAllocator.h" />
+    <ClInclude Include="reactphysics3d.h" />
+    <ClInclude Include="systems\BroadPhaseSystem.h" />
+    <ClInclude Include="systems\CollisionDetectionSystem.h" />
+    <ClInclude Include="systems\ConstraintSolverSystem.h" />
+    <ClInclude Include="systems\ContactSolverSystem.h" />
+    <ClInclude Include="systems\DynamicsSystem.h" />
+    <ClInclude Include="systems\SolveBallAndSocketJointSystem.h" />
+    <ClInclude Include="systems\SolveFixedJointSystem.h" />
+    <ClInclude Include="systems\SolveHingeJointSystem.h" />
+    <ClInclude Include="systems\SolveSliderJointSystem.h" />
+    <ClInclude Include="utils\DebugRenderer.h" />
+    <ClInclude Include="utils\DefaultLogger.h" />
+    <ClInclude Include="utils\Logger.h" />
+    <ClInclude Include="utils\Message.h" />
+    <ClInclude Include="utils\Profiler.h" />
+    <ClInclude Include="utils\quickhull\QHHalfEdgeStructure.h" />
+    <ClInclude Include="utils\quickhull\QuickHull.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="body\CollisionBody.cpp" />
+    <ClCompile Include="body\RigidBody.cpp" />
+    <ClCompile Include="collision\broadphase\DynamicAABBTree.cpp" />
+    <ClCompile Include="collision\Collider.cpp" />
+    <ClCompile Include="collision\CollisionCallback.cpp" />
+    <ClCompile Include="collision\ContactManifold.cpp" />
+    <ClCompile Include="collision\ConvexMesh.cpp" />
+    <ClCompile Include="collision\HalfEdgeStructure.cpp" />
+    <ClCompile Include="collision\HeightField.cpp" />
+    <ClCompile Include="collision\narrowphase\CapsuleVsCapsuleAlgorithm.cpp" />
+    <ClCompile Include="collision\narrowphase\CapsuleVsConvexPolyhedronAlgorithm.cpp" />
+    <ClCompile Include="collision\narrowphase\CollisionDispatch.cpp" />
+    <ClCompile Include="collision\narrowphase\ConvexPolyhedronVsConvexPolyhedronAlgorithm.cpp" />
+    <ClCompile Include="collision\narrowphase\GJK\GJKAlgorithm.cpp" />
+    <ClCompile Include="collision\narrowphase\GJK\VoronoiSimplex.cpp" />
+    <ClCompile Include="collision\narrowphase\NarrowPhaseInfoBatch.cpp" />
+    <ClCompile Include="collision\narrowphase\NarrowPhaseInput.cpp" />
+    <ClCompile Include="collision\narrowphase\SAT\SATAlgorithm.cpp" />
+    <ClCompile Include="collision\narrowphase\SphereVsCapsuleAlgorithm.cpp" />
+    <ClCompile Include="collision\narrowphase\SphereVsConvexPolyhedronAlgorithm.cpp" />
+    <ClCompile Include="collision\narrowphase\SphereVsSphereAlgorithm.cpp" />
+    <ClCompile Include="collision\OverlapCallback.cpp" />
+    <ClCompile Include="collision\PolygonVertexArray.cpp" />
+    <ClCompile Include="collision\RaycastInfo.cpp" />
+    <ClCompile Include="collision\shapes\AABB.cpp" />
+    <ClCompile Include="collision\shapes\BoxShape.cpp" />
+    <ClCompile Include="collision\shapes\CapsuleShape.cpp" />
+    <ClCompile Include="collision\shapes\CollisionShape.cpp" />
+    <ClCompile Include="collision\shapes\ConcaveMeshShape.cpp" />
+    <ClCompile Include="collision\shapes\ConcaveShape.cpp" />
+    <ClCompile Include="collision\shapes\ConvexMeshShape.cpp" />
+    <ClCompile Include="collision\shapes\ConvexPolyhedronShape.cpp" />
+    <ClCompile Include="collision\shapes\ConvexShape.cpp" />
+    <ClCompile Include="collision\shapes\HeightFieldShape.cpp" />
+    <ClCompile Include="collision\shapes\SphereShape.cpp" />
+    <ClCompile Include="collision\shapes\TriangleShape.cpp" />
+    <ClCompile Include="collision\TriangleMesh.cpp" />
+    <ClCompile Include="collision\TriangleVertexArray.cpp" />
+    <ClCompile Include="collision\VertexArray.cpp" />
+    <ClCompile Include="components\BallAndSocketJointComponents.cpp" />
+    <ClCompile Include="components\ColliderComponents.cpp" />
+    <ClCompile Include="components\CollisionBodyComponents.cpp" />
+    <ClCompile Include="components\Components.cpp" />
+    <ClCompile Include="components\FixedJointComponents.cpp" />
+    <ClCompile Include="components\HingeJointComponents.cpp" />
+    <ClCompile Include="components\JointComponents.cpp" />
+    <ClCompile Include="components\RigidBodyComponents.cpp" />
+    <ClCompile Include="components\SliderJointComponents.cpp" />
+    <ClCompile Include="components\TransformComponents.cpp" />
+    <ClCompile Include="constraint\BallAndSocketJoint.cpp" />
+    <ClCompile Include="constraint\ContactPoint.cpp" />
+    <ClCompile Include="constraint\FixedJoint.cpp" />
+    <ClCompile Include="constraint\HingeJoint.cpp" />
+    <ClCompile Include="constraint\Joint.cpp" />
+    <ClCompile Include="constraint\SliderJoint.cpp" />
+    <ClCompile Include="engine\Entity.cpp" />
+    <ClCompile Include="engine\EntityManager.cpp" />
+    <ClCompile Include="engine\Island.cpp" />
+    <ClCompile Include="engine\Material.cpp" />
+    <ClCompile Include="engine\OverlappingPairs.cpp" />
+    <ClCompile Include="engine\PhysicsCommon.cpp" />
+    <ClCompile Include="engine\PhysicsWorld.cpp" />
+    <ClCompile Include="mathematics\Matrix2x2.cpp" />
+    <ClCompile Include="mathematics\Matrix3x3.cpp" />
+    <ClCompile Include="mathematics\Quaternion.cpp" />
+    <ClCompile Include="mathematics\Transform.cpp" />
+    <ClCompile Include="mathematics\Vector2.cpp" />
+    <ClCompile Include="mathematics\Vector3.cpp" />
+    <ClCompile Include="memory\HeapAllocator.cpp" />
+    <ClCompile Include="memory\MemoryAllocator.cpp" />
+    <ClCompile Include="memory\MemoryManager.cpp" />
+    <ClCompile Include="memory\PoolAllocator.cpp" />
+    <ClCompile Include="memory\SingleFrameAllocator.cpp" />
+    <ClCompile Include="systems\BroadPhaseSystem.cpp" />
+    <ClCompile Include="systems\CollisionDetectionSystem.cpp" />
+    <ClCompile Include="systems\ConstraintSolverSystem.cpp" />
+    <ClCompile Include="systems\ContactSolverSystem.cpp" />
+    <ClCompile Include="systems\DynamicsSystem.cpp" />
+    <ClCompile Include="systems\SolveBallAndSocketJointSystem.cpp" />
+    <ClCompile Include="systems\SolveFixedJointSystem.cpp" />
+    <ClCompile Include="systems\SolveHingeJointSystem.cpp" />
+    <ClCompile Include="systems\SolveSliderJointSystem.cpp" />
+    <ClCompile Include="utils\DebugRenderer.cpp" />
+    <ClCompile Include="utils\DefaultLogger.cpp" />
+    <ClCompile Include="utils\Profiler.cpp" />
+    <ClCompile Include="utils\quickhull\QHHalfEdgeStructure.cpp" />
+    <ClCompile Include="utils\quickhull\QuickHull.cpp" />
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>16.0</VCProjectVersion>
+    <Keyword>Win32Proj</Keyword>
+    <ProjectGuid>{32BFE801-6311-415E-890B-E0B02A97DB40}</ProjectGuid>
+    <RootNamespace>My3rdparty</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <OutDir>$(SolutionDir)..\_lib\$(Configuration)\$(PlatformTarget)\</OutDir>
+    <IntDir>$(SolutionDir)..\_obj\$(Configuration)\$(PlatformTarget)\$(ProjectName)\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <OutDir>$(SolutionDir)..\_lib\$(Configuration)\$(PlatformTarget)\</OutDir>
+    <IntDir>$(SolutionDir)..\_obj\$(Configuration)\$(PlatformTarget)\$(ProjectName)\</IntDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>TurnOffAllWarnings</WarningLevel>
+      <SDLCheck>false</SDLCheck>
+      <PreprocessorDefinitions>_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(SolutionDir)3rdparty\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+    <Link>
+      <SubSystem>
+      </SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+    <Lib>
+      <AdditionalLibraryDirectories>$(ProjectDir)physx5Lib\$(Configuration)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>TurnOffAllWarnings</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>false</SDLCheck>
+      <PreprocessorDefinitions>NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(SolutionDir)3rdparty\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>
+      </SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+    <Lib>
+      <AdditionalLibraryDirectories>$(ProjectDir)physx5Lib\$(Configuration)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Lib>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

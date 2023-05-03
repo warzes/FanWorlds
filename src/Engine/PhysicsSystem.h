@@ -41,6 +41,7 @@ public:
 
 	void AddScene(PhysicsScene* scene) { m_physicsScene = scene; }
 	PhysicsScene *GetPhysicsScene() { assert(m_physicsScene); return m_physicsScene; }
+	physx::PxPhysics *GetPhysics() { return m_physics; }
 private:
 	PhysicsSystem() = default;
 	PhysicsSystem(PhysicsSystem&&) = delete;

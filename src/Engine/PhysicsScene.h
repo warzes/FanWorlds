@@ -85,6 +85,8 @@ public:
 		PhysicsLayer              layer
 	) const;
 
+	physx::PxScene* GetScene() { return m_scene; }
+
 private:
 	physx::PxPhysics* m_physics = nullptr;
 

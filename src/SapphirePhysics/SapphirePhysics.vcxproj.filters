@@ -23,6 +23,9 @@
     <ClCompile Include="satHullVertex.cpp">
       <Filter>Collision\SAT</Filter>
     </ClCompile>
+    <ClCompile Include="Collision.cpp">
+      <Filter>Collision</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h" />
@@ -99,6 +102,15 @@
     <ClInclude Include="satHullVertex.h">
       <Filter>Collision\SAT</Filter>
     </ClInclude>
+    <ClInclude Include="Array.h">
+      <Filter>Common\template</Filter>
+    </ClInclude>
+    <ClInclude Include="Stack.h">
+      <Filter>Common\template</Filter>
+    </ClInclude>
+    <ClInclude Include="Collision.h">
+      <Filter>Collision</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="_DOC">
@@ -124,6 +136,9 @@
     </Filter>
     <Filter Include="Collision\Shapes">
       <UniqueIdentifier>{a3474921-07ce-4f39-8a68-90bd71c02bbe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Common\template">
+      <UniqueIdentifier>{d29f9243-37ce-4afb-9411-328833bdfce7}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

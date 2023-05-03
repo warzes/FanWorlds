@@ -12,6 +12,9 @@
 
 #include <iostream>
 
+#include <reactphysics3dLib/reactphysics3d.h>
+
+
 #if defined(_MSC_VER)
 #	pragma warning(pop)
 #endif

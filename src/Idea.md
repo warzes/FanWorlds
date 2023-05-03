@@ -1,5 +1,9 @@
-https://www.youtube.com/watch?v=i2M__5rgx74
+https://rejkiavik.itch.io/goblins-catacombs
 
+
+
+
+https://www.youtube.com/watch?v=i2M__5rgx74
 игрок находится на многоэтажке.
 все улицы погружены под воду и открыты только крыши.
 можно заниматься крафтом по механике рафта

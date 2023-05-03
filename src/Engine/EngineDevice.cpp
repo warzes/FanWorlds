@@ -7,6 +7,7 @@
 #	pragma comment( lib, "BulletLib.lib" )
 #	pragma comment( lib, "BounceLib.lib" )
 #	pragma comment( lib, "solid3Lib.lib" )
+#	pragma comment( lib, "reactphysics3dLib.lib" )
 #endif
 //-----------------------------------------------------------------------------
 EngineDevice::~EngineDevice()
