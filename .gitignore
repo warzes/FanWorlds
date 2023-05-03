@@ -22,3 +22,5 @@ Thumbs.db
 /bin/Release/TinyDungeons.*
 /bin/Debug/SimplePhysicsTest.*
 /bin/Release/SimplePhysicsTest.*
+/bin/Debug/TinyWorld.*
+/bin/Release/TinyWorld.*
