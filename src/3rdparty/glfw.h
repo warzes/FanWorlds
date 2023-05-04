@@ -7508,6 +7508,128 @@ typedef VkResult (APIENTRY * PFN_vkEnumerateInstanceExtensionProperties)(const c
 #define GLFW_NULL_CURSOR_STATE
 #define GLFW_NULL_LIBRARY_CONTEXT_STATE
 
+#define GLFW_NULL_SC_FIRST          GLFW_NULL_SC_SPACE
+#define GLFW_NULL_SC_SPACE          1
+#define GLFW_NULL_SC_APOSTROPHE     2
+#define GLFW_NULL_SC_COMMA          3
+#define GLFW_NULL_SC_MINUS          4
+#define GLFW_NULL_SC_PERIOD         5
+#define GLFW_NULL_SC_SLASH          6
+#define GLFW_NULL_SC_0              7
+#define GLFW_NULL_SC_1              8
+#define GLFW_NULL_SC_2              9
+#define GLFW_NULL_SC_3              10
+#define GLFW_NULL_SC_4              11
+#define GLFW_NULL_SC_5              12
+#define GLFW_NULL_SC_6              13
+#define GLFW_NULL_SC_7              14
+#define GLFW_NULL_SC_8              15
+#define GLFW_NULL_SC_9              16
+#define GLFW_NULL_SC_SEMICOLON      17
+#define GLFW_NULL_SC_EQUAL          18
+#define GLFW_NULL_SC_LEFT_BRACKET   19
+#define GLFW_NULL_SC_BACKSLASH      20
+#define GLFW_NULL_SC_RIGHT_BRACKET  21
+#define GLFW_NULL_SC_GRAVE_ACCENT   22
+#define GLFW_NULL_SC_WORLD_1        23
+#define GLFW_NULL_SC_WORLD_2        24
+#define GLFW_NULL_SC_ESCAPE         25
+#define GLFW_NULL_SC_ENTER          26
+#define GLFW_NULL_SC_TAB            27
+#define GLFW_NULL_SC_BACKSPACE      28
+#define GLFW_NULL_SC_INSERT         29
+#define GLFW_NULL_SC_DELETE         30
+#define GLFW_NULL_SC_RIGHT          31
+#define GLFW_NULL_SC_LEFT           32
+#define GLFW_NULL_SC_DOWN           33
+#define GLFW_NULL_SC_UP             34
+#define GLFW_NULL_SC_PAGE_UP        35
+#define GLFW_NULL_SC_PAGE_DOWN      36
+#define GLFW_NULL_SC_HOME           37
+#define GLFW_NULL_SC_END            38
+#define GLFW_NULL_SC_CAPS_LOCK      39
+#define GLFW_NULL_SC_SCROLL_LOCK    40
+#define GLFW_NULL_SC_NUM_LOCK       41
+#define GLFW_NULL_SC_PRINT_SCREEN   42
+#define GLFW_NULL_SC_PAUSE          43
+#define GLFW_NULL_SC_A              44
+#define GLFW_NULL_SC_B              45
+#define GLFW_NULL_SC_C              46
+#define GLFW_NULL_SC_D              47
+#define GLFW_NULL_SC_E              48
+#define GLFW_NULL_SC_F              49
+#define GLFW_NULL_SC_G              50
+#define GLFW_NULL_SC_H              51
+#define GLFW_NULL_SC_I              52
+#define GLFW_NULL_SC_J              53
+#define GLFW_NULL_SC_K              54
+#define GLFW_NULL_SC_L              55
+#define GLFW_NULL_SC_M              56
+#define GLFW_NULL_SC_N              57
+#define GLFW_NULL_SC_O              58
+#define GLFW_NULL_SC_P              59
+#define GLFW_NULL_SC_Q              60
+#define GLFW_NULL_SC_R              61
+#define GLFW_NULL_SC_S              62
+#define GLFW_NULL_SC_T              63
+#define GLFW_NULL_SC_U              64
+#define GLFW_NULL_SC_V              65
+#define GLFW_NULL_SC_W              66
+#define GLFW_NULL_SC_X              67
+#define GLFW_NULL_SC_Y              68
+#define GLFW_NULL_SC_Z              69
+#define GLFW_NULL_SC_F1             70
+#define GLFW_NULL_SC_F2             71
+#define GLFW_NULL_SC_F3             72
+#define GLFW_NULL_SC_F4             73
+#define GLFW_NULL_SC_F5             74
+#define GLFW_NULL_SC_F6             75
+#define GLFW_NULL_SC_F7             76
+#define GLFW_NULL_SC_F8             77
+#define GLFW_NULL_SC_F9             78
+#define GLFW_NULL_SC_F10            79
+#define GLFW_NULL_SC_F11            80
+#define GLFW_NULL_SC_F12            81
+#define GLFW_NULL_SC_F13            82
+#define GLFW_NULL_SC_F14            83
+#define GLFW_NULL_SC_F15            84
+#define GLFW_NULL_SC_F16            85
+#define GLFW_NULL_SC_F17            86
+#define GLFW_NULL_SC_F18            87
+#define GLFW_NULL_SC_F19            88
+#define GLFW_NULL_SC_F20            89
+#define GLFW_NULL_SC_F21            90
+#define GLFW_NULL_SC_F22            91
+#define GLFW_NULL_SC_F23            92
+#define GLFW_NULL_SC_F24            93
+#define GLFW_NULL_SC_F25            94
+#define GLFW_NULL_SC_KP_0           95
+#define GLFW_NULL_SC_KP_1           96
+#define GLFW_NULL_SC_KP_2           97
+#define GLFW_NULL_SC_KP_3           98
+#define GLFW_NULL_SC_KP_4           99
+#define GLFW_NULL_SC_KP_5           100
+#define GLFW_NULL_SC_KP_6           101
+#define GLFW_NULL_SC_KP_7           102
+#define GLFW_NULL_SC_KP_8           103
+#define GLFW_NULL_SC_KP_9           104
+#define GLFW_NULL_SC_KP_DECIMAL     105
+#define GLFW_NULL_SC_KP_DIVIDE      106
+#define GLFW_NULL_SC_KP_MULTIPLY    107
+#define GLFW_NULL_SC_KP_SUBTRACT    108
+#define GLFW_NULL_SC_KP_ADD         109
+#define GLFW_NULL_SC_KP_ENTER       110
+#define GLFW_NULL_SC_KP_EQUAL       111
+#define GLFW_NULL_SC_LEFT_SHIFT     112
+#define GLFW_NULL_SC_LEFT_CONTROL   113
+#define GLFW_NULL_SC_LEFT_ALT       114
+#define GLFW_NULL_SC_LEFT_SUPER     115
+#define GLFW_NULL_SC_RIGHT_SHIFT    116
+#define GLFW_NULL_SC_RIGHT_CONTROL  117
+#define GLFW_NULL_SC_RIGHT_ALT      118
+#define GLFW_NULL_SC_RIGHT_SUPER    119
+#define GLFW_NULL_SC_MENU           120
+#define GLFW_NULL_SC_LAST           GLFW_NULL_SC_MENU
 
 // Null-specific per-window data
 //
@@ -7543,6 +7665,8 @@ typedef struct _GLFWlibraryNull
     int             ycursor;
     char*           clipboardString;
     _GLFWwindow*    focusedWindow;
+    uint16_t        keycodes[GLFW_NULL_SC_LAST + 1];
+    uint8_t         scancodes[GLFW_KEY_LAST + 1];
 } _GLFWlibraryNull;
 
 void _glfwPollMonitorsNull(void);
@@ -24856,6 +24980,7 @@ GLFWbool _glfwConnectNull(int platformID, _GLFWplatform* platform) { return GLFW
 
 
 #include <stdlib.h>
+#include <string.h>
 
 
 //////////////////////////////////////////////////////////////////////////
@@ -24946,6 +25071,138 @@ GLFWbool _glfwConnectNull(int platformID, _GLFWplatform* platform)
 
 int _glfwInitNull(void)
 {
+    int scancode;
+
+    memset(_glfw.null.keycodes, -1, sizeof(_glfw.null.keycodes));
+    memset(_glfw.null.scancodes, -1, sizeof(_glfw.null.scancodes));
+
+    _glfw.null.keycodes[GLFW_NULL_SC_SPACE]         = GLFW_KEY_SPACE;
+    _glfw.null.keycodes[GLFW_NULL_SC_APOSTROPHE]    = GLFW_KEY_APOSTROPHE;
+    _glfw.null.keycodes[GLFW_NULL_SC_COMMA]         = GLFW_KEY_COMMA;
+    _glfw.null.keycodes[GLFW_NULL_SC_MINUS]         = GLFW_KEY_MINUS;
+    _glfw.null.keycodes[GLFW_NULL_SC_PERIOD]        = GLFW_KEY_PERIOD;
+    _glfw.null.keycodes[GLFW_NULL_SC_SLASH]         = GLFW_KEY_SLASH;
+    _glfw.null.keycodes[GLFW_NULL_SC_0]             = GLFW_KEY_0;
+    _glfw.null.keycodes[GLFW_NULL_SC_1]             = GLFW_KEY_1;
+    _glfw.null.keycodes[GLFW_NULL_SC_2]             = GLFW_KEY_2;
+    _glfw.null.keycodes[GLFW_NULL_SC_3]             = GLFW_KEY_3;
+    _glfw.null.keycodes[GLFW_NULL_SC_4]             = GLFW_KEY_4;
+    _glfw.null.keycodes[GLFW_NULL_SC_5]             = GLFW_KEY_5;
+    _glfw.null.keycodes[GLFW_NULL_SC_6]             = GLFW_KEY_6;
+    _glfw.null.keycodes[GLFW_NULL_SC_7]             = GLFW_KEY_7;
+    _glfw.null.keycodes[GLFW_NULL_SC_8]             = GLFW_KEY_8;
+    _glfw.null.keycodes[GLFW_NULL_SC_9]             = GLFW_KEY_9;
+    _glfw.null.keycodes[GLFW_NULL_SC_SEMICOLON]     = GLFW_KEY_SEMICOLON;
+    _glfw.null.keycodes[GLFW_NULL_SC_EQUAL]         = GLFW_KEY_EQUAL;
+    _glfw.null.keycodes[GLFW_NULL_SC_A]             = GLFW_KEY_A;
+    _glfw.null.keycodes[GLFW_NULL_SC_B]             = GLFW_KEY_B;
+    _glfw.null.keycodes[GLFW_NULL_SC_C]             = GLFW_KEY_C;
+    _glfw.null.keycodes[GLFW_NULL_SC_D]             = GLFW_KEY_D;
+    _glfw.null.keycodes[GLFW_NULL_SC_E]             = GLFW_KEY_E;
+    _glfw.null.keycodes[GLFW_NULL_SC_F]             = GLFW_KEY_F;
+    _glfw.null.keycodes[GLFW_NULL_SC_G]             = GLFW_KEY_G;
+    _glfw.null.keycodes[GLFW_NULL_SC_H]             = GLFW_KEY_H;
+    _glfw.null.keycodes[GLFW_NULL_SC_I]             = GLFW_KEY_I;
+    _glfw.null.keycodes[GLFW_NULL_SC_J]             = GLFW_KEY_J;
+    _glfw.null.keycodes[GLFW_NULL_SC_K]             = GLFW_KEY_K;
+    _glfw.null.keycodes[GLFW_NULL_SC_L]             = GLFW_KEY_L;
+    _glfw.null.keycodes[GLFW_NULL_SC_M]             = GLFW_KEY_M;
+    _glfw.null.keycodes[GLFW_NULL_SC_N]             = GLFW_KEY_N;
+    _glfw.null.keycodes[GLFW_NULL_SC_O]             = GLFW_KEY_O;
+    _glfw.null.keycodes[GLFW_NULL_SC_P]             = GLFW_KEY_P;
+    _glfw.null.keycodes[GLFW_NULL_SC_Q]             = GLFW_KEY_Q;
+    _glfw.null.keycodes[GLFW_NULL_SC_R]             = GLFW_KEY_R;
+    _glfw.null.keycodes[GLFW_NULL_SC_S]             = GLFW_KEY_S;
+    _glfw.null.keycodes[GLFW_NULL_SC_T]             = GLFW_KEY_T;
+    _glfw.null.keycodes[GLFW_NULL_SC_U]             = GLFW_KEY_U;
+    _glfw.null.keycodes[GLFW_NULL_SC_V]             = GLFW_KEY_V;
+    _glfw.null.keycodes[GLFW_NULL_SC_W]             = GLFW_KEY_W;
+    _glfw.null.keycodes[GLFW_NULL_SC_X]             = GLFW_KEY_X;
+    _glfw.null.keycodes[GLFW_NULL_SC_Y]             = GLFW_KEY_Y;
+    _glfw.null.keycodes[GLFW_NULL_SC_Z]             = GLFW_KEY_Z;
+    _glfw.null.keycodes[GLFW_NULL_SC_LEFT_BRACKET]  = GLFW_KEY_LEFT_BRACKET;
+    _glfw.null.keycodes[GLFW_NULL_SC_BACKSLASH]     = GLFW_KEY_BACKSLASH;
+    _glfw.null.keycodes[GLFW_NULL_SC_RIGHT_BRACKET] = GLFW_KEY_RIGHT_BRACKET;
+    _glfw.null.keycodes[GLFW_NULL_SC_GRAVE_ACCENT]  = GLFW_KEY_GRAVE_ACCENT;
+    _glfw.null.keycodes[GLFW_NULL_SC_WORLD_1]       = GLFW_KEY_WORLD_1;
+    _glfw.null.keycodes[GLFW_NULL_SC_WORLD_2]       = GLFW_KEY_WORLD_2;
+    _glfw.null.keycodes[GLFW_NULL_SC_ESCAPE]        = GLFW_KEY_ESCAPE;
+    _glfw.null.keycodes[GLFW_NULL_SC_ENTER]         = GLFW_KEY_ENTER;
+    _glfw.null.keycodes[GLFW_NULL_SC_TAB]           = GLFW_KEY_TAB;
+    _glfw.null.keycodes[GLFW_NULL_SC_BACKSPACE]     = GLFW_KEY_BACKSPACE;
+    _glfw.null.keycodes[GLFW_NULL_SC_INSERT]        = GLFW_KEY_INSERT;
+    _glfw.null.keycodes[GLFW_NULL_SC_DELETE]        = GLFW_KEY_DELETE;
+    _glfw.null.keycodes[GLFW_NULL_SC_RIGHT]         = GLFW_KEY_RIGHT;
+    _glfw.null.keycodes[GLFW_NULL_SC_LEFT]          = GLFW_KEY_LEFT;
+    _glfw.null.keycodes[GLFW_NULL_SC_DOWN]          = GLFW_KEY_DOWN;
+    _glfw.null.keycodes[GLFW_NULL_SC_UP]            = GLFW_KEY_UP;
+    _glfw.null.keycodes[GLFW_NULL_SC_PAGE_UP]       = GLFW_KEY_PAGE_UP;
+    _glfw.null.keycodes[GLFW_NULL_SC_PAGE_DOWN]     = GLFW_KEY_PAGE_DOWN;
+    _glfw.null.keycodes[GLFW_NULL_SC_HOME]          = GLFW_KEY_HOME;
+    _glfw.null.keycodes[GLFW_NULL_SC_END]           = GLFW_KEY_END;
+    _glfw.null.keycodes[GLFW_NULL_SC_CAPS_LOCK]     = GLFW_KEY_CAPS_LOCK;
+    _glfw.null.keycodes[GLFW_NULL_SC_SCROLL_LOCK]   = GLFW_KEY_SCROLL_LOCK;
+    _glfw.null.keycodes[GLFW_NULL_SC_NUM_LOCK]      = GLFW_KEY_NUM_LOCK;
+    _glfw.null.keycodes[GLFW_NULL_SC_PRINT_SCREEN]  = GLFW_KEY_PRINT_SCREEN;
+    _glfw.null.keycodes[GLFW_NULL_SC_PAUSE]         = GLFW_KEY_PAUSE;
+    _glfw.null.keycodes[GLFW_NULL_SC_F1]            = GLFW_KEY_F1;
+    _glfw.null.keycodes[GLFW_NULL_SC_F2]            = GLFW_KEY_F2;
+    _glfw.null.keycodes[GLFW_NULL_SC_F3]            = GLFW_KEY_F3;
+    _glfw.null.keycodes[GLFW_NULL_SC_F4]            = GLFW_KEY_F4;
+    _glfw.null.keycodes[GLFW_NULL_SC_F5]            = GLFW_KEY_F5;
+    _glfw.null.keycodes[GLFW_NULL_SC_F6]            = GLFW_KEY_F6;
+    _glfw.null.keycodes[GLFW_NULL_SC_F7]            = GLFW_KEY_F7;
+    _glfw.null.keycodes[GLFW_NULL_SC_F8]            = GLFW_KEY_F8;
+    _glfw.null.keycodes[GLFW_NULL_SC_F9]            = GLFW_KEY_F9;
+    _glfw.null.keycodes[GLFW_NULL_SC_F10]           = GLFW_KEY_F10;
+    _glfw.null.keycodes[GLFW_NULL_SC_F11]           = GLFW_KEY_F11;
+    _glfw.null.keycodes[GLFW_NULL_SC_F12]           = GLFW_KEY_F12;
+    _glfw.null.keycodes[GLFW_NULL_SC_F13]           = GLFW_KEY_F13;
+    _glfw.null.keycodes[GLFW_NULL_SC_F14]           = GLFW_KEY_F14;
+    _glfw.null.keycodes[GLFW_NULL_SC_F15]           = GLFW_KEY_F15;
+    _glfw.null.keycodes[GLFW_NULL_SC_F16]           = GLFW_KEY_F16;
+    _glfw.null.keycodes[GLFW_NULL_SC_F17]           = GLFW_KEY_F17;
+    _glfw.null.keycodes[GLFW_NULL_SC_F18]           = GLFW_KEY_F18;
+    _glfw.null.keycodes[GLFW_NULL_SC_F19]           = GLFW_KEY_F19;
+    _glfw.null.keycodes[GLFW_NULL_SC_F20]           = GLFW_KEY_F20;
+    _glfw.null.keycodes[GLFW_NULL_SC_F21]           = GLFW_KEY_F21;
+    _glfw.null.keycodes[GLFW_NULL_SC_F22]           = GLFW_KEY_F22;
+    _glfw.null.keycodes[GLFW_NULL_SC_F23]           = GLFW_KEY_F23;
+    _glfw.null.keycodes[GLFW_NULL_SC_F24]           = GLFW_KEY_F24;
+    _glfw.null.keycodes[GLFW_NULL_SC_F25]           = GLFW_KEY_F25;
+    _glfw.null.keycodes[GLFW_NULL_SC_KP_0]          = GLFW_KEY_KP_0;
+    _glfw.null.keycodes[GLFW_NULL_SC_KP_1]          = GLFW_KEY_KP_1;
+    _glfw.null.keycodes[GLFW_NULL_SC_KP_2]          = GLFW_KEY_KP_2;
+    _glfw.null.keycodes[GLFW_NULL_SC_KP_3]          = GLFW_KEY_KP_3;
+    _glfw.null.keycodes[GLFW_NULL_SC_KP_4]          = GLFW_KEY_KP_4;
+    _glfw.null.keycodes[GLFW_NULL_SC_KP_5]          = GLFW_KEY_KP_5;
+    _glfw.null.keycodes[GLFW_NULL_SC_KP_6]          = GLFW_KEY_KP_6;
+    _glfw.null.keycodes[GLFW_NULL_SC_KP_7]          = GLFW_KEY_KP_7;
+    _glfw.null.keycodes[GLFW_NULL_SC_KP_8]          = GLFW_KEY_KP_8;
+    _glfw.null.keycodes[GLFW_NULL_SC_KP_9]          = GLFW_KEY_KP_9;
+    _glfw.null.keycodes[GLFW_NULL_SC_KP_DECIMAL]    = GLFW_KEY_KP_DECIMAL;
+    _glfw.null.keycodes[GLFW_NULL_SC_KP_DIVIDE]     = GLFW_KEY_KP_DIVIDE;
+    _glfw.null.keycodes[GLFW_NULL_SC_KP_MULTIPLY]   = GLFW_KEY_KP_MULTIPLY;
+    _glfw.null.keycodes[GLFW_NULL_SC_KP_SUBTRACT]   = GLFW_KEY_KP_SUBTRACT;
+    _glfw.null.keycodes[GLFW_NULL_SC_KP_ADD]        = GLFW_KEY_KP_ADD;
+    _glfw.null.keycodes[GLFW_NULL_SC_KP_ENTER]      = GLFW_KEY_KP_ENTER;
+    _glfw.null.keycodes[GLFW_NULL_SC_KP_EQUAL]      = GLFW_KEY_KP_EQUAL;
+    _glfw.null.keycodes[GLFW_NULL_SC_LEFT_SHIFT]    = GLFW_KEY_LEFT_SHIFT;
+    _glfw.null.keycodes[GLFW_NULL_SC_LEFT_CONTROL]  = GLFW_KEY_LEFT_CONTROL;
+    _glfw.null.keycodes[GLFW_NULL_SC_LEFT_ALT]      = GLFW_KEY_LEFT_ALT;
+    _glfw.null.keycodes[GLFW_NULL_SC_LEFT_SUPER]    = GLFW_KEY_LEFT_SUPER;
+    _glfw.null.keycodes[GLFW_NULL_SC_RIGHT_SHIFT]   = GLFW_KEY_RIGHT_SHIFT;
+    _glfw.null.keycodes[GLFW_NULL_SC_RIGHT_CONTROL] = GLFW_KEY_RIGHT_CONTROL;
+    _glfw.null.keycodes[GLFW_NULL_SC_RIGHT_ALT]     = GLFW_KEY_RIGHT_ALT;
+    _glfw.null.keycodes[GLFW_NULL_SC_RIGHT_SUPER]   = GLFW_KEY_RIGHT_SUPER;
+    _glfw.null.keycodes[GLFW_NULL_SC_MENU]          = GLFW_KEY_MENU;
+
+    for (scancode = GLFW_NULL_SC_FIRST;  scancode < GLFW_NULL_SC_LAST;  scancode++)
+    {
+        if (_glfw.null.keycodes[scancode] > 0)
+            _glfw.null.scancodes[_glfw.null.keycodes[scancode]] = scancode;
+    }
+
     _glfwPollMonitorsNull();
     return GLFW_TRUE;
 }
@@ -25704,7 +25961,7 @@ EGLNativeWindowType _glfwGetEGLNativeWindowNull(_GLFWwindow* window)
 
 const char* _glfwGetScancodeNameNull(int scancode)
 {
-    if (scancode < GLFW_KEY_SPACE || scancode > GLFW_KEY_LAST)
+    if (scancode < GLFW_NULL_SC_FIRST || scancode > GLFW_NULL_SC_LAST)
     {
         _glfwInputError(GLFW_INVALID_VALUE, "Invalid scancode %i", scancode);
         return NULL;
@@ -25712,117 +25969,117 @@ const char* _glfwGetScancodeNameNull(int scancode)
 
     switch (scancode)
     {
-        case GLFW_KEY_APOSTROPHE:
+        case GLFW_NULL_SC_APOSTROPHE:
             return "'";
-        case GLFW_KEY_COMMA:
+        case GLFW_NULL_SC_COMMA:
             return ",";
-        case GLFW_KEY_MINUS:
-        case GLFW_KEY_KP_SUBTRACT:
+        case GLFW_NULL_SC_MINUS:
+        case GLFW_NULL_SC_KP_SUBTRACT:
             return "-";
-        case GLFW_KEY_PERIOD:
-        case GLFW_KEY_KP_DECIMAL:
+        case GLFW_NULL_SC_PERIOD:
+        case GLFW_NULL_SC_KP_DECIMAL:
             return ".";
-        case GLFW_KEY_SLASH:
-        case GLFW_KEY_KP_DIVIDE:
+        case GLFW_NULL_SC_SLASH:
+        case GLFW_NULL_SC_KP_DIVIDE:
             return "/";
-        case GLFW_KEY_SEMICOLON:
+        case GLFW_NULL_SC_SEMICOLON:
             return ";";
-        case GLFW_KEY_EQUAL:
-        case GLFW_KEY_KP_EQUAL:
+        case GLFW_NULL_SC_EQUAL:
+        case GLFW_NULL_SC_KP_EQUAL:
             return "=";
-        case GLFW_KEY_LEFT_BRACKET:
+        case GLFW_NULL_SC_LEFT_BRACKET:
             return "[";
-        case GLFW_KEY_RIGHT_BRACKET:
+        case GLFW_NULL_SC_RIGHT_BRACKET:
             return "]";
-        case GLFW_KEY_KP_MULTIPLY:
+        case GLFW_NULL_SC_KP_MULTIPLY:
             return "*";
-        case GLFW_KEY_KP_ADD:
+        case GLFW_NULL_SC_KP_ADD:
             return "+";
-        case GLFW_KEY_BACKSLASH:
-        case GLFW_KEY_WORLD_1:
-        case GLFW_KEY_WORLD_2:
+        case GLFW_NULL_SC_BACKSLASH:
+        case GLFW_NULL_SC_WORLD_1:
+        case GLFW_NULL_SC_WORLD_2:
             return "\\";
-        case GLFW_KEY_0:
-        case GLFW_KEY_KP_0:
+        case GLFW_NULL_SC_0:
+        case GLFW_NULL_SC_KP_0:
             return "0";
-        case GLFW_KEY_1:
-        case GLFW_KEY_KP_1:
+        case GLFW_NULL_SC_1:
+        case GLFW_NULL_SC_KP_1:
             return "1";
-        case GLFW_KEY_2:
-        case GLFW_KEY_KP_2:
+        case GLFW_NULL_SC_2:
+        case GLFW_NULL_SC_KP_2:
             return "2";
-        case GLFW_KEY_3:
-        case GLFW_KEY_KP_3:
+        case GLFW_NULL_SC_3:
+        case GLFW_NULL_SC_KP_3:
             return "3";
-        case GLFW_KEY_4:
-        case GLFW_KEY_KP_4:
+        case GLFW_NULL_SC_4:
+        case GLFW_NULL_SC_KP_4:
             return "4";
-        case GLFW_KEY_5:
-        case GLFW_KEY_KP_5:
+        case GLFW_NULL_SC_5:
+        case GLFW_NULL_SC_KP_5:
             return "5";
-        case GLFW_KEY_6:
-        case GLFW_KEY_KP_6:
+        case GLFW_NULL_SC_6:
+        case GLFW_NULL_SC_KP_6:
             return "6";
-        case GLFW_KEY_7:
-        case GLFW_KEY_KP_7:
+        case GLFW_NULL_SC_7:
+        case GLFW_NULL_SC_KP_7:
             return "7";
-        case GLFW_KEY_8:
-        case GLFW_KEY_KP_8:
+        case GLFW_NULL_SC_8:
+        case GLFW_NULL_SC_KP_8:
             return "8";
-        case GLFW_KEY_9:
-        case GLFW_KEY_KP_9:
+        case GLFW_NULL_SC_9:
+        case GLFW_NULL_SC_KP_9:
             return "9";
-        case GLFW_KEY_A:
+        case GLFW_NULL_SC_A:
             return "a";
-        case GLFW_KEY_B:
+        case GLFW_NULL_SC_B:
             return "b";
-        case GLFW_KEY_C:
+        case GLFW_NULL_SC_C:
             return "c";
-        case GLFW_KEY_D:
+        case GLFW_NULL_SC_D:
             return "d";
-        case GLFW_KEY_E:
+        case GLFW_NULL_SC_E:
             return "e";
-        case GLFW_KEY_F:
+        case GLFW_NULL_SC_F:
             return "f";
-        case GLFW_KEY_G:
+        case GLFW_NULL_SC_G:
             return "g";
-        case GLFW_KEY_H:
+        case GLFW_NULL_SC_H:
             return "h";
-        case GLFW_KEY_I:
+        case GLFW_NULL_SC_I:
             return "i";
-        case GLFW_KEY_J:
+        case GLFW_NULL_SC_J:
             return "j";
-        case GLFW_KEY_K:
+        case GLFW_NULL_SC_K:
             return "k";
-        case GLFW_KEY_L:
+        case GLFW_NULL_SC_L:
             return "l";
-        case GLFW_KEY_M:
+        case GLFW_NULL_SC_M:
             return "m";
-        case GLFW_KEY_N:
+        case GLFW_NULL_SC_N:
             return "n";
-        case GLFW_KEY_O:
+        case GLFW_NULL_SC_O:
             return "o";
-        case GLFW_KEY_P:
+        case GLFW_NULL_SC_P:
             return "p";
-        case GLFW_KEY_Q:
+        case GLFW_NULL_SC_Q:
             return "q";
-        case GLFW_KEY_R:
+        case GLFW_NULL_SC_R:
             return "r";
-        case GLFW_KEY_S:
+        case GLFW_NULL_SC_S:
             return "s";
-        case GLFW_KEY_T:
+        case GLFW_NULL_SC_T:
             return "t";
-        case GLFW_KEY_U:
+        case GLFW_NULL_SC_U:
             return "u";
-        case GLFW_KEY_V:
+        case GLFW_NULL_SC_V:
             return "v";
-        case GLFW_KEY_W:
+        case GLFW_NULL_SC_W:
             return "w";
-        case GLFW_KEY_X:
+        case GLFW_NULL_SC_X:
             return "x";
-        case GLFW_KEY_Y:
+        case GLFW_NULL_SC_Y:
             return "y";
-        case GLFW_KEY_Z:
+        case GLFW_NULL_SC_Z:
             return "z";
     }
 
@@ -25831,7 +26088,7 @@ const char* _glfwGetScancodeNameNull(int scancode)
 
 int _glfwGetKeyScancodeNull(int key)
 {
-    return key;
+    return _glfw.null.scancodes[key];
 }
 
 void _glfwGetRequiredInstanceExtensionsNull(char** extensions)
@@ -34634,6 +34891,11 @@ static void inputText(_GLFWwindow* window, uint32_t scancode)
 
 static void handleEvents(double* timeout)
 {
+#if defined(GLFW_BUILD_LINUX_JOYSTICK)
+    if (_glfw.joysticksInitialized)
+        _glfwDetectJoystickConnectionLinux();
+#endif
+
     GLFWbool event = GLFW_FALSE;
     struct pollfd fds[4] =
     {
