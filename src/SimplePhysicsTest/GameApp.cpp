@@ -1,18 +1,5 @@
 #include "stdafx.h"
 #include "GameApp.h"
-
-
-https://chat-gpt.org/ru/chat
-https://www.perplexity.ai
-https://poe.com/Sage
-https://chatgptproxy.me/#/
-
-FWK
-
-План для игры
-
-ouzel
-
 #if 0 // велосипед без физ движка
 
 glm::vec3 PlayerPos = { 0.0f, 10.0f, 6.0f };
@@ -354,15 +341,15 @@ bool GameApp::Create()
 
 	 auto mesh = m_renderUtils.GetModelBox();
 
-	 std::vector<Vector3> tempVec;
-	 for( int i = 0; i < mesh->subMeshes[0].vertices.size(); i++ )
-	 {
-		 auto v = mesh->subMeshes[0].vertices[i];
-		 tempVec.push_back({ v.position.x,v.position.y, v.position.z });
-	 }
+	 //std::vector<Vector3> tempVec;
+	 //for( int i = 0; i < mesh->subMeshes[0].vertices.size(); i++ )
+	 //{
+		// auto v = mesh->subMeshes[0].vertices[i];
+		// tempVec.push_back({ v.position.x,v.position.y, v.position.z });
+	 //}
 
-	 cube1 = new TriangleVertexArray(tempVec.size(), tempVec.data(), sizeof(Vector3),
-		 )
+	 //cube1 = new TriangleVertexArray(tempVec.size(), tempVec.data(), sizeof(Vector3),
+		// )
 
 
 	return true;

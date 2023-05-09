@@ -6,6 +6,7 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DOC", "DOC", "{DBE8E3A4-9179-4FB8-AF80-43F9DA7D2AB5}"
 	ProjectSection(SolutionItems) = preProject
 		Idea.md = Idea.md
+		Link.md = Link.md
 		OpenGL.md = OpenGL.md
 		Physics.md = Physics.md
 		..\README.md = ..\README.md
